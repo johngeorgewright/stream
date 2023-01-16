@@ -1,0 +1,16 @@
+{
+  "name": "stream",
+  "packageManager": "yarn@3.3.1",
+  "devDependencies": {
+    "@types/jest": "^29.2.5",
+    "@types/node": "^18.11.18",
+    "jest": "^29.3.1",
+    "jest-environment-jsdom": "^29.3.1",
+    "prettier": "^2.8.3",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4",
+    "web-streams-polyfill": "^3.2.1"
+  }
+}
