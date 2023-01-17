@@ -1,31 +1,25 @@
-import { defer } from '@johngw/async'
 import { without } from 'lodash'
+import { ControllableStream } from './ControllableStream'
+import { identity } from './identity'
 import { open } from './open'
 
 export class Subject<T> {
-  #subscriptions: SubjectSubscription<T>[] = []
-  #errorHandlers: SubjectSubscription<any>[] = []
-  #finished: Promise<void>
-  #finish: () => void
-  #error: (error: any) => void
+  #error?: any
+  #finished = false
+  #controllers: ControllableStream<T>[] = []
   #readable: ReadableStream<T>
 
   constructor(readable: ReadableStream<T>) {
-    const { promise: finished, resolve: finish, reject: error } = defer()
-    this.#finish = finish
-    this.#finished = finished
-    this.#error = error
-
     this.#readable = readable.pipeThrough(
       new TransformStream<T, T>({
         transform: (chunk, controller) => {
-          emit(chunk, this.#subscriptions)
+          this.#enqueue(chunk)
           controller.enqueue(chunk)
         },
 
         flush: () => {
-          this.#subscriptions = []
-          this.#errorHandlers = []
+          this.#forEachSubscription((subscription) => subscription.close())
+          this.#controllers = []
         },
       })
     )
@@ -35,32 +29,42 @@ export class Subject<T> {
     return this.#finished
   }
 
+  #forEachSubscription(fn: (subscription: ControllableStream<T>) => void) {
+    for (const subscription of this.#controllers) fn(subscription)
+  }
+
+  #enqueue(chunk: T) {
+    this.#forEachSubscription((subscription) => subscription.enqueue(chunk))
+  }
+
   #open() {
     open(this.#readable)
-      .then(() => this.#finish())
       .catch((error) => {
-        emit(error, this.#errorHandlers)
-        this.#error(error)
+        this.#error = error
+        this.#forEachSubscription((subscription) => subscription.error(error))
+        throw error
       })
+      .finally(() => (this.#finished = true))
   }
 
-  subscribe(
-    subscription: SubjectSubscription<T>,
-    errorHandler?: SubjectSubscription<any>
-  ) {
-    this.#subscriptions.push(subscription)
-    if (errorHandler) this.#errorHandlers.push(errorHandler)
+  protected addController() {
+    const controller = new ControllableStream<T>({
+      cancel: () => {
+        this.#controllers = without(this.#controllers, controller)
+      },
+    })
+    this.#controllers.push(controller)
+    return controller
+  }
+
+  protected subscribeToController(controller: ControllableStream<T>) {
+    if (this.#error) controller.error(this.#error)
+    else if (this.#finished) controller.close()
     if (!this.#readable.locked) this.#open()
-    return () => {
-      if (errorHandler)
-        this.#errorHandlers = without(this.#errorHandlers, errorHandler)
-      this.#subscriptions = without(this.#subscriptions, subscription)
-    }
+    return controller.pipeThrough(identity())
   }
-}
 
-export type SubjectSubscription<T> = (chunk: T) => any
-
-function emit<T>(chunk: T, subscriptions: SubjectSubscription<T>[]) {
-  for (const subscription of subscriptions) subscription(chunk)
+  subscribe() {
+    return this.subscribeToController(this.addController())
+  }
 }

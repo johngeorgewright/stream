@@ -1,4 +1,4 @@
-import { Subject, SubjectSubscription } from './Subject'
+import { Subject } from './Subject'
 import { tap } from './tap'
 
 export class ReplaySubject<T> extends Subject<T> {
@@ -8,11 +8,9 @@ export class ReplaySubject<T> extends Subject<T> {
     super(readable.pipeThrough(tap((chunk) => this.#chunks.push(chunk))))
   }
 
-  override subscribe(
-    subscription: SubjectSubscription<T>,
-    errorHandler?: SubjectSubscription<any>
-  ) {
-    for (const chunk of this.#chunks) subscription(chunk)
-    return super.subscribe(subscription, errorHandler)
+  override subscribe() {
+    const controller = this.addController()
+    for (const chunk of this.#chunks) controller.enqueue(chunk)
+    return this.subscribeToController(controller)
   }
 }

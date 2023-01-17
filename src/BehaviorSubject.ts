@@ -1,4 +1,4 @@
-import { Subject, SubjectSubscription } from './Subject'
+import { Subject } from './Subject'
 import { tap } from './tap'
 
 export class BehaviorSubject<T> extends Subject<T> {
@@ -8,11 +8,9 @@ export class BehaviorSubject<T> extends Subject<T> {
     super(readable.pipeThrough(tap((chunk) => (this.#chunk = chunk))))
   }
 
-  override subscribe(
-    subscription: SubjectSubscription<T>,
-    errorHandler?: SubjectSubscription<any>
-  ) {
-    if (this.#chunk !== undefined) subscription(this.#chunk)
-    return super.subscribe(subscription, errorHandler)
+  override subscribe() {
+    const controller = this.addController()
+    if (this.#chunk !== undefined) controller.enqueue(this.#chunk)
+    return this.subscribeToController(controller)
   }
 }

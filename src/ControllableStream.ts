@@ -22,6 +22,10 @@ export class ControllableStream<T> extends ReadableStream<T> {
     this.#controller = controller!
   }
 
+  error(error?: any) {
+    this.#controller.error(error)
+  }
+
   enqueue(chunk: T) {
     this.#controller.enqueue(chunk)
   }
