@@ -1,5 +1,8 @@
 {
   "name": "stream",
+  "scripts": {
+    "test": "jest"
+  },
   "packageManager": "yarn@3.3.1",
   "devDependencies": {
     "@types/jest": "^29.2.5",

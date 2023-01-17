@@ -1,4 +1,5 @@
 import { interval } from '../src/interval'
+import { write } from '../src/write'
 
 test('continuasly emits date events until terminated', (done) => {
   const fn = jest.fn()
@@ -6,14 +7,7 @@ test('continuasly emits date events until terminated', (done) => {
   setTimeout(() => abortController.abort(), 300)
 
   interval(50)
-    .pipeTo(
-      new WritableStream({
-        write(chunk) {
-          fn(chunk)
-        },
-      }),
-      { signal: abortController.signal }
-    )
+    .pipeTo(write(fn), { signal: abortController.signal })
     .catch(() => {
       expect(fn).toHaveBeenCalledTimes(5)
       done()

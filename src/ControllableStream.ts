@@ -11,9 +11,9 @@ export class ControllableStream<T> extends ReadableStream<T> {
       {
         ...underlyingSource,
 
-        start($controller) {
+        async start($controller) {
           controller = $controller
-          underlyingSource?.start?.($controller)
+          await underlyingSource?.start?.($controller)
         },
       },
       strategy
