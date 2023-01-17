@@ -1,4 +1,5 @@
 import { consume } from '../src/consume'
+import { map } from '../src/map'
 import { ControllableStream } from '../src/ControllableStream'
 
 test('gives ability to enqueue messages to a stream', async () => {
@@ -25,6 +26,27 @@ test('gives ability to enqueue messages to a stream', async () => {
       ],
       [
         4,
+      ],
+    ]
+  `)
+})
+
+test('piping', async () => {
+  const controller = new ControllableStream<number>()
+  const stream = controller.pipeThrough(map((x) => x + 1))
+  const fn = jest.fn()
+  controller.enqueue(1)
+  controller.enqueue(2)
+  controller.close()
+  await consume(stream, fn)
+  expect(fn).toHaveBeenCalledTimes(2)
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        2,
+      ],
+      [
+        3,
       ],
     ]
   `)
