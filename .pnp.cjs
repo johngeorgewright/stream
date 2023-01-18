@@ -28,13 +28,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@johngw/async", "npm:4.1.1"],\
             ["@types/jest", "npm:29.2.5"],\
             ["@types/lodash", "npm:4.14.191"],\
             ["@types/node", "npm:18.11.18"],\
             ["jest", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.3.1"],\
             ["jest-environment-jsdom", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.3.1"],\
-            ["lodash", "npm:4.17.21"],\
             ["parcel", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:2.8.2"],\
             ["prettier", "npm:2.8.3"],\
             ["ts-jest", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.0.5"],\
@@ -1127,28 +1125,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.11.18"],\
             ["@types/yargs", "npm:17.0.19"],\
             ["chalk", "npm:4.1.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@johngw/async", [\
-        ["npm:4.1.1", {\
-          "packageLocation": "./.yarn/cache/@johngw-async-npm-4.1.1-63a8fb8c8a-2d001a4348.zip/node_modules/@johngw/async/",\
-          "packageDependencies": [\
-            ["@johngw/async", "npm:4.1.1"],\
-            ["@johngw/object", "npm:1.2.1"],\
-            ["node-abort-controller", "npm:3.0.1"],\
-            ["tslib", "npm:2.4.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@johngw/object", [\
-        ["npm:1.2.1", {\
-          "packageLocation": "./.yarn/cache/@johngw-object-npm-1.2.1-02eb656d5d-b6654a790b.zip/node_modules/@johngw/object/",\
-          "packageDependencies": [\
-            ["@johngw/object", "npm:1.2.1"],\
-            ["tslib", "npm:2.4.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5215,15 +5191,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["lodash", [\
-        ["npm:4.17.21", {\
-          "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-eb835a2e51.zip/node_modules/lodash/",\
-          "packageDependencies": [\
-            ["lodash", "npm:4.17.21"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["lodash.memoize", [\
         ["npm:4.1.2", {\
           "packageLocation": "./.yarn/cache/lodash.memoize-npm-4.1.2-0e6250041f-9ff3942fee.zip/node_modules/lodash.memoize/",\
@@ -5535,15 +5502,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/negotiator-npm-0.6.3-9d50e36171-b8ffeb1e26.zip/node_modules/negotiator/",\
           "packageDependencies": [\
             ["negotiator", "npm:0.6.3"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["node-abort-controller", [\
-        ["npm:3.0.1", {\
-          "packageLocation": "./.yarn/cache/node-abort-controller-npm-3.0.1-0ee00c2bea-2b3d75c652.zip/node_modules/node-abort-controller/",\
-          "packageDependencies": [\
-            ["node-abort-controller", "npm:3.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6423,13 +6381,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["stream", "workspace:."],\
-            ["@johngw/async", "npm:4.1.1"],\
             ["@types/jest", "npm:29.2.5"],\
             ["@types/lodash", "npm:4.14.191"],\
             ["@types/node", "npm:18.11.18"],\
             ["jest", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.3.1"],\
             ["jest-environment-jsdom", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.3.1"],\
-            ["lodash", "npm:4.17.21"],\
             ["parcel", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:2.8.2"],\
             ["prettier", "npm:2.8.3"],\
             ["ts-jest", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.0.5"],\
