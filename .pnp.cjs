@@ -37,6 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.8.3"],\
             ["ts-jest", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.0.5"],\
             ["ts-node", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:10.9.1"],\
+            ["ts-toolbelt", "npm:9.6.0"],\
             ["tslib", "npm:2.4.1"],\
             ["typed-query-selector", "npm:2.8.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"],\
@@ -6390,6 +6391,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.8.3"],\
             ["ts-jest", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.0.5"],\
             ["ts-node", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:10.9.1"],\
+            ["ts-toolbelt", "npm:9.6.0"],\
             ["tslib", "npm:2.4.1"],\
             ["typed-query-selector", "npm:2.8.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"],\
@@ -6728,6 +6730,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/swc__wasm",\
             "@types/typescript",\
             "typescript"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["ts-toolbelt", [\
+        ["npm:9.6.0", {\
+          "packageLocation": "./.yarn/cache/ts-toolbelt-npm-9.6.0-a95699c8d0-9f35fd95d8.zip/node_modules/ts-toolbelt/",\
+          "packageDependencies": [\
+            ["ts-toolbelt", "npm:9.6.0"]\
           ],\
           "linkType": "HARD"\
         }]\

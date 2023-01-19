@@ -1,20 +1,31 @@
-import { ForkableBehaviorStream } from './ForkableBehaviorStream'
+import { ReadableStreamsChunks } from './util/ReadableStreamsChunks'
 import { write } from './write'
 
-export function withLatestFrom<S, T>(input: ReadableStream<T>) {
-  let inputValue: T | undefined
-  const inputBehaviour = new ForkableBehaviorStream(input)
+export function withLatestFrom<S, RT extends ReadableStream<unknown>[]>(
+  ...inputs: RT
+) {
+  type Output = [S, ...ReadableStreamsChunks<RT>]
 
-  inputBehaviour.fork().pipeTo(
-    write((chunk) => {
-      inputValue = chunk
-    })
+  let inputValues = new Array(inputs.length)
+
+  const promise = Promise.all(
+    inputs.map((input, index) =>
+      input.pipeTo(
+        write((chunk) => {
+          inputValues[index] = chunk
+        })
+      )
+    )
   )
 
-  return new TransformStream<{ source: S; input: T }>({
+  return new TransformStream<S, Output>({
+    start(controller) {
+      promise.catch((error) => controller.error(error))
+    },
+
     transform(chunk, controller) {
-      if (inputValue !== undefined)
-        controller.enqueue({ source: chunk, input: inputValue })
+      if (inputValues.some((value) => value === undefined)) return
+      controller.enqueue([chunk, ...inputValues] as Output)
     },
   })
 }

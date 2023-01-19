@@ -1,10 +1,10 @@
-import { ForkableBehaviorStream } from '../src/ForkableBehaviorStream'
-import { fromArray } from '../src/fromArray'
+import { ForkableRecallStream } from '../src/ForkableRecallStream'
+import { fromIterable } from '../src/fromIterable'
 import { write } from '../src/write'
 
 test('subscribing will always provide that last chunk', async () => {
-  const forkable = new ForkableBehaviorStream()
-  fromArray([1, 2, 3, 4, 5]).pipeTo(forkable)
+  const forkable = new ForkableRecallStream()
+  fromIterable([1, 2, 3, 4, 5]).pipeTo(forkable)
   const fn1 = jest.fn()
   const fn2 = jest.fn()
   await forkable.fork().pipeTo(write(fn1))

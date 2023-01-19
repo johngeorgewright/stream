@@ -7,6 +7,9 @@ export class ForkableStream<T> extends WritableStream<T> {
   #finished = false
   #controllers: ControllableStream<T>[] = []
 
+  /**
+   * One WritableStream to many ReadableStreams.
+   */
   constructor(
     underlyingSink?: UnderlyingSink<T>,
     strategy?: QueuingStrategy<T>
@@ -60,7 +63,7 @@ export class ForkableStream<T> extends WritableStream<T> {
         this.#controllers = without(this.#controllers, controller)
       },
     })
-    this.#controllers.push(controller)
+    if (!this.#finished) this.#controllers.push(controller)
     return controller
   }
 

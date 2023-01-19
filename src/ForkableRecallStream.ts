@@ -1,6 +1,6 @@
 import { ForkableStream } from './ForkableStream'
 
-export class ForkableBehaviorStream<T> extends ForkableStream<T> {
+export class ForkableRecallStream<T> extends ForkableStream<T> {
   #chunk?: T
 
   constructor() {

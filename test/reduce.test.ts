@@ -1,11 +1,11 @@
-import { fromArray } from '../src/fromArray'
+import { fromIterable } from '../src/fromIterable'
 import { reduce } from '../src/reduce'
 import { toArray } from '../src/toArray'
 
 test('accumulates values from a stream', async () => {
   expect(
     await toArray(
-      fromArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).pipeThrough(
+      fromIterable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).pipeThrough(
         reduce({} as Record<string, number>, (acc, chunk) => ({
           ...acc,
           [chunk.toString()]: chunk,

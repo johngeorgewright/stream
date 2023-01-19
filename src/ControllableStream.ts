@@ -10,7 +10,6 @@ export class ControllableStream<T> extends ReadableStream<T> {
     super(
       {
         ...underlyingSource,
-
         async start($controller) {
           controller = $controller
           await underlyingSource?.start?.($controller)
