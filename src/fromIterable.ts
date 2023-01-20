@@ -13,7 +13,7 @@ export function fromIterable<T>(
         for (const item of iterable) controller.enqueue(item)
       else if (Symbol.asyncIterator in iterable)
         for await (const item of iterable) controller.enqueue(item)
-      else
+      else if ('length' in iterable)
         for (let i = 0; i < iterable.length; i++)
           controller.enqueue(iterable[i])
       controller.close()
