@@ -2,10 +2,7 @@
  * Creates a readable stream from an iterable of values.
  */
 export function fromIterable<T>(
-  iterable:
-    | Iterable<T>
-    | AsyncIterable<T>
-    | { length: number; [index: number]: T }
+  iterable: Iterable<T> | AsyncIterable<T> | ArrayLike<T>
 ) {
   return new ReadableStream<T>({
     async start(controller) {
