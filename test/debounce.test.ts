@@ -1,11 +1,9 @@
 import { setImmediate, setTimeout } from 'node:timers/promises'
 import { ControllableStream } from '../src/ControllableStream'
-import {
-  BackOffBehaviour,
-  debounce,
-  LeadingBehavior,
-  TrailingBehavior,
-} from '../src/debounce'
+import { debounce } from '../src/debounce'
+import { BackOffBehavior } from '../src/debounce/BackOffBehavior'
+import { LeadingBehavior } from '../src/debounce/LeadingBehavior'
+import { TrailingBehavior } from '../src/debounce/TrailingBehavior'
 import { write } from '../src/write'
 
 let controller: ControllableStream<number>
@@ -68,7 +66,7 @@ test('back off', async () => {
     .pipeThrough(
       debounce(10, [
         new LeadingBehavior(),
-        new BackOffBehaviour({ inc: (x) => x * 2, max: 45 }),
+        new BackOffBehavior({ inc: (x) => x * 2, max: 45 }),
       ])
     )
     .pipeTo(write(fn))
