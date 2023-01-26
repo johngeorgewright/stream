@@ -1,82 +1,176 @@
-export interface DebounceOptions {
-  leading?: boolean
-  trailing?: boolean
-}
-
 export function debounce<T>(
   ms: number,
-  { leading, trailing }: DebounceOptions = { trailing: true }
+  behaviors?: Behavior<T> | Behavior<T>[]
 ) {
   return new TransformStream<T, T>(
-    leading && trailing
-      ? new LeadingAndTrailingBehavior(ms)
-      : leading
-      ? new LeadingBehavior(ms)
-      : trailing
-      ? new TrailingBehavior(ms)
-      : {}
+    new DebounceTransformer(
+      ms,
+      !behaviors
+        ? [new TrailingBehavior()]
+        : Array.isArray(behaviors)
+        ? behaviors
+        : [behaviors]
+    )
   )
 }
 
-abstract class Behavior<T> implements Transformer<T, T> {
-  protected _timer?: NodeJS.Timer
+type DebounceContext = Readonly<{
+  queued?: boolean
+  ms: number
+  timer?: NodeJS.Timer
+}>
 
-  #ms: number
+class DebounceTransformer<T> implements Transformer<T, T> {
+  #behaviors: Behavior<T>[]
+  #context: DebounceContext
 
-  constructor(ms: number) {
-    this.#ms = ms
+  constructor(ms: number, behaviors: Behavior<T>[]) {
+    this.#behaviors = behaviors
+    this.#context = this.#init({ ms: ms })
   }
 
   transform(chunk: T, controller: TransformStreamDefaultController<T>) {
-    clearTimeout(this._timer)
-    this._timer = setTimeout(
-      () => this._handleTimeout(chunk, controller),
-      this.#ms
-    )
+    clearTimeout(this.#context.timer)
+    this.#context = this.#preTimer(chunk, controller, this.#context)
+    this.#context = {
+      ...this.#context,
+      timer: setTimeout(() => {
+        clearTimeout(this.#context.timer)
+        this.#context = this.#postTimer(chunk, controller, {
+          ...this.#context,
+          timer: undefined,
+        })
+      }, this.#context.ms),
+    }
   }
 
   flush() {
-    if (this._timer) clearTimeout(this._timer)
+    clearTimeout(this.#context.timer)
   }
 
-  protected _handleTimeout(
+  #init(context: DebounceContext) {
+    return this.#behaviors.reduce(
+      (context, behavior) => behavior.init?.(context) || context,
+      context
+    )
+  }
+
+  #preTimer(
+    chunk: T,
+    controller: TransformStreamDefaultController<T>,
+    context: DebounceContext
+  ) {
+    return this.#behaviors.reduce(
+      (context, behavior) =>
+        behavior.preTimer?.(chunk, controller, context) || context,
+      context
+    )
+  }
+
+  #postTimer(
+    chunk: T,
+    controller: TransformStreamDefaultController<T>,
+    context: DebounceContext
+  ) {
+    return this.#behaviors.reduce(
+      (context, behavior) =>
+        behavior.postTimer?.(chunk, controller, context) || context,
+      context
+    )
+  }
+}
+
+export interface Behavior<T> {
+  /**
+   * Called only once, when the debouncer is constructed.
+   */
+  init?(context: DebounceContext): DebounceContext
+
+  /**
+   * This is will be called once for every chunk received and before
+   * the timer has been set.
+   */
+  preTimer?(
     _chunk: T,
-    _controller: TransformStreamDefaultController<T>
+    _controller: TransformStreamDefaultController<T>,
+    context: DebounceContext
+  ): DebounceContext
+
+  /**
+   * Called after timer has timed out.
+   */
+  postTimer?(
+    _chunk: T,
+    _controller: TransformStreamDefaultController<T>,
+    context: DebounceContext
+  ): DebounceContext
+}
+
+export class LeadingBehavior<T> implements Behavior<T> {
+  preTimer(
+    chunk: T,
+    controller: TransformStreamDefaultController<T>,
+    context: DebounceContext
   ) {
-    clearTimeout(this._timer)
-    this._timer = undefined
+    if (!context.timer) controller.enqueue(chunk)
+    return {
+      ...context,
+      queued: !context.timer,
+    }
   }
 }
 
-class LeadingBehavior<T> extends Behavior<T> {
-  protected _queued = false
-
-  override transform(
+export class TrailingBehavior<T> implements Behavior<T> {
+  postTimer(
     chunk: T,
-    controller: TransformStreamDefaultController<T>
+    controller: TransformStreamDefaultController<T>,
+    context: DebounceContext
   ) {
-    this._queued = !this._timer
-    if (this._queued) controller.enqueue(chunk)
-    super.transform(chunk, controller)
+    if (!context.queued) {
+      controller.enqueue(chunk)
+      return {
+        ...context,
+        queued: true,
+      }
+    }
+    return context
   }
 }
 
-class TrailingBehavior<T> extends Behavior<T> {
-  protected override _handleTimeout(
-    chunk: T,
-    controller: TransformStreamDefaultController<T>
-  ) {
-    super._handleTimeout(chunk, controller)
-    controller.enqueue(chunk)
-  }
-}
+export class BackOffBehaviour<T> implements Behavior<T> {
+  #inc: (currentMS: number) => number
+  #max: number
+  #startingMS = 0
 
-class LeadingAndTrailingBehavior<T> extends LeadingBehavior<T> {
-  protected override _handleTimeout(
-    chunk: T,
-    controller: TransformStreamDefaultController<T>
+  constructor({
+    inc,
+    max = Number.MAX_SAFE_INTEGER,
+  }: {
+    inc(currentMS: number): number
+    max?: number
+  }) {
+    this.#inc = inc
+    this.#max = max
+  }
+
+  init(context: DebounceContext) {
+    this.#startingMS = context.ms
+    return context
+  }
+
+  preTimer(
+    _chunk: T,
+    _controller: TransformStreamDefaultController<T>,
+    context: DebounceContext
   ) {
-    super._handleTimeout(chunk, controller)
-    if (!this._queued) controller.enqueue(chunk)
+    return context.timer
+      ? {
+          ...context,
+          ms: Math.min(this.#inc(context.ms), this.#max),
+        }
+      : {
+          ...context,
+          ms: this.#startingMS,
+        }
   }
 }

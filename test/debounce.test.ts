@@ -1,6 +1,11 @@
 import { setImmediate, setTimeout } from 'node:timers/promises'
 import { ControllableStream } from '../src/ControllableStream'
-import { debounce } from '../src/debounce'
+import {
+  BackOffBehaviour,
+  debounce,
+  LeadingBehavior,
+  TrailingBehavior,
+} from '../src/debounce'
 import { write } from '../src/write'
 
 let controller: ControllableStream<number>
@@ -29,7 +34,7 @@ test('trailing only (by default)', async () => {
 })
 
 test('leading only', async () => {
-  controller.pipeThrough(debounce(10, { leading: true })).pipeTo(write(fn))
+  controller.pipeThrough(debounce(10, new LeadingBehavior())).pipeTo(write(fn))
 
   controller.enqueue(1)
   controller.enqueue(2)
@@ -43,7 +48,7 @@ test('leading only', async () => {
 
 test('leading and trailing', async () => {
   controller
-    .pipeThrough(debounce(10, { leading: true, trailing: true }))
+    .pipeThrough(debounce(10, [new LeadingBehavior(), new TrailingBehavior()]))
     .pipeTo(write(fn))
 
   controller.enqueue(1)
@@ -54,6 +59,29 @@ test('leading and trailing', async () => {
   expect(fn).toHaveBeenCalledWith(1)
 
   await setTimeout(15)
+  expect(fn).toHaveBeenCalledTimes(2)
+  expect(fn).toHaveBeenCalledWith(3)
+})
+
+test('back off', async () => {
+  controller
+    .pipeThrough(
+      debounce(10, [
+        new LeadingBehavior(),
+        new BackOffBehaviour({ inc: (x) => x * 2, max: 45 }),
+      ])
+    )
+    .pipeTo(write(fn))
+
+  controller.enqueue(1)
+  controller.enqueue(2)
+  await setTimeout(15)
+  expect(fn).toHaveBeenCalledTimes(1)
+  expect(fn).toHaveBeenCalledWith(1)
+
+  await setTimeout(10)
+  controller.enqueue(3)
+  controller.enqueue(4)
   expect(fn).toHaveBeenCalledTimes(2)
   expect(fn).toHaveBeenCalledWith(3)
 })
