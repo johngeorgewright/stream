@@ -14,8 +14,8 @@ import { ReadableStreamChunk } from './ReadableStreamChunk'
  *   ReadableStream<string>,
  *   ReadableStream<number>,
  * ]>
- * ```
  * // [number, string, string, number]
+ * ```
  */
 export type ReadableStreamsChunks<Rs extends ReadableStream<unknown>[]> =
   _ReadableStreamsChunks<Rs, []>
