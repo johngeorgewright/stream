@@ -6,10 +6,10 @@ import { write } from './write'
  * @group Sources
  * @example
  * ```
- * merge([
- *   fromIterable([1, 2, 3, 4]),
- *   fromIterable(['one', 'two', 'three', 'four']),
- * ])
+ * --1----2----3-------4-|
+ * ---one---two---three---four-|
+ *
+ * merge([stream1, stream2])
  *
  * -1-one-2-two-3-three-4-four-|
  * ```
