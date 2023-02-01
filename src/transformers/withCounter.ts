@@ -4,7 +4,7 @@ import { map } from './map'
  * Adds a counter representing the amount of chunks
  * received thus far.
  *
- * @group Transformer
+ * @group Transformers
  * @example
  * ```
  * --a----------------------b-------|
