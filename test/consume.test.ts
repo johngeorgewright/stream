@@ -1,5 +1,5 @@
-import { fromIterable } from '../src/fromIterable'
-import { write } from '../src/write'
+import { fromIterable } from '../src/sources/fromIterable'
+import { write } from '../src/sinks/write'
 
 test('consuming a string', async () => {
   const fn = jest.fn()

@@ -1,5 +1,8 @@
-import { consume } from './consume'
+import { write } from './write'
 
+/**
+ * @group Sinks
+ */
 export interface ToArrayOptions extends StreamPipeOptions {
   /**
    * When set to true, any errors are caught and the accumulated
@@ -9,7 +12,29 @@ export interface ToArrayOptions extends StreamPipeOptions {
 }
 
 /**
- * Consumes all chunks in the streams resolves them as an array.
+ * Consumes all chunks in the stream and resolves them as an array.
+ *
+ * @see ToArrayOptions
+ * @group Sinks
+ * @example
+ * ```
+ * --1--2--3--4--5--6--|
+ *
+ * toArray(stream)
+ *
+ * [1, 2, 3, 4, 5, 6]
+ * ```
+ *
+ * Using the `catch` option will resolve whatever pass with a
+ * possible error.
+ *
+ * ```
+ * --1--2--3--E--4--5--6--|
+ *
+ * toArray(stream, { catch: true })
+ *
+ * { result: [1, 2, 3], error: E }
+ * ```
  */
 export async function toArray<T>(
   readableStream: ReadableStream<T>,
@@ -27,9 +52,8 @@ export async function toArray<T>(
 ) {
   const result: T[] = []
 
-  const promise = consume(
-    readableStream,
-    (chunk) => result.push(chunk),
+  const promise = readableStream.pipeTo(
+    write((chunk) => result.push(chunk)),
     options
   )
 

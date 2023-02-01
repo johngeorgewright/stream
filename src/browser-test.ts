@@ -1,8 +1,8 @@
-import { addedNodes } from './addedNodes'
-import { fromDOMMutations } from './fromDOMMutations'
-import { tap } from './tap'
-import { toArray } from './toArray'
-import { write } from './write'
+import { addedNodes } from './transformers/addedNodes'
+import { fromDOMMutations } from './sources/fromDOMMutations'
+import { tap } from './transformers/tap'
+import { toArray } from './sinks/toArray'
+import { write } from './sinks/write'
 
 toArray(startAuction().pipeThrough(tap((bid) => console.info('bid', bid))), {
   catch: true,

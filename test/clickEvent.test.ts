@@ -1,4 +1,4 @@
-import { fromDOMEvent } from '../src/fromDOMEvent'
+import { fromDOMEvent } from '../src/sources/fromDOMEvent'
 
 let element: HTMLAnchorElement
 

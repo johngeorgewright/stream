@@ -1,4 +1,4 @@
-import { Predicate } from './util/Preciate'
+import { Predicate } from '../util/Preciate'
 
 /**
  * Prevents chunks from travelling down the stream

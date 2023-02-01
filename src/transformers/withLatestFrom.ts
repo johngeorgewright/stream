@@ -1,8 +1,23 @@
-import { ReadableStreamsChunks } from './util/ReadableStreamsChunks'
-import { write } from './write'
+import { ReadableStreamsChunks } from '../util/ReadableStreamsChunks'
+import { write } from '../sinks/write'
 
 const unfilled = Symbol()
 
+/**
+ * Combines the source Observable with other Observables to create an Observable
+ * whose values are calculated from the latest values of each, only when the source emits.
+ *
+ * @group Transformers
+ * @example
+ * ```
+ * --a-----b-------c---d---e--
+ * -----1----2-3-4------------
+ *
+ * withLatestFrom(stream2)
+ *
+ * --------b1------c4--d4--e4-
+ * ```
+ */
 export function withLatestFrom<T, RSs extends ReadableStream<unknown>[]>(
   ...inputs: RSs
 ) {

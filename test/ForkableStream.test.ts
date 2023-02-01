@@ -1,6 +1,6 @@
-import { fromIterable } from '../src/fromIterable'
-import { ForkableStream } from '../src/ForkableStream'
-import { write } from '../src/write'
+import { fromIterable } from '../src/sources/fromIterable'
+import { ForkableStream } from '../src/sinks/ForkableStream'
+import { write } from '../src/sinks/write'
 
 let forkable: ForkableStream<number>
 let fn: jest.Mock<void, [number]>

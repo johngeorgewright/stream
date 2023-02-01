@@ -1,4 +1,4 @@
-import { Predicate } from './util/Preciate'
+import { Predicate } from '../util/Preciate'
 
 /**
  * Filters out queued chunks based on a predicate.

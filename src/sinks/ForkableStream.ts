@@ -1,6 +1,6 @@
-import { ControllableStream } from './ControllableStream'
-import { identity } from './identity'
-import { without } from './util/array'
+import { ControllableStream } from '../sources/ControllableStream'
+import { identity } from '../transformers/identity'
+import { without } from '../util/array'
 
 /**
  * A ForkableStream is "1 Writeable to many Readables".

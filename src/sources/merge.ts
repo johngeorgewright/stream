@@ -1,4 +1,4 @@
-import { write } from './write'
+import { write } from '../sinks/write'
 
 /**
  * Merges multiple streams in to 1 ReadableStream.

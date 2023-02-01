@@ -1,4 +1,4 @@
-import { Predicate } from './util/Preciate'
+import { Predicate } from '../util/Preciate'
 
 /**
  * Call the predicate on each chunk in the queue.

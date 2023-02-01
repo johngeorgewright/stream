@@ -1,6 +1,6 @@
-import { every } from '../src/every'
-import { fromIterable } from '../src/fromIterable'
-import { toArray } from '../src/toArray'
+import { every } from '../src/transformers/every'
+import { fromIterable } from '../src/sources/fromIterable'
+import { toArray } from '../src/sinks/toArray'
 
 test('when not', async () => {
   expect(
@@ -9,7 +9,7 @@ test('when not', async () => {
         every((chunk) => chunk % 5 === 0)
       )
     )
-  ).toBe([false])
+  ).toEqual([false])
 })
 
 test('when true', async () => {
@@ -19,5 +19,5 @@ test('when true', async () => {
         every((chunk) => chunk % 5 === 0)
       )
     )
-  ).toBe([true])
+  ).toEqual([true])
 })

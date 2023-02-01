@@ -1,4 +1,4 @@
-import { Predicate } from './util/Preciate'
+import { Predicate } from '../util/Preciate'
 
 /**
  * Runs every chunk through a predicate. If anything suceeds the
