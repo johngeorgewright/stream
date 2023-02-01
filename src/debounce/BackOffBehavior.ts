@@ -20,13 +20,18 @@ export interface DebounceBackOffBehaviorOptions {
 
 /**
  * A behavior that will increase the debounce time whenever events
- * are received within the current time.
+ * are received within the current time. It's best to be used in
+ * conjunction with the {@link DebounceTrailingBehavior:function}
+ * or the {@link DebounceLeadingBehavior:function}.
  *
  * @group Debounce
  * @example
  * --a--b---c----d------------------
  *
- * debounce(5, new DebounceBackOffBehavior({ inc: (ms) => ms * 2 }))
+ * debounce(5, [
+ *   new DebounceBackOffBehavior({ inc: (ms) => ms * 2 }),
+ *   new DebounceTrailingBehavior(),
+ * ])
  *
  * ---T5-T10-T20---T40--------------
  * -------------------------------d-
