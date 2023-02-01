@@ -21,8 +21,8 @@ export interface DebounceBackOffBehaviorOptions {
 /**
  * A behavior that will increase the debounce time whenever events
  * are received within the current time. It's best to be used in
- * conjunction with the {@link DebounceTrailingBehavior:function}
- * or the {@link DebounceLeadingBehavior:function}.
+ * conjunction with the {@link DebounceTrailingBehavior:class}
+ * or the {@link DebounceLeadingBehavior:class}.
  *
  * @group Debounce
  * @example
