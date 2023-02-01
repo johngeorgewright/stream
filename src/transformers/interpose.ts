@@ -12,7 +12,11 @@
  * --------a--------b-|
  * ```
  */
-export function interpose<T>(fn: (chunk: T) => Promise<void>) {
+export function interpose<T>(
+  promise: Promise<void> | ((chunk: T) => Promise<void>)
+) {
+  const fn = typeof promise === 'function' ? promise : () => promise
+
   return new TransformStream<T, T>({
     async transform(chunk, controller) {
       try {
