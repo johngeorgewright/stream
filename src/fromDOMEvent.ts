@@ -1,3 +1,13 @@
+/**
+ * Creates a readable stream from DOM events.
+ *
+ * @group Sources
+ * @example
+ * ```
+ * fromDOMEvent(window, 'resize')
+ * fromDOMEvent(document, 'click', { capture: true })
+ * ```
+ */
 export function fromDOMEvent<K extends keyof HTMLElementEventMap>(
   element: HTMLElement,
   type: K,

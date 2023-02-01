@@ -1,7 +1,25 @@
-import { Behavior } from './Behavior'
-import { DebounceContext } from './DebounceContext'
+/**
+ * @module debounce
+ */
 
-export class LeadingBehavior<T> implements Behavior<T> {
+import { DebounceBehavior } from './Behavior'
+import { DebounceContext } from './Context'
+
+/**
+ * Debouncing behavior to queue the leading event.
+ *
+ * @group Debounce
+ * @see [debounce](./index.ts)
+ * @example
+ * ```
+ * --a-b-c--------------d-----------
+ *
+ * debounce(20, new DebounceLeadingBehavior())
+ *
+ * ---a------------------d----------
+ * ```
+ */
+export class DebounceLeadingBehavior<T> implements DebounceBehavior<T> {
   preTimer(
     context: DebounceContext,
     chunk: T,

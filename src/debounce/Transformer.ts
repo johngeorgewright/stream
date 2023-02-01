@@ -1,11 +1,21 @@
-import { Behavior } from './Behavior'
-import { DebounceContext } from './DebounceContext'
+/**
+ * @module debounce
+ */
 
+import { DebounceBehavior } from './Behavior'
+import { DebounceContext } from './Context'
+
+/**
+ * The transformer implementation for [debounce](./index.ts).
+ *
+ * @group Debounce
+ * @see [debounce](./index.ts)
+ */
 export class DebounceTransformer<T> implements Transformer<T, T> {
-  #behaviors: Behavior<T>[]
+  #behaviors: DebounceBehavior<T>[]
   #context: DebounceContext
 
-  constructor(ms: number, behaviors: Behavior<T>[]) {
+  constructor(ms: number, behaviors: DebounceBehavior<T>[]) {
     this.#behaviors = behaviors
     this.#context = this.#reduceContext('init', { ms: ms, queued: false })
   }
@@ -55,7 +65,7 @@ export class DebounceTransformer<T> implements Transformer<T, T> {
   ): DebounceContext
 
   #reduceContext(
-    stage: keyof Behavior<T>,
+    stage: keyof DebounceBehavior<T>,
     context: DebounceContext,
     chunk?: T,
     controller?: TransformStreamDefaultController<T>

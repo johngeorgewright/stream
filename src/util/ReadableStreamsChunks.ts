@@ -1,6 +1,9 @@
 import { L } from 'ts-toolbelt'
 import { ReadableStreamChunk } from './ReadableStreamChunk'
 
+/**
+ * @group Utils
+ */
 export type ReadableStreamsChunks<Rs extends ReadableStream<unknown>[]> =
   _ReadableStreamsChunks<Rs, []>
 

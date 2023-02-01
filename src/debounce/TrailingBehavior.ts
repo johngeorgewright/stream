@@ -1,7 +1,27 @@
-import { Behavior } from './Behavior'
-import { DebounceContext } from './DebounceContext'
+/**
+ * @module debounce
+ */
 
-export class TrailingBehavior<T> implements Behavior<T> {
+import { DebounceBehavior } from './Behavior'
+import { DebounceContext } from './Context'
+
+/**
+ * Debouncing behavior to queue the trailing event.
+ *
+ * @group Debounce
+ * @see [debounce](./index.ts)
+ * @example
+ * ```
+ * --a-----------------b-c--------------d-----------
+ *
+ * debounce(20)
+ * // Same as...
+ * debounce(20, new TrailingBehavior())
+ *
+ * ----------a------------------c----------------d--
+ * ```
+ */
+export class DebounceTrailingBehavior<T> implements DebounceBehavior<T> {
   postTimer(
     context: DebounceContext,
     chunk: T,

@@ -1,6 +1,13 @@
-import { DebounceContext } from './DebounceContext'
+import { DebounceContext } from './Context'
 
-export interface Behavior<T> {
+/**
+ * Debouncing requires at least one behavior that implements
+ * the DebounceBehavior.
+ *
+ * @group Debounce
+ * @see [debounce](./index.ts)
+ */
+export interface DebounceBehavior<T> {
   /**
    * Called only once, when the debouncer is constructed.
    */

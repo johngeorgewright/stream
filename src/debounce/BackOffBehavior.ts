@@ -1,17 +1,45 @@
-import { Behavior } from './Behavior'
-import { DebounceContext } from './DebounceContext'
+import { DebounceBehavior } from './Behavior'
+import { DebounceContext } from './Context'
 
-export interface BackOffBehaviorOptions {
+/**
+ * @group Debounce
+ */
+export interface DebounceBackOffBehaviorOptions {
+  /**
+   * The back-off increment formular
+   */
   inc(currentMS: number): number
+
+  /**
+   * An optional maximum time to reach.
+   *
+   * @default Number.MAX_SAFE_INTEGER
+   */
   max?: number
 }
 
-export class BackOffBehavior<T> implements Behavior<T> {
+/**
+ * A behavior that will increase the debounce time whenever events
+ * are received within the current time.
+ *
+ * @group Debounce
+ * @example
+ * --a--b---c----d------------------
+ *
+ * debounce(5, new DebounceBackOffBehavior({ inc: (ms) => ms * 2 }))
+ *
+ * ---T5-T10-T20---T40--------------
+ * -------------------------------d-
+ */
+export class DebounceBackOffBehavior<T> implements DebounceBehavior<T> {
   #inc: (currentMS: number) => number
   #max: number
   #startingMS = 0
 
-  constructor({ inc, max = Number.MAX_SAFE_INTEGER }: BackOffBehaviorOptions) {
+  constructor({
+    inc,
+    max = Number.MAX_SAFE_INTEGER,
+  }: DebounceBackOffBehaviorOptions) {
     this.#inc = inc
     this.#max = max
   }
