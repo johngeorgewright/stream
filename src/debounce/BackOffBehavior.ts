@@ -1,32 +1,26 @@
 import { Behavior } from './Behavior'
 import { DebounceContext } from './DebounceContext'
 
+export interface BackOffBehaviorOptions {
+  inc(currentMS: number): number
+  max?: number
+}
+
 export class BackOffBehavior<T> implements Behavior<T> {
   #inc: (currentMS: number) => number
   #max: number
   #startingMS = 0
 
-  constructor({
-    inc,
-    max = Number.MAX_SAFE_INTEGER,
-  }: {
-    inc(currentMS: number): number
-    max?: number
-  }) {
+  constructor({ inc, max = Number.MAX_SAFE_INTEGER }: BackOffBehaviorOptions) {
     this.#inc = inc
     this.#max = max
   }
 
   init(context: DebounceContext) {
     this.#startingMS = context.ms
-    return context
   }
 
-  preTimer(
-    _chunk: T,
-    _controller: TransformStreamDefaultController<T>,
-    context: DebounceContext
-  ) {
+  preTimer(context: DebounceContext) {
     return context.timer
       ? {
           ...context,

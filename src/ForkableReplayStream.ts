@@ -16,4 +16,8 @@ export class ForkableReplayStream<T> extends ForkableStream<T> {
     for (const chunk of this.#chunks) controller.enqueue(chunk)
     return this._pipeThroughController(controller)
   }
+
+  clear() {
+    this.#chunks = []
+  }
 }

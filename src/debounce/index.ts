@@ -2,6 +2,11 @@ import { Behavior } from './Behavior'
 import { DebounceTransformer } from './DebounceTransformer'
 import { TrailingBehavior } from './TrailingBehavior'
 
+export { Behavior, DebounceTransformer, TrailingBehavior }
+export * from './BackOffBehavior'
+export * from './DebounceContext'
+export * from './LeadingBehavior'
+
 export function debounce<T>(
   ms: number,
   behaviors?: Behavior<T> | Behavior<T>[]

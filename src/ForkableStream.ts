@@ -17,6 +17,7 @@ export class ForkableStream<T> extends WritableStream<T> {
     super(
       {
         ...underlyingSink,
+
         abort: (reason) => {
           this.#forEachController((controller) => controller.error(reason))
           this.#controllers = []
@@ -24,6 +25,7 @@ export class ForkableStream<T> extends WritableStream<T> {
           this.#finished = true
           return underlyingSink?.abort?.(reason)
         },
+
         close: () => {
           this.#forEachController((controller) => {
             try {
@@ -36,11 +38,13 @@ export class ForkableStream<T> extends WritableStream<T> {
           this.#finished = true
           return underlyingSink?.close?.()
         },
+
         write: (chunk, controller) => {
           this.#forEachController((controller) => controller.enqueue(chunk))
           return underlyingSink?.write?.(chunk, controller)
         },
       },
+
       strategy
     )
   }

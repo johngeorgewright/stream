@@ -29,7 +29,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@types/jest", "npm:29.2.5"],\
-            ["@types/lodash", "npm:4.14.191"],\
             ["@types/node", "npm:18.11.18"],\
             ["jest", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.3.1"],\
             ["jest-environment-jsdom", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.3.1"],\
@@ -2447,15 +2446,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.11.18"],\
             ["@types/tough-cookie", "npm:4.0.2"],\
             ["parse5", "npm:7.1.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@types/lodash", [\
-        ["npm:4.14.191", {\
-          "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.191-67a04a969b-ba0d5434e1.zip/node_modules/@types/lodash/",\
-          "packageDependencies": [\
-            ["@types/lodash", "npm:4.14.191"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6383,7 +6373,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["stream", "workspace:."],\
             ["@types/jest", "npm:29.2.5"],\
-            ["@types/lodash", "npm:4.14.191"],\
             ["@types/node", "npm:18.11.18"],\
             ["jest", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.3.1"],\
             ["jest-environment-jsdom", "virtual:a50ac34c994199f331d8f2c0b91325f65d8cc978798daed5b5106971078b528ea88164f31345e813fc4bf393ebca5d6eeb61f08d8a3e2925a3ef64d0753215a7#npm:29.3.1"],\

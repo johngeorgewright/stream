@@ -1,9 +1,11 @@
 import { setImmediate, setTimeout } from 'node:timers/promises'
 import { ControllableStream } from '../src/ControllableStream'
-import { debounce } from '../src/debounce'
-import { BackOffBehavior } from '../src/debounce/BackOffBehavior'
-import { LeadingBehavior } from '../src/debounce/LeadingBehavior'
-import { TrailingBehavior } from '../src/debounce/TrailingBehavior'
+import {
+  BackOffBehavior,
+  debounce,
+  LeadingBehavior,
+  TrailingBehavior,
+} from '../src/debounce'
 import { write } from '../src/write'
 
 let controller: ControllableStream<number>

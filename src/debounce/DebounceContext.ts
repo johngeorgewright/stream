@@ -1,5 +1,5 @@
 export type DebounceContext = Readonly<{
-  queued?: boolean
+  queued: boolean
   ms: number
   timer?: NodeJS.Timer
 }>

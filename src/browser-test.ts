@@ -1,22 +1,35 @@
-import { debounce } from './debounce'
-import { fromDOMEvent } from './fromDOMEvent'
-import { map } from './map'
+import { addedNodes } from './addedNodes'
+import { fromDOMMutations } from './fromDOMMutations'
 import { tap } from './tap'
-import { withCounter } from './withCounter'
-import 'typed-query-selector'
-import { filter } from './filter'
+import { toArray } from './toArray'
 import { write } from './write'
 
-const element = document.querySelector('a#click-test')
+toArray(startAuction().pipeThrough(tap((bid) => console.info('bid', bid))), {
+  catch: true,
+  signal: AbortSignal.timeout(2_000),
+}).then(console.info)
 
-if (!element) throw new Error('cannot find clicky thing')
+fromDOMMutations(document.querySelector('#mutant')!, { childList: true })
+  .pipeThrough(addedNodes())
+  .pipeTo(write(console.info))
 
-fromDOMEvent(element, 'click')
-  .pipeThrough(tap((event) => console.info(event)))
-  .pipeThrough(debounce(1_000))
-  .pipeThrough(filter((event) => !!event.target))
-  .pipeThrough(map((event) => event.target))
-  .pipeThrough(withCounter())
-  .pipeThrough(tap((event) => console.info(event)))
-  .pipeTo(write())
-  .catch(console.error)
+function startAuction() {
+  let timer: NodeJS.Timer
+
+  return new ReadableStream<number>({
+    start(controller) {
+      receiveBid()
+
+      function receiveBid() {
+        timer = setTimeout(() => {
+          controller.enqueue(Math.random())
+          receiveBid()
+        }, Math.random() * 1_000)
+      }
+    },
+
+    cancel() {
+      clearTimeout(timer)
+    },
+  })
+}

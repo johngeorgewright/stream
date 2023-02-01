@@ -1,7 +1,20 @@
-export function accumulate<I, O>(acc: O, fn: (acc: O, chunk: I) => O) {
+import { Accumulator } from './util/Accumulator'
+
+/**
+ * Every chunk is added to an accumulator.
+ *
+ * @example
+ * readable.pipeThrough(
+ *   accumulate({ chunks: [], counter: 0 } (acc, chunk) => ({
+ *     chunks: [...acc.chunks, chunk],
+ *     counter: acc.counter + 1
+ *   }))
+ * )
+ */
+export function accumulate<I, O>(acc: O, fn: Accumulator<I, O>) {
   return new TransformStream<I, O>({
-    transform(chunk, controller) {
-      acc = fn(acc, chunk)
+    async transform(chunk, controller) {
+      acc = await fn(acc, chunk)
       controller.enqueue(acc)
     },
   })

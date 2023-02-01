@@ -3,14 +3,15 @@ import { DebounceContext } from './DebounceContext'
 
 export class LeadingBehavior<T> implements Behavior<T> {
   preTimer(
+    context: DebounceContext,
     chunk: T,
-    controller: TransformStreamDefaultController<T>,
-    context: DebounceContext
+    controller: TransformStreamDefaultController<T>
   ) {
-    if (!context.timer) controller.enqueue(chunk)
+    const enqueue = !context.timer && !context.queued
+    if (enqueue) controller.enqueue(chunk)
     return {
       ...context,
-      queued: !context.timer,
+      queued: enqueue,
     }
   }
 }

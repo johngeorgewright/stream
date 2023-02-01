@@ -1,14 +1,19 @@
 import { ReadableStreamsChunks } from './util/ReadableStreamsChunks'
 import { write } from './write'
 
-export function withLatestFrom<S, RT extends ReadableStream<unknown>[]>(
-  ...inputs: RT
+const unfilled = Symbol()
+
+export function withLatestFrom<T, RSs extends ReadableStream<unknown>[]>(
+  ...inputs: RSs
 ) {
-  type Output = [S, ...ReadableStreamsChunks<RT>]
+  type Output = [T, ...ReadableStreamsChunks<RSs>]
 
-  let inputValues = new Array(inputs.length)
+  const isFilled = (arr: any[]): arr is ReadableStreamsChunks<RSs> =>
+    arr.every((value) => value !== unfilled)
 
-  const promise = Promise.all(
+  let inputValues = new Array(inputs.length).fill(unfilled)
+
+  const inputValuesPromise = Promise.all(
     inputs.map((input, index) =>
       input.pipeTo(
         write((chunk) => {
@@ -18,14 +23,13 @@ export function withLatestFrom<S, RT extends ReadableStream<unknown>[]>(
     )
   )
 
-  return new TransformStream<S, Output>({
+  return new TransformStream<T, Output>({
     start(controller) {
-      promise.catch((error) => controller.error(error))
+      inputValuesPromise.catch((error) => controller.error(error))
     },
 
     transform(chunk, controller) {
-      if (inputValues.some((value) => value === undefined)) return
-      controller.enqueue([chunk, ...inputValues] as Output)
+      if (isFilled(inputValues)) controller.enqueue([chunk, ...inputValues])
     },
   })
 }

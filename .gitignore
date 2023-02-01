@@ -1,5 +1,6 @@
 dist
 *.log
+.parcel-cache
 .yarn/*
 !.yarn/patches
 !.yarn/plugins

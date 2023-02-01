@@ -7,20 +7,36 @@ export class DebounceTransformer<T> implements Transformer<T, T> {
 
   constructor(ms: number, behaviors: Behavior<T>[]) {
     this.#behaviors = behaviors
-    this.#context = this.#init({ ms: ms })
+    this.#context = this.#reduceContext('init', { ms: ms, queued: false })
   }
 
   transform(chunk: T, controller: TransformStreamDefaultController<T>) {
     clearTimeout(this.#context.timer)
-    this.#context = this.#preTimer(chunk, controller, this.#context)
+
+    this.#context = this.#reduceContext(
+      'preTimer',
+      {
+        ...this.#context,
+        queued: false,
+      },
+      chunk,
+      controller
+    )
+
     this.#context = {
       ...this.#context,
+
       timer: setTimeout(() => {
         clearTimeout(this.#context.timer)
-        this.#context = this.#postTimer(chunk, controller, {
-          ...this.#context,
-          timer: undefined,
-        })
+        this.#context = this.#reduceContext(
+          'postTimer',
+          {
+            ...this.#context,
+            timer: undefined,
+          },
+          chunk,
+          controller
+        )
       }, this.#context.ms),
     }
   }
@@ -29,33 +45,24 @@ export class DebounceTransformer<T> implements Transformer<T, T> {
     clearTimeout(this.#context.timer)
   }
 
-  #init(context: DebounceContext) {
-    return this.#behaviors.reduce(
-      (context, behavior) => behavior.init?.(context) || context,
-      context
-    )
-  }
+  #reduceContext(stage: 'init', context: DebounceContext): DebounceContext
 
-  #preTimer(
+  #reduceContext(
+    stage: 'preTimer' | 'postTimer',
+    context: DebounceContext,
     chunk: T,
-    controller: TransformStreamDefaultController<T>,
-    context: DebounceContext
-  ) {
+    controller: TransformStreamDefaultController<T>
+  ): DebounceContext
+
+  #reduceContext(
+    stage: keyof Behavior<T>,
+    context: DebounceContext,
+    chunk?: T,
+    controller?: TransformStreamDefaultController<T>
+  ): DebounceContext {
     return this.#behaviors.reduce(
       (context, behavior) =>
-        behavior.preTimer?.(chunk, controller, context) || context,
-      context
-    )
-  }
-
-  #postTimer(
-    chunk: T,
-    controller: TransformStreamDefaultController<T>,
-    context: DebounceContext
-  ) {
-    return this.#behaviors.reduce(
-      (context, behavior) =>
-        behavior.postTimer?.(chunk, controller, context) || context,
+        behavior[stage]?.(context, chunk!, controller!) || context,
       context
     )
   }

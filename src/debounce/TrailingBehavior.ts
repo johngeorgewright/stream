@@ -3,10 +3,10 @@ import { DebounceContext } from './DebounceContext'
 
 export class TrailingBehavior<T> implements Behavior<T> {
   postTimer(
+    context: DebounceContext,
     chunk: T,
-    controller: TransformStreamDefaultController<T>,
-    context: DebounceContext
-  ) {
+    controller: TransformStreamDefaultController<T>
+  ): DebounceContext | void {
     if (!context.queued) {
       controller.enqueue(chunk)
       return {
@@ -14,6 +14,5 @@ export class TrailingBehavior<T> implements Behavior<T> {
         queued: true,
       }
     }
-    return context
   }
 }

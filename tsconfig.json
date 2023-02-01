@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "importHelpers": true,
     "incremental": true,
-    "lib": ["dom", "es2020"],
+    "lib": ["dom", "es2022"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitOverride": true,
@@ -15,7 +15,7 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es6"
+    "target": "ES2022"
   },
   "includes": ["src"],
   "exclude": ["commitlint.config.ts", "dist", "test", "jest.config.ts"]
