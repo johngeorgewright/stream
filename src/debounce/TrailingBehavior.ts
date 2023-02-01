@@ -8,7 +8,7 @@ import { DebounceContext } from './Context'
 /**
  * Debouncing behavior to queue the trailing event.
  *
- * @group Debounce
+ * @group Transformers
  * @see {@link debounce:function}
  * @example
  * ```

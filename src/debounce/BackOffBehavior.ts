@@ -2,7 +2,7 @@ import { DebounceBehavior } from './Behavior'
 import { DebounceContext } from './Context'
 
 /**
- * @group Debounce
+ * @group Transformers
  */
 export interface DebounceBackOffBehaviorOptions {
   /**
@@ -24,7 +24,7 @@ export interface DebounceBackOffBehaviorOptions {
  * conjunction with the {@link DebounceTrailingBehavior:class}
  * or the {@link DebounceLeadingBehavior:class}.
  *
- * @group Debounce
+ * @group Transformers
  * @see {@link debounce:function}
  * @example
  * --a--b---c----d------------------

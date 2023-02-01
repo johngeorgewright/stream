@@ -8,7 +8,7 @@ import { DebounceContext } from './Context'
 /**
  * The transformer implementation for {@link debounce:function}.
  *
- * @group Debounce
+ * @group Transformers
  * @see {@link debounce:function}
  */
 export class DebounceTransformer<T> implements Transformer<T, T> {

@@ -1,5 +1,19 @@
-import { consume } from './consume'
+import { write } from './write'
 
+/**
+ * Merges multiple streams in to 1 ReadableStream.
+ *
+ * @group Sources
+ * @example
+ * ```
+ * merge([
+ *   fromIterable([1, 2, 3, 4]),
+ *   fromIterable(['one', 'two', 'three', 'four']),
+ * ])
+ *
+ * -1-one-2-two-3-three-4-four-|
+ * ```
+ */
 export function merge<T>(
   readableStreams: ReadableStream<T>[]
 ): ReadableStream<T> {
@@ -12,9 +26,14 @@ export function merge<T>(
 
       await Promise.all(
         readableStreams.map((stream) =>
-          consume(stream, (chunk) => controller.enqueue(chunk), {
-            signal: abortController.signal,
-          }).catch((error) => controller.error(error))
+          stream
+            .pipeTo(
+              write((chunk) => controller.enqueue(chunk)),
+              {
+                signal: abortController.signal,
+              }
+            )
+            .catch((error) => controller.error(error))
         )
       )
 

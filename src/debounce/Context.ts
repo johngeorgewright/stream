@@ -5,7 +5,7 @@
 /**
  * The DebounceContext is passed to each {@link DebounceBehavior:interface} stage.
  *
- * @group Debounce
+ * @group Transformers
  * @see {@link DebounceBehavior:interface}
  * @see {@link debounce:function}
  */

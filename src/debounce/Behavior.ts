@@ -4,7 +4,7 @@ import { DebounceContext } from './Context'
  * Debouncing requires at least one behavior that implements
  * the DebounceBehavior.
  *
- * @group Debounce
+ * @group Transformers
  * @see {@link debounce:function}
  */
 export interface DebounceBehavior<T> {
