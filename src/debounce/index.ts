@@ -12,9 +12,9 @@ export * from './LeadingBehavior'
  * since the last time this transformer received anything.
  * The queuing behavior is configurable.
  *
- * @see [DebounceLeadingBehavior](./LeadingBehavior.ts)
- * @see DebounceTrailingBehavior
- * @see [DebounceBackOffBehavior](./BackOffBehavior.ts)
+ * @see {@link DebounceLeadingBehavior:class}
+ * @see {@link DebounceTrailingBehavior:class}
+ * @see {@link DebounceBackOffBehavior:class}
  * @group Transformers
  * @example
  * Using the trailing behavior.

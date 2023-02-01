@@ -9,7 +9,7 @@ import { DebounceContext } from './Context'
  * Debouncing behavior to queue the leading event.
  *
  * @group Debounce
- * @see [debounce](./index.ts)
+ * @see {@link debounce:function}
  * @example
  * ```
  * --a-b-c--------------d-----------

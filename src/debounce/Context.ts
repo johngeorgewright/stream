@@ -3,11 +3,11 @@
  */
 
 /**
- * The DebounceContext is passed to each DebounceBehavior stage.
+ * The DebounceContext is passed to each {@link DebounceBehavior:interface} stage.
  *
  * @group Debounce
- * @see [DebounceBehavior](./Behavior.ts)
- * @see [debounce](./index.ts)
+ * @see {@link DebounceBehavior:interface}
+ * @see {@link debounce:function}
  */
 export type DebounceContext = Readonly<{
   queued: boolean

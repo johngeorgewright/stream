@@ -6,10 +6,10 @@ import { DebounceBehavior } from './Behavior'
 import { DebounceContext } from './Context'
 
 /**
- * The transformer implementation for [debounce](./index.ts).
+ * The transformer implementation for {@link debounce:function}.
  *
  * @group Debounce
- * @see [debounce](./index.ts)
+ * @see {@link debounce:function}
  */
 export class DebounceTransformer<T> implements Transformer<T, T> {
   #behaviors: DebounceBehavior<T>[]

@@ -25,6 +25,7 @@ export interface DebounceBackOffBehaviorOptions {
  * or the {@link DebounceLeadingBehavior:class}.
  *
  * @group Debounce
+ * @see {@link debounce:function}
  * @example
  * --a--b---c----d------------------
  *

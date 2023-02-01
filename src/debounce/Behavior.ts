@@ -5,7 +5,7 @@ import { DebounceContext } from './Context'
  * the DebounceBehavior.
  *
  * @group Debounce
- * @see [debounce](./index.ts)
+ * @see {@link debounce:function}
  */
 export interface DebounceBehavior<T> {
   /**
