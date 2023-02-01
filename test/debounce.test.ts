@@ -1,10 +1,10 @@
 import { setImmediate, setTimeout } from 'node:timers/promises'
 import { ControllableStream } from '../src/ControllableStream'
 import {
-  BackOffBehavior,
   debounce,
-  LeadingBehavior,
-  TrailingBehavior,
+  DebounceBackOffBehavior,
+  DebounceLeadingBehavior,
+  DebounceTrailingBehavior,
 } from '../src/debounce'
 import { write } from '../src/write'
 
@@ -34,7 +34,9 @@ test('trailing only (by default)', async () => {
 })
 
 test('leading only', async () => {
-  controller.pipeThrough(debounce(10, new LeadingBehavior())).pipeTo(write(fn))
+  controller
+    .pipeThrough(debounce(10, new DebounceLeadingBehavior()))
+    .pipeTo(write(fn))
 
   controller.enqueue(1)
   controller.enqueue(2)
@@ -48,7 +50,12 @@ test('leading only', async () => {
 
 test('leading and trailing', async () => {
   controller
-    .pipeThrough(debounce(10, [new LeadingBehavior(), new TrailingBehavior()]))
+    .pipeThrough(
+      debounce(10, [
+        new DebounceLeadingBehavior(),
+        new DebounceTrailingBehavior(),
+      ])
+    )
     .pipeTo(write(fn))
 
   controller.enqueue(1)
@@ -67,8 +74,8 @@ test('back off', async () => {
   controller
     .pipeThrough(
       debounce(10, [
-        new LeadingBehavior(),
-        new BackOffBehavior({ inc: (x) => x * 2, max: 45 }),
+        new DebounceLeadingBehavior(),
+        new DebounceBackOffBehavior({ inc: (x) => x * 2, max: 45 }),
       ])
     )
     .pipeTo(write(fn))
