@@ -25,8 +25,8 @@ export interface ToArrayOptions extends StreamPipeOptions {
  * [1, 2, 3, 4, 5, 6]
  * ```
  *
- * Using the `catch` option will resolve whatever pass with a
- * possible error.
+ * Using the `catch` option will resolve whatever it
+ * has consumed before the error is thrown.
  *
  * ```
  * --1--2--3--E--4--5--6--|

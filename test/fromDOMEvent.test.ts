@@ -1,0 +1,35 @@
+import { first } from '../src/transformers/first'
+import { fromDOMEvent } from '../src/sources/fromDOMEvent'
+import { write } from '../src/sinks/write'
+
+let element: HTMLAnchorElement
+
+beforeEach(() => {
+  element = document.createElement('a')
+  document.body.appendChild(element)
+})
+
+afterEach(() => {
+  element.remove()
+})
+
+test('click events', async () => {
+  const fn = jest.fn()
+
+  const finished = fromDOMEvent(element, 'click')
+    .pipeThrough(first())
+    .pipeTo(write(fn))
+
+  element.click()
+
+  await finished
+
+  expect(fn).toHaveBeenCalledTimes(1)
+  expect(fn.mock.calls[0]).toMatchInlineSnapshot(`
+    [
+      MouseEvent {
+        "isTrusted": false,
+      },
+    ]
+  `)
+})

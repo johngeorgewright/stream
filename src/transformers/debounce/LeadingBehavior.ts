@@ -1,7 +1,3 @@
-/**
- * @module debounce
- */
-
 import { DebounceBehavior } from './Behavior'
 import { DebounceContext } from './Context'
 

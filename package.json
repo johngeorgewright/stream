@@ -1,5 +1,13 @@
 {
-  "name": "stream",
+  "name": "pour",
+  "description": "Reactive programming tools using the Web Streams API.",
+  "keywords": [
+    "stream",
+    "streams",
+    "web streams",
+    "stream api",
+    "reactive"
+  ],
   "scripts": {
     "build:docs": "rimraf docs && yarn typedoc src/index.ts",
     "test": "jest"

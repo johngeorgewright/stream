@@ -1,8 +1,4 @@
 /**
- * @module debounce
- */
-
-/**
  * The DebounceContext is passed to each {@link DebounceBehavior:interface} stage.
  *
  * @group Transformers

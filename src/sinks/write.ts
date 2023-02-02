@@ -6,6 +6,14 @@
  * @example
  * ```
  * readableStream.pipeTo(write(console.info))
+ *
+ * // ... instead of ...
+ *
+ * readableStream.pipeTo(new WritableStream({
+ *   write(chunk) {
+ *     console.info(chunk)
+ *   }
+ * }))
  * ```
  */
 export function write<T>(fn?: (chunk: T) => any) {
