@@ -1,7 +1,6 @@
 import { ReadableStreamsChunks } from '../util/ReadableStreamsChunks'
 import { write } from '../sinks/write'
-
-const unfilled = Symbol()
+import { empty } from '../util/symbols'
 
 /**
  * Combines the source Observable with other Observables to create an Observable
@@ -24,9 +23,9 @@ export function withLatestFrom<T, RSs extends ReadableStream<unknown>[]>(
   type Output = [T, ...ReadableStreamsChunks<RSs>]
 
   const isFilled = (arr: any[]): arr is ReadableStreamsChunks<RSs> =>
-    arr.every((value) => value !== unfilled)
+    arr.every((value) => value !== empty)
 
-  let inputValues = new Array(inputs.length).fill(unfilled)
+  let inputValues = new Array(inputs.length).fill(empty)
 
   const inputValuesPromise = Promise.all(
     inputs.map((input, index) =>

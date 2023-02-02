@@ -1,3 +1,4 @@
+import { empty, Empty } from '../util/symbols'
 import { ForkableStream } from './ForkableStream'
 
 /**
@@ -20,7 +21,7 @@ import { ForkableStream } from './ForkableStream'
  * ```
  */
 export class ForkableRecallStream<T> extends ForkableStream<T> {
-  #chunk?: T
+  #chunk: T | Empty = empty
 
   constructor() {
     super({
@@ -32,7 +33,7 @@ export class ForkableRecallStream<T> extends ForkableStream<T> {
 
   override fork() {
     const controller = this._addController()
-    if (this.#chunk !== undefined) controller.enqueue(this.#chunk)
+    if (this.#chunk !== empty) controller.enqueue(this.#chunk)
     return this._pipeThroughController(controller)
   }
 }
