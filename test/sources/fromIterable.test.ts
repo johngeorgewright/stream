@@ -1,5 +1,5 @@
-import { fromIterable } from '../src/sources/fromIterable'
-import { toArray } from '../src/sinks/toArray'
+import { fromIterable } from '../../src/sources/fromIterable'
+import { toArray } from '../../src/sinks/toArray'
 
 test('iterables', async () => {
   expect(await toArray(fromIterable([0, 1, 2]))).toEqual([0, 1, 2])

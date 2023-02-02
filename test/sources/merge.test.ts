@@ -1,6 +1,6 @@
-import { fromIterable } from '../src/sources/fromIterable'
-import { merge } from '../src/sources/merge'
-import { toArray } from '../src/sinks/toArray'
+import { fromIterable } from '../../src/sources/fromIterable'
+import { merge } from '../../src/sources/merge'
+import { toArray } from '../../src/sinks/toArray'
 
 test('successfully merge all streams', async () => {
   expect(

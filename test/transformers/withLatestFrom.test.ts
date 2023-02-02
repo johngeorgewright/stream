@@ -1,8 +1,8 @@
 import { setTimeout } from 'node:timers/promises'
-import { fromIterable } from '../src/sources/fromIterable'
-import { map } from '../src/transformers/map'
-import { withLatestFrom } from '../src/transformers/withLatestFrom'
-import { write } from '../src/sinks/write'
+import { fromIterable } from '../../src/sources/fromIterable'
+import { map } from '../../src/transformers/map'
+import { withLatestFrom } from '../../src/transformers/withLatestFrom'
+import { write } from '../../src/sinks/write'
 
 test('combines each value from the source with the latest values from other inputs', async () => {
   const fn = jest.fn()

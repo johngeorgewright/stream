@@ -1,12 +1,12 @@
 import { setImmediate, setTimeout } from 'node:timers/promises'
-import { ControllableStream } from '../src/sources/ControllableStream'
+import { ControllableStream } from '../../src/sources/ControllableStream'
 import {
   debounce,
   DebounceBackOffBehavior,
   DebounceLeadingBehavior,
   DebounceTrailingBehavior,
-} from '../src/transformers/debounce'
-import { write } from '../src/sinks/write'
+} from '../../src/transformers/debounce'
+import { write } from '../../src/sinks/write'
 
 let controller: ControllableStream<number>
 let fn: jest.Mock<void, [number]>

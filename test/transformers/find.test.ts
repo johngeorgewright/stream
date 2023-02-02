@@ -1,6 +1,6 @@
-import { find } from '../src/transformers/find'
-import { fromIterable } from '../src/sources/fromIterable'
-import { toArray } from '../src/sinks/toArray'
+import { find } from '../../src/transformers/find'
+import { fromIterable } from '../../src/sources/fromIterable'
+import { toArray } from '../../src/sinks/toArray'
 
 test('queues the first found chunk and then terminates the stream', async () => {
   expect(

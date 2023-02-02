@@ -1,6 +1,6 @@
-import { fromIterable } from '../src/sources/fromIterable'
-import { map } from '../src/transformers/map'
-import { toArray } from '../src/sinks/toArray'
+import { fromIterable } from '../../src/sources/fromIterable'
+import { map } from '../../src/transformers/map'
+import { toArray } from '../../src/sinks/toArray'
 
 test('transforms values', async () => {
   expect(

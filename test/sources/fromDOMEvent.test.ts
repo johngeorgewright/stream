@@ -1,6 +1,6 @@
-import { first } from '../src/transformers/first'
-import { fromDOMEvent } from '../src/sources/fromDOMEvent'
-import { write } from '../src/sinks/write'
+import { first } from '../../src/transformers/first'
+import { fromDOMEvent } from '../../src/sources/fromDOMEvent'
+import { write } from '../../src/sinks/write'
 
 let element: HTMLAnchorElement
 

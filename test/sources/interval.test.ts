@@ -1,5 +1,5 @@
-import { interval } from '../src/sources/interval'
-import { write } from '../src/sinks/write'
+import { interval } from '../../src/sources/interval'
+import { write } from '../../src/sinks/write'
 
 test('continuasly emits date events until terminated', (done) => {
   const fn = jest.fn()

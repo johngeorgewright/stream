@@ -1,6 +1,6 @@
-import { fromIterable } from '../src/sources/fromIterable'
-import { reduce } from '../src/transformers/reduce'
-import { toArray } from '../src/sinks/toArray'
+import { fromIterable } from '../../src/sources/fromIterable'
+import { reduce } from '../../src/transformers/reduce'
+import { toArray } from '../../src/sinks/toArray'
 
 test('accumulates values from a stream', async () => {
   expect(
