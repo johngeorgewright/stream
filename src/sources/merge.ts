@@ -1,5 +1,3 @@
-import { write } from '../sinks/write'
-
 /**
  * Merges multiple streams in to 1 ReadableStream.
  *
@@ -18,26 +16,29 @@ export function merge<T>(
   readableStreams: ReadableStream<T>[]
 ): ReadableStream<T> {
   const abortController = new AbortController()
+  const readers = readableStreams.map((stream) => stream.getReader())
+
+  abortController.signal.addEventListener('abort', () => {
+    for (const reader of readers) reader.cancel()
+  })
 
   return new ReadableStream<T>({
-    async start(controller) {
-      if (abortController.signal.aborted)
-        return controller.error(abortController.signal.reason)
+    async pull(controller) {
+      let results: ReadableStreamReadResult<T>[]
 
-      await Promise.all(
-        readableStreams.map((stream) =>
-          stream
-            .pipeTo(
-              write((chunk) => controller.enqueue(chunk)),
-              {
-                signal: abortController.signal,
-              }
-            )
-            .catch((error) => controller.error(error))
-        )
-      )
+      try {
+        results = await Promise.all(readers.map((reader) => reader.read()))
+      } catch (error) {
+        return controller.error(error)
+      }
 
-      controller.close()
+      let done = 0
+      for (const result of results) {
+        if (result.done) done++
+        else controller.enqueue(result.value)
+      }
+
+      if (done === readableStreams.length) controller.close()
     },
 
     cancel(reason) {

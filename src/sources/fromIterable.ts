@@ -23,16 +23,43 @@
 export function fromIterable<T>(
   iterable: Iterable<T> | AsyncIterable<T> | ArrayLike<T>
 ) {
-  return new ReadableStream<T>({
-    async start(controller) {
-      if (Symbol.iterator in iterable)
-        for (const item of iterable) controller.enqueue(item)
-      else if (Symbol.asyncIterator in iterable)
-        for await (const item of iterable) controller.enqueue(item)
-      else if ('length' in iterable)
-        for (let i = 0; i < iterable.length; i++)
-          controller.enqueue(iterable[i])
-      controller.close()
+  return new ReadableStream<T>(
+    Symbol.iterator in iterable
+      ? fromIterator(iterable[Symbol.iterator]())
+      : Symbol.asyncIterator in iterable
+      ? fromIterator(iterable[Symbol.asyncIterator]())
+      : 'length' in iterable
+      ? fromArrayLike(iterable)
+      : {}
+  )
+}
+
+function fromIterator<T>(
+  iterator: Iterator<T> | AsyncIterator<T>
+): UnderlyingDefaultSource<T> {
+  return {
+    async pull(controller) {
+      let result: IteratorResult<T>
+
+      try {
+        result = await iterator.next()
+      } catch (error) {
+        return controller.error(error)
+      }
+
+      if (result.done) controller.close()
+      else controller.enqueue(result.value)
     },
-  })
+  }
+}
+
+function fromArrayLike<T>(arrayLike: ArrayLike<T>): UnderlyingDefaultSource<T> {
+  let i = 0
+
+  return {
+    pull(controller) {
+      if (i === arrayLike.length) controller.close()
+      else controller.enqueue(arrayLike[i++])
+    },
+  }
 }
