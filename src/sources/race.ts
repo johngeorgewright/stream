@@ -1,5 +1,5 @@
 /**
- * Returns an `ReadableStream` that mirrors the first source stream to queue an item.
+ * Returns a `ReadableStream` that mirrors the first source stream to queue an item.
  *
  * @group Sources
  * @example
@@ -31,6 +31,10 @@ export function race<T>(...streams: ReadableStream<T>[]) {
 
       if (done) controller.close()
       else controller.enqueue(value)
+    },
+
+    async cancel(reason) {
+      await Promise.all(readers.map((reader) => reader.cancel(reason)))
     },
   })
 }

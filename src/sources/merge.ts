@@ -13,14 +13,9 @@
  * ```
  */
 export function merge<T>(
-  readableStreams: ReadableStream<T>[]
+  ...readableStreams: ReadableStream<T>[]
 ): ReadableStream<T> {
-  const abortController = new AbortController()
   const readers = readableStreams.map((stream) => stream.getReader())
-
-  abortController.signal.addEventListener('abort', () => {
-    for (const reader of readers) reader.cancel()
-  })
 
   return new ReadableStream<T>({
     async pull(controller) {
@@ -41,8 +36,8 @@ export function merge<T>(
       if (done === readableStreams.length) controller.close()
     },
 
-    cancel(reason) {
-      abortController.abort(reason)
+    async cancel(reason) {
+      await Promise.all(readers.map((reader) => reader.cancel(reason)))
     },
   })
 }
