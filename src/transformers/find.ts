@@ -8,7 +8,7 @@ import { Predicate } from '../util/Preciate'
  * @group Transformers
  * @example
  * ```
- * --1--2--3--4--5--6-|
+ * --1--2--3--4--5--6-X
  *
  * find((x) => x === 6)
  *
