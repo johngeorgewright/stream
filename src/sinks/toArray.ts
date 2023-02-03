@@ -13,21 +13,14 @@ export interface ToArrayOptions extends StreamPipeOptions {
 
 /**
  * Consumes all chunks in the stream and resolves them as an array.
- *
- * @see ToArrayOptions
- * @group Sinks
- * @example
- * ```
- * --1--2--3--4--5--6--|
- *
- * toArray(stream)
- *
- * [1, 2, 3, 4, 5, 6]
- * ```
- *
  * Using the `catch` option will resolve whatever it
- * has consumed before the error is thrown.
+ * has consumed before the error is thrown and return an object
+ * containing the result and the error.
  *
+ * @see {@link ToArrayOptions}
+ * @group Sinks
+ * {@label CATCH}
+ * @example
  * ```
  * --1--2--3--E--4--5--6--|
  *
@@ -41,6 +34,21 @@ export async function toArray<T>(
   options: ToArrayOptions & { catch: true }
 ): Promise<{ error?: any; result: T[] }>
 
+/**
+ * Consumes all chunks in the stream and resolves them as an array.
+ *
+ * @see {@link ToArrayOptions}
+ * @group Sinks
+ * {@label STANDARD}
+ * @example
+ * ```
+ * --1--2--3--4--5--6--|
+ *
+ * toArray(stream)
+ *
+ * [1, 2, 3, 4, 5, 6]
+ * ```
+ */
 export async function toArray<T>(
   readableStream: ReadableStream<T>,
   options?: ToArrayOptions

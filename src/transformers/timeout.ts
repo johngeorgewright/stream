@@ -3,6 +3,7 @@
  * Otherwise emits an error.
  *
  * @group Transformers
+ * @throws {@link TimeoutError}
  * @example
  * readableStream.pipeThrough(timeout(1_000))
  *   .pipeTo(write())
