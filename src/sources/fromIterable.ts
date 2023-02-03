@@ -23,43 +23,54 @@
 export function fromIterable<T>(
   iterable: Iterable<T> | AsyncIterable<T> | ArrayLike<T>
 ) {
-  return new ReadableStream<T>(
+  return new ReadableStream(
     Symbol.iterator in iterable
-      ? fromIterator(iterable[Symbol.iterator]())
+      ? new IteratorSource(iterable[Symbol.iterator]())
       : Symbol.asyncIterator in iterable
-      ? fromIterator(iterable[Symbol.asyncIterator]())
+      ? new IteratorSource(iterable[Symbol.asyncIterator]())
       : 'length' in iterable
-      ? fromArrayLike(iterable)
+      ? new ArrayLikeSource(iterable)
       : {}
   )
 }
 
-function fromIterator<T>(
-  iterator: Iterator<T> | AsyncIterator<T>
-): UnderlyingDefaultSource<T> {
-  return {
-    async pull(controller) {
-      let result: IteratorResult<T>
+class IteratorSource<T> implements UnderlyingDefaultSource<T> {
+  readonly #iterator: Iterator<T> | AsyncIterator<T>
 
-      try {
-        result = await iterator.next()
-      } catch (error) {
-        return controller.error(error)
-      }
+  constructor(iterator: Iterator<T> | AsyncIterator<T>) {
+    this.#iterator = iterator
+  }
 
-      if (result.done) controller.close()
-      else controller.enqueue(result.value)
-    },
+  async pull(controller: ReadableStreamDefaultController<T>) {
+    let result: IteratorResult<T>
+
+    try {
+      result = await this.#iterator.next()
+    } catch (error) {
+      return controller.error(error)
+    }
+
+    if (result.done) controller.close()
+    else controller.enqueue(result.value)
   }
 }
 
-function fromArrayLike<T>(arrayLike: ArrayLike<T>): UnderlyingDefaultSource<T> {
-  let i = 0
+class ArrayLikeSource<T> implements UnderlyingDefaultSource<T> {
+  readonly #arrayLike: ArrayLike<T>
+  readonly #length: number
+  #i = 0
 
-  return {
-    pull(controller) {
-      if (i === arrayLike.length) controller.close()
-      else controller.enqueue(arrayLike[i++])
-    },
+  constructor(arrayLike: ArrayLike<T>) {
+    this.#arrayLike = arrayLike
+    this.#length = arrayLike.length
+  }
+
+  start(controller: ReadableStreamDefaultController<T>) {
+    if (this.#i === this.#length) controller.close()
+  }
+
+  pull(controller: ReadableStreamDefaultController<T>) {
+    controller.enqueue(this.#arrayLike[this.#i++])
+    if (this.#i === this.#length) controller.close()
   }
 }
