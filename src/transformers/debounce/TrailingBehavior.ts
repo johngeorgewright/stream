@@ -1,5 +1,5 @@
 import { DebounceBehavior } from './Behavior'
-import { DebounceContext } from './Context'
+import { DebounceState } from './State'
 
 /**
  * Debouncing behavior to queue the trailing event.
@@ -12,22 +12,23 @@ import { DebounceContext } from './Context'
  *
  * debounce(20)
  * // Same as...
- * debounce(20, new TrailingBehavior())
+ * debounce(20, new DebounceTrailingBehavior())
  *
  * ----------a------------------c----------------d--
  * ```
  */
 export class DebounceTrailingBehavior<T> implements DebounceBehavior<T> {
   postTimer(
-    context: DebounceContext,
+    context: DebounceState,
     chunk: T,
     controller: TransformStreamDefaultController<T>
-  ): DebounceContext | void {
-    if (!context.queued) {
+  ): DebounceState | void {
+    const enqueue = !context.queued
+    if (enqueue) {
       controller.enqueue(chunk)
       return {
         ...context,
-        queued: true,
+        queued: enqueue,
       }
     }
   }

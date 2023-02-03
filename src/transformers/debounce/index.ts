@@ -4,7 +4,7 @@ import { DebounceTrailingBehavior } from './TrailingBehavior'
 
 export { DebounceBehavior, DebounceTransformer, DebounceTrailingBehavior }
 export * from './BackOffBehavior'
-export * from './Context'
+export * from './State'
 export * from './LeadingBehavior'
 
 /**

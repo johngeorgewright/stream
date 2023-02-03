@@ -1,5 +1,5 @@
 import { DebounceBehavior } from './Behavior'
-import { DebounceContext } from './Context'
+import { DebounceState } from './State'
 
 /**
  * Debouncing behavior to queue the leading event.
@@ -17,15 +17,17 @@ import { DebounceContext } from './Context'
  */
 export class DebounceLeadingBehavior<T> implements DebounceBehavior<T> {
   preTimer(
-    context: DebounceContext,
+    context: DebounceState,
     chunk: T,
     controller: TransformStreamDefaultController<T>
-  ) {
+  ): DebounceState | void {
     const enqueue = !context.timer && !context.queued
-    if (enqueue) controller.enqueue(chunk)
-    return {
-      ...context,
-      queued: enqueue,
+    if (enqueue) {
+      controller.enqueue(chunk)
+      return {
+        ...context,
+        queued: enqueue,
+      }
     }
   }
 }

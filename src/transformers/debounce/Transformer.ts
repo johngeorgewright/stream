@@ -1,5 +1,5 @@
 import { DebounceBehavior } from './Behavior'
-import { DebounceContext } from './Context'
+import { DebounceState } from './State'
 
 /**
  * The transformer implementation for {@link debounce:function}.
@@ -9,67 +9,77 @@ import { DebounceContext } from './Context'
  */
 export class DebounceTransformer<T> implements Transformer<T, T> {
   #behaviors: DebounceBehavior<T>[]
-  #context: DebounceContext
+  #state: DebounceState
 
   constructor(ms: number, behaviors: DebounceBehavior<T>[]) {
     this.#behaviors = behaviors
-    this.#context = this.#reduceContext('init', { ms: ms, queued: false })
+    this.#state = this.#reduceState('init', { ms: ms, queued: false })
   }
 
   transform(chunk: T, controller: TransformStreamDefaultController<T>) {
-    clearTimeout(this.#context.timer)
+    this.#preTimer(chunk, controller)
 
-    this.#context = this.#reduceContext(
+    this.#state = {
+      ...this.#state,
+
+      timer: setTimeout(
+        () => this.#postTimer(chunk, controller),
+        this.#state.ms
+      ),
+    }
+  }
+
+  flush() {
+    clearTimeout(this.#state.timer)
+  }
+
+  #preTimer(chunk: T, controller: TransformStreamDefaultController<T>) {
+    clearTimeout(this.#state.timer)
+
+    this.#state = this.#reduceState(
       'preTimer',
       {
-        ...this.#context,
+        ...this.#state,
         queued: false,
       },
       chunk,
       controller
     )
-
-    this.#context = {
-      ...this.#context,
-
-      timer: setTimeout(() => {
-        clearTimeout(this.#context.timer)
-        this.#context = this.#reduceContext(
-          'postTimer',
-          {
-            ...this.#context,
-            timer: undefined,
-          },
-          chunk,
-          controller
-        )
-      }, this.#context.ms),
-    }
   }
 
-  flush() {
-    clearTimeout(this.#context.timer)
+  #postTimer(chunk: T, controller: TransformStreamDefaultController<T>) {
+    clearTimeout(this.#state.timer)
+
+    this.#state = this.#reduceState(
+      'postTimer',
+      {
+        ...this.#state,
+        timer: undefined,
+      },
+      chunk,
+      controller
+    )
   }
 
-  #reduceContext(stage: 'init', context: DebounceContext): DebounceContext
+  #reduceState(stage: 'init', state: DebounceState): DebounceState
 
-  #reduceContext(
+  #reduceState(
     stage: 'preTimer' | 'postTimer',
-    context: DebounceContext,
+    state: DebounceState,
     chunk: T,
     controller: TransformStreamDefaultController<T>
-  ): DebounceContext
+  ): DebounceState
 
-  #reduceContext(
+  #reduceState(
     stage: keyof DebounceBehavior<T>,
-    context: DebounceContext,
+    state: DebounceState,
     chunk?: T,
     controller?: TransformStreamDefaultController<T>
-  ): DebounceContext {
+  ): DebounceState {
     return this.#behaviors.reduce(
-      (context, behavior) =>
-        behavior[stage]?.(context, chunk!, controller!) || context,
-      context
+      (state, behavior) =>
+        behavior[stage]?.(state, chunk!, controller!) || state,
+      state
     )
   }
 }

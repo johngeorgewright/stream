@@ -1,5 +1,5 @@
 import { DebounceBehavior } from './Behavior'
-import { DebounceContext } from './Context'
+import { DebounceState } from './State'
 
 /**
  * @group Transformers
@@ -50,18 +50,18 @@ export class DebounceBackOffBehavior<T> implements DebounceBehavior<T> {
     this.#max = max
   }
 
-  init(context: DebounceContext) {
-    this.#startingMS = context.ms
+  init(state: DebounceState) {
+    this.#startingMS = state.ms
   }
 
-  preTimer(context: DebounceContext) {
-    return context.timer
+  preTimer(state: DebounceState) {
+    return state.timer
       ? {
-          ...context,
-          ms: Math.min(this.#inc(context.ms), this.#max),
+          ...state,
+          ms: Math.min(this.#inc(state.ms), this.#max),
         }
       : {
-          ...context,
+          ...state,
           ms: this.#startingMS,
         }
   }

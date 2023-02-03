@@ -1,4 +1,4 @@
-import { DebounceContext } from './Context'
+import { DebounceState } from './State'
 
 /**
  * Debouncing requires at least one behavior that implements
@@ -11,24 +11,24 @@ export interface DebounceBehavior<T> {
   /**
    * Called only once, when the debouncer is constructed.
    */
-  init?(context: DebounceContext): DebounceContext | void
+  init?(state: DebounceState): DebounceState | void
 
   /**
    * This is will be called once for every chunk received and before
    * the timer has been set.
    */
   preTimer?(
-    context: DebounceContext,
+    state: DebounceState,
     chunk: T,
     controller: TransformStreamDefaultController<T>
-  ): DebounceContext | void
+  ): DebounceState | void
 
   /**
    * Called after timer has timed out.
    */
   postTimer?(
-    context: DebounceContext,
+    state: DebounceState,
     chunk: T,
     controller: TransformStreamDefaultController<T>
-  ): DebounceContext | void
+  ): DebounceState | void
 }
