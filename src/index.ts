@@ -10,6 +10,7 @@ export * from './sources/fromDOMEvent'
 export * from './sources/fromDOMMutations'
 export * from './sources/interval'
 export * from './sources/merge'
+export * from './sources/race'
 
 export * from './transformers/accumulate'
 export * from './transformers/addedNodes'
