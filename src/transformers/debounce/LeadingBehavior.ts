@@ -17,15 +17,15 @@ import { DebounceState } from './State'
  */
 export class DebounceLeadingBehavior<T> implements DebounceBehavior<T> {
   preTimer(
-    context: DebounceState,
+    state: DebounceState,
     chunk: T,
     controller: TransformStreamDefaultController<T>
   ): DebounceState | void {
-    const enqueue = !context.timer && !context.queued
+    const enqueue = !state.timer && !state.queued
     if (enqueue) {
       controller.enqueue(chunk)
       return {
-        ...context,
+        ...state,
         queued: enqueue,
       }
     }

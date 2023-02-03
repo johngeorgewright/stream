@@ -19,15 +19,15 @@ import { DebounceState } from './State'
  */
 export class DebounceTrailingBehavior<T> implements DebounceBehavior<T> {
   postTimer(
-    context: DebounceState,
+    state: DebounceState,
     chunk: T,
     controller: TransformStreamDefaultController<T>
   ): DebounceState | void {
-    const enqueue = !context.queued
+    const enqueue = !state.queued
     if (enqueue) {
       controller.enqueue(chunk)
       return {
-        ...context,
+        ...state,
         queued: enqueue,
       }
     }
