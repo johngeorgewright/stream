@@ -32,7 +32,11 @@ export interface ToArrayOptions extends StreamPipeOptions {
 export async function toArray<T>(
   readableStream: ReadableStream<T>,
   options: ToArrayOptions & { catch: true }
-): Promise<{ error?: any; result: T[] }>
+): Promise<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  error?: any
+  result: T[]
+}>
 
 /**
  * Consumes all chunks in the stream and resolves them as an array.

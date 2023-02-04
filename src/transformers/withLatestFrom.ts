@@ -1,6 +1,7 @@
 import { ReadableStreamsChunks } from '../util/ReadableStreamsChunks'
 import { write } from '../sinks/write'
 import { empty } from '../util/symbols'
+import { ControllableStream } from '../sources/ControllableStream'
 
 /**
  * Combines the source Observable with other Observables to create an Observable
@@ -19,31 +20,56 @@ import { empty } from '../util/symbols'
  */
 export function withLatestFrom<T, RSs extends ReadableStream<unknown>[]>(
   ...inputs: RSs
-) {
-  type Output = [T, ...ReadableStreamsChunks<RSs>]
+): ReadableWritablePair<[T, ...ReadableStreamsChunks<RSs>], T> {
+  const abortController = new AbortController()
 
-  const isFilled = (arr: any[]): arr is ReadableStreamsChunks<RSs> =>
+  const isFilled = (arr: unknown[]): arr is ReadableStreamsChunks<RSs> =>
     arr.every((value) => value !== empty)
 
-  let inputValues = new Array(inputs.length).fill(empty)
+  const inputValues = new Array(inputs.length).fill(empty)
 
   const inputValuesPromise = Promise.all(
     inputs.map((input, index) =>
       input.pipeTo(
         write((chunk) => {
           inputValues[index] = chunk
-        })
+        }),
+        { signal: abortController.signal }
       )
     )
   )
 
-  return new TransformStream<T, Output>({
+  const readable = new ControllableStream<[T, ...ReadableStreamsChunks<RSs>]>({
     start(controller) {
       inputValuesPromise.catch((error) => controller.error(error))
     },
 
-    transform(chunk, controller) {
-      if (isFilled(inputValues)) controller.enqueue([chunk, ...inputValues])
+    cancel(reason) {
+      abortController.abort(reason)
     },
   })
+
+  const writable = new WritableStream<T>({
+    start(controller) {
+      inputValuesPromise.catch((error) => controller.error(error))
+      abortController.signal.addEventListener('abort', () =>
+        controller.error(abortController.signal.reason)
+      )
+    },
+
+    write(chunk) {
+      if (isFilled(inputValues)) readable.enqueue([chunk, ...inputValues])
+    },
+
+    abort(reason) {
+      readable.close()
+      readable.cancel(reason)
+    },
+
+    close() {
+      readable.close()
+    },
+  })
+
+  return { readable, writable }
 }

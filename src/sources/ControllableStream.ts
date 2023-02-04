@@ -32,10 +32,11 @@ export class ControllableStream<T> extends ReadableStream<T> {
       strategy
     )
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.#controller = controller!
   }
 
-  error(error?: any) {
+  error(error?: unknown) {
     this.#controller.error(error)
   }
 

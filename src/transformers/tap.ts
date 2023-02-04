@@ -12,7 +12,7 @@
  * --1--2--3--4--5--6--
  * ```
  */
-export function tap<T>(fn: (chunk: T) => any) {
+export function tap<T>(fn: (chunk: T) => unknown) {
   return new TransformStream<T, T>({
     transform(chunk, controller) {
       fn(chunk)

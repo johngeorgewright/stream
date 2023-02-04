@@ -16,7 +16,7 @@
  * }))
  * ```
  */
-export function write<T>(fn?: (chunk: T) => any) {
+export function write<T>(fn?: (chunk: T) => unknown) {
   return new WritableStream<T>(
     fn && {
       async write(chunk) {

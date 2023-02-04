@@ -13,7 +13,7 @@ export class DebounceTransformer<T> implements Transformer<T, T> {
 
   constructor(ms: number, behaviors: DebounceBehavior<T>[]) {
     this.#behaviors = behaviors
-    this.#state = this.#reduceState('init', { ms: ms, queued: false })
+    this.#state = this.#reduceState('init', { ms, queued: false })
   }
 
   transform(chunk: T, controller: TransformStreamDefaultController<T>) {
@@ -78,6 +78,7 @@ export class DebounceTransformer<T> implements Transformer<T, T> {
   ): DebounceState {
     return this.#behaviors.reduce(
       (state, behavior) =>
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         behavior[stage]?.(state, chunk!, controller!) || state,
       state
     )
