@@ -1,3 +1,5 @@
+import { empty, Empty } from '../util/symbols'
+
 /**
  * Puts the current value and previous value together as an array, and queues that.
  *
@@ -12,12 +14,12 @@
  * ```
  */
 export function pairwise<T>() {
-  let previous: T | undefined
+  let previous: T | Empty = empty
 
   return new TransformStream<T, [T, T]>({
     transform(chunk, controller) {
-      if (previous) controller.enqueue([previous, chunk])
-      previous = chunk
+      if (previous === empty) previous = chunk
+      else controller.enqueue([previous, chunk])
     },
   })
 }
