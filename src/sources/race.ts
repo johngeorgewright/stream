@@ -18,19 +18,16 @@ export function race<T>(...streams: ReadableStream<T>[]) {
 
   return new ReadableStream<T>({
     async pull(controller) {
-      let done: boolean
-      let value: undefined | T
+      let result: ReadableStreamReadResult<T>
 
       try {
-        ;({ done, value } = await Promise.race(
-          readers.map((reader) => reader.read())
-        ))
+        result = await Promise.race(readers.map((reader) => reader.read()))
       } catch (error) {
         return controller.error(error)
       }
 
-      if (done) controller.close()
-      else controller.enqueue(value)
+      if (result.done) controller.close()
+      else controller.enqueue(result.value)
     },
 
     async cancel(reason) {
