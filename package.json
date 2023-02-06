@@ -8,6 +8,7 @@
     "stream api",
     "reactive"
   ],
+  "sideEffects": false,
   "scripts": {
     "build:docs": "rimraf docs && yarn typedoc src/index.ts",
     "lint": "eslint src",
