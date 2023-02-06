@@ -1,3 +1,4 @@
+import { setTimeout } from 'node:timers/promises'
 import { fromIterable } from '../../src/sources/fromIterable'
 import { merge } from '../../src/sources/merge'
 import { toArray } from '../../src/sinks/toArray'
@@ -36,6 +37,33 @@ test('merge streams of different lengths', async () => {
         fromIterable([1]),
         fromIterable(['a', 'b']),
         fromIterable(['!', '@', '#'])
+      )
+    )
+  ).toEqual([1, 'a', '!', 'b', '@', '#'])
+})
+
+test('asynchronous streams', async () => {
+  expect(
+    await toArray(
+      merge<number | string>(
+        fromIterable(
+          (async function* () {
+            yield 1
+          })()
+        ),
+        fromIterable(
+          (async function* () {
+            yield await setTimeout(10, 'a')
+            yield await setTimeout(10, 'b')
+          })()
+        ),
+        fromIterable(
+          (async function* () {
+            yield await setTimeout(20, '!')
+            yield await setTimeout(20, '@')
+            yield await setTimeout(20, '#')
+          })()
+        )
       )
     )
   ).toEqual([1, 'a', '!', 'b', '@', '#'])
