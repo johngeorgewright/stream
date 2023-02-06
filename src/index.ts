@@ -12,6 +12,9 @@ export * from './sources/interval'
 export * from './sources/merge'
 export * from './sources/race'
 
+export * from './subjects/Subject'
+export * from './subjects/StatefulSubject'
+
 export * from './transformers/accumulate'
 export * from './transformers/addedNodes'
 export * from './transformers/after'
