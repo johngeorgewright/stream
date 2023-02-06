@@ -1,3 +1,8 @@
+// @ts-check
+
+/**
+ * @type {import('eslint').ESLint.ConfigData}
+ */
 module.exports = {
   env: {
     browser: true,
@@ -11,5 +16,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint'],
-  rules: {},
+  rules: {
+    '@typescript-eslint/no-extra-semi': 'off',
+  },
 }
