@@ -66,11 +66,15 @@ class ArrayLikeSource<T> implements UnderlyingDefaultSource<T> {
   }
 
   start(controller: ReadableStreamDefaultController<T>) {
-    if (this.#i === this.#length) controller.close()
+    if (this.#finished) controller.close()
   }
 
   pull(controller: ReadableStreamDefaultController<T>) {
     controller.enqueue(this.#arrayLike[this.#i++])
-    if (this.#i === this.#length) controller.close()
+    if (this.#finished) controller.close()
+  }
+
+  get #finished() {
+    return this.#i === this.#length
   }
 }
