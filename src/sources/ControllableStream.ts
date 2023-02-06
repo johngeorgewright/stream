@@ -32,6 +32,8 @@ export class ControllableStream<T> extends ReadableStream<T> {
       strategy
     )
 
+    // TypeScript does not know that the `underlyingSource`'s `start`
+    // function is called during construction.
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.#controller = controller!
   }

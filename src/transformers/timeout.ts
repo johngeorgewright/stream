@@ -5,7 +5,8 @@
  * @group Transformers
  * @throws {@link TimeoutError}
  * @example
- * readableStream.pipeThrough(timeout(1_000))
+ * readableStream
+ *   .pipeThrough(timeout(1_000))
  *   .pipeTo(write())
  *   .catch(error => {
  *     // error is TimeoutError if any event took too long
