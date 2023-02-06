@@ -1,6 +1,10 @@
 /**
  * Merges multiple streams in to 1 ReadableStream.
  *
+ * Warning: this will always create a bottleneck... the highwater mark
+ * will always be breached. This is because every pull will attempt to
+ * read and queue at least one chunk from each incoming stream.
+ *
  * @group Sources
  * @example
  * ```
@@ -18,22 +22,34 @@ export function merge<T>(
   const readers = readableStreams.map((stream) => stream.getReader())
 
   return new ReadableStream<T>({
-    async pull(controller) {
-      let results: ReadableStreamReadResult<T>[]
+    pull(controller) {
+      return new Promise((resolve) => {
+        let done = 0
 
-      try {
-        results = await Promise.all(readers.map((reader) => reader.read()))
-      } catch (error) {
-        return controller.error(error)
-      }
-
-      let done = 0
-      for (const result of results) {
-        if (result.done) done++
-        else controller.enqueue(result.value)
-      }
-
-      if (done === readableStreams.length) controller.close()
+        Promise.all(
+          readers.map((reader) =>
+            reader
+              .read()
+              .then((result) => {
+                if (result.done) done++
+                else {
+                  controller.enqueue(result.value)
+                  resolve()
+                }
+              })
+              .catch((error) => controller.error(error))
+          )
+        ).finally(() => {
+          if (done === readableStreams.length) {
+            try {
+              controller.close()
+            } catch (error) {
+              // potentially closed already
+            }
+            resolve()
+          }
+        })
+      })
     },
 
     async cancel(reason) {
