@@ -2,7 +2,7 @@ import { DebounceBehavior } from './Behavior'
 import { DebounceTransformer } from './Transformer'
 import { DebounceTrailingBehavior } from './TrailingBehavior'
 
-export { DebounceBehavior, DebounceTransformer, DebounceTrailingBehavior }
+export { DebounceBehavior, DebounceTrailingBehavior }
 export * from './BackOffBehavior'
 export * from './State'
 export * from './LeadingBehavior'
