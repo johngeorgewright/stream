@@ -70,10 +70,9 @@ export class StatefulSubject<Actions extends Record<string, unknown>, State> {
       ? [action: Action]
       : [action: Action, param: Actions[Action]]
   ) {
-    const [action, param] = args
     this.#controllable.enqueue({
-      action,
-      param,
+      action: args[0],
+      param: args[1],
     } as StatefulSubjectInput<Actions>)
   }
 
