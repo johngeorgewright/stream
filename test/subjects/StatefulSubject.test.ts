@@ -1,16 +1,13 @@
-import {
-  StatefulSubject,
-  StatefulSubjectBaseActions,
-} from '../../src/subjects/StatefulSubject'
+import { StatefulSubject } from '../../src/subjects/StatefulSubject'
 import { write } from '../../src/sinks/write'
 
 interface State {
   authors: string[]
 }
 
-interface Actions extends StatefulSubjectBaseActions {
+type Actions = {
   'add author': string
-  nothing: null
+  nothing: void
 }
 
 let subject: StatefulSubject<Actions, State>
@@ -19,7 +16,7 @@ beforeEach(() => {
   subject = new StatefulSubject<Actions, State>({
     __INIT__: () => ({ authors: [] }),
 
-    'add author': (author, state) =>
+    'add author': (state, author) =>
       state.authors.includes(author)
         ? state
         : {
@@ -27,7 +24,7 @@ beforeEach(() => {
             authors: [...state.authors, author],
           },
 
-    nothing: (_, state) => state,
+    nothing: (state) => state,
   })
 })
 
@@ -42,7 +39,6 @@ test('the __INIT__ action', async () => {
       [
         {
           "action": "__INIT__",
-          "param": null,
           "state": {
             "authors": [],
           },
@@ -78,7 +74,7 @@ test('a reducer that changes state', async () => {
 
 test('a reducer that doesnt change state', async () => {
   const fn = jest.fn()
-  subject.dispatch('nothing', null)
+  subject.dispatch('nothing')
   subject.close()
   await subject.fork().pipeTo(write(fn))
 
@@ -88,7 +84,6 @@ test('a reducer that doesnt change state', async () => {
       [
         {
           "action": "__INIT__",
-          "param": null,
           "state": {
             "authors": [],
           },
@@ -113,7 +108,6 @@ test('multiple calls', async () => {
       [
         {
           "action": "__INIT__",
-          "param": null,
           "state": {
             "authors": [],
           },

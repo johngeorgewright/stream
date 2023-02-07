@@ -1,3 +1,4 @@
+import { L, O, U } from 'ts-toolbelt'
 import { ForkableRecallStream } from '../sinks/ForkableRecallStream'
 import { ControllableStream } from '../sources/ControllableStream'
 
@@ -10,7 +11,6 @@ import { ControllableStream } from '../sources/ControllableStream'
  *
  * @group Subjects
  * @see {@link Subject:class}
- * @see {@link StatefulSubjectBaseActions}
  * @see {@link StatefulSubjectReducers}
  * @example
  * ```
@@ -18,7 +18,7 @@ import { ControllableStream } from '../sources/ControllableStream'
  *   authors: string[]
  * }
  *
- * interface Actions extends StatefulSubjectBaseActions {
+ * type Actions = {
  *   'add author': string
  * }
  *
@@ -43,34 +43,25 @@ import { ControllableStream } from '../sources/ControllableStream'
  * // **Nothing will be queued as the state did not change.**
  * ```
  */
-export class StatefulSubject<
-  Actions extends StatefulSubjectBaseActions,
-  State
-> {
-  #controllable = new ControllableStream<{
-    action: keyof Actions
-    param: Actions[keyof Actions]
-  }>()
-
-  #forkable = new ForkableRecallStream<{
-    action: keyof Actions
-    state: State
-  }>()
-
+export class StatefulSubject<Actions extends Record<string, unknown>, State> {
+  #controllable = new ControllableStream<Input<Actions>>()
+  #forkable = new ForkableRecallStream<Output<Actions, State>>()
   #reducers: StatefulSubjectReducers<Actions, State>
   #state!: State
 
   constructor(reducers: StatefulSubjectReducers<Actions, State>) {
     this.#reducers = reducers
     this.#controllable.pipeThrough(this.#transform()).pipeTo(this.#forkable)
-    this.dispatch('__INIT__', null)
+    this.#controllable.enqueue({ action: '__INIT__' as const })
   }
 
   dispatch<Action extends keyof Actions>(
-    action: Action,
-    param: Actions[Action]
+    ...args: Actions[Action] extends void
+      ? [action: Action]
+      : [action: Action, param: Actions[Action]]
   ) {
-    this.#controllable.enqueue({ action, param })
+    const [action, param] = args
+    this.#controllable.enqueue({ action, param } as Input<Actions>)
   }
 
   close() {
@@ -87,14 +78,14 @@ export class StatefulSubject<
 
   #transform<Action extends keyof Actions>() {
     return new TransformStream<
-      { action: Action; param: Actions[Action] },
-      { action: Action; state: State }
+      { action: Action; param?: Actions[Action] },
+      Output<Actions, State>
     >({
       transform: (chunk, controller) => {
         const state = this.#reduce(chunk, this.#state)
         if (state !== this.#state) {
           this.#state = Object.freeze(state)
-          controller.enqueue({ action: chunk.action, state })
+          controller.enqueue({ ...chunk, state } as Output<Actions, State>)
         }
       },
     })
@@ -106,24 +97,12 @@ export class StatefulSubject<
       param,
     }: {
       action: Action
-      param: Actions[Action]
+      param?: Actions[Action]
     },
     state: State
   ) {
-    return this.#reducers[action]?.(param, state) ?? state
+    return this.#reducers[action]?.(state, param) ?? state
   }
-}
-
-/**
- * The base interface for a StatefulSubject's actions.
- *
- * @group Subjects
- */
-export interface StatefulSubjectBaseActions {
-  /**
-   * Called during initialization of a StatefulSubject
-   */
-  __INIT__: null
 }
 
 /**
@@ -131,9 +110,9 @@ export interface StatefulSubjectBaseActions {
  *
  * @group Subjects
  */
-export interface StatefulSubjectReducer<Param, State> {
-  (param: Param, state: Readonly<State>): Readonly<State>
-}
+export type StatefulSubjectReducer<Param, State> = Param extends void
+  ? (state: Readonly<State>) => Readonly<State>
+  : (state: Readonly<State>, param: Param) => Readonly<State>
 
 /**
  * A collection of reducers for a StatefulSubject.
@@ -141,8 +120,60 @@ export interface StatefulSubjectReducer<Param, State> {
  * @group Subjects
  */
 export type StatefulSubjectReducers<
-  Actions extends StatefulSubjectBaseActions,
+  Actions extends Record<string, unknown>,
   State
 > = {
   [Action in keyof Actions]: StatefulSubjectReducer<Actions[Action], State>
-}
+} & { __INIT__(): Readonly<State> }
+
+type Input<Actions extends Record<string, unknown>> = _Input<
+  Actions,
+  U.ListOf<keyof Actions>,
+  { action: '__INIT__' }
+>
+
+type _Input<
+  Actions extends Record<string, unknown>,
+  ActionNames extends readonly (keyof Actions)[],
+  Acc extends { action: keyof Actions; param?: unknown }
+> = L.Length<ActionNames> extends 0
+  ? Acc
+  : _Input<
+      Actions,
+      L.Tail<ActionNames>,
+      | Acc
+      | (Actions[L.Head<ActionNames>] extends void
+          ? { action: L.Head<ActionNames> }
+          : {
+              action: L.Head<ActionNames>
+              param: Actions[L.Head<ActionNames>]
+            })
+    >
+
+type Output<Actions extends Record<string, unknown>, State> = _Output<
+  Actions,
+  State,
+  U.ListOf<keyof Actions>,
+  { action: '__INIT__'; state: State }
+>
+
+type _Output<
+  Actions extends Record<string, unknown>,
+  State,
+  ActionNames extends readonly (keyof Actions)[],
+  Acc extends { action: keyof Actions; param?: unknown; state: State }
+> = L.Length<ActionNames> extends 0
+  ? Acc
+  : _Output<
+      Actions,
+      State,
+      L.Tail<ActionNames>,
+      | Acc
+      | (Actions[L.Head<ActionNames>] extends void
+          ? { action: L.Head<ActionNames>; state: State }
+          : {
+              action: L.Head<ActionNames>
+              param: Actions[L.Head<ActionNames>]
+              state: State
+            })
+    >
