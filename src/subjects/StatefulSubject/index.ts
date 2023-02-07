@@ -1,10 +1,8 @@
 import { ForkableRecallStream } from '../../sinks/ForkableRecallStream'
 import { ControllableStream } from '../../sources/ControllableStream'
-import {
-  StatefuleSubjectOutput,
-  StatefulSubjectInput,
-  StatefulSubjectReducers,
-} from './types'
+import { StatefulSubjectInput } from './Input'
+import { StatefuleSubjectOutput } from './Output'
+import { StatefulSubjectReducers } from './Reducers'
 
 /**
  * Another form of the {@link Subject:class} that reduces a piece
