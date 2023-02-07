@@ -1,4 +1,4 @@
-import { L, O, U } from 'ts-toolbelt'
+import { L, U } from 'ts-toolbelt'
 import { ForkableRecallStream } from '../sinks/ForkableRecallStream'
 import { ControllableStream } from '../sources/ControllableStream'
 
