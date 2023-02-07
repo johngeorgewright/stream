@@ -139,3 +139,37 @@ test('multiple calls', async () => {
     ]
   `)
 })
+
+test('typing errors', () => {
+  new StatefulSubject<Actions, State>(
+    // @ts-expect-error There is no __INIT__ method
+    {
+      'add author': (state) => state,
+    }
+  )
+
+  new StatefulSubject<Actions, State>({
+    // @ts-expect-error Incorrect state shape
+    __INIT__: () => ({ mung: 'face' }),
+
+    // @ts-expect-error Function declaration does not match action
+    nothing: (state: State, param: string) => ({ ...state, authors: [param] }),
+  })
+
+  subject.close()
+  return subject.fork().pipeTo(
+    write((chunk) => {
+      if (chunk.action === 'nothing') {
+        console.info(
+          // @ts-expect-error There is no param for the 'nothing' action
+          chunk.param
+        )
+      }
+
+      // @ts-expect-error Unknown action name
+      if (chunk.action === 'unknown') {
+        //
+      }
+    })
+  )
+})
