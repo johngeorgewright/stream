@@ -76,11 +76,8 @@ export class StatefulSubject<Actions extends Record<string, unknown>, State> {
     return this.#forkable.fork()
   }
 
-  #transform<Action extends keyof Actions>() {
-    return new TransformStream<
-      { action: Action; param?: Actions[Action] },
-      Output<Actions, State>
-    >({
+  #transform() {
+    return new TransformStream<Input<Actions>, Output<Actions, State>>({
       transform: (chunk, controller) => {
         const state = this.#reduce(chunk, this.#state)
         if (state !== this.#state) {
