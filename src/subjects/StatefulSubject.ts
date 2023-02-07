@@ -26,7 +26,7 @@ import { ControllableStream } from '../sources/ControllableStream'
  *   {
  *     __INIT__: () => ({ authors: [] }),
  *
- *     'add author': (author, state) => state.authors.includes(author) ? state : {
+ *     'add author': (state, author) => state.authors.includes(author) ? state : {
  *        ...state,
  *        authors: [...state.authors, author],
  *     },
