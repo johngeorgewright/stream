@@ -19,15 +19,24 @@ test('async iterables', async () => {
   ).toEqual([0, 1, 2])
 })
 
-test('node lists', async () => {
-  for (let i = 0; i < 3; i++)
-    document.documentElement.appendChild(document.createElement('p'))
-  expect(await toArray(fromIterable(document.querySelectorAll('p'))))
-    .toMatchInlineSnapshot(`
+describe('node lists', () => {
+  beforeEach(() => {
+    for (let i = 0; i < 3; i++)
+      document.documentElement.appendChild(document.createElement('p'))
+  })
+
+  afterEach(() => {
+    Array.from(document.querySelectorAll('p')).forEach((p) => p.remove())
+  })
+
+  test('is iterable', async () => {
+    expect(await toArray(fromIterable(document.querySelectorAll('p'))))
+      .toMatchInlineSnapshot(`
     [
       <p />,
       <p />,
       <p />,
     ]
   `)
+  })
 })
