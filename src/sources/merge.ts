@@ -23,7 +23,14 @@ export function merge<T>(
 
   return new ReadableStream<T>({
     pull(controller) {
-      return new Promise((resolve) => {
+      // At first glance you may wonder why we're wrapping
+      // the Promise.all in another Promise. This is because
+      // we have no idea how long each reader is going to
+      // take and we may want to fill the desired size before
+      // all readers have resolved. Therefore we resolve
+      // when the 1st reader queues an item so the stream
+      // can request more if it needs.
+      return new Promise((resolve, reject) => {
         let done = 0
 
         Promise.all(
@@ -37,7 +44,11 @@ export function merge<T>(
                   resolve()
                 }
               })
-              .catch((error) => controller.error(error))
+              .catch((error) => {
+                controller.error(error)
+                // TODO: do we need to reject if the error is in the stream?
+                reject(error)
+              })
           )
         ).finally(() => {
           if (done === readableStreams.length) {
