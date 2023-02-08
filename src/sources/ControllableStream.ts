@@ -6,6 +6,8 @@ import { without } from '../util/array'
  *
  * @group Sources
  * @example
+ * Queuing items externally.
+ *
  * ```
  * const controller = new ControllableStream<number>()
  * controller.enqueue(1)
@@ -13,11 +15,18 @@ import { without } from '../util/array'
  * controller.enqueue(3)
  * controller.close()
  * ```
+ *
+ * Registering pull subscribers externally.
+ *
+ * ```
+ * const controller = new ControllableStream<number>()
+ * let i = -1
+ * controller.onPull(() => ++i)
+ * ```
  */
 export class ControllableStream<T> extends ReadableStream<T> {
   #controller: ReadableStreamDefaultController<T>
   #pullListeners: PullListener<T>[] = []
-  #pullListenerIndex = 0
 
   constructor(
     underlyingSource?: UnderlyingDefaultSource<T>,
@@ -42,8 +51,10 @@ export class ControllableStream<T> extends ReadableStream<T> {
       strategy
     )
 
-    // TypeScript does not know that the `underlyingSource`'s `start`
-    // function is called during construction.
+    /*
+    TypeScript does not know that the `underlyingSource`'s `start`
+    function is called during construction.
+    */
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.#controller = controller!
   }
@@ -52,6 +63,12 @@ export class ControllableStream<T> extends ReadableStream<T> {
     return this.#controller.desiredSize
   }
 
+  /**
+   * Register a pull subscriber.
+   *
+   * When the stream is ready to pull it will pull from all
+   * subscribers until the desired size has been fulfilled.
+   */
   onPull(pullListener: PullListener<T>) {
     this.#pullListeners.push(pullListener)
 
@@ -72,16 +89,27 @@ export class ControllableStream<T> extends ReadableStream<T> {
     this.#controller.close()
   }
 
-  async #pull(controller: ReadableStreamDefaultController<T>): Promise<void> {
-    if (this.#pullListenerIndex === this.#pullListeners.length)
-      this.#pullListenerIndex = 0
-
-    if (this.#pullListenerIndex in this.#pullListeners) {
-      controller.enqueue(await this.#pullListeners[this.#pullListenerIndex++]())
-      // If the stream is pulling, then it has a desired size to fulfill.
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      if (controller.desiredSize! > 0) return this.#pull(controller)
-    }
+  #pull(controller: ReadableStreamDefaultController<T>) {
+    /*
+    At first glance you may wonder why we're not using
+    Promise.all. This is because we have no idea how long 
+    each pullListener is going to take and we may want to 
+    fill the desired size before all listeners have resolved. 
+    Therefore we resolve when the 1st listener queues an item 
+    so the stream can request more if it needs.
+    */
+    return new Promise<void>((resolve, reject) => {
+      this.#pullListeners.map(async (pullListener) => {
+        try {
+          controller.enqueue(await pullListener())
+          resolve()
+        } catch (error) {
+          controller.error(error)
+          // TODO: do we need to reject if the error is in the stream?
+          reject(error)
+        }
+      })
+    })
   }
 }
 
