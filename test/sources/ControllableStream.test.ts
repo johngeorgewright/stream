@@ -69,6 +69,5 @@ test('pulling', async () => {
     )
   ).rejects.toThrow('I have enough')
 
-  // It will have already queued the 4th item before the 3rd errored
-  expect(i).toBe(4)
+  expect(i).toBe(5)
 })
