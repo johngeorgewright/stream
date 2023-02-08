@@ -19,6 +19,10 @@ export type StatefulSubjectInput<Actions extends Record<string, unknown>> =
     { action: '__INIT__' }
   >
 
+/**
+ * {@inheritdoc StatefulSubjectInput}
+ * @hidden
+ */
 type _StatefulSubjectInput<
   Actions extends Record<string, unknown>,
   ActionNames extends readonly (keyof Actions)[],

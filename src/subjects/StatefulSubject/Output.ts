@@ -22,6 +22,10 @@ export type StatefuleSubjectOutput<
   { action: '__INIT__'; state: Readonly<State> }
 >
 
+/**
+ * {@inheritdoc StatefuleSubjectOutput}
+ * @hidden
+ */
 type _StatefulSubjectOutput<
   Actions extends Record<string, unknown>,
   State,
