@@ -50,3 +50,25 @@ test('piping', async () => {
     ]
   `)
 })
+
+test('pulling', async () => {
+  const controller = new ControllableStream<number>()
+
+  let i = -1
+  controller.onPull(() => ++i)
+  controller.onPull(() => ++i)
+  controller.onPull(() => ++i)
+
+  await expect(
+    controller.pipeTo(
+      new WritableStream({
+        write(chunk, controller) {
+          if (chunk === 3) controller.error(new Error('I have enough'))
+        },
+      })
+    )
+  ).rejects.toThrow('I have enough')
+
+  // It will have already queued the 4th item before the 3rd errored
+  expect(i).toBe(4)
+})
