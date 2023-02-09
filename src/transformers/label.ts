@@ -8,11 +8,11 @@ import { map } from './map'
  * @group Transformers
  * @example
  * ```
- * --one--------------------two--------------------three----------------
+ * --one--------------------two--------------------three-------------------
  *
  * label('length')
  *
- * --{label:3,value:'one'}--{label:3,value:'two'}--{label:5,value:'five'}-
+ * --{label:3,value:'one'}--{label:3,value:'two'}--{label:5,value:'three'}-
  * ```
  */
 export function label<T, K extends keyof T>(
@@ -22,6 +22,7 @@ export function label<T, K extends keyof T>(
 /**
  * The label can be the result of calling a provided function.
  *
+ * @group Transformers
  * @example
  * ```
  * --6.1------------------4.2------------------6.3------------------
