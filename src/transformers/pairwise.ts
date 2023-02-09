@@ -18,8 +18,8 @@ export function pairwise<T>() {
 
   return new TransformStream<T, [T, T]>({
     transform(chunk, controller) {
-      if (previous === empty) previous = chunk
-      else controller.enqueue([previous, chunk])
+      if (previous !== empty) controller.enqueue([previous, chunk])
+      previous = chunk
     },
   })
 }
