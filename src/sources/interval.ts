@@ -9,16 +9,21 @@
  * ------<Date>------<Date>------
  * ```
  */
-export function interval(ms: number) {
+export function interval(ms: number, queuingStrategy?: QueuingStrategy<Date>) {
   let timer: NodeJS.Timer
 
-  return new ReadableStream<Date>({
-    start(controller) {
-      timer = setInterval(() => controller.enqueue(new Date()), ms)
-    },
+  return new ReadableStream<Date>(
+    {
+      start(controller) {
+        timer = setInterval(() => {
+          if (controller.desiredSize) controller.enqueue(new Date())
+        }, ms)
+      },
 
-    cancel() {
-      clearInterval(timer)
+      cancel() {
+        clearInterval(timer)
+      },
     },
-  })
+    queuingStrategy
+  )
 }

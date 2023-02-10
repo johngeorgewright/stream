@@ -21,7 +21,8 @@
  * ```
  */
 export function fromIterable<T>(
-  iterable: Iterable<T> | AsyncIterable<T> | ArrayLike<T>
+  iterable: Iterable<T> | AsyncIterable<T> | ArrayLike<T>,
+  queuingStrategy?: QueuingStrategy<T>
 ) {
   return new ReadableStream(
     Symbol.iterator in iterable
@@ -30,7 +31,8 @@ export function fromIterable<T>(
       ? new IteratorSource(iterable[Symbol.asyncIterator]())
       : 'length' in iterable
       ? new ArrayLikeSource(iterable)
-      : {}
+      : {},
+    queuingStrategy
   )
 }
 

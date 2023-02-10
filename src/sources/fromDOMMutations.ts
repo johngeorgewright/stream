@@ -12,20 +12,28 @@
  *   }))
  * ```
  */
-export function fromDOMMutations(target: Node, options?: MutationObserverInit) {
+export function fromDOMMutations(
+  target: Node,
+  options?: MutationObserverInit,
+  queuingStrategy?: QueuingStrategy<MutationRecord>
+) {
   let observer: MutationObserver
 
-  return new ReadableStream<MutationRecord>({
-    start(controller) {
-      observer = new MutationObserver((mutations) => {
-        for (const mutation of mutations) controller.enqueue(mutation)
-      })
+  return new ReadableStream<MutationRecord>(
+    {
+      start(controller) {
+        observer = new MutationObserver((mutations) => {
+          for (const mutation of mutations)
+            if (controller.desiredSize) controller.enqueue(mutation)
+        })
 
-      observer.observe(target, options)
-    },
+        observer.observe(target, options)
+      },
 
-    cancel() {
-      observer.disconnect()
+      cancel() {
+        observer.disconnect()
+      },
     },
-  })
+    queuingStrategy
+  )
 }

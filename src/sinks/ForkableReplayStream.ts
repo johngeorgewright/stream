@@ -5,6 +5,7 @@ import { ForkableStream } from './ForkableStream'
  * queues the entire contents of whatever has been previously consumed.
  *
  * @group Sinks
+ * @todo Implement a maximum size to be kept in memory
  * @example
  * ```
  * const forkable = new ForkableReplayStream<number>()

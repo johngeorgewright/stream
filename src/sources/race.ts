@@ -13,25 +13,31 @@
  * --1-----2-----3---------
  * ```
  */
-export function race<T>(...streams: ReadableStream<T>[]) {
+export function race<T>(
+  streams: ReadableStream<T>[],
+  queuingStrategy?: QueuingStrategy<T>
+) {
   const readers = streams.map((stream) => stream.getReader())
 
-  return new ReadableStream<T>({
-    async pull(controller) {
-      let result: ReadableStreamReadResult<T>
+  return new ReadableStream<T>(
+    {
+      async pull(controller) {
+        let result: ReadableStreamReadResult<T>
 
-      try {
-        result = await Promise.race(readers.map((reader) => reader.read()))
-      } catch (error) {
-        return controller.error(error)
-      }
+        try {
+          result = await Promise.race(readers.map((reader) => reader.read()))
+        } catch (error) {
+          return controller.error(error)
+        }
 
-      if (result.done) controller.close()
-      else controller.enqueue(result.value)
+        if (result.done) controller.close()
+        else controller.enqueue(result.value)
+      },
+
+      async cancel(reason) {
+        await Promise.all(readers.map((reader) => reader.cancel(reason)))
+      },
     },
-
-    async cancel(reason) {
-      await Promise.all(readers.map((reader) => reader.cancel(reason)))
-    },
-  })
+    queuingStrategy
+  )
 }
