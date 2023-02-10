@@ -1,6 +1,4 @@
-import { fromIterable } from '../../src/sources/fromIterable'
-import { ForkableReplayStream } from '../../src/sinks/ForkableReplayStream'
-import { write } from '../../src/sinks/write'
+import { ForkableReplayStream, fromIterable, write } from '../../src'
 
 test('subscribing will replay all previously emitted values', async () => {
   const forkable = new ForkableReplayStream()

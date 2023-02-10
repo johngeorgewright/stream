@@ -1,6 +1,4 @@
-import { map } from '../../src/transformers/map'
-import { ControllableStream } from '../../src/sources/ControllableStream'
-import { write } from '../../src/sinks/write'
+import { ControllableStream, map, write } from '../../src'
 
 test('gives ability to enqueue messages to a stream', async () => {
   const controller = new ControllableStream<number>()

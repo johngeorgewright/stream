@@ -1,6 +1,4 @@
-import { filter } from '../../src/transformers/filter'
-import { fromIterable } from '../../src/sources/fromIterable'
-import { toArray } from '../../src/sinks/toArray'
+import { filter, fromIterable, toArray } from '../../src'
 
 test('filters unwanted values', async () => {
   expect(

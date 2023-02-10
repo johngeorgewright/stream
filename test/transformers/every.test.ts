@@ -1,6 +1,4 @@
-import { every } from '../../src/transformers/every'
-import { fromIterable } from '../../src/sources/fromIterable'
-import { toArray } from '../../src/sinks/toArray'
+import { every, fromIterable, toArray } from '../../src'
 
 test('when not', async () => {
   expect(

@@ -1,6 +1,4 @@
-import { chunks } from '../../src/transformers/chunks'
-import { fromIterable } from '../../src/sources/fromIterable'
-import { write } from '../../src/sinks/write'
+import { chunks, fromIterable, write } from '../../src'
 
 test('chunks in 2s', async () => {
   const fn = jest.fn()

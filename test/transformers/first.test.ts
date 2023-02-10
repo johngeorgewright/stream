@@ -1,6 +1,4 @@
-import { first } from '../../src/transformers/first'
-import { fromIterable } from '../../src/sources/fromIterable'
-import { toArray } from '../../src/sinks/toArray'
+import { first, fromIterable, toArray } from '../../src'
 
 test('gets only the first chunk', async () => {
   expect(

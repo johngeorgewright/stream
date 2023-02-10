@@ -1,7 +1,5 @@
-import { flat } from '../../src/transformers/flat'
-import { fromIterable } from '../../src/sources/fromIterable'
 import { setTimeout } from 'timers/promises'
-import { write } from '../../src/sinks/write'
+import { flat, fromIterable, write } from '../../src'
 
 beforeEach(() => {
   for (let i = 0; i < 3; i++) {

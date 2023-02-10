@@ -1,5 +1,4 @@
-import { StatefulSubject } from '../../src/subjects/StatefulSubject'
-import { write } from '../../src/sinks/write'
+import { StatefulSubject, write } from '../../src'
 
 interface State {
   authors: string[]

@@ -1,5 +1,4 @@
-import { Subject } from '../../src/subjects/Subject'
-import { write } from '../../src/sinks/write'
+import { Subject, write } from '../../src'
 
 test('ability to queue and fork from the same object', async () => {
   const subject = new Subject<number>()

@@ -1,6 +1,4 @@
-import { ForkableRecallStream } from '../../src/sinks/ForkableRecallStream'
-import { fromIterable } from '../../src/sources/fromIterable'
-import { write } from '../../src/sinks/write'
+import { ForkableRecallStream, fromIterable, write } from '../../src'
 
 test('subscribing will always provide that last chunk', async () => {
   const forkable = new ForkableRecallStream()

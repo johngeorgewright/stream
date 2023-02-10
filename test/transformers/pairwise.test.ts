@@ -1,6 +1,4 @@
-import { fromIterable } from '../../src/sources/fromIterable'
-import { pairwise } from '../../src/transformers/pairwise'
-import { toArray } from '../../src/sinks/toArray'
+import { fromIterable, pairwise, toArray } from '../../src'
 
 test('Queues the current value and previous values', async () => {
   expect(
