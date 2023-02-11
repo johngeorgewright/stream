@@ -19,7 +19,7 @@ module.exports = {
         verifyConditionsCmd: 'yarn npm whoami --publish',
         prepareCmd:
           "yarn version ${nextRelease.version} && echo 'version=${nextRelease.version}' >> $GITHUB_OUTPUT",
-        publishCmd: 'yarn npm publish --public',
+        publishCmd: 'yarn npm publish --access public',
       },
     ],
     [
