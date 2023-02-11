@@ -42,6 +42,11 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
+      - name: Setup Registries
+        run: |
+          yarn config set --home 'npmRegistries["https://registry.npmjs.org"].npmAuthToken' '${{ secrets.NPM_TOKEN }}'
+          yarn config set --home npmPublishRegistry https://registry.npmjs.org
+
       - name: Build
         run: yarn build
 
