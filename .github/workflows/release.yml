@@ -17,6 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
+      pull-requests: read
+
     steps:
       - name: Checkout project
         uses: actions/checkout@v3
