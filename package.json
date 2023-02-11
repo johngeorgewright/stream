@@ -11,7 +11,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "yarn rimraf dist && yarn tsc",
-    "build:docs": "rimraf docs && yarn typedoc src/index.ts",
+    "build:docs": "rimraf docs && yarn typedoc --readme none src/index.ts",
     "lint": "eslint src",
     "test": "jest"
   },

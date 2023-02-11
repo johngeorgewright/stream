@@ -1,3 +1,5 @@
 # stream
 
-Learning web streams by abstracting common logic. Might publish at some point.
+Reactive programming tools using the Web Streams API.
+
+See the [docs](https://johngeorgewright.github.io/stream/) for more information.
