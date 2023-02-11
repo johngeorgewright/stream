@@ -1,5 +1,5 @@
 {
-  "name": "@johngeorgewright/stream",
+  "name": "@johngw/stream",
   "description": "Reactive programming tools using the Web Streams API.",
   "keywords": [
     "stream",
