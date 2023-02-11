@@ -1,33 +1,30 @@
-name: Pull Request
+name: Publish
 
 on:
-  pull_request:
-    types: [opened, synchronize]
-
-  workflow_dispatch:
-    inputs:
-      build:
-        description: Should it test by building?
-        required: false
-        default: true
-        type: boolean
+  push:
+    branches: [main]
 
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x, 19.x]
+  publish-test:
+    uses: ./.github/workflows/pull-request.yml
+    with:
+      build: false
 
+  publish-npm:
+    name: NPM
+    environment: npm
+    needs: [publish-test]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout project
         uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: .nvmrc
 
       - name: Restore cache
         uses: actions/cache@v3
@@ -43,8 +40,10 @@ jobs:
         run: yarn install --immutable
 
       - name: Build
-        if: ${{ inputs.build }}
         run: yarn build
 
-      - name: Test
-        run: yarn test
+      - name: Release
+        run: yarn semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
