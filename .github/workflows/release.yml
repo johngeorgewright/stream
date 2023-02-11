@@ -15,6 +15,7 @@ jobs:
     environment: npm
     needs: [publish-test]
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Checkout project
         uses: actions/checkout@v3
