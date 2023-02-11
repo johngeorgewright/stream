@@ -1,0 +1,14 @@
+.github
+docs
+.husky
+node_modules
+.editorconfig
+.eslintrc.js
+.nvmrc
+.pnp.*
+.vscode
+.yarn*
+prettier.config.cjs
+release.config.js
+renovate.json
+tsconfig.json*
