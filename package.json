@@ -1,6 +1,6 @@
 {
   "name": "@johngw/stream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Reactive programming tools using the Web Streams API.",
   "keywords": [
     "stream",
