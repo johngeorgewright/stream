@@ -416,7 +416,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:^17.4.2":
+"@commitlint/cli@npm:17.4.2":
   version: 17.4.2
   resolution: "@commitlint/cli@npm:17.4.2"
   dependencies:
@@ -436,7 +436,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:^17.4.2":
+"@commitlint/config-conventional@npm:17.4.2":
   version: 17.4.2
   resolution: "@commitlint/config-conventional@npm:17.4.2"
   dependencies:
@@ -604,7 +604,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/types@npm:^17.4.0":
+"@commitlint/types@npm:17.4.0, @commitlint/types@npm:^17.4.0":
   version: 17.4.0
   resolution: "@commitlint/types@npm:17.4.0"
   dependencies:
@@ -932,34 +932,34 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@johngw/stream@workspace:."
   dependencies:
-    "@commitlint/cli": ^17.4.2
-    "@commitlint/config-conventional": ^17.4.2
-    "@commitlint/types": ^17.4.0
-    "@semantic-release/commit-analyzer": ^9.0.2
-    "@semantic-release/exec": ^6.0.3
-    "@semantic-release/git": ^10.0.1
-    "@semantic-release/github": ^8.0.7
-    "@semantic-release/release-notes-generator": ^10.0.3
-    "@types/jest": ^29.4.0
-    "@types/node": ^18.11.18
-    "@typescript-eslint/eslint-plugin": latest
-    "@typescript-eslint/parser": latest
-    conventional-changelog-conventionalcommits: ^5.0.0
-    eslint: latest
-    husky: ^8.0.3
-    jest: ^29.4.1
-    jest-environment-jsdom: ^29.4.1
-    lint-staged: ^13.1.0
-    prettier: ^2.8.3
-    rimraf: ^4.1.2
-    semantic-release: ^20.1.0
-    ts-jest: ^29.0.5
-    ts-node: ^10.9.1
-    ts-toolbelt: ^9.6.0
-    tslib: ^2.5.0
-    typedoc: ^0.23.24
-    typescript: ^4.9.5
-    web-streams-polyfill: ^3.2.1
+    "@commitlint/cli": 17.4.2
+    "@commitlint/config-conventional": 17.4.2
+    "@commitlint/types": 17.4.0
+    "@semantic-release/commit-analyzer": 9.0.2
+    "@semantic-release/exec": 6.0.3
+    "@semantic-release/git": 10.0.1
+    "@semantic-release/github": 8.0.7
+    "@semantic-release/release-notes-generator": 10.0.3
+    "@types/jest": 29.4.0
+    "@types/node": 18.13.0
+    "@typescript-eslint/eslint-plugin": 5.51.0
+    "@typescript-eslint/parser": 5.51.0
+    conventional-changelog-conventionalcommits: 5.0.0
+    eslint: 8.34.0
+    husky: 8.0.3
+    jest: 29.4.2
+    jest-environment-jsdom: 29.4.2
+    lint-staged: 13.1.1
+    prettier: 2.8.4
+    rimraf: 4.1.2
+    semantic-release: 20.1.0
+    ts-jest: 29.0.5
+    ts-node: 10.9.1
+    ts-toolbelt: 9.6.0
+    tslib: 2.5.0
+    typedoc: 0.23.24
+    typescript: 4.9.5
+    web-streams-polyfill: 3.2.1
   languageName: unknown
   linkType: soft
 
@@ -1410,7 +1410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/commit-analyzer@npm:^9.0.2":
+"@semantic-release/commit-analyzer@npm:9.0.2, @semantic-release/commit-analyzer@npm:^9.0.2":
   version: 9.0.2
   resolution: "@semantic-release/commit-analyzer@npm:9.0.2"
   dependencies:
@@ -1434,7 +1434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/exec@npm:^6.0.3":
+"@semantic-release/exec@npm:6.0.3":
   version: 6.0.3
   resolution: "@semantic-release/exec@npm:6.0.3"
   dependencies:
@@ -1450,7 +1450,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/git@npm:^10.0.1":
+"@semantic-release/git@npm:10.0.1":
   version: 10.0.1
   resolution: "@semantic-release/git@npm:10.0.1"
   dependencies:
@@ -1468,7 +1468,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/github@npm:^8.0.0, @semantic-release/github@npm:^8.0.7":
+"@semantic-release/github@npm:8.0.7, @semantic-release/github@npm:^8.0.0":
   version: 8.0.7
   resolution: "@semantic-release/github@npm:8.0.7"
   dependencies:
@@ -1517,7 +1517,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/release-notes-generator@npm:^10.0.0, @semantic-release/release-notes-generator@npm:^10.0.3":
+"@semantic-release/release-notes-generator@npm:10.0.3, @semantic-release/release-notes-generator@npm:^10.0.0":
   version: 10.0.3
   resolution: "@semantic-release/release-notes-generator@npm:10.0.3"
   dependencies:
@@ -1672,7 +1672,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.4.0":
+"@types/jest@npm:29.4.0":
   version: 29.4.0
   resolution: "@types/jest@npm:29.4.0"
   dependencies:
@@ -1707,7 +1707,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^18.11.18":
+"@types/node@npm:*, @types/node@npm:18.13.0":
   version: 18.13.0
   resolution: "@types/node@npm:18.13.0"
   checksum: 4ea10f8802848b01672bce938f678b6774ca2cee0c9774f12275ab064ae07818419c3e2e41d6257ce7ba846d1ea26c63214aa1dfa4166fa3746291752b8c6416
@@ -1772,7 +1772,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:latest":
+"@typescript-eslint/eslint-plugin@npm:5.51.0":
   version: 5.51.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.51.0"
   dependencies:
@@ -1796,7 +1796,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:latest":
+"@typescript-eslint/parser@npm:5.51.0":
   version: 5.51.0
   resolution: "@typescript-eslint/parser@npm:5.51.0"
   dependencies:
@@ -2765,7 +2765,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-conventionalcommits@npm:^5.0.0":
+"conventional-changelog-conventionalcommits@npm:5.0.0, conventional-changelog-conventionalcommits@npm:^5.0.0":
   version: 5.0.0
   resolution: "conventional-changelog-conventionalcommits@npm:5.0.0"
   dependencies:
@@ -3338,7 +3338,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:latest":
+"eslint@npm:8.34.0":
   version: 8.34.0
   resolution: "eslint@npm:8.34.0"
   dependencies:
@@ -4070,7 +4070,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^8.0.3":
+"husky@npm:8.0.3":
   version: 8.0.3
   resolution: "husky@npm:8.0.3"
   bin:
@@ -4601,7 +4601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-environment-jsdom@npm:^29.4.1":
+"jest-environment-jsdom@npm:29.4.2":
   version: 29.4.2
   resolution: "jest-environment-jsdom@npm:29.4.2"
   dependencies:
@@ -4910,7 +4910,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^29.4.1":
+"jest@npm:29.4.2":
   version: 29.4.2
   resolution: "jest@npm:29.4.2"
   dependencies:
@@ -5303,7 +5303,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^13.1.0":
+"lint-staged@npm:13.1.1":
   version: 13.1.1
   resolution: "lint-staged@npm:13.1.1"
   dependencies:
@@ -6746,7 +6746,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.3":
+"prettier@npm:2.8.4":
   version: 2.8.4
   resolution: "prettier@npm:2.8.4"
   bin:
@@ -7190,6 +7190,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rimraf@npm:4.1.2":
+  version: 4.1.2
+  resolution: "rimraf@npm:4.1.2"
+  bin:
+    rimraf: dist/cjs/src/bin.js
+  checksum: 480b8147fd9bcbef3ac118f88a7b1169c3872977a3411a0c84df838bfc30e175a394c0db6f9619fc8b8a886a18c6d779d5e74f380a0075ecc710afaf81b3f50c
+  languageName: node
+  linkType: hard
+
 "rimraf@npm:^3.0.0, rimraf@npm:^3.0.2":
   version: 3.0.2
   resolution: "rimraf@npm:3.0.2"
@@ -7198,15 +7207,6 @@ __metadata:
   bin:
     rimraf: bin.js
   checksum: 87f4164e396f0171b0a3386cc1877a817f572148ee13a7e113b238e48e8a9f2f31d009a92ec38a591ff1567d9662c6b67fd8818a2dbbaed74bc26a87a2a4a9a0
-  languageName: node
-  linkType: hard
-
-"rimraf@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "rimraf@npm:4.1.2"
-  bin:
-    rimraf: dist/cjs/src/bin.js
-  checksum: 480b8147fd9bcbef3ac118f88a7b1169c3872977a3411a0c84df838bfc30e175a394c0db6f9619fc8b8a886a18c6d779d5e74f380a0075ecc710afaf81b3f50c
   languageName: node
   linkType: hard
 
@@ -7258,7 +7258,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semantic-release@npm:^20.1.0":
+"semantic-release@npm:20.1.0":
   version: 20.1.0
   resolution: "semantic-release@npm:20.1.0"
   dependencies:
@@ -7928,7 +7928,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^29.0.5":
+"ts-jest@npm:29.0.5":
   version: 29.0.5
   resolution: "ts-jest@npm:29.0.5"
   dependencies:
@@ -7961,7 +7961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.8.1, ts-node@npm:^10.9.1":
+"ts-node@npm:10.9.1, ts-node@npm:^10.8.1":
   version: 10.9.1
   resolution: "ts-node@npm:10.9.1"
   dependencies:
@@ -7999,10 +7999,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-toolbelt@npm:^9.6.0":
+"ts-toolbelt@npm:9.6.0":
   version: 9.6.0
   resolution: "ts-toolbelt@npm:9.6.0"
   checksum: 9f35fd95d895a5d32ea9fd2e532a695b0bae6cbff6832b77292efa188a0ed1ed6e54f63f74a8920390f3d909a7a3adb20a144686372a8e78b420246a9bd3d58a
+  languageName: node
+  linkType: hard
+
+"tslib@npm:2.5.0, tslib@npm:^2.1.0":
+  version: 2.5.0
+  resolution: "tslib@npm:2.5.0"
+  checksum: ae3ed5f9ce29932d049908ebfdf21b3a003a85653a9a140d614da6b767a93ef94f460e52c3d787f0e4f383546981713f165037dc2274df212ea9f8a4541004e1
   languageName: node
   linkType: hard
 
@@ -8010,13 +8017,6 @@ __metadata:
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.1.0, tslib@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "tslib@npm:2.5.0"
-  checksum: ae3ed5f9ce29932d049908ebfdf21b3a003a85653a9a140d614da6b767a93ef94f460e52c3d787f0e4f383546981713f165037dc2274df212ea9f8a4541004e1
   languageName: node
   linkType: hard
 
@@ -8112,7 +8112,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.23.24":
+"typedoc@npm:0.23.24":
   version: 0.23.24
   resolution: "typedoc@npm:0.23.24"
   dependencies:
@@ -8128,7 +8128,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.6.4, typescript@npm:^4.9.5":
+"typescript@npm:4.9.5, typescript@npm:^4.6.4":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -8138,7 +8138,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.9.5#~builtin<compat/typescript>, typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
   bin:
@@ -8337,7 +8337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-streams-polyfill@npm:^3.2.1":
+"web-streams-polyfill@npm:3.2.1":
   version: 3.2.1
   resolution: "web-streams-polyfill@npm:3.2.1"
   checksum: b119c78574b6d65935e35098c2afdcd752b84268e18746606af149e3c424e15621b6f1ff0b42b2676dc012fc4f0d313f964b41a4b5031e525faa03997457da02
