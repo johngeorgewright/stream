@@ -1,4 +1,5 @@
 import { without } from '../util/array'
+import { Controllable, ControllerPullListener } from './Controllable'
 
 /**
  * A ControllableStream is ReadableStream that can have chunks
@@ -24,9 +25,12 @@ import { without } from '../util/array'
  * controller.onPull(() => ++i)
  * ```
  */
-export class ControllableStream<T> extends ReadableStream<T> {
+export class ControllableStream<T>
+  extends ReadableStream<T>
+  implements Controllable<T>
+{
   #controller: ReadableStreamDefaultController<T>
-  #pullListeners: PullListener<T>[] = []
+  #pullListeners: ControllerPullListener<T>[] = []
 
   constructor(
     underlyingSource?: UnderlyingDefaultSource<T>,
@@ -69,7 +73,7 @@ export class ControllableStream<T> extends ReadableStream<T> {
    * When the stream is ready to pull it will pull from all
    * subscribers until the desired size has been fulfilled.
    */
-  onPull(pullListener: PullListener<T>) {
+  onPull(pullListener: ControllerPullListener<T>) {
     this.#pullListeners.push(pullListener)
 
     return () => {
@@ -111,8 +115,4 @@ export class ControllableStream<T> extends ReadableStream<T> {
       })
     })
   }
-}
-
-interface PullListener<T> {
-  (): T | Promise<T>
 }

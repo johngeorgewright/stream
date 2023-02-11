@@ -1,6 +1,7 @@
 import { ControllableStream } from '../sources/ControllableStream'
 import { identity } from '../transformers/identity'
 import { without } from '../util/array'
+import { Forkable } from './Forkable'
 
 /**
  * A ForkableStream is "1 Writeable to many Readables".
@@ -19,7 +20,10 @@ import { without } from '../util/array'
  * // fork2 1, fork2 2, fork2 3, fork2 4, fork2 5, fork2 6, fork2 7
  * ```
  */
-export class ForkableStream<T> extends WritableStream<T> {
+export class ForkableStream<T>
+  extends WritableStream<T>
+  implements Forkable<T>
+{
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   #error?: any
   #finished = false

@@ -1,5 +1,7 @@
 import { ForkableRecallStream } from '../../sinks/ForkableRecallStream'
+import { ControllerPullListener } from '../../sources/Controllable'
 import { ControllableStream } from '../../sources/ControllableStream'
+import { Subjectable } from '../Subjectable'
 import { StatefulSubjectInput } from './Input'
 import { StatefuleSubjectOutput } from './Output'
 import { StatefulSubjectReducers } from './Reducers'
@@ -51,7 +53,13 @@ import { StatefulSubjectReducers } from './Reducers'
  * // **Nothing will be queued as the state did not change.**
  * ```
  */
-export class StatefulSubject<Actions extends Record<string, unknown>, State> {
+export class StatefulSubject<Actions extends Record<string, unknown>, State>
+  implements
+    Subjectable<
+      StatefulSubjectInput<Actions>,
+      StatefuleSubjectOutput<Actions, State>
+    >
+{
   #controllable = new ControllableStream<StatefulSubjectInput<Actions>>()
   #forkable = new ForkableRecallStream<StatefuleSubjectOutput<Actions, State>>()
   #reducers: StatefulSubjectReducers<Actions, State>
@@ -63,6 +71,28 @@ export class StatefulSubject<Actions extends Record<string, unknown>, State> {
     this.#controllable.enqueue({ action: '__INIT__' as const })
   }
 
+  close() {
+    this.#controllable.close()
+  }
+
+  cancel(reason?: unknown) {
+    return this.#controllable.cancel(reason)
+  }
+
+  get desiredSize() {
+    return this.#controllable.desiredSize
+  }
+
+  /**
+   * Parameterised version of enqueue for simpliclity.
+   *
+   * @example
+   * ```
+   * subject.dispatch('action', 'param')
+   * // Instead of
+   * subject.enqueue({ action: 'action', param: 'param' })
+   * ```
+   */
   dispatch<Action extends keyof Actions>(
     ...args: Actions[Action] extends void
       ? [action: Action]
@@ -74,16 +104,20 @@ export class StatefulSubject<Actions extends Record<string, unknown>, State> {
     } as StatefulSubjectInput<Actions>)
   }
 
-  close() {
-    this.#controllable.close()
+  enqueue(chunk: StatefulSubjectInput<Actions>) {
+    return this.#controllable.enqueue(chunk)
   }
 
-  cancel(reason?: unknown) {
-    return this.#controllable.cancel(reason)
+  error(reason: unknown) {
+    return this.#controllable.error(reason)
   }
 
   fork() {
     return this.#forkable.fork()
+  }
+
+  onPull(pullListener: ControllerPullListener<StatefulSubjectInput<Actions>>) {
+    return this.#controllable.onPull(pullListener)
   }
 
   #transform() {

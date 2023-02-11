@@ -1,5 +1,7 @@
 import { ForkableStream } from '../sinks/ForkableStream'
+import { ControllerPullListener } from '../sources/Controllable'
 import { ControllableStream } from '../sources/ControllableStream'
+import { Subjectable } from './Subjectable'
 
 /**
  * @group Subjects
@@ -27,7 +29,7 @@ export interface SubjectOptions<T> {
  * subject.fork().pipeTo(write(chunk => console.info(chunk)))
  * ```
  */
-export class Subject<T> {
+export class Subject<T> implements Subjectable<T, T> {
   #controllable: ControllableStream<T>
   #forkable: ForkableStream<T>
 
@@ -38,6 +40,10 @@ export class Subject<T> {
     this.#controllable = controllable
     this.#forkable = forkable
     this.#controllable.pipeTo(this.#forkable)
+  }
+
+  get desiredSize() {
+    return this.#controllable.desiredSize
   }
 
   enqueue(chunk: T) {
@@ -52,7 +58,15 @@ export class Subject<T> {
     return this.#controllable.cancel(reason)
   }
 
+  error(reason: unknown) {
+    return this.#controllable.error(reason)
+  }
+
   fork() {
     return this.#forkable.fork()
+  }
+
+  onPull(pullListener: ControllerPullListener<T>): void {
+    this.#controllable.onPull(pullListener)
   }
 }
