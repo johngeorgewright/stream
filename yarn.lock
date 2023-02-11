@@ -976,6 +976,7 @@ __metadata:
     "@types/node": ^18.11.18
     "@typescript-eslint/eslint-plugin": latest
     "@typescript-eslint/parser": latest
+    conventional-changelog-conventionalcommits: ^5.0.0
     eslint: latest
     husky: ^8.0.3
     jest: ^29.4.1
