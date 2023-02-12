@@ -2,11 +2,9 @@ import { interval, write } from '../../src'
 
 test('continuasly emits date events until terminated', (done) => {
   const fn = jest.fn()
-  const abortController = new AbortController()
-  setTimeout(() => abortController.abort(), 300)
 
   interval(50)
-    .pipeTo(write(fn), { signal: abortController.signal })
+    .pipeTo(write(fn), { signal: AbortSignal.timeout(300) })
     .catch(() => {
       expect(fn).toHaveBeenCalledTimes(5)
       done()
