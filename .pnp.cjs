@@ -53,7 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ts-node", "virtual:bcf1e79d5d303806a70d3c08e784671c8bd0b8ec5070f10011f3655b10e0d690a4ae122d2086799f834e4be7643b2463c32e1f40adddedbf8b6af81e8799b40a#npm:10.9.1"],\
             ["ts-toolbelt", "npm:9.6.0"],\
             ["tslib", "npm:2.5.0"],\
-            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.24"],\
+            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.25"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"],\
             ["web-streams-polyfill", "npm:3.2.1"]\
           ],\
@@ -1455,7 +1455,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ts-node", "virtual:bcf1e79d5d303806a70d3c08e784671c8bd0b8ec5070f10011f3655b10e0d690a4ae122d2086799f834e4be7643b2463c32e1f40adddedbf8b6af81e8799b40a#npm:10.9.1"],\
             ["ts-toolbelt", "npm:9.6.0"],\
             ["tslib", "npm:2.5.0"],\
-            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.24"],\
+            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.25"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"],\
             ["web-streams-polyfill", "npm:3.2.1"]\
           ],\
@@ -2851,6 +2851,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/ansi-regex-npm-6.0.1-8d663a607d-1ff8b7667c.zip/node_modules/ansi-regex/",\
           "packageDependencies": [\
             ["ansi-regex", "npm:6.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["ansi-sequence-parser", [\
+        ["npm:1.1.0", {\
+          "packageLocation": "./.yarn/cache/ansi-sequence-parser-npm-1.1.0-166d719777-75f4d3a4c5.zip/node_modules/ansi-sequence-parser/",\
+          "packageDependencies": [\
+            ["ansi-sequence-parser", "npm:1.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -7167,6 +7176,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["brace-expansion", "npm:2.0.1"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:6.1.8", {\
+          "packageLocation": "./.yarn/cache/minimatch-npm-6.1.8-a100bace5e-1882e09bf7.zip/node_modules/minimatch/",\
+          "packageDependencies": [\
+            ["minimatch", "npm:6.1.8"],\
+            ["brace-expansion", "npm:2.0.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["minimist", [\
@@ -8922,10 +8939,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["shiki", [\
-        ["npm:0.12.1", {\
-          "packageLocation": "./.yarn/cache/shiki-npm-0.12.1-f591afd43a-a5d78a79d2.zip/node_modules/shiki/",\
+        ["npm:0.14.1", {\
+          "packageLocation": "./.yarn/cache/shiki-npm-0.14.1-f41a21e5be-b19ea337cc.zip/node_modules/shiki/",\
           "packageDependencies": [\
-            ["shiki", "npm:0.12.1"],\
+            ["shiki", "npm:0.14.1"],\
+            ["ansi-sequence-parser", "npm:1.1.0"],\
             ["jsonc-parser", "npm:3.2.0"],\
             ["vscode-oniguruma", "npm:1.7.0"],\
             ["vscode-textmate", "npm:8.0.0"]\
@@ -9796,22 +9814,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["typedoc", [\
-        ["npm:0.23.24", {\
-          "packageLocation": "./.yarn/cache/typedoc-npm-0.23.24-10e99bf8b6-b04f9afcba.zip/node_modules/typedoc/",\
+        ["npm:0.23.25", {\
+          "packageLocation": "./.yarn/cache/typedoc-npm-0.23.25-cef8074c5c-2089d6da02.zip/node_modules/typedoc/",\
           "packageDependencies": [\
-            ["typedoc", "npm:0.23.24"]\
+            ["typedoc", "npm:0.23.25"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.24", {\
-          "packageLocation": "./.yarn/__virtual__/typedoc-virtual-8c08f908ca/0/cache/typedoc-npm-0.23.24-10e99bf8b6-b04f9afcba.zip/node_modules/typedoc/",\
+        ["virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.25", {\
+          "packageLocation": "./.yarn/__virtual__/typedoc-virtual-b511a7cd16/0/cache/typedoc-npm-0.23.25-cef8074c5c-2089d6da02.zip/node_modules/typedoc/",\
           "packageDependencies": [\
-            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.24"],\
+            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.25"],\
             ["@types/typescript", null],\
             ["lunr", "npm:2.3.9"],\
             ["marked", "npm:4.2.12"],\
-            ["minimatch", "npm:5.1.6"],\
-            ["shiki", "npm:0.12.1"],\
+            ["minimatch", "npm:6.1.8"],\
+            ["shiki", "npm:0.14.1"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
           ],\
           "packagePeers": [\
