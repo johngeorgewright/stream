@@ -48,3 +48,12 @@ jobs:
 
       - name: Test
         run: yarn test
+
+      - name: Build Docs
+        run: yarn build:docs
+
+      - name: Upload Docs
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: docs
