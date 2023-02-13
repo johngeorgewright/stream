@@ -9,13 +9,14 @@ import { accumulate } from './accumulate'
  * The key can be the result of a property on the chunk.
  *
  * @group Transformers
+ * @see {@link label:function}
  * @example
  * ```
- * --one------------two------------------three---------------------------
+ * --one------------two------------------three-----------------------------
  *
  * groupBy('length')
  *
- * --{'3':['one']}--{'3',['one','two']}--{'3':['one','two'],'5':'three'}-
+ * --{'3':['one']}--{'3',['one','two']}--{'3':['one','two'],'5':['three']}-
  * ```
  */
 export function groupBy<T, K extends keyof PickByValue<T, Stringable>>(
@@ -25,7 +26,6 @@ export function groupBy<T, K extends keyof PickByValue<T, Stringable>>(
 /**
  * The key can be the result of calling a provided function.
  *
- * @group Transformers
  * @example
  * ```
  * --6.1----------4.2--------------------6.3------------------------

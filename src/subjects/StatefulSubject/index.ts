@@ -4,7 +4,14 @@ import { ControllableStream } from '../../sources/ControllableStream'
 import { Subjectable } from '../Subjectable'
 import { StatefulSubjectInput } from './Input'
 import { StatefuleSubjectOutput } from './Output'
-import { StatefulSubjectReducers } from './Reducers'
+import { StatefulSubjectReducer, StatefulSubjectReducers } from './Reducers'
+
+export {
+  StatefulSubjectInput,
+  StatefuleSubjectOutput,
+  StatefulSubjectReducer,
+  StatefulSubjectReducers,
+}
 
 /**
  * Another form of the {@link Subject:class} that reduces a piece

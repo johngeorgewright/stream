@@ -21,7 +21,6 @@ export type StatefulSubjectInput<Actions extends Record<string, unknown>> =
 
 /**
  * {@inheritdoc StatefulSubjectInput}
- * @hidden
  */
 type _StatefulSubjectInput<
   Actions extends Record<string, unknown>,

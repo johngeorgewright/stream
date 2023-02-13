@@ -5,6 +5,7 @@ import { Accumulator } from '../util/Accumulator'
  * the accumulator will be queued.
  *
  * @group Transformers
+ * @see {@link accumulate:function}
  * @example
  *
  * --a-------b-------c-----|

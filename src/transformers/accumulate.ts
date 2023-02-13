@@ -5,6 +5,7 @@ import { Accumulator } from '../util/Accumulator'
  * Every chunk is transformed in to an accumulator.
  *
  * @group Transformers
+ * @see {@link reduce:function}
  * @example
  * Accumulate all previous chunks with a counter.
  * ```

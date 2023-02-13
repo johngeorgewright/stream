@@ -13,6 +13,8 @@ export interface ToArrayOptions extends StreamPipeOptions {
 
 /**
  * Consumes all chunks in the stream and resolves them as an array.
+ *
+ * @remarks
  * Using the `catch` option will resolve whatever it
  * has consumed before the error is thrown and return an object
  * containing the result and the error.

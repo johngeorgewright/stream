@@ -1,3 +1,8 @@
+/**
+ * A common interface for controllable streams.
+ *
+ * @group Sources
+ */
 export interface Controllable<T> extends ReadableStreamDefaultController<T> {
   /**
    * Register a pull subscriber.
@@ -8,6 +13,11 @@ export interface Controllable<T> extends ReadableStreamDefaultController<T> {
   onPull(pullListener: ControllerPullListener<T>): void
 }
 
+/**
+ * The pull listener type for controllables.
+ *
+ * @group Sources
+ */
 export interface ControllerPullListener<T> {
   (): T | Promise<T>
 }

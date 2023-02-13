@@ -24,7 +24,6 @@ export type StatefuleSubjectOutput<
 
 /**
  * {@inheritdoc StatefuleSubjectOutput}
- * @hidden
  */
 type _StatefulSubjectOutput<
   Actions extends Record<string, unknown>,

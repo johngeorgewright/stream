@@ -34,6 +34,11 @@ export function timeout<T>(ms: number) {
   }
 }
 
+/**
+ * The error emitted from {@link timeout}.
+ *
+ * @group Transformers
+ */
 export class TimeoutError extends Error {
   constructor(public readonly ms: number) {
     super(`Exceeded ${ms}ms`)

@@ -6,6 +6,7 @@ import { map } from './map'
  * The label can be the result of a property on the chunk.
  *
  * @group Transformers
+ * @see {@link groupBy:function}
  * @example
  * ```
  * --one--------------------two--------------------three-------------------

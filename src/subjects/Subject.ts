@@ -4,6 +4,8 @@ import { ControllableStream } from '../sources/ControllableStream'
 import { Subjectable } from './Subjectable'
 
 /**
+ * The constructor options for a {@link Subject}.
+ *
  * @group Subjects
  */
 export interface SubjectOptions<T> {
