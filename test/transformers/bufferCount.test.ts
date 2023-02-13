@@ -1,9 +1,9 @@
-import { chunks, fromIterable, write } from '../../src'
+import { bufferCount, fromIterable, write } from '../../src'
 
-test('chunks in 2s', async () => {
+test('bufferCount in 2s', async () => {
   const fn = jest.fn()
   await fromIterable([1, 2, 3, 4, 5, 6, 7, 8])
-    .pipeThrough(chunks(2))
+    .pipeThrough(bufferCount(2))
     .pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
@@ -38,7 +38,7 @@ test('chunks in 2s', async () => {
 test('queues whatever remains after stream has closed', async () => {
   const fn = jest.fn()
   await fromIterable([1, 2, 3, 4, 5, 6, 7, 8])
-    .pipeThrough(chunks(5))
+    .pipeThrough(bufferCount(5))
     .pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
