@@ -18,6 +18,7 @@ export function buffer<T>(
   notifier: ReadableStream<unknown>,
   maxBuffer = Infinity
 ) {
+  const abortController = new AbortController()
   let buffer: T[] = []
 
   return new TransformStream<T, T[]>({
@@ -29,9 +30,14 @@ export function buffer<T>(
               controller.enqueue(buffer)
               buffer = []
             }
-          })
+          }),
+          { signal: abortController.signal }
         )
-        .then(() => controller.terminate())
+        .then(() =>
+          // Typescript still thinks that `flush` may not be set.
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          this.flush!(controller)
+        )
         .catch((error) => controller.error(error))
     },
 
@@ -42,6 +48,8 @@ export function buffer<T>(
 
     flush(controller) {
       controller.enqueue(buffer)
+      controller.terminate()
+      abortController.abort()
     },
   })
 }
