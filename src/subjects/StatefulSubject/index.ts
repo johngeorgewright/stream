@@ -1,7 +1,5 @@
 import { ForkableRecallStream } from '../../sinks/ForkableRecallStream'
-import { ControllerPullListener } from '../../sources/Controllable'
-import { ControllableStream } from '../../sources/ControllableStream'
-import { Subjectable } from '../Subjectable'
+import { BaseSubject, BaseSubjectOptions } from '../BaseSubject'
 import { StatefulSubjectInput } from './Input'
 import { StatefuleSubjectOutput } from './Output'
 import { StatefulSubjectReducer, StatefulSubjectReducers } from './Reducers'
@@ -11,6 +9,15 @@ export {
   StatefuleSubjectOutput,
   StatefulSubjectReducer,
   StatefulSubjectReducers,
+}
+
+/**
+ * The constructor options for a {@link StatefulSubject}.
+ *
+ * @group Subjects
+ */
+interface StatefulSubjectOptions<In, Out> extends BaseSubjectOptions<In, Out> {
+  forkable?: ForkableRecallStream<Out>
 }
 
 /**
@@ -60,34 +67,30 @@ export {
  * // **Nothing will be queued as the state did not change.**
  * ```
  */
-export class StatefulSubject<Actions extends Record<string, unknown>, State>
-  implements
-    Subjectable<
-      StatefulSubjectInput<Actions>,
-      StatefuleSubjectOutput<Actions, State>
-    >
-{
-  #controllable = new ControllableStream<StatefulSubjectInput<Actions>>()
-  #forkable = new ForkableRecallStream<StatefuleSubjectOutput<Actions, State>>()
+export class StatefulSubject<
+  Actions extends Record<string, unknown>,
+  State
+> extends BaseSubject<
+  StatefulSubjectInput<Actions>,
+  StatefuleSubjectOutput<Actions, State>
+> {
   #reducers: StatefulSubjectReducers<Actions, State>
   #state!: State
 
-  constructor(reducers: StatefulSubjectReducers<Actions, State>) {
+  constructor(
+    reducers: StatefulSubjectReducers<Actions, State>,
+    {
+      forkable = new ForkableRecallStream(),
+      controllable,
+    }: StatefulSubjectOptions<
+      StatefulSubjectInput<Actions>,
+      StatefuleSubjectOutput<Actions, State>
+    > = {}
+  ) {
+    super({ forkable, controllable })
     this.#reducers = reducers
-    this.#controllable.pipeThrough(this.#transform()).pipeTo(this.#forkable)
-    this.#controllable.enqueue({ action: '__INIT__' as const })
-  }
-
-  close() {
-    this.#controllable.close()
-  }
-
-  cancel(reason?: unknown) {
-    return this.#controllable.cancel(reason)
-  }
-
-  get desiredSize() {
-    return this.#controllable.desiredSize
+    this.controllable.pipeThrough(this.#transform()).pipeTo(this.forkable)
+    this.controllable.enqueue({ action: '__INIT__' as const })
   }
 
   /**
@@ -105,26 +108,10 @@ export class StatefulSubject<Actions extends Record<string, unknown>, State>
       ? [action: Action]
       : [action: Action, param: Actions[Action]]
   ) {
-    this.#controllable.enqueue({
+    this.controllable.enqueue({
       action: args[0],
       param: args[1],
     } as StatefulSubjectInput<Actions>)
-  }
-
-  enqueue(chunk: StatefulSubjectInput<Actions>) {
-    return this.#controllable.enqueue(chunk)
-  }
-
-  error(reason: unknown) {
-    return this.#controllable.error(reason)
-  }
-
-  fork() {
-    return this.#forkable.fork()
-  }
-
-  onPull(pullListener: ControllerPullListener<StatefulSubjectInput<Actions>>) {
-    return this.#controllable.onPull(pullListener)
   }
 
   #transform() {

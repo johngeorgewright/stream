@@ -14,6 +14,7 @@ export * from './sources/interval'
 export * from './sources/merge'
 export * from './sources/race'
 
+export * from './subjects/BaseSubject'
 export * from './subjects/Subject'
 export * from './subjects/Subjectable'
 export * from './subjects/StatefulSubject'
