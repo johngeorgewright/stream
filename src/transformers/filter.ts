@@ -13,10 +13,16 @@ import { Predicate } from '../util/Preciate'
  * -----2-----4-----6-----8-----
  * ```
  */
-export function filter<T>(predicate: Predicate<T>) {
-  return new TransformStream<T, T>({
+export function filter<In, Out extends In>(
+  predicate: (chunk: In) => chunk is Out
+): TransformStream<In, Out>
+
+export function filter<In>(predicate: Predicate<In>): TransformStream<In, In>
+
+export function filter<In, Out extends In = In>(predicate: Predicate<In>) {
+  return new TransformStream<In, Out>({
     async transform(chunk, controller) {
-      if (await predicate(chunk)) controller.enqueue(chunk)
+      if (await predicate(chunk)) controller.enqueue(chunk as Out)
     },
   })
 }
