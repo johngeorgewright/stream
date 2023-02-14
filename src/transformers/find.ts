@@ -13,6 +13,15 @@ import { Predicate } from '../util/Preciate'
  * find((x) => x === 6)
  *
  * -----------------6-|
+ *
+ * Using type guards will extract the types you want to work with.
+ *
+ * ```
+ * --A--A--A--B--X
+ *
+ * find((x): x is B => x.type === 'b')
+ *
+ * -----------B--|
  * ```
  */
 export function find<In, Out extends In>(
