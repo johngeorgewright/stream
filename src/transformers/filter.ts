@@ -11,6 +11,15 @@ import { Predicate } from '../util/Preciate'
  * filter((x) => x % 2 === 0)
  *
  * -----2-----4-----6-----8-----
+ *
+ * Using type guards will extract the types you want to work with.
+ *
+ * ```
+ * --A--B--A--B---
+ *
+ * filter((x): x is B => x.type === 'b')
+ *
+ * -----B-----B---
  * ```
  */
 export function filter<In, Out extends In>(
