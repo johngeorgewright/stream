@@ -1,4 +1,4 @@
-import { filter, fromIterable, toArray } from '../../src'
+import { filter, fromIterable, toArray, write } from '../../src'
 
 test('filters unwanted values', async () => {
   expect(
@@ -8,4 +8,19 @@ test('filters unwanted values', async () => {
       )
     )
   ).toEqual([0, 2, 4, 6, 8])
+})
+
+test('using type guards', () => {
+  type A = { type: 'a' }
+  type B = { type: 'b' }
+  type AB = A | B
+  fromIterable<AB>([{ type: 'a' }, { type: 'b' }])
+    .pipeThrough(filter((chunk): chunk is B => chunk.type === 'b'))
+    .pipeTo(
+      write((chunk) => {
+        // @ts-expect-error This comparison appears to be unintentional because the types '"b"' and '"a"' have no overlap.
+        chunk.type === 'a'
+        chunk.type === 'b'
+      })
+    )
 })
