@@ -1,4 +1,4 @@
-import { find, fromIterable, toArray } from '../../src'
+import { find, fromIterable, toArray, write } from '../../src'
 
 test('queues the first found chunk and then terminates the stream', async () => {
   expect(
@@ -8,4 +8,19 @@ test('queues the first found chunk and then terminates the stream', async () => 
       )
     )
   ).toEqual([4])
+})
+
+test('using type guards', () => {
+  type A = { type: 'a' }
+  type B = { type: 'b' }
+  type AB = A | B
+  fromIterable<AB>([{ type: 'a' }, { type: 'b' }])
+    .pipeThrough(find((chunk): chunk is B => chunk.type === 'b'))
+    .pipeTo(
+      write((chunk) => {
+        // @ts-expect-error This comparison appears to be unintentional because the types '"b"' and '"a"' have no overlap.
+        chunk.type === 'a'
+        chunk.type === 'b'
+      })
+    )
 })

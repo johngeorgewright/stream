@@ -15,11 +15,17 @@ import { Predicate } from '../util/Preciate'
  * -----------------6-|
  * ```
  */
-export function find<T>(predicate: Predicate<T>) {
-  return new TransformStream<T>({
+export function find<In, Out extends In>(
+  predicate: (chunk: In) => chunk is Out
+): TransformStream<In, Out>
+
+export function find<In>(predicate: Predicate<In>): TransformStream<In, In>
+
+export function find<In, Out extends In = In>(predicate: Predicate<In>) {
+  return new TransformStream<In, Out>({
     async transform(chunk, controller) {
       if (await predicate(chunk)) {
-        controller.enqueue(chunk)
+        controller.enqueue(chunk as Out)
         controller.terminate()
       }
     },
