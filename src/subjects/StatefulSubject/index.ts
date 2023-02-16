@@ -1,12 +1,12 @@
 import { ForkableRecallStream } from '../../sinks/ForkableRecallStream'
 import { BaseSubject, BaseSubjectOptions } from '../BaseSubject'
 import { StatefulSubjectInput } from './Input'
-import { StatefuleSubjectOutput } from './Output'
+import { StatefulSubjectOutput } from './Output'
 import { StatefulSubjectReducer, StatefulSubjectReducers } from './Reducers'
 
 export {
   StatefulSubjectInput,
-  StatefuleSubjectOutput,
+  StatefulSubjectOutput,
   StatefulSubjectReducer,
   StatefulSubjectReducers,
 }
@@ -72,7 +72,7 @@ export class StatefulSubject<
   State
 > extends BaseSubject<
   StatefulSubjectInput<Actions>,
-  StatefuleSubjectOutput<Actions, State>
+  StatefulSubjectOutput<Actions, State>
 > {
   #reducers: StatefulSubjectReducers<Actions, State>
   #state!: State
@@ -84,7 +84,7 @@ export class StatefulSubject<
       controllable,
     }: StatefulSubjectOptions<
       StatefulSubjectInput<Actions>,
-      StatefuleSubjectOutput<Actions, State>
+      StatefulSubjectOutput<Actions, State>
     > = {}
   ) {
     super({ forkable, controllable })
@@ -117,7 +117,7 @@ export class StatefulSubject<
   #transform() {
     return new TransformStream<
       StatefulSubjectInput<Actions>,
-      StatefuleSubjectOutput<Actions, State>
+      StatefulSubjectOutput<Actions, State>
     >({
       transform: (chunk, controller) => {
         const state = this.#reduce(chunk, this.#state)
@@ -126,7 +126,7 @@ export class StatefulSubject<
           controller.enqueue({
             ...chunk,
             state: this.#state,
-          } as StatefuleSubjectOutput<Actions, State>)
+          } as StatefulSubjectOutput<Actions, State>)
         }
       },
     })
@@ -142,6 +142,6 @@ export class StatefulSubject<
     },
     state: State
   ) {
-    return this.#reducers[action]?.(state, param) ?? state
+    return this.#reducers[action](state, param) ?? state
   }
 }

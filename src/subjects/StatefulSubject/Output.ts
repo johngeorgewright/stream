@@ -12,10 +12,10 @@ import { L, U } from 'ts-toolbelt'
  * // | { action: 'nothing', state: string }
  * ```
  */
-export type StatefuleSubjectOutput<
+export type StatefulSubjectOutput<
   Actions extends Record<string, unknown>,
   State
-> = _StatefulSubjectOutput<
+> = AccumulateStatefulSubjectOutput<
   Actions,
   Readonly<State>,
   U.ListOf<keyof Actions>,
@@ -23,16 +23,16 @@ export type StatefuleSubjectOutput<
 >
 
 /**
- * {@inheritdoc StatefuleSubjectOutput}
+ * {@inheritdoc StatefulSubjectOutput}
  */
-type _StatefulSubjectOutput<
+type AccumulateStatefulSubjectOutput<
   Actions extends Record<string, unknown>,
   State,
   ActionNames extends readonly (keyof Actions)[],
   Acc extends { action: keyof Actions; param?: unknown; state: State }
 > = L.Length<ActionNames> extends 0
   ? Acc
-  : _StatefulSubjectOutput<
+  : AccumulateStatefulSubjectOutput<
       Actions,
       State,
       L.Tail<ActionNames>,

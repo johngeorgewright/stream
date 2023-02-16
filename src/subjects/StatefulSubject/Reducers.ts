@@ -19,10 +19,7 @@
  * // }
  * ```
  */
-export type StatefulSubjectReducers<
-  Actions extends Record<string, unknown>,
-  State
-> = {
+export type StatefulSubjectReducers<Actions, State> = {
   [Action in keyof Actions]: StatefulSubjectReducer<Actions[Action], State>
 } & { __INIT__(): Readonly<State> }
 
