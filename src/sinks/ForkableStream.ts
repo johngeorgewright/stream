@@ -29,9 +29,6 @@ export class ForkableStream<T>
   #finished = false
   #controllers: ControllableStream<T>[] = []
 
-  /**
-   * One WritableStream to many ReadableStreams.
-   */
   constructor(
     underlyingSink?: UnderlyingSink<T>,
     strategy?: QueuingStrategy<T>
@@ -52,6 +49,7 @@ export class ForkableStream<T>
           this.#forEachController((controller) => {
             try {
               controller.close()
+              controller.cancel()
             } catch (error) {
               // potentially already closed
             }
@@ -62,7 +60,9 @@ export class ForkableStream<T>
         },
 
         write: (chunk, controller) => {
-          this.#forEachController((controller) => controller.enqueue(chunk))
+          this.#forEachController(
+            (controller) => controller.desiredSize && controller.enqueue(chunk)
+          )
           return underlyingSink?.write?.(chunk, controller)
         },
       },
@@ -75,20 +75,23 @@ export class ForkableStream<T>
     return this.#finished
   }
 
-  fork() {
-    return this._pipeThroughController(this._addController())
+  fork(queuingStrategy?: QueuingStrategy) {
+    return this._pipeThroughController(this._addController(queuingStrategy))
   }
 
   #forEachController(fn: (controller: ControllableStream<T>) => void) {
     for (const controller of this.#controllers) fn(controller)
   }
 
-  protected _addController() {
-    const controller = new ControllableStream<T>({
-      cancel: () => {
-        this.#controllers = without(this.#controllers, controller)
+  protected _addController(queuingStrategy?: QueuingStrategy) {
+    const controller = new ControllableStream<T>(
+      {
+        cancel: () => {
+          this.#controllers = without(this.#controllers, controller)
+        },
       },
-    })
+      queuingStrategy
+    )
     if (!this.#finished) this.#controllers.push(controller)
     return controller
   }

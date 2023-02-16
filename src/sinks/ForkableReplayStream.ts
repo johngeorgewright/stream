@@ -31,8 +31,8 @@ export class ForkableReplayStream<T> extends ForkableStream<T> {
     })
   }
 
-  override fork() {
-    const controller = this._addController()
+  override fork(queuingStrategy?: QueuingStrategy) {
+    const controller = this._addController(queuingStrategy)
     for (const chunk of this.#chunks) controller.enqueue(chunk)
     return this._pipeThroughController(controller)
   }
