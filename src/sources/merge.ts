@@ -1,3 +1,5 @@
+import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream'
+
 /**
  * Merges multiple streams in to 1 ReadableStream.
  *
@@ -6,6 +8,7 @@
  * read and queue at least one chunk from each incoming stream.
  *
  * @group Sources
+ * @see {@link roundRobin:function}
  * @example
  * ```
  * --1----2----3-------4-|
@@ -17,13 +20,11 @@
  * ```
  */
 export function merge<T>(
-  readableStreams: [
-    ReadableStream<T>,
-    ReadableStream<T>,
-    ...ReadableStream<T>[]
-  ],
+  readableStreams: ReadableStream<T>[],
   queuingStrategy?: QueuingStrategy<T>
 ): ReadableStream<T> {
+  if (!readableStreams.length) return immediatelyClosingReadableStream()
+
   const readers = readableStreams.map((stream) => stream.getReader())
 
   return new ReadableStream<T>(

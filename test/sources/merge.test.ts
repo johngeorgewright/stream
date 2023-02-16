@@ -30,6 +30,31 @@ test('aborted merged streams', () => {
   ).rejects.toThrow()
 })
 
+test('cancelling the stream will cancel all upstreams', async () => {
+  const oneCancel = jest.fn()
+  const one = new ReadableStream({
+    pull(controller) {
+      controller.enqueue(1)
+    },
+    cancel: oneCancel,
+  })
+
+  const twoCancel = jest.fn()
+  const two = new ReadableStream({
+    pull(controller) {
+      controller.enqueue(2)
+    },
+    cancel: twoCancel,
+  })
+
+  const three = merge([one, two])
+  const reader = three.getReader()
+  await reader.cancel('foobar')
+
+  expect(oneCancel).toHaveBeenCalledWith('foobar')
+  expect(twoCancel).toHaveBeenCalledWith('foobar')
+})
+
 test('merge streams of different lengths', async () => {
   expect(
     await toArray(
