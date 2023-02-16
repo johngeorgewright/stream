@@ -35,8 +35,7 @@ export async function toArray<T>(
   readableStream: ReadableStream<T>,
   options: ToArrayOptions & { catch: true }
 ): Promise<{
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  error?: any
+  error?: unknown
   result: T[]
 }>
 
