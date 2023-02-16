@@ -43,7 +43,7 @@ class IteratorSource<T> implements UnderlyingDefaultSource<T> {
     this.#iterator = iterator
   }
 
-  async pull(controller: ReadableStreamDefaultController<T>) {
+  async pull(controller: ReadableStreamDefaultController<T>): Promise<void> {
     let result: IteratorResult<T>
 
     try {
@@ -53,7 +53,10 @@ class IteratorSource<T> implements UnderlyingDefaultSource<T> {
     }
 
     if (result.done) controller.close()
-    else controller.enqueue(result.value)
+    else {
+      controller.enqueue(result.value)
+      if (controller.desiredSize) return this.pull(controller)
+    }
   }
 }
 
@@ -71,8 +74,9 @@ class ArrayLikeSource<T> implements UnderlyingDefaultSource<T> {
     if (this.#finished) controller.close()
   }
 
-  pull(controller: ReadableStreamDefaultController<T>) {
-    controller.enqueue(this.#arrayLike[this.#i++])
+  pull(controller: ReadableStreamDefaultController<T>): void {
+    for (; controller.desiredSize && this.#i < this.#length; this.#i++)
+      controller.enqueue(this.#arrayLike[this.#i])
     if (this.#finished) controller.close()
   }
 
