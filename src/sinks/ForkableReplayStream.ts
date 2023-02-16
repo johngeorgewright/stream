@@ -5,7 +5,6 @@ import { ForkableStream } from './ForkableStream'
  * queues the entire contents of whatever has been previously consumed.
  *
  * @group Sinks
- * @todo Implement a maximum size to be kept in memory
  * @example
  * ```
  * const forkable = new ForkableReplayStream<number>()
@@ -23,9 +22,10 @@ import { ForkableStream } from './ForkableStream'
 export class ForkableReplayStream<T> extends ForkableStream<T> {
   #chunks: T[] = []
 
-  constructor() {
+  constructor(maxReplaySize = Number.MAX_SAFE_INTEGER) {
     super({
       write: (chunk) => {
+        if (this.#chunks.length === maxReplaySize) this.#chunks.shift()
         this.#chunks.push(chunk)
       },
     })
