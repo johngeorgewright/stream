@@ -1,3 +1,5 @@
+import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream'
+
 /**
  * Returns a `ReadableStream` that mirrors the first source stream to queue an item.
  *
@@ -17,21 +19,18 @@ export function race<T>(
   streams: ReadableStream<T>[],
   queuingStrategy?: QueuingStrategy<T>
 ) {
+  if (!streams.length) return immediatelyClosingReadableStream()
+
   const readers = streams.map((stream) => stream.getReader())
 
   return new ReadableStream<T>(
     {
       async pull(controller) {
-        let result: ReadableStreamReadResult<T>
-
-        try {
-          result = await Promise.race(readers.map((reader) => reader.read()))
-        } catch (error) {
-          return controller.error(error)
-        }
-
-        if (result.done) controller.close()
-        else controller.enqueue(result.value)
+        return Promise.race(readers.map((reader) => reader.read())).then(
+          (result) =>
+            result.done ? controller.close() : controller.enqueue(result.value),
+          (error) => controller.error(error)
+        )
       },
 
       async cancel(reason) {
