@@ -6,7 +6,6 @@ import { BaseSubject, BaseSubjectOptions } from './BaseSubject'
  * ability to both queue items and fork the stream from the same object.
  *
  * @group Subjects
- * @see {@link SubjectOptions}
  * @example
  * ```
  * const subject = new Subject<number>()
