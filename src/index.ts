@@ -13,6 +13,7 @@ export * from './sources/fromDOMMutations'
 export * from './sources/interval'
 export * from './sources/merge'
 export * from './sources/race'
+export * from './sources/roundRobin'
 
 export * from './subjects/BaseSubject'
 export * from './subjects/Subject'
