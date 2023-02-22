@@ -1,14 +1,14 @@
 /**
- * Do nothing. Simply pass chunks through.
+ * Transforms nothing.
  *
  * @group Transformers
  * @example
  * ```
- * --a--b--c--d--e--f--
+ * --a--b--c--d--
  *
  * identity()
  *
- * --a--b--c--d--e--f--
+ * --a--b--c--d--
  * ```
  */
 export function identity<T>() {
