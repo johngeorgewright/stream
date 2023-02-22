@@ -1,4 +1,4 @@
-import { empty, Empty } from '../util/symbols'
+import { empty, Empty } from '../utils/Symbol'
 
 /**
  * Puts the current value and previous value together as an array, and queues that.

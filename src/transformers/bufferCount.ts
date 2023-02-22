@@ -12,7 +12,7 @@
  * -------[a,b]---------[c,d]--
  * ```
  */
-export function bufferCount<T, L extends number>(length: L) {
+export function bufferCount<T>(length: number) {
   let buffer: T[] = []
 
   return new TransformStream<T, T[]>({

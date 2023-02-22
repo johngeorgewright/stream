@@ -1,15 +1,11 @@
 import { ForkableRecallStream } from '../../sinks/ForkableRecallStream'
+import {
+  stateReducer,
+  StateReducerInput,
+  StateReducerOutput,
+  StateReducers,
+} from '../../transformers/stateReducer'
 import { BaseSubject, BaseSubjectOptions } from '../BaseSubject'
-import { StatefulSubjectInput } from './Input'
-import { StatefulSubjectOutput } from './Output'
-import { StatefulSubjectReducer, StatefulSubjectReducers } from './Reducers'
-
-export {
-  StatefulSubjectInput,
-  StatefulSubjectOutput,
-  StatefulSubjectReducer,
-  StatefulSubjectReducers,
-}
 
 /**
  * The constructor options for a {@link StatefulSubject}.
@@ -18,6 +14,7 @@ export {
  */
 interface StatefulSubjectOptions<In, Out> extends BaseSubjectOptions<In, Out> {
   forkable?: ForkableRecallStream<Out>
+  pipeThroughOptions?: StreamPipeOptions
 }
 
 /**
@@ -28,6 +25,7 @@ interface StatefulSubjectOptions<In, Out> extends BaseSubjectOptions<In, Out> {
  * the state then nothing is queued to the stream.
  *
  * @group Subjects
+ * @see {@link stateReducer:function}
  * @example
  * ```
  * // The State will be the type of data you want to manipulate.
@@ -71,26 +69,23 @@ export class StatefulSubject<
   Actions extends Record<string, unknown>,
   State
 > extends BaseSubject<
-  StatefulSubjectInput<Actions>,
-  StatefulSubjectOutput<Actions, State>
+  StateReducerInput<Actions>,
+  StateReducerOutput<Actions, State>
 > {
-  #reducers: StatefulSubjectReducers<Actions, State>
-  #state!: State
-
   constructor(
-    reducers: StatefulSubjectReducers<Actions, State>,
+    reducers: StateReducers<Actions, State>,
     {
       forkable = new ForkableRecallStream(),
-      controllable,
+      ...options
     }: StatefulSubjectOptions<
-      StatefulSubjectInput<Actions>,
-      StatefulSubjectOutput<Actions, State>
+      StateReducerInput<Actions>,
+      StateReducerOutput<Actions, State>
     > = {}
   ) {
-    super({ forkable, controllable })
-    this.#reducers = reducers
-    this.controllable.pipeThrough(this.#transform()).pipeTo(this.forkable)
-    this.controllable.enqueue({ action: '__INIT__' as const })
+    super({ forkable, controllable: options.controllable })
+    this.controllable
+      .pipeThrough(stateReducer(reducers), options.pipeThroughOptions)
+      .pipeTo(this.forkable, options.pipeToOptions)
   }
 
   /**
@@ -111,37 +106,6 @@ export class StatefulSubject<
     this.controllable.enqueue({
       action: args[0],
       param: args[1],
-    } as StatefulSubjectInput<Actions>)
-  }
-
-  #transform() {
-    return new TransformStream<
-      StatefulSubjectInput<Actions>,
-      StatefulSubjectOutput<Actions, State>
-    >({
-      transform: (chunk, controller) => {
-        const state = this.#reduce(chunk, this.#state)
-        if (state !== this.#state) {
-          this.#state = Object.freeze(state)
-          controller.enqueue({
-            ...chunk,
-            state: this.#state,
-          } as StatefulSubjectOutput<Actions, State>)
-        }
-      },
-    })
-  }
-
-  #reduce<Action extends keyof Actions>(
-    {
-      action,
-      param,
-    }: {
-      action: Action
-      param?: Actions[Action]
-    },
-    state: State
-  ) {
-    return this.#reducers[action](state, param) ?? state
+    } as StateReducerInput<Actions>)
   }
 }

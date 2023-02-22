@@ -2,6 +2,7 @@
  * Removes the first occurance of `item` in `array`.
  *
  * @group Utils
+ * @category Array
  * @exampe
  * ```
  * without([1, 2, 3, 4, 5], 4)

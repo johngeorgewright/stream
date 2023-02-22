@@ -1,11 +1,25 @@
 import { L } from 'ts-toolbelt'
-import { ReadableStreamChunk } from './ReadableStreamChunk'
+
+/**
+ * Returns the chunk type of a ReadableStream.
+ *
+ * @group Utils
+ * @category Stream
+ * @example
+ * ```
+ * type T = ReadableStreamChunk<ReadableStream<number>>
+ * // number
+ * ```
+ */
+export type ReadableStreamChunk<R extends ReadableStream<unknown>> =
+  R extends ReadableStream<infer T> ? T : never
 
 /**
  * Creates a tuple type of the chunk types from a list of
  * ReadableStreams.
  *
  * @group Utils
+ * @category Stream
  * @example
  * ```
  * type T = ReadableStreamsChunks<[

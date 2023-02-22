@@ -11,6 +11,7 @@ import { Subjectable } from './Subjectable'
 export interface BaseSubjectOptions<In, Out> {
   controllable?: ControllableStream<In>
   forkable?: ForkableStream<Out>
+  pipeToOptions?: StreamPipeOptions
 }
 
 /**

@@ -1,5 +1,5 @@
 import { map } from './map'
-import { Accumulator } from '../util/Accumulator'
+import { Accumulator } from '../utils/Function'
 
 /**
  * Every chunk is transformed in to an accumulator.

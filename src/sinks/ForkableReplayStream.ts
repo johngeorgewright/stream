@@ -16,23 +16,41 @@ import { ForkableStream } from './ForkableStream'
  *
  * ```
  * await forkable.fork().pipeTo(write(console.info))
- * // 1, 2, 3, 4, 5, 6, 7
+ * // 1
+ * // 2
+ * // 3
+ * // 4
+ * // 5
+ * // 6
+ * // 7
  * ```
  */
 export class ForkableReplayStream<T> extends ForkableStream<T> {
   #chunks: T[] = []
 
-  constructor(maxReplaySize = Number.MAX_SAFE_INTEGER) {
-    super({
-      write: (chunk) => {
-        if (this.#chunks.length === maxReplaySize) this.#chunks.shift()
-        this.#chunks.push(chunk)
+  constructor(
+    maxReplaySize = Number.MAX_SAFE_INTEGER,
+    underlyingSink?: UnderlyingSink<T>,
+    strategy?: QueuingStrategy<T>
+  ) {
+    super(
+      {
+        ...underlyingSink,
+        write: (chunk, controller) => {
+          if (this.#chunks.length === maxReplaySize) this.#chunks.shift()
+          this.#chunks.push(chunk)
+          underlyingSink?.write?.(chunk, controller)
+        },
       },
-    })
+      strategy
+    )
   }
 
-  override fork(queuingStrategy?: QueuingStrategy) {
-    const controller = this._addController(queuingStrategy)
+  override fork(
+    underlyingSource?: UnderlyingDefaultSource<T>,
+    queuingStrategy?: QueuingStrategy
+  ) {
+    const controller = this._addController(underlyingSource, queuingStrategy)
     for (const chunk of this.#chunks) controller.enqueue(chunk)
     return this._pipeThroughController(controller)
   }

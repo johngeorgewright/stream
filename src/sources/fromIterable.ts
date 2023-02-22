@@ -1,3 +1,5 @@
+import assertNever from 'assert-never'
+
 /**
  * Creates a readable stream from an iterable of values.
  *
@@ -21,7 +23,12 @@
  * ```
  */
 export function fromIterable<T>(
-  iterable: Iterable<T> | AsyncIterable<T> | ArrayLike<T>,
+  iterable:
+    | Iterator<T>
+    | Iterable<T>
+    | AsyncIterator<T>
+    | AsyncIterable<T>
+    | ArrayLike<T>,
   queuingStrategy?: QueuingStrategy<T>
 ) {
   return new ReadableStream(
@@ -29,9 +36,11 @@ export function fromIterable<T>(
       ? new IteratorSource(iterable[Symbol.iterator]())
       : Symbol.asyncIterator in iterable
       ? new IteratorSource(iterable[Symbol.asyncIterator]())
+      : 'next' in iterable
+      ? new IteratorSource(iterable)
       : 'length' in iterable
       ? new ArrayLikeSource(iterable)
-      : {},
+      : assertNever(iterable),
     queuingStrategy
   )
 }

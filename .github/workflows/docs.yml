@@ -46,13 +46,28 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
-      - name: Build Documentation
-        run: yarn build:docs
+      - name: Install Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 3.2.1
+
+      - name: Bundle
+        run: |
+          cd docs
+          bundle install
+
+      - name: Build Docs
+        run: |
+          cd docs
+          bundle exec jekyll build
+
+      - name: Build API
+        run: yarn build:api
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'docs'
+          path: docs/_site
 
       - name: Deploy to GitHub Pages
         id: deployment

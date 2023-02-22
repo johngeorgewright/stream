@@ -1,6 +1,6 @@
-import { ReadableStreamsChunks } from '../util/ReadableStreamsChunks'
+import { ReadableStreamsChunks } from '../utils/Stream'
 import { write } from '../sinks/write'
-import { empty } from '../util/symbols'
+import { empty } from '../utils/Symbol'
 import { ControllableStream } from '../sources/ControllableStream'
 
 /**

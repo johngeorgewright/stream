@@ -1,5 +1,5 @@
-import { PickByValue } from '../util/PickByValue'
-import { Stringable } from '../util/Stringable'
+import { PickByValue } from '../utils/Object'
+import { Stringable } from '../utils/String'
 import { accumulate } from './accumulate'
 
 /**

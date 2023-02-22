@@ -1,4 +1,4 @@
-import { without } from '../util/array'
+import { without } from '../utils/Array'
 import { Controllable, ControllerPullListener } from './Controllable'
 
 /**
@@ -70,6 +70,7 @@ export class ControllableStream<T>
   /**
    * Register a pull subscriber.
    *
+   * @remark
    * When the stream is ready to pull it will pull from all
    * subscribers until the desired size has been fulfilled.
    */
@@ -102,15 +103,14 @@ export class ControllableStream<T>
     Therefore we resolve when the 1st listener queues an item 
     so the stream can request more if it needs.
     */
-    return new Promise<void>((resolve, reject) => {
-      this.#pullListeners.map(async (pullListener) => {
+    return new Promise<void>((resolve) => {
+      this.#pullListeners.forEach(async (pullListener) => {
         try {
           controller.enqueue(await pullListener())
-          resolve()
         } catch (error) {
           controller.error(error)
-          // TODO: do we need to reject if the error is in the stream?
-          reject(error)
+        } finally {
+          resolve()
         }
       })
     })
