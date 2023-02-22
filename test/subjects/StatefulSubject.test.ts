@@ -1,3 +1,4 @@
+import { setImmediate } from 'node:timers/promises'
 import { StatefulSubject, write } from '../../src'
 
 interface State {
@@ -95,6 +96,9 @@ test('a reducer that doesnt change state', async () => {
 test('multiple calls', async () => {
   const fn = jest.fn()
   const promise = subject.fork().pipeTo(write(fn))
+  // There's a bug in the web-streams-polyfill that resolves the above
+  // promise too early.
+  await setImmediate()
   subject.dispatch('add author', 'Jane Austin')
   subject.dispatch('add author', 'George Orwell')
   subject.dispatch('add author', 'Jane Austin')
@@ -140,12 +144,15 @@ test('multiple calls', async () => {
 })
 
 test('typing errors', () => {
-  new StatefulSubject<Actions, State>(
-    // @ts-expect-error There is no __INIT__ method
-    {
-      'add author': (state) => state,
-    }
-  )
+  expect(
+    () =>
+      new StatefulSubject<Actions, State>(
+        // @ts-expect-error There is no __INIT__ method
+        {
+          'add author': (state) => state,
+        }
+      )
+  ).toThrow()
 
   new StatefulSubject<Actions, State>({
     // @ts-expect-error Incorrect state shape

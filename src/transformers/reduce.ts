@@ -1,4 +1,4 @@
-import { Accumulator } from '../util/Accumulator'
+import { Accumulator } from '../utils/Function'
 
 /**
  * Reduces chunks in to one accumulator. Once the stream is cancelled,

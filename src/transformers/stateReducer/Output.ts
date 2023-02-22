@@ -1,38 +1,39 @@
 import { L, U } from 'ts-toolbelt'
+import { StateReducerInit } from './Reducers'
 
 /**
- * Represents the Writable (output) types of StatefulSubject actions.
+ * Represents the Writable (output) types of StateReducer actions.
  *
- * @group Subjects
+ * @group Transformers
  * @example
  * ```
- * type T = StatefulSubjectOutput<{ foo: string, bar: number, nothing: void }, string>
+ * type T = StateReducerOutput<{ foo: string, bar: number, nothing: void }, string>
  * // | { action: 'foo', param: string, state: string }
  * // | { action: 'bar', param: number, state: string }
  * // | { action: 'nothing', state: string }
  * ```
  */
-export type StatefulSubjectOutput<
+export type StateReducerOutput<
   Actions extends Record<string, unknown>,
   State
-> = AccumulateStatefulSubjectOutput<
+> = AccumulateStateReducerOutput<
   Actions,
   Readonly<State>,
   U.ListOf<keyof Actions>,
-  { action: '__INIT__'; state: Readonly<State> }
+  { action: StateReducerInit; state: Readonly<State> }
 >
 
 /**
- * {@inheritdoc StatefulSubjectOutput}
+ * {@inheritdoc StateReducerOutput}
  */
-type AccumulateStatefulSubjectOutput<
+type AccumulateStateReducerOutput<
   Actions extends Record<string, unknown>,
   State,
   ActionNames extends readonly (keyof Actions)[],
   Acc extends { action: keyof Actions; param?: unknown; state: State }
 > = L.Length<ActionNames> extends 0
   ? Acc
-  : AccumulateStatefulSubjectOutput<
+  : AccumulateStateReducerOutput<
       Actions,
       State,
       L.Tail<ActionNames>,

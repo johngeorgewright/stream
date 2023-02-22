@@ -16,7 +16,7 @@ import { write } from '../sinks/write'
  */
 export function buffer<T>(
   notifier: ReadableStream<unknown>,
-  maxBuffer = Infinity
+  maxBuffer = Number.MAX_SAFE_INTEGER
 ) {
   const abortController = new AbortController()
   let buffer: T[] = []
@@ -42,8 +42,8 @@ export function buffer<T>(
     },
 
     transform(chunk: T) {
+      if (buffer.length === maxBuffer) buffer.shift()
       buffer.push(chunk)
-      if (buffer.length > maxBuffer) buffer.shift()
     },
 
     flush(controller) {

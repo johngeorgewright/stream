@@ -20,6 +20,6 @@ import { BaseSubject, BaseSubjectOptions } from './BaseSubject'
 export class Subject<T> extends BaseSubject<T, T> {
   constructor(options?: BaseSubjectOptions<T, T>) {
     super(options)
-    this.controllable.pipeTo(this.forkable)
+    this.controllable.pipeTo(this.forkable, options?.pipeToOptions)
   }
 }

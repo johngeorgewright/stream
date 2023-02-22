@@ -7,6 +7,8 @@
  * or `null`.
  *
  * @hidden
+ * @group Utils
+ * @category Symbol
  */
 export const empty = Symbol('empty')
 

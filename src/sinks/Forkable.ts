@@ -4,5 +4,8 @@
  * @group Sinks
  */
 export interface Forkable<T> {
-  fork(queuingStrategy?: QueuingStrategy): ReadableStream<T>
+  fork(
+    underlyingSource?: UnderlyingDefaultSource<T>,
+    queuingStrategy?: QueuingStrategy
+  ): ReadableStream<T>
 }

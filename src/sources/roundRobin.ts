@@ -1,4 +1,4 @@
-import { without } from '../util/array'
+import { without } from '../utils/Array'
 import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream'
 
 /**

@@ -1,6 +1,6 @@
 import { ControllableStream } from '../sources/ControllableStream'
 import { identity } from '../transformers/identity'
-import { without } from '../util/array'
+import { without } from '../utils/Array'
 import { Forkable } from './Forkable'
 
 /**
@@ -49,7 +49,6 @@ export class ForkableStream<T>
           this.#forEachController((controller) => {
             try {
               controller.close()
-              controller.cancel()
             } catch (error) {
               // potentially already closed
             }
@@ -75,19 +74,29 @@ export class ForkableStream<T>
     return this.#finished
   }
 
-  fork(queuingStrategy?: QueuingStrategy) {
-    return this._pipeThroughController(this._addController(queuingStrategy))
+  fork(
+    underlyingSource?: UnderlyingDefaultSource<T>,
+    queuingStrategy?: QueuingStrategy
+  ) {
+    return this._pipeThroughController(
+      this._addController(underlyingSource, queuingStrategy)
+    )
   }
 
   #forEachController(fn: (controller: ControllableStream<T>) => void) {
     for (const controller of this.#controllers) fn(controller)
   }
 
-  protected _addController(queuingStrategy?: QueuingStrategy) {
+  protected _addController(
+    underlyingSource?: UnderlyingDefaultSource<T>,
+    queuingStrategy?: QueuingStrategy
+  ) {
     const controller = new ControllableStream<T>(
       {
-        cancel: () => {
+        ...underlyingSource,
+        cancel: (reason) => {
           this.#controllers = without(this.#controllers, controller)
+          underlyingSource?.cancel?.(reason)
         },
       },
       queuingStrategy
