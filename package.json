@@ -12,7 +12,9 @@
   "sideEffects": false,
   "scripts": {
     "build": "yarn rimraf dist && yarn tsc",
-    "build:docs": "rimraf docs && yarn typedoc --readme none src/index.ts",
+    "build:api": "rimraf docs/_site/api && typedoc",
+    "build:docs": "yarn build:site && build:api",
+    "build:site": "mkdirp docs && cd docs && bundle exec jekyll && cd -",
     "lint": "eslint src",
     "test": "jest"
   },
@@ -31,6 +33,7 @@
     "@types/node": "18.13.0",
     "@typescript-eslint/eslint-plugin": "5.52.0",
     "@typescript-eslint/parser": "5.52.0",
+    "concurrently": "7.6.0",
     "conventional-changelog-conventionalcommits": "5.0.0",
     "eslint": "8.34.0",
     "husky": "8.0.3",
@@ -47,6 +50,7 @@
     "web-streams-polyfill": "3.2.1"
   },
   "dependencies": {
+    "assert-never": "^1.2.1",
     "ts-toolbelt": "9.6.0",
     "tslib": "2.5.0"
   },
