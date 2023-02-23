@@ -59,4 +59,3 @@ jobs:
         uses: vebr/jest-lcov-reporter@v0.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          update-comment: true
