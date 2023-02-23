@@ -5,3 +5,50 @@ test('consumes a stream in to an array of values', async () => {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
   ])
 })
+
+test('errors in the stream will reject', async () => {
+  await expect(
+    toArray(
+      fromIterable(
+        (function* () {
+          yield 1
+          yield 2
+          throw new Error('foo')
+        })()
+      )
+    )
+  ).rejects.toThrow('foo')
+})
+
+describe('the catch options', () => {
+  test('return an object with results', async () => {
+    expect(
+      await toArray(fromIterable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), {
+        catch: true,
+      })
+    ).toEqual({ result: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] })
+  })
+
+  test('will return the error and any results before the error', async () => {
+    expect(
+      await toArray(
+        fromIterable(
+          (function* () {
+            yield 1
+            yield 2
+            throw new Error('foo')
+          })()
+        ),
+        { catch: true }
+      )
+    ).toMatchInlineSnapshot(`
+    {
+      "error": [Error: foo],
+      "result": [
+        1,
+        2,
+      ],
+    }
+  `)
+  })
+})
