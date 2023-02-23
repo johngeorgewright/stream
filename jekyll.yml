@@ -1,4 +1,4 @@
-# Jekyll Config
+# yaml-language-server: $schema=https://json.schemastore.org/jekyll
 
 title: '@johngw/stream'
 
