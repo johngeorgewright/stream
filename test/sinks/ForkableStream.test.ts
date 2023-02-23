@@ -1,4 +1,5 @@
-import { ForkableStream, fromIterable, write } from '../../src'
+import { setImmediate, setTimeout } from 'node:timers/promises'
+import { ForkableStream, fromIterable, interval, tap, write } from '../../src'
 
 let forkable: ForkableStream<number>
 let fn: jest.Mock<void, [number]>
@@ -31,4 +32,76 @@ test('multiple subscribers', async () => {
     forkable.fork().pipeTo(write(fn)),
   ])
   expect(fn).toHaveBeenCalledTimes(15)
+})
+
+test('finished property', async () => {
+  await readable.pipeTo(forkable)
+  expect(forkable.finished).toBe(true)
+})
+
+test('finished streams will immediately close forks', async () => {
+  await readable.pipeTo(forkable)
+  await forkable
+    .fork({
+      pull(controller) {
+        controller.enqueue(6)
+      },
+    })
+    .pipeTo(write(fn))
+  expect(fn).not.toHaveBeenCalled()
+})
+
+describe('aborting', () => {
+  let fn: jest.Mock<void, [Date]>
+  let forkable: ForkableStream<Date>
+  let abortController: AbortController
+  let promise: Promise<void>
+
+  beforeEach(() => {
+    fn = jest.fn()
+    forkable = new ForkableStream<Date>()
+    abortController = new AbortController()
+    promise = interval(5)
+      .pipeThrough(tap(fn))
+      .pipeTo(forkable, { signal: abortController.signal })
+  })
+
+  afterEach(async () => {
+    abortController.abort()
+    await expect(promise).rejects.toThrow()
+  })
+
+  test('previously aborted streams will error new forks', async () => {
+    abortController.abort()
+    await setImmediate()
+    await expect(forkable.fork().pipeTo(write())).rejects.toThrow()
+  })
+
+  test('aborting an stream will error previous forks', async () => {
+    const fork = forkable.fork().pipeTo(write())
+    abortController.abort()
+    await expect(fork).rejects.toThrow()
+  })
+
+  test('should not affect upstream', async () => {
+    await expect(
+      forkable.fork().pipeTo(write(), { signal: AbortSignal.timeout(10) })
+    ).rejects.toThrow()
+    await setTimeout(50)
+    expect(fn.mock.calls.length).toBeGreaterThanOrEqual(6)
+  })
+
+  test('will cancel the fork', async () => {
+    let cancelled = false
+    await expect(
+      forkable
+        .fork({
+          cancel() {
+            cancelled = true
+          },
+        })
+        .pipeTo(write(), { signal: AbortSignal.timeout(10) })
+    ).rejects.toThrow()
+    expect(cancelled).toBe(true)
+  })
 })
