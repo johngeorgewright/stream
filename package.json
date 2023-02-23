@@ -12,7 +12,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "yarn rimraf dist && yarn tsc",
-    "build:docs": "yarn build:docs:site && yarn build:docs:api",
+    "build:docs": "yarn build:docs:api && yarn build:docs:site",
     "build:docs:api": "rimraf docs/_site/api && typedoc",
     "build:docs:site": "bundle exec jekyll build --config jekyll.yml",
     "serve:docs": "bundle exec jekyll serve --config jekyll.yml",
