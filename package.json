@@ -12,9 +12,9 @@
   "sideEffects": false,
   "scripts": {
     "build": "yarn rimraf dist && yarn tsc",
-    "build:api": "rimraf docs/_site/api && typedoc",
-    "build:docs": "yarn build:site && build:api",
-    "build:site": "mkdirp docs && cd docs && bundle exec jekyll && cd -",
+    "build:docs": "yarn build:docs:site && yarn build:docs:api",
+    "build:docs:api": "rimraf docs/_site/api && typedoc",
+    "build:docs:site": "cd docs && bundle exec jekyll build",
     "lint": "eslint src",
     "test": "jest"
   },

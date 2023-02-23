@@ -58,12 +58,7 @@ jobs:
           bundle install
 
       - name: Build Docs
-        run: |
-          cd docs
-          bundle exec jekyll build
-
-      - name: Build API
-        run: yarn build:api
+        run: yarn build:docs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
