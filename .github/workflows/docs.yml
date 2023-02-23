@@ -53,9 +53,7 @@ jobs:
           bundler-cache: true
 
       - name: Bundle
-        run: |
-          cd docs
-          bundle install
+        run: bundle install
 
       - name: Build Docs
         run: yarn build:docs
