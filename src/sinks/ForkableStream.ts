@@ -76,7 +76,7 @@ export class ForkableStream<T>
 
   fork(
     underlyingSource?: UnderlyingDefaultSource<T>,
-    queuingStrategy?: QueuingStrategy
+    queuingStrategy?: QueuingStrategy<T>
   ) {
     return this._pipeThroughController(
       this._addController(underlyingSource, queuingStrategy)
@@ -89,7 +89,7 @@ export class ForkableStream<T>
 
   protected _addController(
     underlyingSource?: UnderlyingDefaultSource<T>,
-    queuingStrategy?: QueuingStrategy
+    queuingStrategy?: QueuingStrategy<T>
   ) {
     const controller = new ControllableStream<T>(
       {

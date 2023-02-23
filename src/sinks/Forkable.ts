@@ -6,6 +6,6 @@
 export interface Forkable<T> {
   fork(
     underlyingSource?: UnderlyingDefaultSource<T>,
-    queuingStrategy?: QueuingStrategy
+    queuingStrategy?: QueuingStrategy<T>
   ): ReadableStream<T>
 }
