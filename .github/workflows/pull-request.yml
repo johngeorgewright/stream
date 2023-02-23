@@ -55,7 +55,7 @@ jobs:
         run: yarn test
 
       - name: Report Test Coverage
-        if: startsWith(matrix.node-version, steps.meta.outputs.node-version)
+        if: github.base_ref != '' && startsWith(matrix.node-version, steps.meta.outputs.node-version)
         uses: vebr/jest-lcov-reporter@v0.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
