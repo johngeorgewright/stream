@@ -3,8 +3,6 @@
   "entryPoints": ["./src/index.ts"],
   "out": "docs/_site/api",
   "basePath": "/stream/api",
-  "navigationLinks": {
-    "Docs": "/stream/"
-  },
-  "readme": "none"
+  "readme": "none",
+  "titleLink": "/stream/"
 }
