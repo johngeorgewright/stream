@@ -29,7 +29,7 @@ export type StateReducers<Actions, State> = {
 /**
  * A single reducer for a State.
  *
- * @group Subjects
+ * @group Transformers
  * @example
  * ```
  * interface State {
