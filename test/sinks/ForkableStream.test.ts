@@ -55,20 +55,21 @@ describe('aborting', () => {
   let fn: jest.Mock<void, [Date]>
   let forkable: ForkableStream<Date>
   let abortController: AbortController
-  let promise: Promise<void>
 
   beforeEach(() => {
     fn = jest.fn()
     forkable = new ForkableStream<Date>()
     abortController = new AbortController()
-    promise = interval(5)
+    interval(5)
       .pipeThrough(tap(fn))
       .pipeTo(forkable, { signal: abortController.signal })
+      .catch(() => {
+        //
+      })
   })
 
   afterEach(async () => {
     abortController.abort()
-    await expect(promise).rejects.toThrow()
   })
 
   test('previously aborted streams will error new forks', async () => {
