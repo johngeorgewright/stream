@@ -39,12 +39,12 @@ export class ForkableRecallStream<T> extends ForkableStream<T> {
     )
   }
 
-  override fork(
+  protected override _addController(
     underlyingSource?: UnderlyingDefaultSource<T>,
-    queuingStrategy?: QueuingStrategy
+    queuingStrategy?: QueuingStrategy<T>
   ) {
-    const controller = this._addController(underlyingSource, queuingStrategy)
+    const controller = super._addController(underlyingSource, queuingStrategy)
     if (this.#chunk !== empty) controller.enqueue(this.#chunk)
-    return this._pipeThroughController(controller)
+    return controller
   }
 }
