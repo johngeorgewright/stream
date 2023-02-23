@@ -1,3 +1,5 @@
+# Jekyll Config
+
 title: '@johngw/stream'
 
 description: >-
@@ -24,3 +26,7 @@ theme: just-the-docs
 
 plugins:
   - jekyll-feed
+
+source: ./docs
+
+destination: ./docs/_site

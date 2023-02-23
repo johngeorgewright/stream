@@ -14,9 +14,12 @@
     "build": "yarn rimraf dist && yarn tsc",
     "build:docs": "yarn build:docs:site && yarn build:docs:api",
     "build:docs:api": "rimraf docs/_site/api && typedoc",
-    "build:docs:site": "cd docs && bundle exec jekyll build",
-    "lint": "eslint src",
-    "test": "jest"
+    "build:docs:site": "bundle exec jekyll build --config jekyll.yml",
+    "serve:docs": "bundle exec jekyll serve --config jekyll.yml",
+    "start": "yarn tsc --watch --preserveWatchOutput",
+    "test": "yarn test:lint && yarn test:unit",
+    "test:lint": "eslint src",
+    "test:unit": "jest"
   },
   "main": "dist/index.js",
   "packageManager": "yarn@3.4.1",
