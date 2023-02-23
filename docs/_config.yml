@@ -27,6 +27,9 @@ baseurl: '/stream' # the subpath of your site, e.g. /blog
 url: 'https://johngeorgewright.github.io' # the base hostname & protocol for your site, e.g. http://example.com
 github_username: johngeorgewright
 
+keep_files:
+  - api
+
 nav_external_links:
   - title: API
     url: /api

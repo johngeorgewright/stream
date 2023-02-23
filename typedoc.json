@@ -1,7 +1,7 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": ["./src/index.ts"],
-  "out": "docs/_site/api",
+  "out": "docs/api",
   "basePath": "/stream/api",
   "readme": "none",
   "titleLink": "/stream/"
