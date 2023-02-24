@@ -1,7 +1,12 @@
 import { ControllableStream, map, write } from '../../src'
 
+let controller: ControllableStream<number>
+
+beforeEach(() => {
+  controller = new ControllableStream()
+})
+
 test('gives ability to enqueue messages to a stream', async () => {
-  const controller = new ControllableStream<number>()
   const fn = jest.fn()
   controller.enqueue(1)
   controller.enqueue(2)
@@ -30,7 +35,6 @@ test('gives ability to enqueue messages to a stream', async () => {
 })
 
 test('piping', async () => {
-  const controller = new ControllableStream<number>()
   const fn = jest.fn()
   controller.enqueue(1)
   controller.enqueue(2)
@@ -49,23 +53,59 @@ test('piping', async () => {
   `)
 })
 
-test('pulling', async () => {
-  const controller = new ControllableStream<number>()
+test('back pressure', async () => {
+  expect(controller.desiredSize).toBe(1)
+  controller.enqueue(1)
+  expect(controller.desiredSize).toBe(0)
+})
 
-  let i = -1
-  controller.onPull(() => ++i)
-  controller.onPull(() => ++i)
-  controller.onPull(() => ++i)
+test('emitting errors', async () => {
+  const promise = controller.pipeTo(write())
+  controller.error(new Error('foo'))
+  await expect(promise).rejects.toThrow('foo')
+})
 
-  await expect(
-    controller.pipeTo(
-      new WritableStream({
-        write(chunk, controller) {
-          if (chunk === 3) controller.error(new Error('I have enough'))
-        },
+describe('pull subscription', () => {
+  test('registering', async () => {
+    let i = -1
+    controller.onPull(() => ++i)
+    controller.onPull(() => ++i)
+    controller.onPull(() => ++i)
+
+    await expect(
+      controller.pipeTo(
+        new WritableStream({
+          write(chunk, controller) {
+            if (chunk === 3) controller.error(new Error('I have enough'))
+          },
+        })
+      )
+    ).rejects.toThrow('I have enough')
+
+    expect(i).toBe(5)
+  })
+
+  test('unsubscribing', async () => {
+    const fn = jest.fn(() => {
+      unsubscribe()
+      return 1
+    })
+
+    const unsubscribe = controller.onPull(fn)
+
+    await controller
+      .pipeTo(write(), { signal: AbortSignal.timeout(50) })
+      .catch(() => {
+        //
       })
-    )
-  ).rejects.toThrow('I have enough')
 
-  expect(i).toBe(5)
+    expect(fn).toHaveBeenCalledTimes(1)
+  })
+
+  test('erroring listenrs will error downstream', async () => {
+    controller.onPull(() => {
+      throw new Error('foo')
+    })
+    await expect(controller.pipeTo(write())).rejects.toThrow('foo')
+  })
 })
