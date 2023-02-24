@@ -10,7 +10,7 @@ export interface Controllable<T> extends ReadableStreamDefaultController<T> {
    * When the stream is ready to pull it will pull from all
    * subscribers until the desired size has been fulfilled.
    */
-  onPull(pullListener: ControllerPullListener<T>): void
+  onPull(pullListener: ControllerPullListener<T>): () => void
 }
 
 /**
@@ -19,5 +19,5 @@ export interface Controllable<T> extends ReadableStreamDefaultController<T> {
  * @group Sources
  */
 export interface ControllerPullListener<T> {
-  (): T | Promise<T>
+  (): T | Promise<T> | undefined
 }
