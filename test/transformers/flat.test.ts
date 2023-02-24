@@ -1,18 +1,6 @@
 import { setTimeout } from 'timers/promises'
 import { flat, fromIterable, write } from '../../src'
 
-beforeEach(() => {
-  for (let i = 0; i < 3; i++) {
-    const p = document.createElement('p')
-    p.id = i.toString()
-    document.documentElement.appendChild(p)
-  }
-})
-
-afterEach(() => {
-  Array.from(document.querySelectorAll('p')).forEach((p) => p.remove())
-})
-
 test('flattens iterables', async () => {
   const fn = jest.fn()
   await fromIterable([
@@ -78,25 +66,40 @@ test('flattens async iterables', async () => {
 
 test('flattens array likes', async () => {
   const fn = jest.fn()
-  await fromIterable(document.querySelectorAll('p'))
+  await fromIterable({ 0: 'zero', 1: 'one', 2: 'three', length: 3 })
     .pipeThrough(flat())
     .pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
       [
-        <p
-          id="0"
-        />,
+        "zero",
       ],
       [
-        <p
-          id="1"
-        />,
+        "one",
       ],
       [
-        <p
-          id="2"
-        />,
+        "three",
+      ],
+    ]
+  `)
+})
+
+test('queues things that arent iterable', async () => {
+  const fn = jest.fn()
+  await new ReadableStream({
+    start(controller) {
+      controller.enqueue({ foo: 'bar' })
+      controller.close()
+    },
+  })
+    .pipeThrough(flat())
+    .pipeTo(write(fn))
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        {
+          "foo": "bar",
+        },
       ],
     ]
   `)
@@ -112,7 +115,7 @@ test('flattens a mixture of all iterables things', async () => {
         yield [2, 3]
       })(),
       (async function* () {
-        yield [document.querySelectorAll('p')]
+        yield [{ 0: 'zero', length: 1 }]
       })(),
     ],
   ])
@@ -130,19 +133,7 @@ test('flattens a mixture of all iterables things', async () => {
         3,
       ],
       [
-        <p
-          id="0"
-        />,
-      ],
-      [
-        <p
-          id="1"
-        />,
-      ],
-      [
-        <p
-          id="2"
-        />,
+        "zero",
       ],
     ]
   `)
