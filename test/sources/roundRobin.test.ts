@@ -1,5 +1,5 @@
 import { setTimeout } from 'node:timers/promises'
-import { roundRobin, toArray } from '../../src'
+import { roundRobin, toArray, write } from '../../src'
 
 const randomlyDelayedStream = <T>(items: T[]) =>
   new ReadableStream({
@@ -55,4 +55,10 @@ test('cancelling the stream will cancel all upstreams', async () => {
 
   expect(oneCancel).toHaveBeenCalledWith('foobar')
   expect(twoCancel).toHaveBeenCalledWith('foobar')
+})
+
+test('immediately closes with no streams to merge', async () => {
+  const fn = jest.fn()
+  await roundRobin([]).pipeTo(write())
+  expect(fn).not.toHaveBeenCalled()
 })
