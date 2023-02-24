@@ -38,7 +38,7 @@ export function fromIterable<T>(
       ? new IteratorSource(iterable[Symbol.asyncIterator]())
       : 'next' in iterable
       ? new IteratorSource(iterable)
-      : 'length' in iterable
+      : typeof iterable === 'object' && 'length' in iterable
       ? new ArrayLikeSource(iterable)
       : assertNever(iterable),
     queuingStrategy
