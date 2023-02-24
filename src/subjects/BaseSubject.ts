@@ -65,7 +65,7 @@ export abstract class BaseSubject<In, Out> implements Subjectable<In, Out> {
     return this.#forkable.fork()
   }
 
-  onPull(pullListener: ControllerPullListener<In>): void {
-    this.#controllable.onPull(pullListener)
+  onPull(pullListener: ControllerPullListener<In>) {
+    return this.#controllable.onPull(pullListener)
   }
 }
