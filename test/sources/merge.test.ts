@@ -1,7 +1,5 @@
 import { setTimeout } from 'node:timers/promises'
-import { fromIterable } from '../../src/sources/fromIterable'
-import { merge } from '../../src/sources/merge'
-import { toArray } from '../../src/sinks/toArray'
+import { fromIterable, merge, toArray, write } from '../../src'
 
 test('successfully merge all streams', async () => {
   expect(
@@ -92,4 +90,10 @@ test('asynchronous streams', async () => {
       ])
     )
   ).toEqual([1, 'a', '!', 'b', '@', '#'])
+})
+
+test('merging no streams closes the stream immediately', async () => {
+  const fn = jest.fn()
+  await merge([]).pipeTo(write(fn))
+  expect(fn).not.toHaveBeenCalled()
 })
