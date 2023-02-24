@@ -95,6 +95,7 @@ export class ControllableStream<T>
   }
 
   #pull(controller: ReadableStreamDefaultController<T>) {
+    if (!this.#pullListeners.length) return
     /*
     At first glance you may wonder why we're not using
     Promise.all. This is because we have no idea how long 
