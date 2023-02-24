@@ -1,54 +1,120 @@
-import { fromIterable, toArray } from '../../src'
+import { fromIterable, write } from '../../src'
 
 test('iterables', async () => {
-  expect(await toArray(fromIterable([0, 1, 2]))).toEqual([0, 1, 2])
+  const fn = jest.fn()
+  await fromIterable([0, 1, 2]).pipeTo(write(fn))
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        0,
+      ],
+      [
+        1,
+      ],
+      [
+        2,
+      ],
+    ]
+  `)
 })
 
 test('iterators', async () => {
+  const fn = jest.fn()
   let i = 0
   const iterator: Iterator<number> = {
     next: () =>
       i > 2 ? { done: true, value: undefined } : { done: false, value: i++ },
   }
-
-  expect(await toArray(fromIterable(iterator))).toEqual([0, 1, 2])
+  await fromIterable(iterator).pipeTo(write(fn))
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        0,
+      ],
+      [
+        1,
+      ],
+      [
+        2,
+      ],
+    ]
+  `)
 })
 
 test('async iterables', async () => {
-  expect(
-    await toArray(
-      fromIterable(
-        (async function* () {
-          yield 0
-          yield 1
-          yield 2
-        })()
-      )
-    )
-  ).toEqual([0, 1, 2])
+  const fn = jest.fn()
+  await fromIterable(
+    (async function* () {
+      yield 0
+      yield 1
+      yield 2
+    })()
+  ).pipeTo(write(fn))
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        0,
+      ],
+      [
+        1,
+      ],
+      [
+        2,
+      ],
+    ]
+  `)
 })
 
 test('async iterators', async () => {
+  const fn = jest.fn()
   let i = 0
   const iterator: AsyncIterator<number> = {
     next: async () =>
       i > 2 ? { done: true, value: undefined } : { done: false, value: i++ },
   }
-
-  expect(await toArray(fromIterable(iterator))).toEqual([0, 1, 2])
+  await fromIterable(iterator).pipeTo(write(fn))
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        0,
+      ],
+      [
+        1,
+      ],
+      [
+        2,
+      ],
+    ]
+  `)
 })
 
 test('array likes', async () => {
-  expect(
-    await toArray(
-      fromIterable({
-        0: 'zero',
-        1: 'one',
-        2: 'two',
-        length: 3,
-      })
-    )
-  ).toEqual(['zero', 'one', 'two'])
+  const fn = jest.fn()
+  await fromIterable({
+    0: 'zero',
+    1: 'one',
+    2: 'two',
+    length: 3,
+  }).pipeTo(write(fn))
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        "zero",
+      ],
+      [
+        "one",
+      ],
+      [
+        "two",
+      ],
+    ]
+  `)
+})
+
+test('empy array likes', async () => {
+  const fn = jest.fn()
+  await fromIterable({ length: 0 }).pipeTo(write(fn))
+  expect(fn).not.toHaveBeenCalled()
 })
 
 test('errors', async () => {
@@ -68,4 +134,13 @@ test('errors', async () => {
     )
   ).rejects.toThrow('Foo')
   expect(aborted).toBe(true)
+})
+
+test('unknown iterable type', async () => {
+  expect(() =>
+    fromIterable(
+      // @ts-expect-error Argument of type '() => any' is not assignable to parameter of type
+      () => 'mung'
+    )
+  ).toThrow()
 })
