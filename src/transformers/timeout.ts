@@ -16,7 +16,9 @@ export function timeout<T>(ms: number) {
   let timer: NodeJS.Timer
 
   return new TransformStream<T, T>({
-    start: begin,
+    start: (controller) => {
+      begin(controller)
+    },
 
     transform(chunk, controller) {
       begin(controller)
@@ -30,7 +32,7 @@ export function timeout<T>(ms: number) {
 
   function begin(controller: TransformStreamDefaultController<T>) {
     clearTimeout(timer)
-    timer = setTimeout(() => controller.error(new TimeoutError(ms)))
+    timer = setTimeout(() => controller.error(new TimeoutError(ms)), ms)
   }
 }
 
