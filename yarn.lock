@@ -976,7 +976,7 @@ __metadata:
     "@types/node": 18.14.0
     "@typescript-eslint/eslint-plugin": 5.53.0
     "@typescript-eslint/parser": 5.53.0
-    assert-never: ^1.2.1
+    assert-never: 1.2.1
     concurrently: 7.6.0
     conventional-changelog-conventionalcommits: 5.0.0
     eslint: 8.34.0
@@ -2229,7 +2229,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"assert-never@npm:^1.2.1":
+"assert-never@npm:1.2.1":
   version: 1.2.1
   resolution: "assert-never@npm:1.2.1"
   checksum: ea4f1756d90f55254c4dc7a20d6c5d5bc169160562aefe3d8756b598c10e695daf568f21b6d6b12245d7f3782d3ff83ef6a01ab75d487adfc6909470a813bf8c
