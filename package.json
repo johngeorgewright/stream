@@ -1,11 +1,11 @@
 {
   "name": "@johngw/stream",
   "version": "1.3.0",
-  "description": "Reactive programming tools using the Web Streams API.",
+  "description": "Reactive programming tools using the WHATWG Streams API.",
   "keywords": [
     "stream",
     "streams",
-    "web streams",
+    "whatwg streams",
     "stream api",
     "reactive"
   ],

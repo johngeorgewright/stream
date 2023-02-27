@@ -6,4 +6,4 @@ permalink: /
 
 # `@johngw/stream`
 
-A selection of web stream extensions to provide reactive style programming capabilities.
+A selection of WHATWG stream extensions to provide reactive style programming capabilities.

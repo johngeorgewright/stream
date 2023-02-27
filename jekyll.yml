@@ -3,7 +3,7 @@
 title: '@johngw/stream'
 
 description: >-
-  A selection of web stream extensions to provide reactive style 
+  A selection of whatwg stream extensions to provide reactive style 
   programming capabilities.
 
 baseurl: '/stream'
