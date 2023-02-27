@@ -4,14 +4,6 @@ on:
   pull_request:
     types: [opened, synchronize]
 
-  workflow_call:
-    inputs:
-      build:
-        description: Should it test by building?
-        required: false
-        default: true
-        type: boolean
-
 jobs:
   test:
     name: Test
@@ -48,14 +40,13 @@ jobs:
         run: yarn install --immutable
 
       - name: Build
-        if: ${{ inputs.build }}
         run: yarn build
 
       - name: Test
         run: yarn test
 
       - name: Report Test Coverage
-        if: github.base_ref != '' && startsWith(matrix.node-version, steps.meta.outputs.node-version)
+        if: startsWith(matrix.node-version, steps.meta.outputs.node-version)
         uses: vebr/jest-lcov-reporter@v0.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
