@@ -1,5 +1,4 @@
 import { ReadableStreamsChunks } from '../utils/Stream'
-import { write } from '../sinks/write'
 import { empty } from '../utils/Symbol'
 import { ControllableStream } from '../sources/ControllableStream'
 
@@ -28,21 +27,26 @@ export function withLatestFrom<T, RSs extends ReadableStream<unknown>[]>(
 
   const inputValues = new Array(inputs.length).fill(empty)
 
-  const inputValuesPromise = Promise.all(
-    inputs.map((input, index) =>
-      input.pipeTo(
-        write((chunk) => {
-          inputValues[index] = chunk
+  inputs.forEach((input, index) =>
+    input
+      .pipeTo(
+        new WritableStream({
+          abort(reason) {
+            abortController.abort(reason)
+          },
+          write(chunk) {
+            inputValues[index] = chunk
+          },
         }),
         { signal: abortController.signal }
       )
-    )
+      .catch(() => {
+        // errors are handled in the stream object
+      })
   )
 
   const readable = new ControllableStream<[T, ...ReadableStreamsChunks<RSs>]>({
-    start(controller) {
-      inputValuesPromise.catch((error) => controller.error(error))
-    },
+    start,
 
     cancel(reason) {
       abortController.abort(reason)
@@ -50,20 +54,14 @@ export function withLatestFrom<T, RSs extends ReadableStream<unknown>[]>(
   })
 
   const writable = new WritableStream<T>({
-    start(controller) {
-      inputValuesPromise.catch((error) => controller.error(error))
-      abortController.signal.addEventListener('abort', () =>
-        controller.error(abortController.signal.reason)
-      )
-    },
+    start,
 
     write(chunk) {
       if (isFilled(inputValues)) readable.enqueue([chunk, ...inputValues])
     },
 
     abort(reason) {
-      readable.close()
-      readable.cancel(reason)
+      abortController.abort(reason)
     },
 
     close() {
@@ -72,4 +70,13 @@ export function withLatestFrom<T, RSs extends ReadableStream<unknown>[]>(
   })
 
   return { readable, writable }
+
+  function start(
+    controller:
+      | ReadableStreamDefaultController<[T, ...ReadableStreamsChunks<RSs>]>
+      | WritableStreamDefaultController
+  ) {
+    const onAbort = () => controller.error(abortController.signal.reason)
+    abortController.signal.addEventListener('abort', onAbort)
+  }
 }
