@@ -37,7 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/github", "virtual:0db27408db66b35f867db5f036a1a6018ab37af44622cc99731540d4a88b54e31d506e2173bbf9d35d3da0d71fe88d5a152c149c5de69f3144e9ee830407eb1c#npm:8.0.7"],\
             ["@semantic-release/release-notes-generator", "virtual:0db27408db66b35f867db5f036a1a6018ab37af44622cc99731540d4a88b54e31d506e2173bbf9d35d3da0d71fe88d5a152c149c5de69f3144e9ee830407eb1c#npm:10.0.3"],\
             ["@types/jest", "npm:29.4.0"],\
-            ["@types/node", "npm:18.14.0"],\
+            ["@types/node", "npm:18.14.2"],\
             ["@typescript-eslint/eslint-plugin", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:5.53.0"],\
             ["@typescript-eslint/parser", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:5.53.0"],\
             ["assert-never", "npm:1.2.1"],\
@@ -1470,7 +1470,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/github", "virtual:0db27408db66b35f867db5f036a1a6018ab37af44622cc99731540d4a88b54e31d506e2173bbf9d35d3da0d71fe88d5a152c149c5de69f3144e9ee830407eb1c#npm:8.0.7"],\
             ["@semantic-release/release-notes-generator", "virtual:0db27408db66b35f867db5f036a1a6018ab37af44622cc99731540d4a88b54e31d506e2173bbf9d35d3da0d71fe88d5a152c149c5de69f3144e9ee830407eb1c#npm:10.0.3"],\
             ["@types/jest", "npm:29.4.0"],\
-            ["@types/node", "npm:18.14.0"],\
+            ["@types/node", "npm:18.14.2"],\
             ["@typescript-eslint/eslint-plugin", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:5.53.0"],\
             ["@typescript-eslint/parser", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:5.53.0"],\
             ["assert-never", "npm:1.2.1"],\
@@ -2424,10 +2424,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:18.14.0", {\
-          "packageLocation": "./.yarn/cache/@types-node-npm-18.14.0-ddc1a221d2-d83fcf5e4e.zip/node_modules/@types/node/",\
+        ["npm:18.14.2", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-18.14.2-ba0496d563-53c07e721f.zip/node_modules/@types/node/",\
           "packageDependencies": [\
-            ["@types/node", "npm:18.14.0"]\
+            ["@types/node", "npm:18.14.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -9865,7 +9865,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node12", "npm:1.0.11"],\
             ["@tsconfig/node14", "npm:1.0.3"],\
             ["@tsconfig/node16", "npm:1.0.3"],\
-            ["@types/node", "npm:18.14.0"],\
+            ["@types/node", "npm:18.14.2"],\
             ["@types/swc__core", null],\
             ["@types/swc__wasm", null],\
             ["@types/typescript", null],\
