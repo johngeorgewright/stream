@@ -7,6 +7,7 @@ import { Predicate } from '../utils/Function'
  * before queuing `false`.
  *
  * @group Transformers
+ * @see {@link every:function}
  * @example
  * When every chunk failes the predicate.
  * ```
