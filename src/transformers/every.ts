@@ -7,6 +7,7 @@ import { Predicate } from '../utils/Function'
  * before queuing `true`.
  *
  * @group Transformers
+ * @see {@link some:function}
  * @example
  * When every chunk passes the predicate.
  * ```
