@@ -7,4 +7,4 @@ has_children: true
 
 # Extensions
 
-`@johngw/stream` provides a few extensions to the Web Streams API.
+`@johngw/stream` provides a few extensions to the WHATWG Streams API.
