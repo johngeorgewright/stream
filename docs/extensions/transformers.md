@@ -15,6 +15,7 @@ parent: Extensions
 - [buffer](/stream/api/functions/buffer.html)
 - [bufferCount](/stream/api/functions/bufferCount.html)
 - [debounce](/stream/api/functions/debounce.html)
+- [distinct](/stream/api/functions/distinct.html)
 - [every](/stream/api/functions/every.html)
 - [filter](/stream/api/functions/filter.html)
 - [find](/stream/api/functions/find.html)
