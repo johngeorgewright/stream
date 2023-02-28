@@ -1,11 +1,11 @@
-import { ForkableRecallStream } from '../../sinks/ForkableRecallStream'
+import { ForkableRecallStream } from '../sinks/ForkableRecallStream'
 import {
   stateReducer,
   StateReducerInput,
   StateReducerOutput,
   StateReducers,
-} from '../../transformers/stateReducer'
-import { BaseSubject, BaseSubjectOptions } from '../BaseSubject'
+} from '../transformers/stateReducer'
+import { BaseSubject, BaseSubjectOptions } from './BaseSubject'
 
 /**
  * The constructor options for a {@link StatefulSubject}.
