@@ -36,10 +36,10 @@ export type StateReducers<Actions, State> = {
  *   foos: string[]
  * }
  *
- * type Reducer1 = StateReducer<string, Actions>
+ * type Reducer1 = StateReducer<string, State>
  * // (state: State, param: string) => State
  *
- * type Reducer2 = StateReducer<void, Actions>
+ * type Reducer2 = StateReducer<void, State>
  * // (state: State) => State
  * ```
  */
