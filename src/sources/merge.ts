@@ -1,4 +1,4 @@
-import { without } from '../utils'
+import { ReadableStreamsChunk, without } from '../utils'
 import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream'
 
 /**
@@ -20,15 +20,15 @@ import { immediatelyClosingReadableStream } from './immediatelyClosingReadableSt
  * -1-one-2-two-3-three-4-four-|
  * ```
  */
-export function merge<T>(
-  readableStreams: ReadableStream<T>[],
-  queuingStrategy?: QueuingStrategy<T>
-): ReadableStream<T> {
+export function merge<RSs extends ReadableStream<unknown>[]>(
+  readableStreams: RSs,
+  queuingStrategy?: QueuingStrategy<ReadableStreamsChunk<RSs>>
+) {
   if (!readableStreams.length) return immediatelyClosingReadableStream()
 
   let readers = readableStreams.map((stream) => stream.getReader())
 
-  return new ReadableStream<T>(
+  return new ReadableStream<ReadableStreamsChunk<RSs>>(
     {
       pull(controller) {
         // At first glance you may wonder why we're wrapping
@@ -45,7 +45,7 @@ export function merge<T>(
                 const result = await reader.read()
                 if (result.done) readers = without(readers, reader)
                 else {
-                  controller.enqueue(result.value)
+                  controller.enqueue(result.value as ReadableStreamsChunk<RSs>)
                   resolve()
                 }
               } catch (error) {

@@ -15,6 +15,20 @@ export type ReadableStreamChunk<R extends ReadableStream<unknown>> =
   R extends ReadableStream<infer T> ? T : never
 
 /**
+ * Returns the union chunk type of a list of ReadableStreams.
+ *
+ * @group Utils
+ * @category Stream
+ * @example
+ * ```
+ * type T = ReadableStreamChunks<[ReadableStream<number>, ReadableStream<string>]>
+ * // number | string
+ * ```
+ */
+export type ReadableStreamsChunk<RSs extends ReadableStream<unknown>[]> =
+  RSs extends ReadableStream<infer T>[] ? T : never
+
+/**
  * Creates a tuple type of the chunk types from a list of
  * ReadableStreams.
  *

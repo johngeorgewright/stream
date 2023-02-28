@@ -56,7 +56,7 @@ test('cancelling the stream will cancel all upstreams', async () => {
 test('merge streams of different lengths', async () => {
   expect(
     await toArray(
-      merge<number | string>([
+      merge([
         fromIterable([1]),
         fromIterable(['a', 'b']),
         fromIterable(['!', '@', '#']),
@@ -68,7 +68,7 @@ test('merge streams of different lengths', async () => {
 test('asynchronous streams', async () => {
   expect(
     await toArray(
-      merge<number | string>([
+      merge([
         fromIterable(
           (async function* () {
             yield 1
