@@ -19,7 +19,12 @@ import assertNever from 'assert-never'
  *
  * Using an ArrayLike
  * ```
- * fromIterable(document.querySelectorAll('div'))
+ * fromIterable({
+ *   0: 'zero',
+ *   1: 'one',
+ *   2: 'two',
+ *   length: 3,
+ * })
  * ```
  */
 export function fromIterable<T>(
