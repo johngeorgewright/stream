@@ -5,7 +5,7 @@ import { DebounceState } from './State'
  * the DebounceBehavior.
  *
  * @group Transformers
- * @see {@link debounce:function}
+ * @see {@link function:debounce}
  */
 export interface DebounceBehavior<T> {
   /**
