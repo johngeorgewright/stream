@@ -1,5 +1,10 @@
 import { write } from '../sinks/write'
 
+/**
+ * Options for the {@link distinct} transformer.
+ *
+ * @group Transformers
+ */
 export interface DistinctOptions<T, K> {
   selector?: (value: T) => K
   flushes?: ReadableStream<unknown>
