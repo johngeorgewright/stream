@@ -1,3 +1,4 @@
+import { without } from '../utils'
 import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream'
 
 /**
@@ -25,7 +26,7 @@ export function merge<T>(
 ): ReadableStream<T> {
   if (!readableStreams.length) return immediatelyClosingReadableStream()
 
-  const readers = readableStreams.map((stream) => stream.getReader())
+  let readers = readableStreams.map((stream) => stream.getReader())
 
   return new ReadableStream<T>(
     {
@@ -38,13 +39,11 @@ export function merge<T>(
         // when the 1st reader queues an item so the stream
         // can request more if it needs.
         return new Promise((resolve) => {
-          let done = 0
-
           Promise.all(
             readers.map(async (reader) => {
               try {
                 const result = await reader.read()
-                if (result.done) done++
+                if (result.done) readers = without(readers, reader)
                 else {
                   controller.enqueue(result.value)
                   resolve()
@@ -55,7 +54,7 @@ export function merge<T>(
               }
             })
           ).finally(() => {
-            if (done === readableStreams.length) {
+            if (!readers.length) {
               try {
                 controller.close()
               } catch (error) {
