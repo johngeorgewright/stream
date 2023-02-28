@@ -12,8 +12,12 @@ import { BaseSubject, BaseSubjectOptions } from './BaseSubject'
  *
  * @group Subjects
  */
-interface StatefulSubjectOptions<In, Out> extends BaseSubjectOptions<In, Out> {
-  forkable?: ForkableRecallStream<Out>
+interface StatefulSubjectOptions<Actions extends Record<string, unknown>, State>
+  extends BaseSubjectOptions<
+    StateReducerInput<Actions>,
+    StateReducerOutput<Actions, State>
+  > {
+  forkable?: ForkableRecallStream<StateReducerOutput<Actions, State>>
   pipeThroughOptions?: StreamPipeOptions
 }
 
@@ -77,10 +81,7 @@ export class StatefulSubject<
     {
       forkable = new ForkableRecallStream(),
       ...options
-    }: StatefulSubjectOptions<
-      StateReducerInput<Actions>,
-      StateReducerOutput<Actions, State>
-    > = {}
+    }: StatefulSubjectOptions<Actions, State> = {}
   ) {
     super({ forkable, controllable: options.controllable })
     this.controllable
