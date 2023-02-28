@@ -1,9 +1,3 @@
-import * as Array from './utils/Array'
-import * as Function from './utils/Function'
-import * as Object from './utils/Object'
-import * as Stream from './utils/Stream'
-import * as String from './utils/String'
-
 export * from './sinks/Forkable'
 export * from './sinks/ForkableRecallStream'
 export * from './sinks/ForkableReplayStream'
@@ -55,10 +49,4 @@ export * from './transformers/timeout'
 export * from './transformers/withCounter'
 export * from './transformers/withLatestFrom'
 
-export const utils = {
-  ...Array,
-  ...Function,
-  ...Object,
-  ...Stream,
-  ...String,
-}
+export * as utils from './utils'
