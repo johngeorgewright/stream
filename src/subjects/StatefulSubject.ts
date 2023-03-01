@@ -83,10 +83,13 @@ export class StatefulSubject<
       ...options
     }: StatefulSubjectOptions<Actions, State> = {}
   ) {
-    super({ forkable, controllable: options.controllable })
+    super({ ...options, forkable })
     this.controllable
       .pipeThrough(stateReducer(reducers), options.pipeThroughOptions)
       .pipeTo(this.forkable, options.pipeToOptions)
+      .catch(() => {
+        // Errors can be handled in forks
+      })
   }
 
   /**
