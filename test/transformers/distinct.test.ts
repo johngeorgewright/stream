@@ -75,3 +75,39 @@ test('flushing with a stream', async () => {
     ]
   `)
 })
+
+test('allow flush errors to be sent down stream', async () => {
+  const flushes = new ControllableStream<null>()
+  await expect(
+    new ReadableStream<number>({
+      pull() {
+        flushes.error(new Error('foo'))
+      },
+    })
+      .pipeThrough(distinct({ flushes }))
+      .pipeTo(write())
+  ).rejects.toThrow('foo')
+})
+
+test('disallow flush errors to be sent down stream', async () => {
+  const fn = jest.fn()
+  let i = 0
+  const flushes = new ControllableStream<null>()
+  await new ReadableStream<number>({
+    pull(controller) {
+      i++
+      if (i === 3) flushes.error(new Error('foo'))
+      else if (i === 6) return controller.close()
+      controller.enqueue(1)
+    },
+  })
+    .pipeThrough(distinct({ flushes, ignoreFlushErrors: true }))
+    .pipeTo(write(fn))
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        1,
+      ],
+    ]
+  `)
+})

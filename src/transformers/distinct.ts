@@ -6,8 +6,12 @@ import { write } from '../sinks/write'
  * @group Transformers
  */
 export interface DistinctOptions<T, K> {
-  selector?: (value: T) => K
   flushes?: ReadableStream<unknown>
+  /**
+   * By default an error in the `flushes` stream will be sent by the transformer.
+   */
+  ignoreFlushErrors?: boolean
+  selector?: (value: T) => K
 }
 
 /**
@@ -44,15 +48,33 @@ export interface DistinctOptions<T, K> {
  */
 export function distinct<T, K>({
   flushes,
+  ignoreFlushErrors,
   selector,
 }: DistinctOptions<T, K> = {}) {
   const set = new Set<T | K>()
+  const abortController = new AbortController()
 
-  flushes?.pipeTo(write(() => set.clear())).catch(() => {
-    // ignore errors from flush stream
-  })
+  flushes?.pipeTo(write(() => set.clear())).catch(
+    ignoreFlushErrors
+      ? () => {
+          // Ignored
+        }
+      : (error) => {
+          abortController.abort(error)
+        }
+  )
 
   return new TransformStream<T, T>({
+    start:
+      flushes && !ignoreFlushErrors
+        ? (controller) => {
+            abortController.signal.addEventListener('abort', () => {
+              set.clear()
+              controller.error(abortController.signal.reason)
+            })
+          }
+        : undefined,
+
     transform(chunk, controller) {
       const key = selector ? selector(chunk) : chunk
       if (!set.has(key)) {
