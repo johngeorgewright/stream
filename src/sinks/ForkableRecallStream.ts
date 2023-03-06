@@ -9,7 +9,7 @@ import { ForkableStream } from './ForkableStream'
  * @example
  * ```
  * const forkable = new ForkableRecallStream<number>()
- * await fromIterable([1, 2, 3, 4, 5, 6, 7]).pipeTo(forkable)
+ * await fromCollection([1, 2, 3, 4, 5, 6, 7]).pipeTo(forkable)
  * ```
  *
  * Now the stream has finished, if we fork from it we'll

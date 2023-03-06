@@ -3,8 +3,8 @@
  *
  * @group Sources
  */
-export function immediatelyClosingReadableStream(): ReadableStream<never> {
-  return new ReadableStream({
+export function immediatelyClosingReadableStream() {
+  return new ReadableStream<never>({
     start(controller) {
       controller.close()
     },

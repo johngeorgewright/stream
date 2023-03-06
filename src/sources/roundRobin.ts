@@ -1,4 +1,5 @@
 import { without } from '../utils/Array'
+import { IteratorSource } from './fromCollection'
 import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream'
 
 /**
@@ -20,29 +21,16 @@ export function roundRobin<T>(
   streams: ReadableStream<T>[],
   queuingStrategy?: QueuingStrategy
 ) {
-  if (!streams.length) return immediatelyClosingReadableStream()
-
   let readers = streams.map((stream) => stream.getReader())
-  const readResultIterator = generateReadResults()
 
-  return new ReadableStream<T>(
-    {
-      async pull(controller) {
-        const result = await readResultIterator.next()
-        if (result.done) return controller.close()
-        controller.enqueue(result.value)
-        if (controller.desiredSize)
-          // Typescript still thinks that `this.pull` could be undefined.
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          return this.pull!(controller)
-      },
-
-      async cancel(reason: unknown) {
-        await Promise.all(readers.map((reader) => reader.cancel(reason)))
-      },
-    },
-    queuingStrategy
-  )
+  return !streams.length
+    ? immediatelyClosingReadableStream()
+    : new ReadableStream(
+        new IteratorSource(generateReadResults(), async (reason) => {
+          await Promise.all(readers.map((reader) => reader.cancel(reason)))
+        }),
+        queuingStrategy
+      )
 
   async function* generateReadResults() {
     let index = 0

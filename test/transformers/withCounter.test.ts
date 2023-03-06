@@ -1,8 +1,8 @@
-import { fromIterable, withCounter, write } from '../../src'
+import { fromCollection, withCounter, write } from '../../src'
 
 test('Adds a counter representing the amount of chunks received thus far', async () => {
   const fn = jest.fn()
-  await fromIterable(['a', 'b', 'c'])
+  await fromCollection(['a', 'b', 'c'])
     .pipeThrough(withCounter())
     .pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`
@@ -31,7 +31,7 @@ test('Adds a counter representing the amount of chunks received thus far', async
 
 test('Can change the starting number', async () => {
   const fn = jest.fn()
-  await fromIterable(['a', 'b', 'c'])
+  await fromCollection(['a', 'b', 'c'])
     .pipeThrough(withCounter(1))
     .pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`

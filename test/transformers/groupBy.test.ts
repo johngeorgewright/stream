@@ -1,8 +1,8 @@
-import { fromIterable, groupBy, write } from '../../src'
+import { fromCollection, groupBy, write } from '../../src'
 
 test('using a property', async () => {
   const fn = jest.fn()
-  await fromIterable(['one', 'two', 'three'])
+  await fromCollection(['one', 'two', 'three'])
     .pipeThrough(groupBy('length'))
     .pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`
@@ -39,7 +39,7 @@ test('using a property', async () => {
 
 test('using a function', async () => {
   const fn = jest.fn()
-  await fromIterable([6.1, 4.2, 6.3])
+  await fromCollection([6.1, 4.2, 6.3])
     .pipeThrough(groupBy(Math.floor))
     .pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`

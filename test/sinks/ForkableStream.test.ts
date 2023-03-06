@@ -1,5 +1,5 @@
 import { setImmediate, setTimeout } from 'node:timers/promises'
-import { ForkableStream, fromIterable, interval, tap, write } from '../../src'
+import { ForkableStream, fromCollection, interval, tap, write } from '../../src'
 
 let forkable: ForkableStream<number>
 let fn: jest.Mock<void, [number]>
@@ -8,7 +8,7 @@ let readable: ReadableStream<number>
 beforeEach(() => {
   forkable = new ForkableStream()
   fn = jest.fn()
-  readable = fromIterable([1, 2, 3, 4, 5])
+  readable = fromCollection([1, 2, 3, 4, 5])
 })
 
 test('fork before piping', async () => {

@@ -1,8 +1,8 @@
-import { fromIterable, write } from '../../src'
+import { fromCollection, write } from '../../src'
 
 test('iterables', async () => {
   const fn = jest.fn()
-  await fromIterable([0, 1, 2]).pipeTo(write(fn))
+  await fromCollection([0, 1, 2]).pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
       [
@@ -25,7 +25,7 @@ test('iterators', async () => {
     next: () =>
       i > 2 ? { done: true, value: undefined } : { done: false, value: i++ },
   }
-  await fromIterable(iterator).pipeTo(write(fn))
+  await fromCollection(iterator).pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
       [
@@ -43,7 +43,7 @@ test('iterators', async () => {
 
 test('async iterables', async () => {
   const fn = jest.fn()
-  await fromIterable(
+  await fromCollection(
     (async function* () {
       yield 0
       yield 1
@@ -72,7 +72,7 @@ test('async iterators', async () => {
     next: async () =>
       i > 2 ? { done: true, value: undefined } : { done: false, value: i++ },
   }
-  await fromIterable(iterator).pipeTo(write(fn))
+  await fromCollection(iterator).pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
       [
@@ -90,7 +90,7 @@ test('async iterators', async () => {
 
 test('array likes', async () => {
   const fn = jest.fn()
-  await fromIterable({
+  await fromCollection({
     0: 'zero',
     1: 'one',
     2: 'two',
@@ -113,14 +113,14 @@ test('array likes', async () => {
 
 test('empy array likes', async () => {
   const fn = jest.fn()
-  await fromIterable({ length: 0 }).pipeTo(write(fn))
+  await fromCollection({ length: 0 }).pipeTo(write(fn))
   expect(fn).not.toHaveBeenCalled()
 })
 
 test('errors', async () => {
   let aborted = false
   await expect(
-    fromIterable({
+    fromCollection({
       next() {
         throw new Error('Foo')
       },
@@ -138,7 +138,7 @@ test('errors', async () => {
 
 test('unknown iterable type', async () => {
   expect(() =>
-    fromIterable(
+    fromCollection(
       // @ts-expect-error Argument of type '() => any' is not assignable to parameter of type
       () => 'mung'
     )

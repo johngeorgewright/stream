@@ -1,8 +1,8 @@
-import { ForkableRecallStream, fromIterable, write } from '../../src'
+import { ForkableRecallStream, fromCollection, write } from '../../src'
 
 test('subscribing will always provide that last chunk', async () => {
   const forkable = new ForkableRecallStream()
-  await fromIterable([1, 2, 3, 4, 5]).pipeTo(forkable)
+  await fromCollection([1, 2, 3, 4, 5]).pipeTo(forkable)
   const fn1 = jest.fn()
   const fn2 = jest.fn()
   await forkable.fork().pipeTo(write(fn1))

@@ -1,9 +1,9 @@
-import { some, fromIterable, toArray } from '../../src'
+import { some, fromCollection, toArray } from '../../src'
 
 test('when not', async () => {
   expect(
     await toArray(
-      fromIterable([6, 11, 12, 18, 27]).pipeThrough(
+      fromCollection([6, 11, 12, 18, 27]).pipeThrough(
         some((chunk) => chunk % 5 === 0)
       )
     )
@@ -13,7 +13,7 @@ test('when not', async () => {
 test('when true', async () => {
   expect(
     await toArray(
-      fromIterable([5, 11, 12, 18, 27]).pipeThrough(
+      fromCollection([5, 11, 12, 18, 27]).pipeThrough(
         some((chunk) => chunk % 5 !== 0)
       )
     )

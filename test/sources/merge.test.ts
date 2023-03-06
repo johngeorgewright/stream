@@ -1,13 +1,13 @@
 import { setTimeout } from 'node:timers/promises'
-import { fromIterable, merge, toArray, write } from '../../src'
+import { fromCollection, merge, toArray, write } from '../../src'
 
 test('successfully merge all streams', async () => {
   expect(
     await toArray(
       merge([
-        fromIterable([1, 2, 3]),
-        fromIterable([1, 2, 3]),
-        fromIterable([4, 5, 6]),
+        fromCollection([1, 2, 3]),
+        fromCollection([1, 2, 3]),
+        fromCollection([4, 5, 6]),
       ])
     )
   ).toEqual([1, 1, 4, 2, 2, 5, 3, 3, 6])
@@ -19,9 +19,9 @@ test('aborted merged streams', () => {
   return expect(
     toArray(
       merge([
-        fromIterable([1, 2, 3]),
-        fromIterable([1, 2, 3]),
-        fromIterable([4, 5, 6]),
+        fromCollection([1, 2, 3]),
+        fromCollection([1, 2, 3]),
+        fromCollection([4, 5, 6]),
       ]),
       { signal: abortController.signal }
     )
@@ -57,9 +57,9 @@ test('merge streams of different lengths', async () => {
   expect(
     await toArray(
       merge([
-        fromIterable([1]),
-        fromIterable(['a', 'b']),
-        fromIterable(['!', '@', '#']),
+        fromCollection([1]),
+        fromCollection(['a', 'b']),
+        fromCollection(['!', '@', '#']),
       ])
     )
   ).toEqual([1, 'a', '!', 'b', '@', '#'])
@@ -69,18 +69,18 @@ test('asynchronous streams', async () => {
   expect(
     await toArray(
       merge([
-        fromIterable(
+        fromCollection(
           (async function* () {
             yield 1
           })()
         ),
-        fromIterable(
+        fromCollection(
           (async function* () {
             yield await setTimeout(10, 'a')
             yield await setTimeout(10, 'b')
           })()
         ),
-        fromIterable(
+        fromCollection(
           (async function* () {
             yield await setTimeout(20, '!')
             yield await setTimeout(20, '@')
