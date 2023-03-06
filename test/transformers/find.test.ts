@@ -1,9 +1,9 @@
-import { find, fromIterable, toArray, write } from '../../src'
+import { find, fromCollection, toArray, write } from '../../src'
 
 test('queues the first found chunk and then terminates the stream', async () => {
   expect(
     await toArray(
-      fromIterable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).pipeThrough(
+      fromCollection([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).pipeThrough(
         find((chunk) => chunk === 4)
       )
     )
@@ -14,7 +14,7 @@ test('using type guards', () => {
   type A = { type: 'a' }
   type B = { type: 'b' }
   type AB = A | B
-  fromIterable<AB>([{ type: 'a' }, { type: 'b' }])
+  fromCollection<AB>([{ type: 'a' }, { type: 'b' }])
     .pipeThrough(find((chunk): chunk is B => chunk.type === 'b'))
     .pipeTo(
       write((chunk) => {

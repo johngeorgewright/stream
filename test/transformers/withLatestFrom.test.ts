@@ -1,15 +1,15 @@
 import { setTimeout } from 'node:timers/promises'
-import { fromIterable, map, withLatestFrom, write } from '../../src'
+import { fromCollection, map, withLatestFrom, write } from '../../src'
 
 test('combines each value from the source with the latest values from other inputs', async () => {
   const fn = jest.fn()
 
-  await fromIterable(['a', 'b', 'c', 'd', 'e'])
+  await fromCollection(['a', 'b', 'c', 'd', 'e'])
     .pipeThrough(
       map(async (chunk) => (chunk === 'b' ? setTimeout(0, chunk) : chunk))
     )
     .pipeThrough(
-      withLatestFrom(fromIterable([1, 2, 3, 4]), fromIterable(['x', 'y']))
+      withLatestFrom(fromCollection([1, 2, 3, 4]), fromCollection(['x', 'y']))
     )
     .pipeTo(write(fn))
 

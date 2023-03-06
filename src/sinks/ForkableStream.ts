@@ -11,7 +11,7 @@ import { Forkable } from './Forkable'
  * ```
  * const forkable = new ForkableStream<T>()
  *
- * fromIterable([1, 2, 3, 4, 5, 6, 7]).pipeTo(forkable)
+ * fromCollection([1, 2, 3, 4, 5, 6, 7]).pipeTo(forkable)
  *
  * forkable.fork().pipeTo(write(x => console.info('fork1', x)))
  * // fork1 1, fork1 2, fork1 3, fork1 4, fork1 5, fork1 6, fork1 7

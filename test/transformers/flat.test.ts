@@ -1,9 +1,9 @@
 import { setTimeout } from 'timers/promises'
-import { flat, fromIterable, write } from '../../src'
+import { flat, fromCollection, write } from '../../src'
 
 test('flattens iterables', async () => {
   const fn = jest.fn()
-  await fromIterable([
+  await fromCollection([
     [1, 2],
     [3, [[4]]],
   ])
@@ -29,7 +29,7 @@ test('flattens iterables', async () => {
 
 test('flattens async iterables', async () => {
   const fn = jest.fn()
-  await fromIterable([
+  await fromCollection([
     (async function* () {
       yield 1
       await setTimeout(1)
@@ -66,7 +66,7 @@ test('flattens async iterables', async () => {
 
 test('flattens array likes', async () => {
   const fn = jest.fn()
-  await fromIterable({ 0: 'zero', 1: 'one', 2: 'three', length: 3 })
+  await fromCollection({ 0: 'zero', 1: 'one', 2: 'three', length: 3 })
     .pipeThrough(flat())
     .pipeTo(write(fn))
   expect(fn.mock.calls).toMatchInlineSnapshot(`
@@ -107,7 +107,7 @@ test('queues things that arent iterable', async () => {
 
 test('flattens a mixture of all iterables things', async () => {
   const fn = jest.fn()
-  await fromIterable([
+  await fromCollection([
     [
       (async function* () {
         yield 1

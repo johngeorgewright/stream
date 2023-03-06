@@ -1,11 +1,11 @@
 import { setImmediate } from 'node:timers/promises'
-import { fromIterable, interpose, write } from '../../src'
+import { fromCollection, interpose, write } from '../../src'
 import { defer } from '../util'
 
 test('holds up a stream until a promise resolves', async () => {
   const fn = jest.fn()
   const { promise, resolve } = defer()
-  fromIterable([1, 2, 3, 4, 5, 6])
+  fromCollection([1, 2, 3, 4, 5, 6])
     .pipeThrough(interpose(promise))
     .pipeTo(write(fn))
   await setImmediate()
@@ -39,7 +39,7 @@ test('holds up a stream until a promise resolves', async () => {
 test("holds up a stream until a function's returned promise resolves", async () => {
   const fn = jest.fn()
   const { promise, resolve } = defer()
-  fromIterable([1, 2, 3, 4, 5, 6])
+  fromCollection([1, 2, 3, 4, 5, 6])
     .pipeThrough(interpose(() => promise))
     .pipeTo(write(fn))
   await setImmediate()
@@ -74,7 +74,7 @@ test('errored promises will error downstream', async () => {
   const fn = jest.fn()
   const promise = Promise.reject(new Error('foo'))
   await expect(
-    fromIterable([1, 2, 3, 4, 5, 6])
+    fromCollection([1, 2, 3, 4, 5, 6])
       .pipeThrough(interpose(promise))
       .pipeTo(write(fn))
   ).rejects.toThrow('foo')

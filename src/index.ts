@@ -9,7 +9,7 @@ export * from './sinks/write'
 
 export * from './sources/Controllable'
 export * from './sources/ControllableStream'
-export * from './sources/fromIterable'
+export * from './sources/fromCollection'
 export * from './sources/fromDOMEvent'
 export * from './sources/fromDOMMutations'
 export * from './sources/immediatelyClosingReadableStream'

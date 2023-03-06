@@ -13,6 +13,7 @@ import { Predicate } from '../utils/Function'
  * find((x) => x === 6)
  *
  * -----------------6-|
+ * ```
  *
  * Using type guards will extract the types you want to work with.
  *

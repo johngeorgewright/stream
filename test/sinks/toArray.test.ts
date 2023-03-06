@@ -1,15 +1,15 @@
-import { fromIterable, toArray } from '../../src'
+import { fromCollection, toArray } from '../../src'
 
 test('consumes a stream in to an array of values', async () => {
-  expect(await toArray(fromIterable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]))).toEqual([
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-  ])
+  expect(await toArray(fromCollection([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]))).toEqual(
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  )
 })
 
 test('errors in the stream will reject', async () => {
   await expect(
     toArray(
-      fromIterable(
+      fromCollection(
         (function* () {
           yield 1
           yield 2
@@ -23,7 +23,7 @@ test('errors in the stream will reject', async () => {
 describe('the catch options', () => {
   test('return an object with results', async () => {
     expect(
-      await toArray(fromIterable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), {
+      await toArray(fromCollection([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), {
         catch: true,
       })
     ).toEqual({ result: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] })
@@ -32,7 +32,7 @@ describe('the catch options', () => {
   test('will return the error and any results before the error', async () => {
     expect(
       await toArray(
-        fromIterable(
+        fromCollection(
           (function* () {
             yield 1
             yield 2

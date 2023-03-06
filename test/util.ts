@@ -8,8 +8,14 @@ export function defer<T = void>() {
       $reject = reject
     }),
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     resolve: $resolve!,
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     reject: $reject!,
   }
 }
+
+export type IsString<T extends string> = T
+export type IsNumber<T extends number> = T
+export type IsStringOrNumber<T extends string | number> = T

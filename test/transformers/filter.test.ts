@@ -1,9 +1,9 @@
-import { filter, fromIterable, toArray, write } from '../../src'
+import { filter, fromCollection, toArray, write } from '../../src'
 
 test('filters unwanted values', async () => {
   expect(
     await toArray(
-      fromIterable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).pipeThrough(
+      fromCollection([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).pipeThrough(
         filter((x) => x % 2 === 0)
       )
     )
@@ -14,7 +14,7 @@ test('using type guards', () => {
   type A = { type: 'a' }
   type B = { type: 'b' }
   type AB = A | B
-  fromIterable<AB>([{ type: 'a' }, { type: 'b' }])
+  fromCollection<AB>([{ type: 'a' }, { type: 'b' }])
     .pipeThrough(filter((chunk): chunk is B => chunk.type === 'b'))
     .pipeTo(
       write((chunk) => {
