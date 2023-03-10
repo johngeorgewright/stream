@@ -15,7 +15,7 @@ export interface DistinctOptions<T, K> {
 }
 
 /**
- * Returns a ReadableStream that queues all items from the source Stream that are distinct by comparison from previous items.
+ * A TransformStream that queues all items from a ReadableStream that are distinct by comparison from previous items.
  *
  * If a `selector` function is provided, then it will project each value from the source observable into a new value that it will
  * check for equality with previously projected values. If the `selector` function is not provided, it will use each value from the
