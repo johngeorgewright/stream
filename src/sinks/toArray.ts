@@ -20,6 +20,7 @@ export interface ToArrayOptions extends StreamPipeOptions {
  * containing the result and the error.
  *
  * @see {@link ToArrayOptions}
+ * @see {@link toIterable:function}
  * @group Sinks
  * @label CATCH
  * @example
