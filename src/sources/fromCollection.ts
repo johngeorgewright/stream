@@ -1,7 +1,7 @@
 import assertNever from 'assert-never'
 
 /**
- * Creates a readable stream from an iterable of values.
+ * Creates a readable stream from an collection of values.
  *
  * @group Sources
  * @example
@@ -28,7 +28,7 @@ import assertNever from 'assert-never'
  * ```
  */
 export function fromCollection<T>(
-  iterable:
+  collection:
     | Iterator<T>
     | Iterable<T>
     | AsyncIterator<T>
@@ -37,15 +37,15 @@ export function fromCollection<T>(
   queuingStrategy?: QueuingStrategy<T>
 ) {
   return new ReadableStream(
-    Symbol.iterator in iterable
-      ? new IteratorSource(iterable[Symbol.iterator]())
-      : Symbol.asyncIterator in iterable
-      ? new IteratorSource(iterable[Symbol.asyncIterator]())
-      : 'next' in iterable
-      ? new IteratorSource(iterable)
-      : typeof iterable === 'object' && 'length' in iterable
-      ? new ArrayLikeSource(iterable)
-      : assertNever(iterable),
+    Symbol.iterator in collection
+      ? new IteratorSource(collection[Symbol.iterator]())
+      : Symbol.asyncIterator in collection
+      ? new IteratorSource(collection[Symbol.asyncIterator]())
+      : 'next' in collection
+      ? new IteratorSource(collection)
+      : 'length' in collection
+      ? new ArrayLikeSource(collection)
+      : assertNever(collection),
     queuingStrategy
   )
 }
@@ -53,6 +53,7 @@ export function fromCollection<T>(
 /**
  * An underlying source for an `Iterator` or `AsyncIterator`.
  *
+ * @group Sources
  * @example
  * ```
  * const reader = new ReadableStream(new IteratorSource((function* () {
@@ -93,6 +94,7 @@ export class IteratorSource<T> implements UnderlyingDefaultSource<T> {
 /**
  * An underlying source for an `ArrayLike`.
  *
+ * @group Sources
  * @example
  * ```
  * const reader = new ReadableStream(new ArrayLikeSource({
