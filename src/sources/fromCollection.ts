@@ -43,7 +43,7 @@ export function fromCollection<T>(
       ? new IteratorSource(collection[Symbol.asyncIterator]())
       : 'next' in collection
       ? new IteratorSource(collection)
-      : 'length' in collection
+      : typeof collection === 'object' && 'length' in collection
       ? new ArrayLikeSource(collection)
       : assertNever(collection),
     queuingStrategy
