@@ -9,6 +9,7 @@ node_modules
 prettier.config.cjs
 release.config.js
 renovate.json
-tsconfig.json*
+tsconfig.test.json
+typedoc.json
 .vscode
 .yarn*
