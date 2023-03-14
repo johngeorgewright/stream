@@ -4,13 +4,13 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: publish
+
 jobs:
   publish-test:
     name: Test
     runs-on: ubuntu-latest
-    concurrency:
-      group: publish-test
-      cancel-in-progress: true
     strategy:
       matrix:
         node-version: [16.x, 18.x, 19.x]
@@ -45,8 +45,6 @@ jobs:
     needs: [publish-test]
     runs-on: ubuntu-latest
     permissions: write-all
-    concurrency:
-      group: publish-npm
     steps:
       - name: Checkout project
         uses: actions/checkout@v3
