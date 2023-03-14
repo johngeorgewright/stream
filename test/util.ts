@@ -20,7 +20,7 @@ export function defer<T = void>() {
 
 export function delayedStream<T>(ms: number, items: T[]) {
   return new ReadableStream<T>({
-    async start(controller) {
+    async pull(controller) {
       if (!items.length) return controller.close()
       await setTimeout(ms)
       controller.enqueue(items.shift())
