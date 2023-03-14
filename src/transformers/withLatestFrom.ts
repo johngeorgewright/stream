@@ -1,6 +1,6 @@
-import { ReadableStreamsChunks } from '../utils/Stream'
-import { empty } from '../utils/Symbol'
-import { ControllableStream } from '../sources/ControllableStream'
+import { ReadableStreamsChunks } from '../utils/Stream.js'
+import { empty } from '../utils/Symbol.js'
+import { ControllableStream } from '../sources/ControllableStream.js'
 
 /**
  * Combines the source Observable with other Observables to create an Observable

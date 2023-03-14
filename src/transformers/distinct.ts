@@ -1,4 +1,4 @@
-import { write } from '../sinks/write'
+import { write } from '../sinks/write.js'
 
 /**
  * Options for the {@link distinct} transformer.

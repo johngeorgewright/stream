@@ -1,4 +1,4 @@
-import { write } from '../sinks/write'
+import { write } from '../sinks/write.js'
 
 /**
  * Buffers the source stream chunks until `notifier` emits.

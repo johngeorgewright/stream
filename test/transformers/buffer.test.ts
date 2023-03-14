@@ -1,5 +1,5 @@
 import { setImmediate } from 'node:timers/promises'
-import { buffer, ControllableStream, write } from '../../src'
+import { buffer, ControllableStream, write } from '../../src/index.js'
 
 let controller: ControllableStream<number>
 let notifier: ControllableStream<null>

@@ -1,5 +1,5 @@
-import { map } from './map'
-import { Accumulator } from '../utils/Function'
+import { map } from './map.js'
+import { Accumulator } from '../utils/Function.js'
 
 /**
  * Every chunk is transformed in to an accumulator.

@@ -1,4 +1,4 @@
-import { fromCollection, reduce, toArray } from '../../src'
+import { fromCollection, reduce, toArray } from '../../src/index.js'
 
 test('accumulates values from a stream', async () => {
   expect(

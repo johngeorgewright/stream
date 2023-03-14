@@ -1,4 +1,4 @@
-import { find, fromCollection, toArray, write } from '../../src'
+import { find, fromCollection, toArray, write } from '../../src/index.js'
 
 test('queues the first found chunk and then terminates the stream', async () => {
   expect(

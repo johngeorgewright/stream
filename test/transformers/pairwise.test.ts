@@ -1,4 +1,4 @@
-import { fromCollection, pairwise, toArray } from '../../src'
+import { fromCollection, pairwise, toArray } from '../../src/index.js'
 
 test('Queues the current value and previous values', async () => {
   expect(

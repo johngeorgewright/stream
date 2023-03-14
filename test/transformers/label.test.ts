@@ -1,4 +1,4 @@
-import { fromCollection, label, write } from '../../src'
+import { fromCollection, label, write } from '../../src/index.js'
 
 test('using a property', async () => {
   const fn = jest.fn()

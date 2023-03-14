@@ -1,5 +1,5 @@
-import { ReadableStreamsChunk, without } from '../utils'
-import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream'
+import { ReadableStreamsChunk, without } from '../utils/index.js'
+import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream.js'
 
 /**
  * Merges multiple streams in to 1 ReadableStream.

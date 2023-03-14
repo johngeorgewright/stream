@@ -1,4 +1,4 @@
-import { roundRobin, toArray, write } from '../../src'
+import { roundRobin, toArray, write } from '../../src/index.js'
 import { delayedStream } from '../util'
 
 test('it pulls, in order, from one stream at a time', async () => {

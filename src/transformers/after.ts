@@ -1,4 +1,4 @@
-import { Predicate } from '../utils/Function'
+import { Predicate } from '../utils/Function.js'
 
 /**
  * Prevents chunks from travelling down the stream

@@ -1,4 +1,4 @@
-import { filter, fromCollection, toArray, write } from '../../src'
+import { filter, fromCollection, toArray, write } from '../../src/index.js'
 
 test('filters unwanted values', async () => {
   expect(

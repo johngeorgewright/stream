@@ -1,6 +1,6 @@
-import { PickByValue } from '../utils/Object'
-import { Stringable } from '../utils/String'
-import { accumulate } from './accumulate'
+import { PickByValue } from '../utils/Object.js'
+import { Stringable } from '../utils/String.js'
+import { accumulate } from './accumulate.js'
 
 /**
  * Accumulates each chunk into an object where the key is the result of

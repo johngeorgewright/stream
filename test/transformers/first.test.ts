@@ -1,4 +1,4 @@
-import { first, fromCollection, toArray } from '../../src'
+import { first, fromCollection, toArray } from '../../src/index.js'
 
 test('gets only the first chunk', async () => {
   expect(

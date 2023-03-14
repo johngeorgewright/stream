@@ -1,4 +1,4 @@
-import { DebounceState } from './State'
+import { DebounceState } from './State.js'
 
 /**
  * Debouncing requires at least one behavior that implements

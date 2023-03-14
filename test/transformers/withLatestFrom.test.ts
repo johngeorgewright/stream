@@ -1,5 +1,5 @@
 import { setTimeout } from 'node:timers/promises'
-import { fromCollection, map, withLatestFrom, write } from '../../src'
+import { fromCollection, map, withLatestFrom, write } from '../../src/index.js'
 
 test('combines each value from the source with the latest values from other inputs', async () => {
   const fn = jest.fn()

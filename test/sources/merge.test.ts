@@ -1,5 +1,5 @@
 import { setTimeout } from 'node:timers/promises'
-import { fromCollection, merge, toArray, write } from '../../src'
+import { fromCollection, merge, toArray, write } from '../../src/index.js'
 
 test('successfully merge all streams', async () => {
   expect(

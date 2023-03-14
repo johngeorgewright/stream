@@ -1,4 +1,8 @@
-import { ControllableStream, fromCollection, toIterator } from '../../src'
+import {
+  ControllableStream,
+  fromCollection,
+  toIterator,
+} from '../../src/index.js'
 
 test('iteration over a collection of values', async () => {
   const iterator = toIterator(fromCollection([1, 2, 3, 4, 5]))

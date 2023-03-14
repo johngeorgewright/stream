@@ -1,4 +1,4 @@
-import { Predicate } from '../utils/Function'
+import { Predicate } from '../utils/Function.js'
 
 /**
  * Filters out queued chunks based on a predicate.

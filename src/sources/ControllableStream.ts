@@ -1,5 +1,5 @@
-import { without } from '../utils/Array'
-import { Controllable, ControllerPullListener } from './Controllable'
+import { without } from '../utils/Array.js'
+import { Controllable, ControllerPullListener } from './Controllable.js'
 
 /**
  * A ControllableStream is ReadableStream that can have chunks

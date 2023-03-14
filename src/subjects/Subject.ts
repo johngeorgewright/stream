@@ -1,4 +1,4 @@
-import { BaseSubject, BaseSubjectOptions } from './BaseSubject'
+import { BaseSubject, BaseSubjectOptions } from './BaseSubject.js'
 
 /**
  * A Subject is a combination of a {@link ControllableStream:class}

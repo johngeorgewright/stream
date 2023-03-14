@@ -1,5 +1,5 @@
 import { setImmediate } from 'node:timers/promises'
-import { StatefulSubject, write } from '../../src'
+import { StatefulSubject, write } from '../../src/index.js'
 
 interface State {
   authors: string[]

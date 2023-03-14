@@ -1,4 +1,4 @@
-import { fromCollection, withCounter, write } from '../../src'
+import { fromCollection, withCounter, write } from '../../src/index.js'
 
 test('Adds a counter representing the amount of chunks received thus far', async () => {
   const fn = jest.fn()

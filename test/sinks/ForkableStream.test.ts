@@ -1,5 +1,11 @@
 import { setImmediate, setTimeout } from 'node:timers/promises'
-import { ForkableStream, fromCollection, interval, tap, write } from '../../src'
+import {
+  ForkableStream,
+  fromCollection,
+  interval,
+  tap,
+  write,
+} from '../../src/index.js'
 
 let forkable: ForkableStream<number>
 let fn: jest.Mock<void, [number]>

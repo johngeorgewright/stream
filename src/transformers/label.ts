@@ -1,4 +1,4 @@
-import { map } from './map'
+import { map } from './map.js'
 
 /**
  * Maps each chunk as an object with a "label" and a "value".

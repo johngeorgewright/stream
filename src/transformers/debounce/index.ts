@@ -1,11 +1,11 @@
-import { DebounceBehavior } from './Behavior'
-import { DebounceTransformer } from './Transformer'
-import { DebounceTrailingBehavior } from './TrailingBehavior'
+import { DebounceBehavior } from './Behavior.js'
+import { DebounceTransformer } from './Transformer.js'
+import { DebounceTrailingBehavior } from './TrailingBehavior.js'
 
 export { DebounceBehavior, DebounceTrailingBehavior }
-export * from './BackOffBehavior'
-export * from './State'
-export * from './LeadingBehavior'
+export * from './BackOffBehavior.js'
+export * from './State.js'
+export * from './LeadingBehavior.js'
 
 /**
  * Delays queuing until after `ms` milliseconds have elapsed

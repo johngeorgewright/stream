@@ -1,5 +1,5 @@
-import { empty, Empty } from '../utils/Symbol'
-import { ForkableStream } from './ForkableStream'
+import { empty, Empty } from '../utils/Symbol.js'
+import { ForkableStream } from './ForkableStream.js'
 
 /**
  * An extension to the {@link ForkableStream:class} that immediately

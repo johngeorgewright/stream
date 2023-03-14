@@ -1,4 +1,4 @@
-import { fromCollection, write } from '../../src'
+import { fromCollection, write } from '../../src/index.js'
 
 test('iterables', async () => {
   const fn = jest.fn()

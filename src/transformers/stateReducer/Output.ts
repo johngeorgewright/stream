@@ -1,5 +1,5 @@
 import { L, U } from 'ts-toolbelt'
-import { StateReducerInit } from './Reducers'
+import { StateReducerInit } from './Reducers.js'
 
 /**
  * Represents the Writable (output) types of StateReducer actions.

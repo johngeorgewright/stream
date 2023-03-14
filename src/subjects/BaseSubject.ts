@@ -1,7 +1,7 @@
-import { ForkableStream } from '../sinks/ForkableStream'
-import { ControllerPullListener } from '../sources/Controllable'
-import { ControllableStream } from '../sources/ControllableStream'
-import { Subjectable } from './Subjectable'
+import { ForkableStream } from '../sinks/ForkableStream.js'
+import { ControllerPullListener } from '../sources/Controllable.js'
+import { ControllableStream } from '../sources/ControllableStream.js'
+import { Subjectable } from './Subjectable.js'
 
 /**
  * The constructor options for {@link BaseSubject}.

@@ -1,4 +1,4 @@
-import { after, fromCollection, write } from '../../src'
+import { after, fromCollection, write } from '../../src/index.js'
 
 test('prevents chunks until predicate', async () => {
   const fn = jest.fn()

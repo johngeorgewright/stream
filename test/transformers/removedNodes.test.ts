@@ -1,5 +1,5 @@
 import { setImmediate } from 'node:timers/promises'
-import { removedNodes, fromDOMMutations, write } from '../../src'
+import { removedNodes, fromDOMMutations, write } from '../../src/index.js'
 
 test('picks removed nodes from DOM mutations', async () => {
   const fn = jest.fn()

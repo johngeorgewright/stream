@@ -1,4 +1,4 @@
-import { bufferCount, fromCollection, write } from '../../src'
+import { bufferCount, fromCollection, write } from '../../src/index.js'
 
 test('bufferCount in 2s', async () => {
   const fn = jest.fn()

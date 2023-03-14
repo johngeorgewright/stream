@@ -1,4 +1,4 @@
-import { first, fromDOMEvent, write } from '../../src'
+import { first, fromDOMEvent, write } from '../../src/index.js'
 
 let element: HTMLAnchorElement
 

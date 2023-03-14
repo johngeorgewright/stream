@@ -1,5 +1,5 @@
 import { setImmediate } from 'node:timers/promises'
-import { fromDOMMutations, write } from '../../src'
+import { fromDOMMutations, write } from '../../src/index.js'
 
 test('stream of DOM mutations', async () => {
   const fn = jest.fn()

@@ -1,5 +1,5 @@
 import { setImmediate } from 'node:timers/promises'
-import { fromCollection, interpose, write } from '../../src'
+import { fromCollection, interpose, write } from '../../src/index.js'
 import { defer } from '../util'
 
 test('holds up a stream until a promise resolves', async () => {

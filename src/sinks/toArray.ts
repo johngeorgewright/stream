@@ -1,4 +1,4 @@
-import { write } from './write'
+import { write } from './write.js'
 
 /**
  * @group Sinks

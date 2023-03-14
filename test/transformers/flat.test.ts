@@ -1,5 +1,5 @@
 import { setTimeout } from 'timers/promises'
-import { flat, fromCollection, write } from '../../src'
+import { flat, fromCollection, write } from '../../src/index.js'
 
 test('flattens iterables', async () => {
   const fn = jest.fn()

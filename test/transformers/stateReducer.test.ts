@@ -4,7 +4,7 @@ import {
   StateReducerInput,
   StateReducerOutput,
   write,
-} from '../../src'
+} from '../../src/index.js'
 
 interface State {
   authors: string[]

@@ -1,7 +1,7 @@
-import { ControllableStream } from '../sources/ControllableStream'
-import { identity } from '../transformers/identity'
-import { without } from '../utils/Array'
-import { Forkable } from './Forkable'
+import { ControllableStream } from '../sources/ControllableStream.js'
+import { identity } from '../transformers/identity.js'
+import { without } from '../utils/Array.js'
+import { Forkable } from './Forkable.js'
 
 /**
  * A ForkableStream is "1 Writeable to many Readables".

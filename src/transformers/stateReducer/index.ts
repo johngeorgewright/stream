@@ -1,6 +1,6 @@
-import { StateReducerInput } from './Input'
-import { StateReducerOutput } from './Output'
-import { StateReducer, StateReducerInit, StateReducers } from './Reducers'
+import { StateReducerInput } from './Input.js'
+import { StateReducerOutput } from './Output.js'
+import { StateReducer, StateReducerInit, StateReducers } from './Reducers.js'
 
 export { StateReducerInput, StateReducerOutput, StateReducer, StateReducers }
 

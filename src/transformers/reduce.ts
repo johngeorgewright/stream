@@ -1,4 +1,4 @@
-import { Accumulator } from '../utils/Function'
+import { Accumulator } from '../utils/Function.js'
 
 /**
  * Reduces chunks in to one accumulator. Once the stream is cancelled,

@@ -1,4 +1,4 @@
-import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream'
+import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream.js'
 
 /**
  * Returns a `ReadableStream` that mirrors the first source stream to queue an item.

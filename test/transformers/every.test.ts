@@ -1,4 +1,4 @@
-import { every, fromCollection, toArray } from '../../src'
+import { every, fromCollection, toArray } from '../../src/index.js'
 
 test('when not', async () => {
   expect(

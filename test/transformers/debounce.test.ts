@@ -6,7 +6,7 @@ import {
   DebounceLeadingBehavior,
   DebounceTrailingBehavior,
   write,
-} from '../../src'
+} from '../../src/index.js'
 
 let controller: ControllableStream<number>
 let fn: jest.Mock<void, [number]>

@@ -1,5 +1,5 @@
 import { setTimeout } from 'node:timers/promises'
-import { race, write } from '../../src'
+import { race, write } from '../../src/index.js'
 
 test('mirrors the first source stream to queue an item', async () => {
   const stream1 = new ReadableStream<number>({

@@ -1,4 +1,4 @@
-import { fromCollection, groupBy, write } from '../../src'
+import { fromCollection, groupBy, write } from '../../src/index.js'
 
 test('using a property', async () => {
   const fn = jest.fn()

@@ -1,7 +1,7 @@
-import { ReadableStreamsChunk } from '../utils'
-import { without } from '../utils/Array'
-import { IteratorSource } from './fromCollection'
-import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream'
+import { ReadableStreamsChunk } from '../utils/index.js'
+import { without } from '../utils/Array.js'
+import { IteratorSource } from './fromCollection.js'
+import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream.js'
 
 /**
  * Given an ordered list of streams, queue their items from one stream at a time.

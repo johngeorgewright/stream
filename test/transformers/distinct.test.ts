@@ -1,4 +1,9 @@
-import { ControllableStream, distinct, fromCollection, write } from '../../src'
+import {
+  ControllableStream,
+  distinct,
+  fromCollection,
+  write,
+} from '../../src/index.js'
 
 test('only emits distinct values', async () => {
   const fn = jest.fn()

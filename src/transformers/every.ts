@@ -1,4 +1,4 @@
-import { Predicate } from '../utils/Function'
+import { Predicate } from '../utils/Function.js'
 
 /**
  * Runs every chunk through a predicate. If anything fails the

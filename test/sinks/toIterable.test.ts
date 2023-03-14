@@ -1,4 +1,4 @@
-import { fromCollection, toIterable } from '../../src'
+import { fromCollection, toIterable } from '../../src/index.js'
 
 test('turns a stream in to an async iterable', async () => {
   const array: number[] = []

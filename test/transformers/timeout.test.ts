@@ -1,5 +1,5 @@
 import { setTimeout } from 'node:timers/promises'
-import { timeout, write } from '../../src'
+import { timeout, write } from '../../src/index.js'
 
 test('makes sure that events are emitted within a number of milliseconds', async () => {
   const fn = jest.fn<void, [number]>()

@@ -1,11 +1,11 @@
-import { ForkableRecallStream } from '../sinks/ForkableRecallStream'
+import { ForkableRecallStream } from '../sinks/ForkableRecallStream.js'
 import {
   stateReducer,
   StateReducerInput,
   StateReducerOutput,
   StateReducers,
-} from '../transformers/stateReducer'
-import { BaseSubject, BaseSubjectOptions } from './BaseSubject'
+} from '../transformers/stateReducer/index.js'
+import { BaseSubject, BaseSubjectOptions } from './BaseSubject.js'
 
 /**
  * The constructor options for a {@link StatefulSubject}.

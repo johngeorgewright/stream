@@ -1,4 +1,4 @@
-import { Predicate } from '../utils/Function'
+import { Predicate } from '../utils/Function.js'
 
 /**
  * Call the predicate on each chunk in the queue.

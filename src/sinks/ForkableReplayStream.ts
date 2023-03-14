@@ -1,4 +1,4 @@
-import { ForkableStream } from './ForkableStream'
+import { ForkableStream } from './ForkableStream.js'
 
 /**
  * An extension to the {@link ForkableStream:class} that immediately

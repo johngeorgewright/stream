@@ -1,5 +1,5 @@
-import { DebounceBehavior } from './Behavior'
-import { DebounceState } from './State'
+import { DebounceBehavior } from './Behavior.js'
+import { DebounceState } from './State.js'
 
 /**
  * Debouncing behavior to queue the leading event.

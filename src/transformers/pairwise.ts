@@ -1,4 +1,4 @@
-import { empty, Empty } from '../utils/Symbol'
+import { empty, Empty } from '../utils/Symbol.js'
 
 /**
  * Puts the current value and previous value together as an array, and queues that.

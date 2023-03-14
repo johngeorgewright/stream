@@ -1,4 +1,4 @@
-import { interval, write } from '../../src'
+import { interval, write } from '../../src/index.js'
 
 test('continuasly emits date events until terminated', (done) => {
   const fn = jest.fn()

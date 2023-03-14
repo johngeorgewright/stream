@@ -1,4 +1,4 @@
-import { fromCollection, map, toArray } from '../../src'
+import { fromCollection, map, toArray } from '../../src/index.js'
 
 test('transforms values', async () => {
   expect(
