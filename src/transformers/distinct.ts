@@ -45,6 +45,17 @@ export interface DistinctOptions<T, K> {
  *
  * --{a:4,n:'f'}--{a:7,n:'b'}---------------
  * ```
+ *
+ * An example using the `flushes` parameter.
+ *
+ * ```
+ * --1--1--2--2--2--1--2--3--4--3--2--1--
+ * -------------F------------------------
+ *
+ * distinct({ flushes })
+ *
+ * --1-----2-----2--1-----3--4-----------
+ * ```
  */
 export function distinct<T, K>({
   flushes,
