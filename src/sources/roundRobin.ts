@@ -1,3 +1,4 @@
+import { ReadableStreamsChunk } from '../utils'
 import { without } from '../utils/Array'
 import { IteratorSource } from './fromCollection'
 import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream'
@@ -17,15 +18,15 @@ import { immediatelyClosingReadableStream } from './immediatelyClosingReadableSt
  * --1-one--2-two--3-three-4------
  * ```
  */
-export function roundRobin<T>(
-  streams: ReadableStream<T>[],
+export function roundRobin<RSs extends ReadableStream<unknown>[]>(
+  streams: RSs,
   queuingStrategy?: QueuingStrategy
 ) {
   let readers = streams.map((stream) => stream.getReader())
 
   return !streams.length
     ? immediatelyClosingReadableStream()
-    : new ReadableStream(
+    : new ReadableStream<ReadableStreamsChunk<RSs>>(
         new IteratorSource(generateReadResults(), async (reason) => {
           await Promise.all(readers.map((reader) => reader.cancel(reason)))
         }),
