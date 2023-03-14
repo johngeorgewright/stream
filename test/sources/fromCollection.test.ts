@@ -111,7 +111,7 @@ test('array likes', async () => {
   `)
 })
 
-test('empy array likes', async () => {
+test('empty array likes', async () => {
   const fn = jest.fn()
   await fromCollection({ length: 0 }).pipeTo(write(fn))
   expect(fn).not.toHaveBeenCalled()
