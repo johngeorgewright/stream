@@ -1,6 +1,6 @@
 import { setImmediate } from 'node:timers/promises'
 import { fromCollection, interpose, write } from '../../src/index.js'
-import { defer } from '../util'
+import { defer } from '../util.js'
 
 test('holds up a stream until a promise resolves', async () => {
   const fn = jest.fn()
