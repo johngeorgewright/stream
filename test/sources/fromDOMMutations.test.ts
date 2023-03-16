@@ -1,5 +1,5 @@
-import { setImmediate } from 'node:timers/promises'
 import { fromDOMMutations, write } from '../../src/index.js'
+import { timeout } from '../util.js'
 
 test('stream of DOM mutations', async () => {
   const fn = jest.fn()
@@ -21,16 +21,16 @@ test('stream of DOM mutations', async () => {
   p.classList.add('test')
   document.body.appendChild(p)
 
-  await setImmediate()
+  await timeout()
 
   const div = document.createElement('div')
   div.appendChild(p)
 
-  await setImmediate()
+  await timeout()
 
   document.body.appendChild(div)
 
-  await setImmediate()
+  await timeout()
 
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
@@ -83,7 +83,7 @@ test('cancelling the stream will disconnect the observer', async () => {
   p.classList.add('test')
   document.body.appendChild(p)
 
-  await setImmediate()
+  await timeout()
 
   expect(fn).not.toHaveBeenCalled()
 })

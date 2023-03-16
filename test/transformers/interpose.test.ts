@@ -1,6 +1,5 @@
-import { setImmediate } from 'node:timers/promises'
 import { fromCollection, interpose, write } from '../../src/index.js'
-import { defer } from '../util.js'
+import { defer, timeout } from '../util.js'
 
 test('holds up a stream until a promise resolves', async () => {
   const fn = jest.fn()
@@ -8,10 +7,10 @@ test('holds up a stream until a promise resolves', async () => {
   fromCollection([1, 2, 3, 4, 5, 6])
     .pipeThrough(interpose(promise))
     .pipeTo(write(fn))
-  await setImmediate()
+  await timeout()
   expect(fn).not.toHaveBeenCalled()
   resolve()
-  await setImmediate()
+  await timeout()
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
       [
@@ -42,10 +41,10 @@ test("holds up a stream until a function's returned promise resolves", async () 
   fromCollection([1, 2, 3, 4, 5, 6])
     .pipeThrough(interpose(() => promise))
     .pipeTo(write(fn))
-  await setImmediate()
+  await timeout()
   expect(fn).not.toHaveBeenCalled()
   resolve()
-  await setImmediate()
+  await timeout()
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
       [

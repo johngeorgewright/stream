@@ -1,5 +1,5 @@
-import { setImmediate } from 'node:timers/promises'
 import { removedNodes, fromDOMMutations, write } from '../../src/index.js'
+import { timeout } from '../util.js'
 
 test('picks removed nodes from DOM mutations', async () => {
   const fn = jest.fn()
@@ -12,16 +12,16 @@ test('picks removed nodes from DOM mutations', async () => {
   p.classList.add('test')
   document.body.appendChild(p)
 
-  await setImmediate()
+  await timeout()
 
   const div = document.createElement('div')
   div.appendChild(p)
 
-  await setImmediate()
+  await timeout()
 
   document.body.appendChild(div)
 
-  await setImmediate()
+  await timeout()
 
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [

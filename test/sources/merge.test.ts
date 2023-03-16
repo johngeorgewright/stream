@@ -1,5 +1,5 @@
-import { setTimeout } from 'node:timers/promises'
 import { fromCollection, merge, toArray, write } from '../../src/index.js'
+import { timeout } from '../util.js'
 
 test('successfully merge all streams', async () => {
   expect(
@@ -76,15 +76,15 @@ test('asynchronous streams', async () => {
         ),
         fromCollection(
           (async function* () {
-            yield await setTimeout(10, 'a')
-            yield await setTimeout(10, 'b')
+            yield await timeout(10, 'a')
+            yield await timeout(10, 'b')
           })()
         ),
         fromCollection(
           (async function* () {
-            yield await setTimeout(20, '!')
-            yield await setTimeout(20, '@')
-            yield await setTimeout(20, '#')
+            yield await timeout(20, '!')
+            yield await timeout(20, '@')
+            yield await timeout(20, '#')
           })()
         ),
       ])

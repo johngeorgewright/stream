@@ -1,4 +1,3 @@
-import { setImmediate, setTimeout } from 'node:timers/promises'
 import {
   ForkableStream,
   fromCollection,
@@ -6,6 +5,7 @@ import {
   tap,
   write,
 } from '../../src/index.js'
+import { timeout } from '../util.js'
 
 let forkable: ForkableStream<number>
 let fn: jest.Mock<void, [number]>
@@ -80,7 +80,7 @@ describe('aborting', () => {
 
   test('previously aborted streams will error new forks', async () => {
     abortController.abort()
-    await setImmediate()
+    await timeout()
     await expect(forkable.fork().pipeTo(write())).rejects.toThrow()
   })
 
@@ -94,7 +94,7 @@ describe('aborting', () => {
     await expect(
       forkable.fork().pipeTo(write(), { signal: AbortSignal.timeout(10) })
     ).rejects.toThrow()
-    await setTimeout(50)
+    await timeout(50)
     expect(fn.mock.calls.length).toBeGreaterThanOrEqual(6)
   })
 

@@ -1,5 +1,5 @@
-import { setImmediate } from 'node:timers/promises'
 import { buffer, ControllableStream, write } from '../../src/index.js'
+import { timeout } from '../util.js'
 
 let controller: ControllableStream<number>
 let notifier: ControllableStream<null>
@@ -16,11 +16,11 @@ test('buffers the source stream chunks until `notifier` emits.', async () => {
   controller.enqueue(1)
   controller.enqueue(2)
   controller.enqueue(3)
-  await setImmediate()
+  await timeout()
   expect(fn).not.toHaveBeenCalled()
 
   notifier.enqueue(null)
-  await setImmediate()
+  await timeout()
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toHaveBeenCalledWith([1, 2, 3])
 
@@ -32,10 +32,10 @@ test('flushes whatever is left over when the notifier closes', async () => {
   controller.enqueue(1)
   controller.enqueue(2)
   controller.enqueue(3)
-  await setImmediate()
+  await timeout()
 
   notifier.close()
-  await setImmediate()
+  await timeout()
 
   expect(fn).toHaveBeenCalledWith([1, 2, 3])
 })
@@ -45,10 +45,10 @@ test('flusher whatever is left over when the stream closes', async () => {
   controller.enqueue(1)
   controller.enqueue(2)
   controller.enqueue(3)
-  await setImmediate()
+  await timeout()
 
   controller.close()
-  await setImmediate()
+  await timeout()
 
   expect(fn).toHaveBeenCalledWith([1, 2, 3])
 })
@@ -59,10 +59,10 @@ test('max buffer size', async () => {
   controller.enqueue(2)
   controller.enqueue(3)
   controller.enqueue(4)
-  await setImmediate()
+  await timeout()
 
   notifier.close()
-  await setImmediate()
+  await timeout()
 
   expect(fn).toHaveBeenCalledWith([3, 4])
 })

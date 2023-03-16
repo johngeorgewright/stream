@@ -1,5 +1,5 @@
-import { setTimeout } from 'timers/promises'
 import { flat, fromCollection, write } from '../../src/index.js'
+import { timeout } from '../util.js'
 
 test('flattens iterables', async () => {
   const fn = jest.fn()
@@ -32,14 +32,14 @@ test('flattens async iterables', async () => {
   await fromCollection([
     (async function* () {
       yield 1
-      await setTimeout(1)
+      await timeout(1)
       yield 2
     })(),
     (async function* () {
       yield 3
-      await setTimeout(1)
+      await timeout(1)
       yield (async function* () {
-        await setTimeout(1)
+        await timeout(1)
         yield 4
       })()
     })(),
@@ -111,7 +111,7 @@ test('flattens a mixture of all iterables things', async () => {
     [
       (async function* () {
         yield 1
-        await setTimeout(1)
+        await timeout(1)
         yield [2, 3]
       })(),
       (async function* () {

@@ -1,4 +1,3 @@
-import { setImmediate, setTimeout } from 'node:timers/promises'
 import {
   ControllableStream,
   debounce,
@@ -7,6 +6,7 @@ import {
   DebounceTrailingBehavior,
   write,
 } from '../../src/index.js'
+import { timeout } from '../util.js'
 
 let controller: ControllableStream<number>
 let fn: jest.Mock<void, [number]>
@@ -25,10 +25,10 @@ test('trailing only (by default)', async () => {
 
   controller.enqueue(1)
   controller.enqueue(2)
-  await setImmediate()
+  await timeout()
   expect(fn).not.toHaveBeenCalled()
 
-  await setTimeout(15)
+  await timeout(15)
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toHaveBeenCalledWith(2)
 })
@@ -40,11 +40,11 @@ test('leading only', async () => {
 
   controller.enqueue(1)
   controller.enqueue(2)
-  await setImmediate()
+  await timeout()
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toHaveBeenCalledWith(1)
 
-  await setTimeout(15)
+  await timeout(15)
   expect(fn).toHaveBeenCalledTimes(1)
 })
 
@@ -61,11 +61,11 @@ test('leading and trailing', async () => {
   controller.enqueue(1)
   controller.enqueue(2)
   controller.enqueue(3)
-  await setImmediate()
+  await timeout()
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toHaveBeenCalledWith(1)
 
-  await setTimeout(15)
+  await timeout(15)
   expect(fn).toHaveBeenCalledTimes(2)
   expect(fn).toHaveBeenCalledWith(3)
 })
@@ -82,11 +82,11 @@ test('back off', async () => {
 
   controller.enqueue(1)
   controller.enqueue(2)
-  await setTimeout(15)
+  await timeout(15)
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toHaveBeenCalledWith(1)
 
-  await setTimeout(10)
+  await timeout(10)
   controller.enqueue(3)
   controller.enqueue(4)
   expect(fn).toHaveBeenCalledTimes(2)

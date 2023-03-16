@@ -1,17 +1,17 @@
-import { setTimeout } from 'node:timers/promises'
 import { race, write } from '../../src/index.js'
+import { timeout } from '../util.js'
 
 test('mirrors the first source stream to queue an item', async () => {
   const stream1 = new ReadableStream<number>({
     async start(controller) {
-      await setTimeout(1_000)
+      await timeout(1_000)
       controller.enqueue(1)
       controller.close()
     },
   })
   const stream2 = new ReadableStream<number>({
     async start(controller) {
-      await setTimeout(10)
+      await timeout(10)
       controller.enqueue(2)
       controller.close()
     },
@@ -36,15 +36,15 @@ test('immediately closes if there are 0 streams', async () => {
 test('receives an error from the first stream that errors', async () => {
   const stream1 = new ReadableStream<number>({
     async start(controller) {
-      await setTimeout(50)
+      await timeout(50)
       controller.error(new Error('foo'))
     },
   })
   const stream2 = new ReadableStream<number>({
     async start(controller) {
-      await setTimeout(10)
+      await timeout(10)
       controller.enqueue(2)
-      await setTimeout(50)
+      await timeout(50)
       controller.enqueue(3)
     },
   })

@@ -1,5 +1,5 @@
-import { setImmediate } from 'node:timers/promises'
 import { StatefulSubject, write } from '../../src/index.js'
+import { timeout } from '../util.js'
 
 interface State {
   authors: string[]
@@ -98,7 +98,7 @@ test('multiple calls', async () => {
   const promise = subject.fork().pipeTo(write(fn))
   // There's a bug in the web-streams-polyfill that resolves the above
   // promise too early.
-  await setImmediate()
+  await timeout()
   subject.dispatch('add author', 'Jane Austin')
   subject.dispatch('add author', 'George Orwell')
   subject.dispatch('add author', 'Jane Austin')
