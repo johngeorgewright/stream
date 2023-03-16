@@ -1,4 +1,4 @@
-import { ReadableStreamsChunk } from '../utils/index.js'
+import { ReadableStreamsChunk } from '../utils/Stream.js'
 import { without } from '../utils/Array.js'
 import { IteratorSource } from './fromCollection.js'
 import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream.js'
