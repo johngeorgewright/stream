@@ -1,4 +1,4 @@
-import { toIterator } from './toIterator.js'
+import { toIterator, ToIteratorOptions } from './toIterator.js'
 
 /**
  * Turns a `ReadableStream` in to an `AsyncIterable`.
