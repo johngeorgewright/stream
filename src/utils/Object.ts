@@ -33,10 +33,28 @@ export function isArrayLike<T>(x: unknown): x is ArrayLike<T> {
   return isNonNullObject(x) && 'length' in x
 }
 
+/**
+ * @group Utils
+ * @category Array
+ */
 export function isIterable<T>(x: unknown): x is Iterable<T> {
   return isNonNullObject(x) && Symbol.iterator in x
 }
 
+/**
+ * @group Utils
+ * @category Array
+ */
 export function isAsyncIterable<T>(x: unknown): x is AsyncIterable<T> {
   return isNonNullObject(x) && Symbol.asyncIterator in x
+}
+
+/**
+ * @group Utils
+ * @category Array
+ */
+export function isIteratorOrAsyncIterator<T>(
+  x: unknown
+): x is Iterator<T> | AsyncIterator<T> {
+  return isNonNullObject(x) && 'next' in x
 }

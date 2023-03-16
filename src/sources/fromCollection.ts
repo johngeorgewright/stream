@@ -1,4 +1,10 @@
 import assertNever from 'assert-never'
+import {
+  isArrayLike,
+  isAsyncIterable,
+  isIterable,
+  isIteratorOrAsyncIterator,
+} from '../utils'
 
 /**
  * Creates a readable stream from an collection of values.
@@ -37,13 +43,13 @@ export function fromCollection<T>(
   queuingStrategy?: QueuingStrategy<T>
 ) {
   return new ReadableStream(
-    Symbol.iterator in collection
+    isIterable<T>(collection)
       ? new IteratorSource(collection[Symbol.iterator]())
-      : Symbol.asyncIterator in collection
+      : isAsyncIterable<T>(collection)
       ? new IteratorSource(collection[Symbol.asyncIterator]())
-      : 'next' in collection
+      : isIteratorOrAsyncIterator<T>(collection)
       ? new IteratorSource(collection)
-      : typeof collection === 'object' && 'length' in collection
+      : isArrayLike<T>(collection)
       ? new ArrayLikeSource(collection)
       : assertNever(collection),
     queuingStrategy
