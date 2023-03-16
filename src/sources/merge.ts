@@ -1,4 +1,5 @@
-import { ReadableStreamsChunk, without } from '../utils/index.js'
+import { without } from '../utils/Array.js'
+import { ReadableStreamsChunk } from '../utils/Stream.js'
 import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream.js'
 
 /**
