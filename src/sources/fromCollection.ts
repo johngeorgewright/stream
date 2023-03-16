@@ -4,7 +4,7 @@ import {
   isAsyncIterable,
   isIterable,
   isIteratorOrAsyncIterator,
-} from '../utils'
+} from '../utils/Object.js'
 
 /**
  * Creates a readable stream from an collection of values.
