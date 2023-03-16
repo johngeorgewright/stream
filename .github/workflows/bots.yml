@@ -27,6 +27,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Use Node.js
+        id: node
         uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
@@ -38,7 +39,7 @@ jobs:
           path: |
             .yarn/unplugged
             .yarn/install-state.gz
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ steps.node.outputs.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: Yarn
         if: steps.cache.outputs.cache-hit != 'true'
