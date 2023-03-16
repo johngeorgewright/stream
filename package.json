@@ -23,7 +23,8 @@
     "test:lint": "eslint src",
     "test:unit": "jest"
   },
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
   "packageManager": "yarn@3.4.1",
   "devDependencies": {
     "@commitlint/cli": "17.4.4",
