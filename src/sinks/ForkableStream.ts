@@ -4,7 +4,7 @@ import { without } from '../utils/Array.js'
 import { Forkable } from './Forkable.js'
 
 /**
- * A ForkableStream is "1 Writeable to many Readables".
+ * A ForkableStream is "1 Writable to many Readables".
  *
  * @group Sinks
  * @example
