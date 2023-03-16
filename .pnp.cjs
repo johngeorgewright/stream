@@ -55,7 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ts-node", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:10.9.1"],\
             ["ts-toolbelt", "npm:9.6.0"],\
             ["tslib", "npm:2.5.0"],\
-            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.26"],\
+            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.27"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"],\
             ["web-streams-polyfill", "npm:3.2.1"]\
           ],\
@@ -1529,7 +1529,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ts-node", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:10.9.1"],\
             ["ts-toolbelt", "npm:9.6.0"],\
             ["tslib", "npm:2.5.0"],\
-            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.26"],\
+            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.27"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"],\
             ["web-streams-polyfill", "npm:3.2.1"]\
           ],\
@@ -10119,17 +10119,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["typedoc", [\
-        ["npm:0.23.26", {\
-          "packageLocation": "./.yarn/cache/typedoc-npm-0.23.26-46aba33afe-09dbd221b5.zip/node_modules/typedoc/",\
+        ["npm:0.23.27", {\
+          "packageLocation": "./.yarn/cache/typedoc-npm-0.23.27-eba44375d1-1ddcccf0b8.zip/node_modules/typedoc/",\
           "packageDependencies": [\
-            ["typedoc", "npm:0.23.26"]\
+            ["typedoc", "npm:0.23.27"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.26", {\
-          "packageLocation": "./.yarn/__virtual__/typedoc-virtual-42f044ffea/0/cache/typedoc-npm-0.23.26-46aba33afe-09dbd221b5.zip/node_modules/typedoc/",\
+        ["virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.27", {\
+          "packageLocation": "./.yarn/__virtual__/typedoc-virtual-cf98dad77c/0/cache/typedoc-npm-0.23.27-eba44375d1-1ddcccf0b8.zip/node_modules/typedoc/",\
           "packageDependencies": [\
-            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.26"],\
+            ["typedoc", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:0.23.27"],\
             ["@types/typescript", null],\
             ["lunr", "npm:2.3.9"],\
             ["marked", "npm:4.2.12"],\
