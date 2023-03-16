@@ -13,8 +13,11 @@ import { toIterator } from './toIterator.js'
  * }
  * ```
  */
-export function toIterable<T>(stream: ReadableStream<T>): AsyncIterable<T> {
+export function toIterable<T>(
+  stream: ReadableStream<T>,
+  options?: ToIteratorOptions
+): AsyncIterable<T> {
   return {
-    [Symbol.asyncIterator]: () => toIterator(stream),
+    [Symbol.asyncIterator]: () => toIterator(stream, options),
   }
 }
