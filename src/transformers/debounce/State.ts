@@ -8,5 +8,5 @@
 export type DebounceState = Readonly<{
   queued: boolean
   ms: number
-  timer?: NodeJS.Timer
+  timer?: number
 }>

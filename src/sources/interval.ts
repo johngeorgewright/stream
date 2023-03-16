@@ -10,7 +10,7 @@
  * ```
  */
 export function interval(ms: number, queuingStrategy?: QueuingStrategy<Date>) {
-  let timer: NodeJS.Timer
+  let timer: number
 
   return new ReadableStream<Date>(
     {
