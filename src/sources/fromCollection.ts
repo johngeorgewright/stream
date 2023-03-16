@@ -1,4 +1,4 @@
-import assertNever from 'assert-never'
+import { assertNever } from 'assert-never'
 import {
   isArrayLike,
   isAsyncIterable,
