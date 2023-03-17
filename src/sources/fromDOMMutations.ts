@@ -11,6 +11,23 @@
  *     console.info(mutation.addedNodes)
  *   }))
  * ```
+ *
+ * If the queue is full when receiving DOM mutations, you
+ * may notice some events being dropped. To avoid this you
+ * will need to increase the high water mark.
+ *
+ * ```
+ * fromDOMMutations(
+ *   document.body,
+ *   { childList: true },
+ *   new CountQueuingStrategy({ highWaterMark: 10 })
+ * )
+ *   .pipeThrough(addedNodes())
+ *   .pipeTo(
+ *     write(console.info),
+ *     new CountQueuingStrategy({ highWaterMark: 50 })
+ *   )
+ * ```
  */
 export function fromDOMMutations(
   target: Node,
