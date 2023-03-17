@@ -21,7 +21,7 @@ export type ReadableStreamChunk<R extends ReadableStream<unknown>> =
  * @category Stream
  * @example
  * ```
- * type T = ReadableStreamChunks<[ReadableStream<number>, ReadableStream<string>]>
+ * type T = ReadableStreamsChunk<[ReadableStream<number>, ReadableStream<string>]>
  * // number | string
  * ```
  */
