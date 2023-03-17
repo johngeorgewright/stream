@@ -43,7 +43,10 @@ export * from './LeadingBehavior.js'
  * ```
  * --a-b-c--------------d-----------
  *
- * debounce(20, [new DebounceLeadingBehavior(), new DebounceTrailingBehavior()])
+ * debounce(20, [
+ *   new DebounceLeadingBehavior(),
+ *   new DebounceTrailingBehavior()
+ *])
  *
  * ---a----------c--------d----------
  * ```
