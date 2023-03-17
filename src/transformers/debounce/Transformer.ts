@@ -18,15 +18,7 @@ export class DebounceTransformer<T> implements Transformer<T, T> {
 
   transform(chunk: T, controller: TransformStreamDefaultController<T>) {
     this.#preTimer(chunk, controller)
-
-    this.#state = {
-      ...this.#state,
-
-      timer: setTimeout(
-        () => this.#postTimer(chunk, controller),
-        this.#state.ms
-      ),
-    }
+    this.#timer(chunk, controller)
   }
 
   flush() {
@@ -45,6 +37,17 @@ export class DebounceTransformer<T> implements Transformer<T, T> {
       chunk,
       controller
     )
+  }
+
+  #timer(chunk: T, controller: TransformStreamDefaultController<T>) {
+    this.#state = {
+      ...this.#state,
+
+      timer: setTimeout(
+        () => this.#postTimer(chunk, controller),
+        this.#state.ms
+      ),
+    }
   }
 
   #postTimer(chunk: T, controller: TransformStreamDefaultController<T>) {

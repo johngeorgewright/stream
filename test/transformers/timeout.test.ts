@@ -7,7 +7,6 @@ test('makes sure that events are emitted within a number of milliseconds', async
   await expect(
     new ReadableStream({
       async pull(controller) {
-        console.time('pull')
         await setTimeout(500)
         controller.enqueue(1)
         controller.close()
@@ -21,7 +20,7 @@ test('makes sure that events are emitted within a number of milliseconds', async
 
   await new ReadableStream({
     async pull(controller) {
-      setTimeout(5)
+      await setTimeout(5)
       controller.enqueue(1)
       await setTimeout(5)
       controller.enqueue(2)

@@ -7,6 +7,19 @@
  * fromDOMEvent(window, 'resize')
  * fromDOMEvent(document, 'click', { capture: true })
  * ```
+ *
+ * If you're receiving an excessive amount of events and
+ * find that some are being dropped, you may wish to
+ * increase the high water mark.
+ *
+ * ```
+ * fromDOMEvent(
+ *   document.body,
+ *   'mousemove',
+ *   {},
+ *   new CountQueuingStrategy({ highWaterMark: 100 })
+ * )
+ * ```
  */
 export function fromDOMEvent<K extends keyof WindowEventMap>(
   element: Window,

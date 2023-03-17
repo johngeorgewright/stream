@@ -20,13 +20,13 @@ import { immediatelyClosingReadableStream } from './immediatelyClosingReadableSt
  */
 export function roundRobin<RSs extends ReadableStream<unknown>[]>(
   streams: RSs,
-  queuingStrategy?: QueuingStrategy
-) {
+  queuingStrategy?: QueuingStrategy<ReadableStreamsChunk<RSs>>
+): ReadableStream<ReadableStreamsChunk<RSs>> {
   let readers = streams.map((stream) => stream.getReader())
 
   return !streams.length
     ? immediatelyClosingReadableStream()
-    : new ReadableStream<ReadableStreamsChunk<RSs>>(
+    : new ReadableStream(
         new IteratorSource(generateReadResults(), async (reason) => {
           await Promise.all(readers.map((reader) => reader.cancel(reason)))
         }),
