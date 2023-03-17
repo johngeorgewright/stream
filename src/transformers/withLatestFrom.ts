@@ -25,7 +25,7 @@ export function withLatestFrom<T, RSs extends ReadableStream<unknown>[]>(
   const isFilled = (arr: unknown[]): arr is ReadableStreamsChunks<RSs> =>
     arr.every((value) => value !== empty)
 
-  const inputValues = new Array(inputs.length).fill(empty)
+  const inputValues: unknown[] = inputs.map(() => empty)
 
   inputs.forEach((input, index) =>
     input
