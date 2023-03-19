@@ -3,6 +3,7 @@ layout: page
 title: Sources
 permalink: /extensions/sources
 parent: Extensions
+nav_order: 1
 ---
 
 # Sources

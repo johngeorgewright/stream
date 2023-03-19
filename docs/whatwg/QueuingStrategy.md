@@ -3,6 +3,7 @@ layout: page
 title: QueuingStrategy
 permalink: /whatwg-stream-api/queuing-strategy
 parent: WHATWG Streams API
+nav_order: 4
 ---
 
 [CountQueuingStrategy]: https://developer.mozilla.org/en-US/docs/Web/API/CountQueuingStrategy

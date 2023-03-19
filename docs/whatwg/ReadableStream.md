@@ -3,6 +3,7 @@ layout: page
 title: ReadableStream
 permalink: /whatwg-stream-api/readable-stream
 parent: WHATWG Streams API
+nav_order: 1
 ---
 
 [desiredSize]: https://developer.mozilla.org/en-US/docs/Web/API/ReadableStreamDefaultController/desiredSize

@@ -3,6 +3,7 @@ layout: page
 title: WritableStream
 permalink: /whatwg-stream-api/writable-stream
 parent: WHATWG Streams API
+nav_order: 2
 ---
 
 [pipeTo]: https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream/pipeTo
