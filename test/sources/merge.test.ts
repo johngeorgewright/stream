@@ -82,7 +82,7 @@ test('asynchronous streams', async () => {
         ),
         fromCollection(
           (async function* () {
-            yield await timeout(20, '!')
+            yield await timeout(15, '!')
             yield await timeout(20, '@')
             yield await timeout(20, '#')
           })()
