@@ -1,4 +1,40 @@
 import { L } from 'ts-toolbelt'
+import { write } from '../index.js'
+
+/**
+ * Something that can be flushed by another stream.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export interface Flushable {
+  flushes?: ReadableStream<unknown>
+  /**
+   * By default an error in the `flushes` stream will be sent by the transformer.
+   */
+  ignoreFlushErrors?: boolean
+}
+
+/**
+ * Using a {@link Flushable} notify when the stream
+ * flushes and errors.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export function pipeFlushes(
+  onFlush: () => unknown,
+  onError: (error: unknown) => unknown,
+  options?: Flushable
+) {
+  options?.flushes?.pipeTo(write(onFlush)).catch(
+    options.ignoreFlushErrors
+      ? () => {
+          // Ignored
+        }
+      : onError
+  )
+}
 
 /**
  * Returns the chunk type of a ReadableStream.
