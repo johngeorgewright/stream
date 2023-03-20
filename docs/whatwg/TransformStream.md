@@ -3,6 +3,7 @@ layout: page
 title: TransformStream
 permalink: /whatwg-stream-api/transform-stream
 parent: WHATWG Streams API
+nav_order: 3
 ---
 
 [pipeThrough]: https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream/pipeThrough

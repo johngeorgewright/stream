@@ -2,6 +2,7 @@
 layout: page
 title: About
 permalink: /
+nav_order: 1
 ---
 
 # `@johngw/stream`

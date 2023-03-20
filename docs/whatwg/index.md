@@ -3,6 +3,7 @@ layout: page
 title: WHATWG Streams API
 permalink: /whatwg-stream-api
 has_children: true
+nav_order: 2
 ---
 
 [Web Streams API]: https://developer.mozilla.org/en-US/docs/Web/API/Streams_API
