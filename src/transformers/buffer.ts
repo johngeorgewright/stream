@@ -7,9 +7,10 @@ import { write } from '../sinks/write.js'
  * @example
  * ```
  * --a--b--c--d--e--f--g--h--i--|
- * --------B--------B--------B--|
  *
- * buffer(notifier)
+ * buffer(
+ * --------B--------B--------B--|
+ * )
  *
  * --------[a,b,c]--[d,e,f]--[g,h,i]-|
  * ```

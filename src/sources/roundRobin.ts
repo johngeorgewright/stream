@@ -10,10 +10,10 @@ import { immediatelyClosingReadableStream } from './immediatelyClosingReadableSt
  * @see {@link merge:function}
  * @example
  * ```
+ * roundRobin([
  * --1------2------3------4-------
  * ----one-two--three-------------
- *
- * roundRobin([stream1, stream2])
+ * ])
  *
  * --1-one--2-two--3-three-4------
  * ```

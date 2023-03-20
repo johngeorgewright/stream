@@ -1008,14 +1008,14 @@ __metadata:
     jest: 29.5.0
     jest-environment-jsdom: 29.5.0
     lint-staged: 13.2.0
-    prettier: 2.8.4
+    prettier: 2.8.5
     rimraf: 4.4.0
     semantic-release: 20.1.3
     ts-jest: 29.0.5
     ts-node: 10.9.1
     ts-toolbelt: 9.6.0
     tslib: 2.5.0
-    typedoc: 0.23.27
+    typedoc: 0.23.28
     typescript: 5.0.2
     web-streams-polyfill: 3.2.1
   languageName: unknown
@@ -6987,12 +6987,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.8.4":
-  version: 2.8.4
-  resolution: "prettier@npm:2.8.4"
+"prettier@npm:2.8.5":
+  version: 2.8.5
+  resolution: "prettier@npm:2.8.5"
   bin:
     prettier: bin-prettier.js
-  checksum: c173064bf3df57b6d93d19aa98753b9b9dd7657212e33b41ada8e2e9f9884066bb9ca0b4005b89b3ab137efffdf8fbe0b462785aba20364798ff4303aadda57e
+  checksum: b7f8d30e14061e0478bc5a59d4d889688d804c173a0daa91b1b85dc08eef5eb6956d1b59f4037770776fda5b967f6c9ca3b7a8a43c50bedb4c7b182029f865aa
   languageName: node
   linkType: hard
 
@@ -8390,19 +8390,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:0.23.27":
-  version: 0.23.27
-  resolution: "typedoc@npm:0.23.27"
+"typedoc@npm:0.23.28":
+  version: 0.23.28
+  resolution: "typedoc@npm:0.23.28"
   dependencies:
     lunr: ^2.3.9
     marked: ^4.2.12
     minimatch: ^7.1.3
     shiki: ^0.14.1
   peerDependencies:
-    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x
+    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x
   bin:
     typedoc: bin/typedoc
-  checksum: 1ddcccf0b839c708a37d18b6dc1ab57ace6e177daf8f0442ff60d6e72c23ecbd78b0e602f0e1e553c7cb0254e0c769afff7c24c58683e564a7a07a2469cf99a5
+  checksum: 40eb4e207aac1b734e09400cf03f543642cc7b11000895198dd5a0d3166315759ccf4ac30a2915153597c5c186101c72bac2f1fc12b428184a9274d3a0e44c5e
   languageName: node
   linkType: hard
 
