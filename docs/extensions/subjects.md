@@ -3,6 +3,7 @@ layout: page
 title: Subjects
 permalink: /extensions/subjects
 parent: Extensions
+nav_order: 3
 ---
 
 [ControllableStream]: /stream/api/classes/ControllableStream.html

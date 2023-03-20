@@ -3,6 +3,7 @@ layout: page
 title: Sinks
 permalink: /extensions/sinks
 parent: Extensions
+nav_order: 2
 ---
 
 # Sinks
