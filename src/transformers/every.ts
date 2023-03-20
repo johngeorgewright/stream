@@ -1,4 +1,5 @@
 import { Predicate } from '../utils/Function.js'
+import { Flushable, pipeFlushes } from '../utils/Stream.js'
 
 /**
  * Runs every chunk through a predicate. If anything fails the
@@ -27,8 +28,16 @@ import { Predicate } from '../utils/Function.js'
  * --------------------false-|
  * ```
  */
-export function every<T>(predicate: Predicate<T>) {
+export function every<T>(predicate: Predicate<T>, options?: Flushable) {
   return new TransformStream<T, boolean>({
+    start(controller) {
+      pipeFlushes(
+        () => controller.enqueue(true),
+        (error) => controller.error(error),
+        options
+      )
+    },
+
     async transform(chunk, controller) {
       if (!(await predicate(chunk))) {
         controller.enqueue(false)
