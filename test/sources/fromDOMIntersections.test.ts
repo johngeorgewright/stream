@@ -60,3 +60,24 @@ test('only receives notifications of current target', async () => {
   await timeout()
   expect(fn).not.toHaveBeenCalled()
 })
+
+test('errored streams will remove observers', async () => {
+  const fn = jest.fn<void, [IntersectionObserverEntry]>()
+  const entry = {
+    boundingClientRect: boundingClientRect(),
+    intersectionRatio: 1,
+    intersectionRect: boundingClientRect(),
+    isIntersecting: true,
+    rootBounds: boundingClientRect(),
+    target,
+    time: Date.now(),
+  }
+  await expect(() =>
+    fromDOMIntersections()(target).pipeTo(write(fn), {
+      signal: AbortSignal.abort(),
+    })
+  ).rejects.toThrow()
+  callIntersectionObservers([entry])
+  await timeout()
+  expect(fn).not.toHaveBeenCalled()
+})
