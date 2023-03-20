@@ -6,8 +6,7 @@ See the [docs](https://johngeorgewright.github.io/stream/) for more information.
 
 ## Building
 
-1. Install [node.js](https://nodejs.org/)
-1. We recommend using [NVM](https://github.com/nvm-sh/nvm). Once doing so install the node version we're using: `nvm install`
+1. Install [node.js](https://nodejs.org/). We recommend using [NVM](https://github.com/nvm-sh/nvm): `nvm install`
 1. Install [Yarn](https://yarnpkg.com/): `corepack enable`
 1. Install dependencies: `yarn`
 1. Start an incremental build tool: `yarn start`. Or build once: `yarn build`
