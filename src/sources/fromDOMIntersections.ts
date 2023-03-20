@@ -13,7 +13,7 @@
  * )
  *
  * observe(document.querySelector("#listItem")).pipeTo(
- *   write(console.info(entry))
+ *   write(console.info)
  * )
  * ```
  *
@@ -32,7 +32,7 @@
  * )
  *
  * observe(document.querySelector("#listItem")).pipeTo(
- *   write(console.info(entry))
+ *   write(console.info)
  * )
  * ```
  */
