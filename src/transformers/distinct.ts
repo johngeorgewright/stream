@@ -1,16 +1,11 @@
-import { write } from '../sinks/write.js'
+import { Flushable, pipeFlushes } from '../utils/Stream.js'
 
 /**
  * Options for the {@link distinct} transformer.
  *
  * @group Transformers
  */
-export interface DistinctOptions<T, K> {
-  flushes?: ReadableStream<unknown>
-  /**
-   * By default an error in the `flushes` stream will be sent by the transformer.
-   */
-  ignoreFlushErrors?: boolean
+export interface DistinctOptions<T, K> extends Flushable {
   selector?: (value: T) => K
 }
 
@@ -65,14 +60,10 @@ export function distinct<T, K>({
   const set = new Set<T | K>()
   const abortController = new AbortController()
 
-  flushes?.pipeTo(write(() => set.clear())).catch(
-    ignoreFlushErrors
-      ? () => {
-          // Ignored
-        }
-      : (error) => {
-          abortController.abort(error)
-        }
+  pipeFlushes(
+    () => set.clear(),
+    (error) => abortController.abort(error),
+    { flushes, ignoreFlushErrors }
   )
 
   return new TransformStream<T, T>({
