@@ -81,18 +81,17 @@ export class IteratorSource<T> implements UnderlyingDefaultSource<T> {
   }
 
   async pull(controller: ReadableStreamDefaultController<T>): Promise<void> {
-    let result: IteratorResult<T>
+    while (controller.desiredSize) {
+      let result: IteratorResult<T>
 
-    try {
-      result = await this.#iterator.next()
-    } catch (error) {
-      return controller.error(error)
-    }
+      try {
+        result = await this.#iterator.next()
+      } catch (error) {
+        return controller.error(error)
+      }
 
-    if (result.done) controller.close()
-    else {
-      controller.enqueue(result.value)
-      if (controller.desiredSize) return this.pull(controller)
+      if (result.done) return controller.close()
+      else controller.enqueue(result.value)
     }
   }
 }
