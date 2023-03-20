@@ -6,11 +6,11 @@ import { immediatelyClosingReadableStream } from './immediatelyClosingReadableSt
  * @group Sources
  * @example
  * ```
+ * race([
  * ----20----40----60------
  * --1-----2-----3---------
  * -----------0-----0----0-
- *
- * race(stream1, stream2, stream3)
+ * ])
  *
  * --1-----2-----3---------
  * ```

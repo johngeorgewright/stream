@@ -10,9 +10,10 @@ import { ControllableStream } from '../sources/ControllableStream.js'
  * @example
  * ```
  * --a-----b-------c---d---e--
- * -----1----2-3-4------------
  *
- * withLatestFrom(stream2)
+ * withLatestFrom(
+ * -----1----2-3-4------------
+ * )
  *
  * --------b1------c4--d4--e4-
  * ```
