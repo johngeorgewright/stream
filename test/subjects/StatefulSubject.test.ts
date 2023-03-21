@@ -1,5 +1,5 @@
 import { StatefulSubject, write } from '../../src/index.js'
-import { timeout } from '../util.js'
+import { timeout } from '../../src/utils/Async.js'
 
 interface State {
   authors: string[]

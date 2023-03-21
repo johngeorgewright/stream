@@ -1,5 +1,5 @@
 import { buffer, ControllableStream, write } from '../../src/index.js'
-import { timeout } from '../util.js'
+import { timeout } from '../../src/utils/Async.js'
 
 let controller: ControllableStream<number>
 let notifier: ControllableStream<null>

@@ -1,5 +1,5 @@
 import { race, write } from '../../src/index.js'
-import { timeout } from '../util.js'
+import { timeout } from '../../src/utils/Async.js'
 
 test('mirrors the first source stream to queue an item', async () => {
   const stream1 = new ReadableStream<number>({

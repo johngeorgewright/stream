@@ -5,7 +5,7 @@ import {
   toArray,
   write,
 } from '../../src/index.js'
-import { timeout } from '../util.js'
+import { timeout } from '../../src/utils/Async.js'
 
 test('when not', async () => {
   expect(

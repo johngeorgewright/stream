@@ -5,7 +5,7 @@ import {
   tap,
   write,
 } from '../../src/index.js'
-import { timeout } from '../util.js'
+import { timeout } from '../../src/utils/Async.js'
 
 let forkable: ForkableStream<number>
 let fn: jest.Mock<void, [number]>

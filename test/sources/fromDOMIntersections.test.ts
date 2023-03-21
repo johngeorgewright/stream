@@ -1,11 +1,11 @@
-import { fromDOMIntersections, write } from '../../src'
+import { fromDOMIntersections, write } from '../../src/index.js'
 import {
   CallIntersectionObserver,
   IntersectionObserverMock,
   boundingClientRect,
   mockIntersectionObserver,
 } from '../mocks/IntersectionObserver'
-import { timeout } from '../util'
+import { timeout } from '../../src/utils/index.js'
 
 let callIntersectionObservers: CallIntersectionObserver
 let IntersectionObserverMock: IntersectionObserverMock

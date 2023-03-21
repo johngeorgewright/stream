@@ -10,6 +10,7 @@ nav_order: 1
 
 This library considers a "source" as something we can "read" from. IE, a `ReadableStream`.
 
+- [CachableStream](/stream/api/classes/CachableStream.html)
 - [ControllableStream](/stream/api/classes/ControllableStream.html)
 - [fromCollection](/stream/api/functions/fromCollection.html)
 - [fromDOMEvent](/stream/api/functions/fromDOMEvent.html)
