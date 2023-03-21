@@ -74,9 +74,7 @@ export function set<T extends Record<string, unknown>>(
   if (!key) return obj
   let current = obj
   for (const key of pop(path)) {
-    if (!(key in current))
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (current as any)[key] = {}
+    if (!(key in current)) Object.assign(current, { [key]: {} })
     else if (!isNonNullObject(current[key]))
       throw new Error(
         `Cannot override "${key}" as it's not an object in:\n${JSON.stringify(
@@ -85,8 +83,7 @@ export function set<T extends Record<string, unknown>>(
       )
     current = current[key] as T
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ;(current as any)[key] = value
+  Object.assign(current, { [key]: value })
   return obj
 }
 
