@@ -8,7 +8,7 @@ import { isNonNullObject } from '../utils/Object.js'
  * Letting cache expire.
  *
  * ```
- * const cache = new StorageCache(localStorage, 'my-cache', 30 * 60 * 60 * 1_000)
+ * const cache = new StorageCache(localStorage, 'my-cache', 30 * 60 * 1_000)
  *
  * cache.set(['a', 'path'], 'foo')
  * cache.get(['a', 'path'])
@@ -22,7 +22,7 @@ import { isNonNullObject } from '../utils/Object.js'
  * Manually invalidating cache.
  *
  * ```
- * const cache = new StorageCache(localStorage, 'my-cache', 30 * 60 * 60 * 1_000)
+ * const cache = new StorageCache(localStorage, 'my-cache', 30 * 60 * 1_000)
  * cache.set(['foo', 'bar'], 'a')
  * cache.set(['foo', 'rab'], 'b')
  *
