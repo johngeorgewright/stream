@@ -9,7 +9,7 @@ import { timeout } from '../../src/utils/index.js'
 let cache: StorageCache
 
 beforeEach(() => {
-  cache = new StorageCache(new MemoryStorage(), 'test', 10)
+  cache = new StorageCache(new MemoryStorage(), 'test', 20)
 })
 
 test('only pulls when the cache is stale', async () => {
@@ -18,11 +18,11 @@ test('only pulls when the cache is stale', async () => {
 
   new CachableStream<number>(cache, ['test'], () => ++i).pipeTo(write(fn))
 
-  await timeout(5)
+  await timeout(10)
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toHaveBeenCalledWith(1)
 
-  await timeout(6)
+  await timeout(10)
   expect(fn).toHaveBeenCalledTimes(2)
   expect(fn.mock.calls[1][0]).toBe(2)
 })
