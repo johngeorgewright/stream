@@ -1,5 +1,5 @@
 import { fromCollection, merge, toArray, write } from '../../src/index.js'
-import { timeout } from '../util.js'
+import { timeout } from '../../src/utils/Async.js'
 
 test('successfully merge all streams', async () => {
   expect(

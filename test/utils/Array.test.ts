@@ -1,7 +1,7 @@
-import { utils } from '../../src/index.js'
+import { without } from '../../src/utils/index.js'
 
 test('without', () => {
-  expect(utils.without([1, 2, 3, 4], 2)).toEqual([1, 3, 4])
-  expect(utils.without([1, 2, 3, 4], 5)).toEqual([1, 2, 3, 4])
-  expect(utils.without([1, 2, 1, 2], 1)).toEqual([2, 1, 2])
+  expect(without([1, 2, 3, 4], 2)).toEqual([1, 3, 4])
+  expect(without([1, 2, 3, 4], 5)).toEqual([1, 2, 3, 4])
+  expect(without([1, 2, 1, 2], 1)).toEqual([2, 1, 2])
 })

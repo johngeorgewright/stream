@@ -1,5 +1,5 @@
 import { fromCollection, map, withLatestFrom, write } from '../../src/index.js'
-import { timeout } from '../util.js'
+import { timeout } from '../../src/utils/Async.js'
 
 test('combines each value from the source with the latest values from other inputs', async () => {
   const fn = jest.fn()

@@ -18,7 +18,7 @@
     "build:docs:site": "bundle exec jekyll build --config jekyll.yml",
     "clean": "rimraf dist",
     "coverage": "open coverage/lcov-report/index.html",
-    "serve:docs": "concurrently --names api,site 'yarn build:docs:api --preserveWatchOutput --watch' 'bundle exec jekyll serve --config jekyll.yml'",
+    "serve:docs": "yarn build:docs:api && concurrently --names api,site 'yarn build:docs:api --preserveWatchOutput --watch' 'bundle exec jekyll serve --config jekyll.yml'",
     "start": "yarn clean && yarn tsc --watch --preserveWatchOutput",
     "test": "yarn test:lint && yarn test:unit",
     "test:lint": "eslint src",

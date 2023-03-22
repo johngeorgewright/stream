@@ -1,5 +1,6 @@
 import { fromCollection, interpose, write } from '../../src/index.js'
-import { defer, timeout } from '../util.js'
+import { timeout } from '../../src/utils/index.js'
+import { defer } from '../util.js'
 
 test('holds up a stream until a promise resolves', async () => {
   const fn = jest.fn()

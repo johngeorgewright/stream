@@ -7,6 +7,7 @@ export * from './sinks/toIterable.js'
 export * from './sinks/toIterator.js'
 export * from './sinks/write.js'
 
+export * from './sources/CachableStream.js'
 export * from './sources/Controllable.js'
 export * from './sources/ControllableStream.js'
 export * from './sources/fromCollection.js'
@@ -19,6 +20,9 @@ export * from './sources/interval.js'
 export * from './sources/merge.js'
 export * from './sources/race.js'
 export * from './sources/roundRobin.js'
+
+export * from './storages/MemoryStorage.js'
+export * from './storages/StorageCache.js'
 
 export * from './subjects/BaseSubject.js'
 export * from './subjects/Subject.js'

@@ -1,6 +1,6 @@
+import { without } from '../utils/Array.js'
 import { ControllableStream } from '../sources/ControllableStream.js'
 import { identity } from '../transformers/identity.js'
-import { without } from '../utils/Array.js'
 import { Forkable } from './Forkable.js'
 
 /**
