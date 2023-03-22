@@ -998,7 +998,7 @@ __metadata:
     "@semantic-release/github": 8.0.7
     "@semantic-release/release-notes-generator": 10.0.3
     "@types/jest": 29.5.0
-    "@types/ramda": ^0
+    "@types/ramda": 0.28.23
     "@typescript-eslint/eslint-plugin": 5.55.0
     "@typescript-eslint/parser": 5.55.0
     assert-never: 1.2.1
@@ -1788,7 +1788,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:^0":
+"@types/ramda@npm:0.28.23":
   version: 0.28.23
   resolution: "@types/ramda@npm:0.28.23"
   dependencies:
