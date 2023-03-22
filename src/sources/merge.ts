@@ -1,4 +1,4 @@
-import { without } from 'ramda'
+import { without } from '../utils/Array.js'
 import { ReadableStreamsChunk } from '../utils/Stream.js'
 import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream.js'
 
@@ -44,7 +44,7 @@ export function merge<RSs extends ReadableStream<unknown>[]>(
             readers.map(async (reader) => {
               try {
                 const result = await reader.read()
-                if (result.done) readers = without([reader], readers)
+                if (result.done) readers = without(readers, reader)
                 else {
                   controller.enqueue(result.value as ReadableStreamsChunk<RSs>)
                   resolve()

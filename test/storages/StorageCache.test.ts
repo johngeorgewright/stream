@@ -39,26 +39,22 @@ test('unsetting values', () => {
   expect(cache.get(['foo'])).toBeUndefined()
 })
 
-test('storage chapes', () => {
+test('storage shapes', () => {
   cache.set(['foo', 'bar'], 'something')
   cache.set(['a', 'b'], 'c')
   cache.set(['foo', 'rab'], 'thrab')
   expect(cache.getAll()).toEqual({
-    a: {
-      b: {
-        t: expect.any(Number),
-        v: 'c',
-      },
+    'a.b': {
+      t: expect.any(Number),
+      v: 'c',
     },
-    foo: {
-      bar: {
-        t: expect.any(Number),
-        v: 'something',
-      },
-      rab: {
-        t: expect.any(Number),
-        v: 'thrab',
-      },
+    'foo.bar': {
+      t: expect.any(Number),
+      v: 'something',
+    },
+    'foo.rab': {
+      t: expect.any(Number),
+      v: 'thrab',
     },
   })
 })

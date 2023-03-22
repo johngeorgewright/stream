@@ -1,4 +1,4 @@
-import { without } from 'ramda'
+import { without } from '../utils/Array.js'
 import { Controllable, ControllerPullListener } from './Controllable.js'
 
 /**
@@ -78,7 +78,7 @@ export class ControllableStream<T>
     this.#pullListeners.push(pullListener)
 
     return () => {
-      this.#pullListeners = without([pullListener], this.#pullListeners)
+      this.#pullListeners = without(this.#pullListeners, pullListener)
     }
   }
 

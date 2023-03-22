@@ -1,4 +1,3 @@
-import { assocPath, dissocPath, path as getPath } from 'ramda'
 import { isNonNullObject } from '../utils/Object.js'
 
 /**
@@ -50,20 +49,24 @@ export class StorageCache {
   }
 
   set(path: string[], value: unknown, ms = this.#ms) {
-    this.#save(
-      assocPath(
-        path,
-        {
-          t: Date.now() + ms,
-          v: value,
-        },
-        this.getAll()
-      )
-    )
+    this.#save({
+      ...this.getAll(),
+      [this.#pathKey(path)]: {
+        t: Date.now() + ms,
+        v: value,
+      },
+    })
   }
 
   unset(path: string[]) {
-    this.#save(dissocPath(path, this.getAll()))
+    const pathKey = this.#pathKey(path)
+    this.#save(
+      Object.entries(this.getAll()).reduce(
+        (acc, [key, value]) =>
+          this.#keyMatches(pathKey, key) ? acc : { ...acc, [key]: value },
+        {}
+      )
+    )
   }
 
   get(path: string[]) {
@@ -78,8 +81,16 @@ export class StorageCache {
     return (this.#get(path)?.t || now) - now
   }
 
+  #pathKey(path: string[]) {
+    return path.join('.')
+  }
+
+  #keyMatches(pathKey: string, test: string) {
+    return test === pathKey || test.startsWith(`${pathKey}.`)
+  }
+
   #get(path: string[]) {
-    const result = getPath(path, this.getAll())
+    const result = this.getAll()[this.#pathKey(path)]
     if (!isStoredItem(result)) return undefined
     if (result.t < Date.now()) {
       this.unset(path)
