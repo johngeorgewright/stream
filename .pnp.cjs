@@ -48,7 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:29.5.0"],\
             ["lint-staged", "npm:13.2.0"],\
             ["prettier", "npm:2.8.6"],\
-            ["rimraf", "npm:4.4.0"],\
+            ["rimraf", "npm:4.4.1"],\
             ["semantic-release", "npm:20.1.3"],\
             ["ts-jest", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:29.0.5"],\
             ["ts-node", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:10.9.1"],\
@@ -1521,7 +1521,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:29.5.0"],\
             ["lint-staged", "npm:13.2.0"],\
             ["prettier", "npm:2.8.6"],\
-            ["rimraf", "npm:4.4.0"],\
+            ["rimraf", "npm:4.4.1"],\
             ["semantic-release", "npm:20.1.3"],\
             ["ts-jest", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:29.0.5"],\
             ["ts-node", "virtual:95929f3e67f2ec66e0e059a60736fd56e2b5337f908cd50c80e15bfa65c738cd4fc0495a49febf66bfea93ea045003e1cd6bf01f9a6c0ab63be26d00837362e9#npm:10.9.1"],\
@@ -8999,10 +8999,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:4.4.0", {\
-          "packageLocation": "./.yarn/cache/rimraf-npm-4.4.0-7bda7f3851-0cedaf9d13.zip/node_modules/rimraf/",\
+        ["npm:4.4.1", {\
+          "packageLocation": "./.yarn/cache/rimraf-npm-4.4.1-80b02e041a-b786adc026.zip/node_modules/rimraf/",\
           "packageDependencies": [\
-            ["rimraf", "npm:4.4.0"],\
+            ["rimraf", "npm:4.4.1"],\
             ["glob", "npm:9.2.1"]\
           ],\
           "linkType": "HARD"\
