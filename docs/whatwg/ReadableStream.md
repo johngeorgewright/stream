@@ -48,7 +48,7 @@ reader.pipeTo(writer).then(() => console.info('done'))
 
 ## Pulling from a source
 
-The above example immediately queues 3 items in to a "source" that is then piped in to a "sink". Each item is consumed, with the [`WritableStream.prototype.write()`][write] function. Although perfectly acceptable, the above approach can be much improved, especially when dealing with large amounts of data, by registering a [pull][] function. The registered pull function will be called when there is room in the queue or after a queued item has moved through the stream.
+The above example immediately queues 3 items in to a "source" that is then piped in to a "sink". Each item is consumed, with the [`WritableStream.prototype.write()`][write] function. Although perfectly acceptable, the above approach can be much improved, especially when dealing with large amounts of data, by registering a [pull][] function. The registered pull function will be called after a queued item has moved through the stream. It will also be called whether there is room in the queue or not.
 
 ```typescript
 let i = 0
@@ -60,25 +60,26 @@ const reader = new ReadableStream<number>({
 })
 ```
 
-An important feature to note about the [pull][] function is that when it returns a [Promise][] it will not be called again until the [Promise][] has resolved or when a queued item has just passed through the stream.
+An important feature to note about the [pull][] function is that when it returns a [Promise][] it will not be called again until the [Promise][] has resolved or when a queued item has just passed through the stream. One may want to implement back/forward pressure by checking the [desiredSize][] property.
 
 ```typescript
 const asyncIterator = generateResults() // an async generator
 
 const reader = new ReadableStream<number>({
   async pull(controller) {
-    let result: IteratorResult<number>
+    while (controller.desiredSize) {
+      let result: IteratorResult<number>
 
-    try {
-      result = await asyncIterator.next()
-    } catch (error) {
-      return controller.error(error)
+      try {
+        result = await asyncIterator.next()
+      } catch (error) {
+        return controller.error(error)
+      }
+
+      if (result.done) return controller.close()
+
+      controller.enqueue(result.value)
     }
-
-    if (result.done) return controller.close()
-
-    controller.enqueue(result.value)
-    if (controller.desiredSize) return this.pull(controller)
   },
 })
 ```
