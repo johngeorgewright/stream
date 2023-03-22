@@ -57,24 +57,27 @@ import { StorageCache } from '../storages/StorageCache.js'
 export class CachableStream<T> extends ReadableStream<T> {
   #abortController = new AbortController()
   readonly #cache: StorageCache
+  readonly #ms: number
   readonly #path: string[]
+  readonly #pullItem: () => T | Promise<T>
 
   constructor(
     cache: StorageCache,
     path: string[],
-    pull: () => T | Promise<T>,
+    pullItem: () => T | Promise<T>,
     ms: number = cache.ms
   ) {
     super({
-      pull: async (controller) => {
-        let item = cache.get(this.#path)
-        if (!item) {
-          item = await pull()
-          cache.set(this.#path, item, ms)
+      start: async (controller) => {
+        let item = cache.get(path)
+        if (typeof item === 'undefined') {
+          item = await pullItem()
+          cache.set(path, item, ms)
         }
         controller.enqueue(item as T)
-        await this.#wait(cache.timeLeft(this.#path))
       },
+
+      pull: (controller) => this.#pull(controller),
 
       cancel: (reason) => {
         this.#abortController.abort(reason)
@@ -82,15 +85,32 @@ export class CachableStream<T> extends ReadableStream<T> {
     })
 
     this.#cache = cache
+    this.#ms = ms
     this.#path = path
+    this.#pullItem = pullItem
   }
 
   async #wait(ms: number) {
+    if (ms <= 0) return
     try {
       await timeout(ms, undefined, this.#abortController.signal)
     } catch (error) {
       //
     }
+  }
+
+  async #pull(controller: ReadableStreamDefaultController<T>): Promise<void> {
+    let item = this.#cache.get(this.#path)
+
+    if (typeof item === 'undefined') {
+      item = await this.#pullItem()
+      this.#cache.set(this.#path, item, this.#ms)
+      controller.enqueue(item as T)
+    } else {
+      await this.#wait(this.#cache.timeLeft(this.#path))
+    }
+
+    if (controller.desiredSize) return this.#pull(controller)
   }
 
   invalidate() {

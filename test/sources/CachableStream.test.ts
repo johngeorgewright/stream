@@ -22,7 +22,7 @@ test('only pulls when the cache is stale', async () => {
   expect(fn).toHaveBeenCalledTimes(1)
   expect(fn).toHaveBeenCalledWith(1)
 
-  await timeout(10)
+  await timeout(15)
   expect(fn).toHaveBeenCalledTimes(2)
   expect(fn.mock.calls[1][0]).toBe(2)
 })

@@ -48,7 +48,7 @@ reader.pipeTo(writer).then(() => console.info('done'))
 
 ## Pulling from a source
 
-The above example immediately queues 3 items in to a "source" that is then piped in to a "sink". Each item is consumed, with the [`WritableStream.prototype.write()`][write] function. Although perfectly acceptable, the above approach can be much improved, especially when dealing with large amounts of data, by registering a [pull][] function. The registered pull function will be called when there is room in the queue.
+The above example immediately queues 3 items in to a "source" that is then piped in to a "sink". Each item is consumed, with the [`WritableStream.prototype.write()`][write] function. Although perfectly acceptable, the above approach can be much improved, especially when dealing with large amounts of data, by registering a [pull][] function. The registered pull function will be called when there is room in the queue or after a queued item has moved through the stream.
 
 ```typescript
 let i = 0
@@ -60,7 +60,7 @@ const reader = new ReadableStream<number>({
 })
 ```
 
-An important feature to note about the [pull][] function is that when it returns a [Promise][] it will not be called again until the [Promise][] has resolved. Futhermore, it will only be called once the stream has time to check the queue size, which is normally after a chunk has been consumed. Therefore one may want to keep adding to the queue until the [desired size][desiredSize] has been met.
+An important feature to note about the [pull][] function is that when it returns a [Promise][] it will not be called again until the [Promise][] has resolved or when a queued item has just passed through the stream.
 
 ```typescript
 const asyncIterator = generateResults() // an async generator
