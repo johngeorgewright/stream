@@ -1,4 +1,5 @@
-import { get, isNonNullObject, set, unset } from '../utils/Object.js'
+import { assocPath, dissocPath, path as getPath } from 'ramda'
+import { isNonNullObject } from '../utils/Object.js'
 
 /**
  * Timed cache using a `Storage` interface.
@@ -50,15 +51,19 @@ export class StorageCache {
 
   set(path: string[], value: unknown, ms = this.#ms) {
     this.#save(
-      set(this.getAll(), path, {
-        t: Date.now() + ms,
-        v: value,
-      })
+      assocPath(
+        path,
+        {
+          t: Date.now() + ms,
+          v: value,
+        },
+        this.getAll()
+      )
     )
   }
 
   unset(path: string[]) {
-    this.#save(unset(this.getAll(), path))
+    this.#save(dissocPath(path, this.getAll()))
   }
 
   get(path: string[]) {
@@ -74,7 +79,7 @@ export class StorageCache {
   }
 
   #get(path: string[]) {
-    const result = get(this.getAll(), path)
+    const result = getPath(path, this.getAll())
     if (!isStoredItem(result)) return undefined
     if (result.t < Date.now()) {
       this.unset(path)

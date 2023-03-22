@@ -1,5 +1,5 @@
+import { without } from 'ramda'
 import { ReadableStreamsChunk } from '../utils/Stream.js'
-import { without } from '../utils/Array.js'
 import { IteratorSource } from './fromCollection.js'
 import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream.js'
 
@@ -40,7 +40,7 @@ export function roundRobin<RSs extends ReadableStream<unknown>[]>(
       if (!(index in readers)) index = 0
       const reader = readers[index]
       const result = await reader.read()
-      if (result.done) readers = without(readers, reader)
+      if (result.done) readers = without([reader], readers)
       else {
         yield result.value
         index++

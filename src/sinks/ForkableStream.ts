@@ -1,6 +1,6 @@
+import { without } from 'ramda'
 import { ControllableStream } from '../sources/ControllableStream.js'
 import { identity } from '../transformers/identity.js'
-import { without } from '../utils/Array.js'
 import { Forkable } from './Forkable.js'
 
 /**
@@ -95,7 +95,7 @@ export class ForkableStream<T>
       {
         ...underlyingSource,
         cancel: (reason) => {
-          this.#controllers = without(this.#controllers, controller)
+          this.#controllers = without([controller], this.#controllers)
           underlyingSource?.cancel?.(reason)
         },
       },
