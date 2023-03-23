@@ -91,7 +91,6 @@ export class CachableStream<T> extends ReadableStream<T> {
   }
 
   async #wait(ms: number) {
-    if (ms <= 0) return
     try {
       await timeout(ms, undefined, this.#abortController.signal)
     } catch (error) {
@@ -100,15 +99,9 @@ export class CachableStream<T> extends ReadableStream<T> {
   }
 
   async #pull(controller: ReadableStreamDefaultController<T>): Promise<void> {
-    let item = this.#cache.get(this.#path)
-
-    if (typeof item === 'undefined') {
-      item = await this.#pullItem()
-      this.#cache.set(this.#path, item, this.#ms)
-      controller.enqueue(item as T)
-    } else {
-      await this.#wait(this.#cache.timeLeft(this.#path))
-    }
+    if (await this.#cache.updateIfStale(this.#path, this.#pullItem, this.#ms))
+      controller.enqueue(this.#cache.get(this.#path) as T)
+    else await this.#wait(this.#cache.timeLeft(this.#path))
 
     if (controller.desiredSize) return this.#pull(controller)
   }

@@ -48,6 +48,9 @@ export class StorageCache {
     return this.#ms
   }
 
+  /**
+   * Ads or overrides an item in the cache.
+   */
   set(path: string[], value: unknown, ms = this.#ms) {
     this.#save({
       ...this.getAll(),
@@ -58,6 +61,10 @@ export class StorageCache {
     })
   }
 
+  /**
+   * Removes one or more items from the cache using the path
+   * as key hierarchy.
+   */
   unset(path: string[]) {
     const pathKey = this.#pathKey(path)
     this.#save(
@@ -69,8 +76,30 @@ export class StorageCache {
     )
   }
 
+  /**
+   * Returns the cached value. Returns undefined if it doesn't
+   * exist or if the cache is stale.
+   */
   get(path: string[]) {
     return this.#get(path)?.v
+  }
+
+  /**
+   * Checks if a path has cache. If not, updates it and returns `true`.
+   * Otherwise returns `false`.
+   */
+  async updateIfStale(
+    path: string[],
+    update: () => unknown | Promise<unknown>,
+    ms?: number
+  ) {
+    let item = this.get(path)
+    if (typeof item === 'undefined') {
+      item = await update()
+      this.set(path, item, ms)
+      return true
+    }
+    return false
   }
 
   /**
@@ -78,7 +107,8 @@ export class StorageCache {
    */
   timeLeft(path: string[]) {
     const now = Date.now()
-    return (this.#get(path)?.t || now) - now
+    const time = this.#get(path)?.t || now
+    return Math.max(time - now, 0)
   }
 
   #pathKey(path: string[]) {
