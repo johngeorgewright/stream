@@ -14,7 +14,7 @@ import { StorageCache } from '../storages/StorageCache.js'
  * const cache = new StorageCache(
  *   localStorage,
  *   'my-cache',
- *   30 * 60 * 60 * 1_000
+ *   30 * 60_000
  * )
  *
  * let i = 0
@@ -27,7 +27,7 @@ import { StorageCache } from '../storages/StorageCache.js'
  * stream.pipeTo(write(console.info))
  * // 1
  *
- * await setTimeout(30 * 60 * 60 * 1_000))
+ * await setTimeout(30 * 60_000))
  * // 2
  * ```
  * @example
@@ -37,7 +37,7 @@ import { StorageCache } from '../storages/StorageCache.js'
  * const cache = new StorageCache(
  *   localStorage,
  *   'my-cache',
- *   30 * 60 * 60 * 1_000
+ *   30 * 60_000
  * )
  *
  * let i = 0
