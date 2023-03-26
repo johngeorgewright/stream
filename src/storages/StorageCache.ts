@@ -59,6 +59,9 @@ export class StorageCache {
         v: value,
       },
     })
+    setTimeout(() => {
+      this.unset(path)
+    }, ms)
   }
 
   /**
@@ -122,10 +125,6 @@ export class StorageCache {
   #get(path: string[]) {
     const result = this.getAll()[this.#pathKey(path)]
     if (!isStoredItem(result)) return undefined
-    if (result.t < Date.now()) {
-      this.unset(path)
-      return undefined
-    }
     return result
   }
 
