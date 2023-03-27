@@ -16,6 +16,7 @@ This library considers a "source" as something we can "read" from. IE, a `Readab
 - [fromDOMEvent](/stream/api/functions/fromDOMEvent.html)
 - [fromDOMIntersections](/stream/api/functions/fromDOMIntersections.html)
 - [fromDOMMutations](/stream/api/functions/fromDOMMutations.html)
+- [fromTimeline](/stream/api/functions/fromTimeline.html)
 - [immediatelyClosingReadableStream](/stream/api/functions/immediatelyClosingReadableStream.html)
 - [interval](/stream/api/functions/interval.html)
 - [merge](/stream/api/functions/merge.html)

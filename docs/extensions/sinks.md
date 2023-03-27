@@ -10,6 +10,7 @@ nav_order: 2
 
 This library considers a "sink" to be something to write to. IE, a `WritableStream`.
 
+- [expectTimeline](/stream/api/functions/expectTimeline.html)
 - [ForkableStream](/stream/api/classes/ForkableStream.html)
 - [ForkableRecallStream](/stream/api/classes/ForkableRecallStream.html)
 - [ForkableReplayStream](/stream/api/classes/ForkableReplayStream.html)
