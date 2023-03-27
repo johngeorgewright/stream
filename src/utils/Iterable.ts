@@ -1,3 +1,9 @@
+/**
+ * Take from an iterable until the `predicate` returns true.
+ *
+ * @group Utils
+ * @category Iterable
+ */
 export function* takeUntil<T>(
   iterable: Iterable<T>,
   predicate: (x: T) => boolean
@@ -8,6 +14,12 @@ export function* takeUntil<T>(
   }
 }
 
+/**
+ * Take from an iterable while a `predicate` returns true.
+ *
+ * @group Utils
+ * @category Iterable
+ */
 export function takeWhile<T>(
   iterable: Iterable<T>,
   predicate: (x: T) => boolean
