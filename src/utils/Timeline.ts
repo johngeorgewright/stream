@@ -1,3 +1,13 @@
+/**
+ * Parses a single timeline value. Used when creating/parsing
+ * streams with timelines.
+ *
+ * @see [timeline docs](/stream/extensions/timelines)
+ * @see {@link fromTimeline:function}
+ * @see {@link expectTimeline:function}
+ * @group Utils
+ * @category Timeline
+ */
 export function parseTimelineValue(value: string): unknown {
   value = value.trim()
 
