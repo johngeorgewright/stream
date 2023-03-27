@@ -4,6 +4,9 @@ import { TimelineError, parseTimelineValue } from '../utils/Timeline.js'
 /**
  * Calls an expectation function to compare a timeline against chunks.
  *
+ * @see [timeline docs](/stream/extensions/timelines)
+ * @see {@link fromTimeline:function}
+ * @group Sinks
  * @example
  * ```
  * fromTimeline(`

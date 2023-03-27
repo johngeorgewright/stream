@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Subjects
-permalink: /extensions/subjects
+title: Timelines
+permalink: /extensions/timelines
 parent: Extensions
 nav_order: 5
 ---

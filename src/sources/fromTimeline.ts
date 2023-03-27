@@ -9,6 +9,9 @@ import {
 /**
  * Creates a ReadableStream from a "timeline".
  *
+ * @see [timeline docs](/stream/extensions/timelines)
+ * @see {@link expectTimeline:function}
+ * @group Sources
  * @example
  * ```
  * fromTimeline('--1--2--3--4--')
