@@ -1,3 +1,64 @@
+import { timeout } from './Async.js'
+import { takeWhile } from './Iterable.js'
+
+/**
+ * Base TimelineError.
+ *
+ * @group Utils
+ * @category Timeline
+ */
+export class TimelineError extends Error {}
+
+/**
+ * An error to represent that the stream requires closing.
+ *
+ * @group Utils
+ * @category Timeline
+ */
+export class CloseTimelineError extends TimelineError {
+  constructor() {
+    super('The stream will now close')
+  }
+}
+
+/**
+ * An error to represent that the stream requires terminating.
+ *
+ * @group Utils
+ * @category Timeline
+ */
+export class TerminateTimelineError extends TimelineError {
+  constructor() {
+    super('The stream was expected to have closed by now')
+  }
+}
+
+/**
+ * Iterates over a timeline, pausing on dashes and yielding
+ * values.
+ *
+ * @group Utils
+ * @category Timeline
+ */
+export async function* parseTimelineValues(
+  timeline: string
+): AsyncGenerator<unknown> {
+  timeline = await timeBits(timeline.trim())
+  if (!timeline.length) return
+  const unparsed = [...takeWhile(timeline, (x) => x !== '-')]
+  yield parseTimelineValue(unparsed.join(''))
+  yield* parseTimelineValues(timeline.slice(unparsed.length))
+}
+
+async function timeBits(timeline: string): Promise<string> {
+  let size = 0
+  for (const _ of takeWhile(timeline, (x) => x === '-')) {
+    size++
+    await timeout(1)
+  }
+  return timeline.slice(size)
+}
+
 /**
  * Parses a single timeline value. Used when creating/parsing
  * streams with timelines.
@@ -8,7 +69,7 @@
  * @group Utils
  * @category Timeline
  */
-export function parseTimelineValue(value: string): unknown {
+function parseTimelineValue(value: string): unknown {
   value = value.trim()
 
   switch (true) {
@@ -47,15 +108,5 @@ export function parseTimelineValue(value: string): unknown {
 
     default:
       return value
-  }
-}
-
-export class TimelineError extends Error {}
-
-export class CloseTimelineError extends TimelineError {}
-
-export class TerminateTimelineError extends TimelineError {
-  constructor() {
-    super('The stream was expected to have closed by now')
   }
 }

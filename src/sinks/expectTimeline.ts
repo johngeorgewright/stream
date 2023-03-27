@@ -1,5 +1,5 @@
-import { takeWhile } from '../utils/Iterable.js'
-import { TimelineError, parseTimelineValue } from '../utils/Timeline.js'
+import { asyncIterableToArray } from '../utils/Iterable.js'
+import { TimelineError, parseTimelineValues } from '../utils/Timeline.js'
 
 /**
  * Calls an expectation function to compare a timeline against chunks.
@@ -26,15 +26,15 @@ export function expectTimeline(
   testExcpectation: (timelineValue: unknown, chunk: unknown) => void,
   queuingStrategy?: QueuingStrategy<unknown>
 ) {
-  const iterator = generate(timeline.trim())
+  const iterator = parseTimelineValues(timeline)
 
   return new WritableStream<unknown>(
     {
-      close() {
-        const todo = [...iterator]
+      async close() {
+        const todo = await asyncIterableToArray(iterator)
         if (todo.length)
           throw new TimelineError(
-            `There are more expectations left.\n${JSON.stringify(
+            `There are ${todo.length} more expectations left.\n${JSON.stringify(
               todo,
               null,
               2
@@ -42,8 +42,8 @@ export function expectTimeline(
           )
       },
 
-      write(chunk, controller) {
-        const { done, value } = iterator.next()
+      async write(chunk, controller) {
+        const { done, value } = await iterator.next()
 
         if (done)
           controller.error(
@@ -57,12 +57,4 @@ export function expectTimeline(
     },
     queuingStrategy
   )
-}
-
-function* generate(timeline: string): Generator<unknown> {
-  const str = timeline.replace(/^-+/, '')
-  if (!str.length) return
-  const unparsed = [...takeWhile(str, (x) => x !== '-')]
-  yield parseTimelineValue(unparsed.join(''))
-  yield* generate(str.slice(unparsed.length))
 }

@@ -20,8 +20,8 @@ The following is an example of merging 2 streams together and what the result wo
 
 ```
 merge([
---1---2---3---4--,
-----a---b---c----,
+--1---2---3---4--
+----a---b---c----
 ])
 
 --1-a-2-b-3-c-4--

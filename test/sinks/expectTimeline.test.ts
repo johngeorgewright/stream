@@ -111,7 +111,7 @@ test('not enough values', async () => {
         fn
       )
     )
-  ).rejects.toThrow(`There are more expectations left.
+  ).rejects.toThrow(`There are 2 more expectations left.
 [
   2,
   {

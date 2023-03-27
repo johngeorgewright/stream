@@ -26,3 +26,15 @@ export function takeWhile<T>(
 ) {
   return takeUntil(iterable, (x) => !predicate(x))
 }
+
+/**
+ * Consumes an async iterable in to an array.
+ *
+ * @group Utils
+ * @category Iterable
+ */
+export async function asyncIterableToArray<T>(iterable: AsyncIterable<T>) {
+  const array: T[] = []
+  for await (const item of iterable) array.push(item)
+  return array
+}
