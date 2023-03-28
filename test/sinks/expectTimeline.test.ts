@@ -97,7 +97,7 @@ test('objects and arrays', async () => {
   `)
 })
 
-test('not enough values', async () => {
+test('not enough chunks', async () => {
   const fn = jest.fn()
 
   await expect(
@@ -118,4 +118,38 @@ test('not enough values', async () => {
     "foo": "bar"
   }
 ]`)
+})
+
+test('not enough of a timeline', async () => {
+  const fn = jest.fn()
+
+  await expect(
+    fromTimeline(`
+    --1--2--3--
+  `).pipeTo(
+      expectTimeline(
+        `
+    --1--
+  `,
+        fn
+      )
+    )
+  ).rejects.toThrow('Received more values than expected (at "2")')
+})
+
+test('errors in the timeline will error in the stream', async () => {
+  const fn = jest.fn()
+
+  await expect(
+    fromTimeline(`
+    --1--
+  `).pipeTo(
+      expectTimeline(
+        `
+    --E--
+  `,
+        fn
+      )
+    )
+  ).rejects.toThrow()
 })
