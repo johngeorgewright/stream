@@ -1,7 +1,14 @@
 import { asyncIterableToArray, takeWhile } from '../../src/utils/index.js'
 
 test('takeWhile', () => {
-  expect(takeWhile('aaabbbcccddd', (x) => x !== 'c')).toBe('aaabbb')
+  expect([...takeWhile('aaabbbcccddd', (x) => x !== 'c')]).toEqual([
+    'a',
+    'a',
+    'a',
+    'b',
+    'b',
+    'b',
+  ])
 })
 
 test('asyncIterableToArray', async () => {
