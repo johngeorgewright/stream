@@ -13,6 +13,7 @@ export interface Flushable {
    * By default an error in the `flushes` stream will be sent by the transformer.
    */
   ignoreFlushErrors?: boolean
+  signal?: AbortSignal
 }
 
 /**
@@ -27,7 +28,7 @@ export function pipeFlushes(
   onError: (error: unknown) => unknown,
   options?: Flushable
 ) {
-  options?.flushes?.pipeTo(write(onFlush)).catch(
+  options?.flushes?.pipeTo(write(onFlush), { signal: options.signal }).catch(
     options.ignoreFlushErrors
       ? () => {
           // Ignored

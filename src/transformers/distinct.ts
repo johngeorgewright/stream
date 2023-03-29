@@ -60,21 +60,22 @@ export function distinct<T, K>({
   selector,
 }: DistinctOptions<T, K> = {}) {
   const set = new Set<T | K>()
-  const abortController = new AbortController()
+  const finishAbortController = new AbortController()
+  const flushesAbortController = new AbortController()
 
   pipeFlushes(
     () => set.clear(),
-    (error) => abortController.abort(error),
-    { flushes, ignoreFlushErrors }
+    (error) => flushesAbortController.abort(error),
+    { flushes, ignoreFlushErrors, signal: finishAbortController.signal }
   )
 
   return new TransformStream<T, T>({
     start:
       flushes && !ignoreFlushErrors
         ? (controller) => {
-            abortController.signal.addEventListener('abort', () => {
+            flushesAbortController.signal.addEventListener('abort', () => {
               set.clear()
-              controller.error(abortController.signal.reason)
+              controller.error(flushesAbortController.signal.reason)
             })
           }
         : undefined,
@@ -89,6 +90,7 @@ export function distinct<T, K>({
 
     flush() {
       set.clear()
+      finishAbortController.abort()
     },
   })
 }
