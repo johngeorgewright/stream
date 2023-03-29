@@ -14,10 +14,10 @@ test('only emits distinct values', async () => {
 test('selecting a distinct key', async () => {
   await expect(
     fromTimeline<{ a: number; n: string }>(`
-    -{a:4,n:f}-{a:7,n:b}-{a:5,n:f}-|
+    -{a: 4,n: f}-{a: 7,n: b}-{a: 5,n: f}-|
     `).pipeThrough(distinct({ selector: (x) => x.n }))
   ).toMatchTimeline(`
-    -{a:4,n:f}-{a:7,n:b}-----------|
+    -{a: 4,n: f}-{a: 7,n: b}-----------|
   `)
 })
 

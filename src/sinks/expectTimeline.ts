@@ -2,8 +2,10 @@ import { timeout } from '../utils/Async.js'
 import { asyncIterableToArray } from '../utils/Iterable.js'
 import {
   CloseTimelineError,
+  NeverReachTimelineError,
   TimelineError,
   TimelineTimer,
+  TimelineValue,
   parseTimelineValues,
 } from '../utils/Timeline.js'
 
@@ -27,7 +29,7 @@ import {
  *   ))
  * ```
  */
-export function expectTimeline(
+export function expectTimeline<T extends TimelineValue>(
   timeline: string,
   testExcpectation: (
     timelineValue: unknown,
@@ -38,7 +40,7 @@ export function expectTimeline(
   const iterator = parseTimelineValues(timeline)
   let nextResult: Promise<IteratorResult<unknown>>
 
-  return new WritableStream<unknown>(
+  return new WritableStream<T>(
     {
       start() {
         nextResult = iterator.next()
@@ -51,6 +53,7 @@ export function expectTimeline(
           : [value, ...(await asyncIterableToArray(iterator))].filter(
               (value) =>
                 !(value instanceof CloseTimelineError) &&
+                !(value instanceof NeverReachTimelineError) &&
                 !(value instanceof TimelineTimer && value.finished)
             )
         if (todo.length)

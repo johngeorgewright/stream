@@ -30,40 +30,6 @@ merge([
 
 The syntax for timelines are as follows:
 
-### Numbers
-
-Anything matching the regular expression `\d+(\.\d+)?` will be considered a number.
-
-For example:
-
-- `1`
-- `1000`
-- `12.34`
-
-### Objects
-
-Objects will be parsed with the use of braces `{ ... }`. **Keys and values should NOT be inside quotes**.
-
-For example:
-
-- `{a:b,c:d}`
-- `{long key:log value}`
-- `{foo:[{nested:object}]}`
-
-### Null
-
-The word null will be parsed as `null`.
-
-### Arrays
-
-Arrays will be parsed with the use of brackets `[ ... ]`.
-
-For example:
-
-- `[1,2,3,4]`
-- `[foo,bar]`
-- `[{foo:bar}]`
-
 ### Closing a stream
 
 A stream will only close, when specified to do so, with the pipe character: `|`.
@@ -108,16 +74,9 @@ debounce(10)
 -----T10-2--
 ```
 
-### Strings
+### Numbers, Strings, Boolean, Objects & Arrays
 
-Any combination of characters, other than a dash (`-`) or any of the above syntax, will be considered a string.
-
-For example:
-
-- `a`
-- `a1`
-- `1.2.3`
-- `__$$%%`
+Any combination of characters, other than a dash (`-`) or any of the above syntax, will be parsed by [js-yaml](https://github.com/nodeca/js-yaml).
 
 ## Testing
 

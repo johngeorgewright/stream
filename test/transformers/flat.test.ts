@@ -6,7 +6,7 @@ test('flattens iterables', async () => {
   await expect(
     fromTimeline(`
     -[1,2]-[3,[[4]]]-|
-    `).pipeThrough(flat())
+    `).pipeThrough(flat<number[]>())
   ).toMatchTimeline(`
     -1-2---3-4-------|
   `)
@@ -48,7 +48,7 @@ test('queues things that arent iterable', async () => {
   await expect(
     fromTimeline(`
     --{foo:bar}--|
-    `).pipeThrough(flat())
+    `).pipeThrough(flat<Record<string, string>>())
   ).toMatchTimeline(`
     --{foo:bar}--
   `)

@@ -1,13 +1,14 @@
-import { find, fromCollection, toArray, write } from '../../src/index.js'
+import { find, fromCollection, fromTimeline, write } from '../../src/index.js'
+import '../../src/jest/extend.js'
 
 test('queues the first found chunk and then terminates the stream', async () => {
-  expect(
-    await toArray(
-      fromCollection([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).pipeThrough(
-        find((chunk) => chunk === 4)
-      )
-    )
-  ).toEqual([4])
+  await expect(
+    fromTimeline(`
+    -0-1-2-3-4-X
+    `).pipeThrough(find((chunk) => chunk === 4))
+  ).toMatchTimeline(`
+    ---------4-X
+  `)
 })
 
 test('using type guards', () => {

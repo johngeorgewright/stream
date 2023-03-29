@@ -1,77 +1,22 @@
-import { fromCollection, groupBy, write } from '../../src/index.js'
+import { fromTimeline, groupBy } from '../../src/index.js'
+import '../../src/jest/extend.js'
 
 test('using a property', async () => {
-  const fn = jest.fn()
-  await fromCollection(['one', 'two', 'three'])
-    .pipeThrough(groupBy('length'))
-    .pipeTo(write(fn))
-  expect(fn.mock.calls).toMatchInlineSnapshot(`
-    [
-      [
-        {
-          "3": [
-            "one",
-          ],
-        },
-      ],
-      [
-        {
-          "3": [
-            "one",
-            "two",
-          ],
-        },
-      ],
-      [
-        {
-          "3": [
-            "one",
-            "two",
-          ],
-          "5": [
-            "three",
-          ],
-        },
-      ],
-    ]
+  await expect(
+    fromTimeline<string>(`
+    -one-------two-----------three------------------|
+    `).pipeThrough(groupBy('length'))
+  ).toMatchTimeline(`
+    -{3:[one]}-{3:[one,two]}-{3:[one,two],5:[three]}-
   `)
 })
 
 test('using a function', async () => {
-  const fn = jest.fn()
-  await fromCollection([6.1, 4.2, 6.3])
-    .pipeThrough(groupBy(Math.floor))
-    .pipeTo(write(fn))
-  expect(fn.mock.calls).toMatchInlineSnapshot(`
-    [
-      [
-        {
-          "6": [
-            6.1,
-          ],
-        },
-      ],
-      [
-        {
-          "4": [
-            4.2,
-          ],
-          "6": [
-            6.1,
-          ],
-        },
-      ],
-      [
-        {
-          "4": [
-            4.2,
-          ],
-          "6": [
-            6.1,
-            6.3,
-          ],
-        },
-      ],
-    ]
+  await expect(
+    fromTimeline(`
+    -6.1-------4.2---------------6.3-------------------|
+    `).pipeThrough(groupBy(Math.floor))
+  ).toMatchTimeline(`
+    -{6:[6.1]}-{4:[4.2],6:[6.1]}-{4:[4.2],6:[6.1, 6.3]}-
   `)
 })

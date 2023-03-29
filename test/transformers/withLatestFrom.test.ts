@@ -1,56 +1,22 @@
-import { fromCollection, map, withLatestFrom, write } from '../../src/index.js'
-import { timeout } from '../../src/utils/Async.js'
+import { fromTimeline, withLatestFrom, write } from '../../src/index.js'
+import '../../src/jest/extend.js'
 
 test('combines each value from the source with the latest values from other inputs', async () => {
-  const fn = jest.fn()
-
-  await fromCollection(['a', 'b', 'c', 'd', 'e'])
-    .pipeThrough(
-      map(async (chunk) => (chunk === 'b' ? timeout(0, chunk) : chunk))
+  await expect(
+    fromTimeline(`
+    --a----------b-------c-------d-------e--|
+    `).pipeThrough(
+      withLatestFrom(
+        fromTimeline(`
+    -1---2-3-4---|
+        `),
+        fromTimeline(`
+    -x-----y-|
+        `)
+      )
     )
-    .pipeThrough(
-      withLatestFrom(fromCollection([1, 2, 3, 4]), fromCollection(['x', 'y']))
-    )
-    .pipeTo(write(fn))
-
-  expect(fn.mock.calls).toMatchInlineSnapshot(`
-    [
-      [
-        [
-          "a",
-          1,
-          "x",
-        ],
-      ],
-      [
-        [
-          "b",
-          4,
-          "y",
-        ],
-      ],
-      [
-        [
-          "c",
-          4,
-          "y",
-        ],
-      ],
-      [
-        [
-          "d",
-          4,
-          "y",
-        ],
-      ],
-      [
-        [
-          "e",
-          4,
-          "y",
-        ],
-      ],
-    ]
+  ).toMatchTimeline(`
+    --[a,1,x]---[b,4,y]--[c,4,y]-[d,4,y]-[e,4,y]-
   `)
 })
 

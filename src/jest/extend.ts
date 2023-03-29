@@ -1,8 +1,9 @@
 import { expect, JestAssertionError, MatcherContext } from 'expect'
 import { expectTimeline } from '../sinks/expectTimeline.js'
+import { TimelineValue } from '../utils/Timeline.js'
 
 expect.extend({
-  toMatchTimeline: function toMatchTimeline<T>(
+  toMatchTimeline: function toMatchTimeline<T extends TimelineValue>(
     this: MatcherContext,
     stream: ReadableStream<T>,
     timeline: string

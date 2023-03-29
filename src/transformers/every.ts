@@ -29,12 +29,14 @@ import { Flushable, pipeFlushes } from '../utils/Stream.js'
  * ```
  */
 export function every<T>(predicate: Predicate<T>, options?: Flushable) {
+  const finishController = new AbortController()
+
   return new TransformStream<T, boolean>({
     start(controller) {
       pipeFlushes(
         () => controller.enqueue(true),
         (error) => controller.error(error),
-        options
+        { ...options, signal: finishController.signal }
       )
     },
 
@@ -51,6 +53,7 @@ export function every<T>(predicate: Predicate<T>, options?: Flushable) {
 
     flush(controller) {
       controller.enqueue(true)
+      finishController.abort()
     },
   })
 }

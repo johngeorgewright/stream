@@ -1,3 +1,4 @@
+import yaml from 'js-yaml'
 import { timeout } from './Async.js'
 import { takeWhile } from './Iterable.js'
 
@@ -31,7 +32,7 @@ export class CloseTimelineError extends TimelineError {
  * @group Utils
  * @category Timeline
  */
-export class TerminateTimelineError extends TimelineError {
+export class NeverReachTimelineError extends TimelineError {
   constructor() {
     super('The stream was expected to have closed by now')
   }
@@ -133,18 +134,6 @@ function parseTimelineValue(value: string): TimelineValue {
   value = value.trim()
 
   switch (true) {
-    case /^\d+(\.\d+)?$/.test(value):
-      return Number(value)
-
-    case value === 'true':
-      return true
-
-    case value === 'false':
-      return false
-
-    case value === 'null':
-      return null
-
     case /^T\d+$/.test(value):
       return new TimelineTimer(Number(value.slice(1)))
 
@@ -155,21 +144,9 @@ function parseTimelineValue(value: string): TimelineValue {
       return new CloseTimelineError()
 
     case value === 'X':
-      return new TerminateTimelineError()
-
-    case /^\{.*\}$/.test(value):
-      return value
-        .slice(1, -1)
-        .split(/\s*,\s*/g)
-        .reduce((acc, x) => {
-          const [key, value] = x.split(/\s*:\s*/g)
-          return { ...acc, [key.trim()]: parseTimelineValue(value) }
-        }, {})
-
-    case /^\[.*\]$/.test(value):
-      return value.slice(1, -1).split(',').map(parseTimelineValue)
+      return new NeverReachTimelineError()
 
     default:
-      return value
+      return yaml.load(value) as TimelineValue
   }
 }

@@ -1,4 +1,5 @@
 import { fromTimeline, reduce, write } from '../../src/index.js'
+import '../../src/jest/extend.js'
 
 test('accumulates values from a stream', async () => {
   await expect(
@@ -11,7 +12,7 @@ test('accumulates values from a stream', async () => {
       }))
     )
   ).toMatchTimeline(`
-    -----------{0:0,1:1,2:2,3:3,4:4}-
+    -----------{0: 0,1: 1,2: 2,3: 3,4: 4}-
   `)
 })
 
@@ -34,7 +35,7 @@ test('flushing', async () => {
       )
     )
   ).toMatchTimeline(`
-    ----------{0:0,1:1,2:2,3:3}---{0:0,1:1,2:2,3:3,4:4,5:5}-
+    ----------{0: 0,1: 1,2: 2,3: 3}---{0: 0,1: 1,2: 2,3: 3,4: 4,5: 5}-
   `)
 })
 

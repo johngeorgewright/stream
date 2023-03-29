@@ -1,6 +1,7 @@
 import {
   CloseTimelineError,
   TimelineTimer,
+  TimelineValue,
   parseTimelineValues,
 } from '../utils/Timeline.js'
 
@@ -37,7 +38,7 @@ import {
  * // 4
  * ```
  */
-export function fromTimeline<T>(
+export function fromTimeline<T extends TimelineValue>(
   timeline: string,
   queuingStrategy?: QueuingStrategy<T>
 ) {

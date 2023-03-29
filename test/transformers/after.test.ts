@@ -1,30 +1,12 @@
-import { after, fromCollection, write } from '../../src/index.js'
+import { after, fromTimeline } from '../../src/index.js'
+import '../../src/jest/extend.js'
 
 test('prevents chunks until predicate', async () => {
-  const fn = jest.fn()
-  await fromCollection([0, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4])
-    .pipeThrough(after((x) => x > 4))
-    .pipeTo(write(fn))
-  expect(fn.mock.calls).toMatchInlineSnapshot(`
-    [
-      [
-        5,
-      ],
-      [
-        6,
-      ],
-      [
-        1,
-      ],
-      [
-        2,
-      ],
-      [
-        3,
-      ],
-      [
-        4,
-      ],
-    ]
+  await expect(
+    fromTimeline<number>(`
+    -0-1-2-3-4-5-6-1-2-3-4-|
+    `).pipeThrough(after((x) => x > 4))
+  ).toMatchTimeline(`
+    -----------5-6-1-2-3-4-
   `)
 })
