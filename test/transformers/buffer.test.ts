@@ -1,4 +1,5 @@
 import { buffer, fromTimeline } from '../../src/index.js'
+import '../../src/jest/extend.js'
 
 test('buffers the source stream chunks until `notifier` emits.', async () => {
   await expect(
