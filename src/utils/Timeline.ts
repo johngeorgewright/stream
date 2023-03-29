@@ -33,6 +33,50 @@ export class TerminateTimelineError extends TimelineError {
   }
 }
 
+export class TimelineTimer {
+  #finished = false
+  readonly #start = Date.now()
+  readonly #end: number
+  readonly #ms: number
+  readonly #promise: Promise<void>
+
+  constructor(ms: number) {
+    this.#ms = ms
+    this.#end = this.#start + ms
+    this.#promise = new Promise<void>((resolve) => {
+      setTimeout(() => {
+        this.#finished = true
+        resolve()
+      }, ms)
+    })
+  }
+
+  toJSON() {
+    return {
+      name: 'TimelineTimer',
+      finished: this.#finished,
+      ms: this.#ms,
+      timeLeft: this.timeLeft,
+    }
+  }
+
+  get timeLeft() {
+    return this.#end - Date.now()
+  }
+
+  get finished() {
+    return this.#finished
+  }
+
+  get promise() {
+    return this.#promise
+  }
+
+  get ms() {
+    return this.#ms
+  }
+}
+
 /**
  * Iterates over a timeline, pausing on dashes and yielding
  * values.
@@ -84,6 +128,9 @@ function parseTimelineValue(value: string): unknown {
 
     case value === 'null':
       return null
+
+    case /^T\d+$/.test(value):
+      return new TimelineTimer(Number(value.slice(1)))
 
     case value === 'E':
       return new TimelineError()

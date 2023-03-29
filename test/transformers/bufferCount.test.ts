@@ -1,63 +1,21 @@
-import { bufferCount, fromCollection, write } from '../../src/index.js'
+import { bufferCount, fromTimeline } from '../../src/index.js'
 
 test('bufferCount in 2s', async () => {
-  const fn = jest.fn()
-  await fromCollection([1, 2, 3, 4, 5, 6, 7, 8])
-    .pipeThrough(bufferCount(2))
-    .pipeTo(write(fn))
-  expect(fn.mock.calls).toMatchInlineSnapshot(`
-    [
-      [
-        [
-          1,
-          2,
-        ],
-      ],
-      [
-        [
-          3,
-          4,
-        ],
-      ],
-      [
-        [
-          5,
-          6,
-        ],
-      ],
-      [
-        [
-          7,
-          8,
-        ],
-      ],
-    ]
+  await expect(
+    fromTimeline(`
+    -1-2---3-4---5-6---7-8-----
+    `).pipeThrough(bufferCount(2))
+  ).toMatchTimeline(`
+    ---[1,2]-[3,4]-[5,6]-[7,8]-
   `)
 })
 
 test('queues whatever remains after stream has closed', async () => {
-  const fn = jest.fn()
-  await fromCollection([1, 2, 3, 4, 5, 6, 7, 8])
-    .pipeThrough(bufferCount(5))
-    .pipeTo(write(fn))
-  expect(fn.mock.calls).toMatchInlineSnapshot(`
-    [
-      [
-        [
-          1,
-          2,
-          3,
-          4,
-          5,
-        ],
-      ],
-      [
-        [
-          6,
-          7,
-          8,
-        ],
-      ],
-    ]
+  await expect(
+    fromTimeline(`
+    -1-2-3-4-5-------6-7-8-|
+    `).pipeThrough(bufferCount(5))
+  ).toMatchTimeline(`
+    ---------[1,2,3,4,5]---[6,7,8]-
   `)
 })

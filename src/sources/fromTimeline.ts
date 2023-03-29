@@ -1,4 +1,8 @@
-import { CloseTimelineError, parseTimelineValues } from '../utils/Timeline.js'
+import {
+  CloseTimelineError,
+  TimelineTimer,
+  parseTimelineValues,
+} from '../utils/Timeline.js'
 
 /**
  * Creates a ReadableStream from a "timeline".
@@ -33,13 +37,13 @@ import { CloseTimelineError, parseTimelineValues } from '../utils/Timeline.js'
  * // 4
  * ```
  */
-export function fromTimeline(
+export function fromTimeline<T>(
   timeline: string,
-  queuingStrategy?: QueuingStrategy<unknown>
+  queuingStrategy?: QueuingStrategy<T>
 ) {
   const iterator = parseTimelineValues(timeline)
 
-  return new ReadableStream(
+  return new ReadableStream<T>(
     {
       async pull(controller) {
         while (controller.desiredSize) {
@@ -48,7 +52,8 @@ export function fromTimeline(
           if (done) controller.close()
           else if (value instanceof CloseTimelineError) controller.close()
           else if (value instanceof Error) controller.error(value)
-          else controller.enqueue(value)
+          else if (value instanceof TimelineTimer) await value.promise
+          else controller.enqueue(value as T)
         }
       },
     },

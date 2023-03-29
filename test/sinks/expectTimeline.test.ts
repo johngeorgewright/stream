@@ -134,7 +134,7 @@ test('not enough of a timeline', async () => {
         fn
       )
     )
-  ).rejects.toThrow('Received more values than expected (at "2")')
+  ).rejects.toThrow('Received a value after the expected timeline:\n2')
 })
 
 test('errors in the timeline will error in the stream', async () => {
@@ -152,4 +152,49 @@ test('errors in the timeline will error in the stream', async () => {
       )
     )
   ).rejects.toThrow()
+})
+
+test('timing success', async () => {
+  const fn = jest.fn()
+
+  await fromTimeline(`
+    --1--T10--2--
+  `).pipeTo(
+    expectTimeline(
+      `
+    --1--T10--2--
+  `,
+      fn
+    )
+  )
+
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        1,
+        1,
+      ],
+      [
+        2,
+        2,
+      ],
+    ]
+  `)
+})
+
+test('timing errors', async () => {
+  const fn = jest.fn()
+
+  await expect(
+    fromTimeline(`
+    --1--T5--2--
+  `).pipeTo(
+      expectTimeline(
+        `
+    --1--T10--2--
+  `,
+        fn
+      )
+    )
+  ).rejects.toThrow('Expected 10ms timer to have finished')
 })

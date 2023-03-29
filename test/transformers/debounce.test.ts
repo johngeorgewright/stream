@@ -1,94 +1,79 @@
 import {
-  ControllableStream,
   debounce,
   DebounceBackOffBehavior,
   DebounceLeadingBehavior,
   DebounceTrailingBehavior,
-  write,
+  fromTimeline,
 } from '../../src/index.js'
-import { timeout } from '../../src/utils/Async.js'
-
-let controller: ControllableStream<number>
-let fn: jest.Mock<void, [number]>
-
-beforeEach(() => {
-  controller = new ControllableStream()
-  fn = jest.fn()
-})
-
-afterEach(() => {
-  controller.close()
-})
+import '../../src/jest/extend.js'
 
 test('trailing only (by default)', async () => {
-  controller.pipeThrough(debounce(10)).pipeTo(write(fn))
-
-  controller.enqueue(1)
-  controller.enqueue(2)
-  await timeout()
-  expect(fn).not.toHaveBeenCalled()
-
-  await timeout(15)
-  expect(fn).toHaveBeenCalledTimes(1)
-  expect(fn).toHaveBeenCalledWith(2)
+  await expect(
+    fromTimeline(`
+    --1--2------T10--|
+    `).pipeThrough(debounce(10))
+  ).toMatchTimeline(`
+    -----T9-2--------|
+  `)
 })
 
 test('leading only', async () => {
-  controller
-    .pipeThrough(debounce(10, new DebounceLeadingBehavior()))
-    .pipeTo(write(fn))
-
-  controller.enqueue(1)
-  controller.enqueue(2)
-  await timeout()
-  expect(fn).toHaveBeenCalledTimes(1)
-  expect(fn).toHaveBeenCalledWith(1)
-
-  await timeout(15)
-  expect(fn).toHaveBeenCalledTimes(1)
+  await expect(
+    fromTimeline(`
+    --1--2--T10-|
+    `).pipeThrough(debounce(10, new DebounceLeadingBehavior()))
+  ).toMatchTimeline(`
+    --1--
+  `)
 })
 
 test('leading and trailing', async () => {
-  controller
-    .pipeThrough(
+  await expect(
+    fromTimeline(`
+    -1-2-3------------|
+    `).pipeThrough(
       debounce(10, [
         new DebounceLeadingBehavior(),
         new DebounceTrailingBehavior(),
       ])
     )
-    .pipeTo(write(fn))
-
-  controller.enqueue(1)
-  controller.enqueue(2)
-  controller.enqueue(3)
-  await timeout()
-  expect(fn).toHaveBeenCalledTimes(1)
-  expect(fn).toHaveBeenCalledWith(1)
-
-  await timeout(15)
-  expect(fn).toHaveBeenCalledTimes(2)
-  expect(fn).toHaveBeenCalledWith(3)
+  ).toMatchTimeline(`
+    -1---T9-3--|
+  `)
 })
 
 test('back off', async () => {
-  controller
-    .pipeThrough(
+  await expect(
+    fromTimeline(`
+    -1-2-3-4-T45-5----|
+  `).pipeThrough(
       debounce(10, [
         new DebounceLeadingBehavior(),
         new DebounceBackOffBehavior({ inc: (x) => x * 2, max: 45 }),
       ])
     )
-    .pipeTo(write(fn))
+  ).toMatchTimeline(`
+    -1-----T45---5----|
+  `)
 
-  controller.enqueue(1)
-  controller.enqueue(2)
-  await timeout(15)
-  expect(fn).toHaveBeenCalledTimes(1)
-  expect(fn).toHaveBeenCalledWith(1)
+  // controller
+  //   .pipeThrough(
+  //     debounce(10, [
+  //       new DebounceLeadingBehavior(),
+  //       new DebounceBackOffBehavior({ inc: (x) => x * 2, max: 45 }),
+  //     ])
+  //   )
+  //   .pipeTo(write(fn))
 
-  await timeout(10)
-  controller.enqueue(3)
-  controller.enqueue(4)
-  expect(fn).toHaveBeenCalledTimes(2)
-  expect(fn).toHaveBeenCalledWith(3)
+  // controller.enqueue(1)
+  // controller.enqueue(2)
+  // await timeout(15)
+  // expect(fn).toHaveBeenCalledTimes(1)
+  // expect(fn).toHaveBeenCalledWith(1)
+
+  // await timeout(10)
+  // controller.enqueue(3)
+  // controller.enqueue(4)
+  // expect(fn).toHaveBeenCalledTimes(2)
+  // expect(fn).toHaveBeenCalledWith(3)
 })

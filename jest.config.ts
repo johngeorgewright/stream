@@ -4,10 +4,13 @@ const config: Config = {
   moduleNameMapper: {
     '^(.+)\\.js$': ['$1.js', '$1.ts'],
   },
-  setupFilesAfterEnv: ['<rootDir>/test/polyfill.ts'],
+  setupFilesAfterEnv: [
+    '<rootDir>/test/polyfill.ts',
+    '<rootDir>/src/jest/extend.ts',
+  ],
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
+    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },
 }
 

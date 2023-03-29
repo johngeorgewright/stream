@@ -1,5 +1,11 @@
+import { timeout } from '../utils/Async.js'
 import { asyncIterableToArray } from '../utils/Iterable.js'
-import { TimelineError, parseTimelineValues } from '../utils/Timeline.js'
+import {
+  CloseTimelineError,
+  TimelineError,
+  TimelineTimer,
+  parseTimelineValues,
+} from '../utils/Timeline.js'
 
 /**
  * Calls an expectation function to compare a timeline against chunks.
@@ -23,36 +29,66 @@ import { TimelineError, parseTimelineValues } from '../utils/Timeline.js'
  */
 export function expectTimeline(
   timeline: string,
-  testExcpectation: (timelineValue: unknown, chunk: unknown) => void,
+  testExcpectation: (
+    timelineValue: unknown,
+    chunk: unknown
+  ) => void | Promise<void>,
   queuingStrategy?: QueuingStrategy<unknown>
 ) {
   const iterator = parseTimelineValues(timeline)
+  let nextResult: Promise<IteratorResult<unknown>>
 
   return new WritableStream<unknown>(
     {
+      start() {
+        nextResult = iterator.next()
+      },
+
       async close() {
-        const todo = await asyncIterableToArray(iterator)
+        const { done, value } = await nextResult
+        const todo = done
+          ? []
+          : [value, ...(await asyncIterableToArray(iterator))].filter(
+              (value) =>
+                !(value instanceof CloseTimelineError) &&
+                !(value instanceof TimelineTimer && value.finished)
+            )
         if (todo.length)
           throw new TimelineError(
-            `There are ${todo.length} more expectations left.\n${JSON.stringify(
-              todo,
-              null,
-              2
-            )}`
+            `There are ${todo.length} more expectations left.\n- ${todo
+              .map((value) => JSON.stringify(value, null, 2))
+              .join('\n- ')}`
           )
       },
 
       async write(chunk, controller) {
-        const { done, value } = await iterator.next()
+        const { done, value } = await nextResult
 
         if (done)
           controller.error(
             new TimelineError(
-              `Received more values than expected (at "${chunk}")`
+              `Received a value after the expected timeline:\n${JSON.stringify(
+                chunk,
+                null,
+                2
+              )}`
             )
           )
         else if (value instanceof Error) controller.error(value)
-        else testExcpectation(value, chunk)
+        else if (value instanceof TimelineTimer) {
+          await timeout()
+          if (!value.finished)
+            controller.error(
+              new TimelineError(
+                `Expected ${value.ms}ms timer to have finished. There is ${value.timeLeft}ms left.`
+              )
+            )
+          nextResult = iterator.next()
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return this.write!(chunk, controller)
+        } else await testExcpectation(value, chunk)
+
+        nextResult = iterator.next()
       },
     },
     queuingStrategy
