@@ -25,7 +25,10 @@
     "test:unit": "jest"
   },
   "main": "./dist/index.js",
-  "exports": "./dist/index.js",
+  "exports": [
+    "./dist/index.js",
+    "./dist/jest/index.js"
+  ],
   "packageManager": "yarn@3.5.0",
   "devDependencies": {
     "@commitlint/cli": "17.5.0",
@@ -42,6 +45,7 @@
     "concurrently": "7.6.0",
     "conventional-changelog-conventionalcommits": "5.0.0",
     "eslint": "8.36.0",
+    "expect": "29.5.0",
     "husky": "8.0.3",
     "jest": "29.5.0",
     "jest-environment-jsdom": "29.5.0",
@@ -59,6 +63,14 @@
     "assert-never": "1.2.1",
     "ts-toolbelt": "9.6.0",
     "tslib": "2.5.0"
+  },
+  "peerDependencies": {
+    "expect": "^29.0.0"
+  },
+  "peerDependenciesMeta": {
+    "expect": {
+      "optional": true
+    }
   },
   "lint-staged": {
     "*.{md,json,js,jsx,ts,tsx,yml,yaml}": [
