@@ -48,7 +48,7 @@ export function buffer<T>(
     },
 
     flush(controller) {
-      controller.enqueue(buffer)
+      if (buffer.length) controller.enqueue(buffer)
       controller.terminate()
       abortController.abort()
     },
