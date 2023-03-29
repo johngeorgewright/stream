@@ -62,7 +62,7 @@ For example:
 
 ### Closing a stream
 
-A stream will only close, when specified to do, so with the pipe character: `|`.
+A stream will only close, when specified to do so, with the pipe character: `|`.
 
 For example:
 
@@ -78,7 +78,7 @@ An error can be populated downstream with the capital letter `E`.
 
 Sometimes you may want to create an expectation that the timeline should **never** reach. Use the capital `X` for such a scenario.
 
-For example, the `buffer` transformer's test uses this to test when the buffer's `notifier` close even will close the source stream:
+For example, the `buffer` transformer's test uses this to test that the buffer's `notifier` close event will close the source stream:
 
 ```
 --1--2--3---X
