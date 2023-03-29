@@ -77,6 +77,18 @@ export class TimelineTimer {
   }
 }
 
+export type TimelineValue = ValueOrArrayOrObject<
+  number | boolean | string | null | TimelineTimer | TimelineError
+>
+
+type ValueOrArrayOrObject<T> =
+  | T
+  | ValueOrArrayOrObject<T>[]
+  | {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      [key: keyof any]: ValueOrArrayOrObject<T>
+    }
+
 /**
  * Iterates over a timeline, pausing on dashes and yielding
  * values.
@@ -86,7 +98,7 @@ export class TimelineTimer {
  */
 export async function* parseTimelineValues(
   timeline: string
-): AsyncGenerator<unknown> {
+): AsyncGenerator<TimelineValue> {
   timeline = await timeBits(timeline.trim())
   if (!timeline.length) return
   const unparsed = [...takeWhile(timeline, (x) => x !== '-')]
@@ -113,7 +125,7 @@ async function timeBits(timeline: string): Promise<string> {
  * @group Utils
  * @category Timeline
  */
-function parseTimelineValue(value: string): unknown {
+function parseTimelineValue(value: string): TimelineValue {
   value = value.trim()
 
   switch (true) {
