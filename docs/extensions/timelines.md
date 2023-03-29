@@ -31,17 +31,6 @@ merge([
 
 The syntax for timelines are as follows:
 
-### Strings
-
-Any combination of characters, other than a dash (`-`) or a likeness of a number (`\d+(\.\d+)?`) will be considered a string.
-
-For example:
-
-- `a`
-- `a1`
-- `1.2.3`
-- `__$$%%`
-
 ### Numbers
 
 Anything matching the regular expression `\d+(\.\d+)?` will be considered a number.
@@ -109,6 +98,17 @@ debounce(10)
 
 -----T10-2--
 ```
+
+### Strings
+
+Any combination of characters, other than a dash (`-`) or any of the above syntax, will be considered a string.
+
+For example:
+
+- `a`
+- `a1`
+- `1.2.3`
+- `__$$%%`
 
 ## Testing
 
