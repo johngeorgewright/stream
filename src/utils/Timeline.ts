@@ -7,7 +7,11 @@ import { takeWhile } from './Iterable.js'
  * @group Utils
  * @category Timeline
  */
-export class TimelineError extends Error {}
+export class TimelineError extends Error {
+  constructor(message?: string) {
+    super(message || 'Timeline Error')
+  }
+}
 
 /**
  * An error to represent that the stream requires closing.
