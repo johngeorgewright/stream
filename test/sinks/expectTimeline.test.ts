@@ -5,10 +5,10 @@ test('expectTimeline', async () => {
 
   await merge([
     fromTimeline(`
-      --1---2---3---4---5---
+      --1---2---3---4---5---|
     `),
     fromTimeline(`
-      ----a---b---c---d---e-
+      ----a---b---c---d---e-|
     `),
   ]).pipeTo(
     expectTimeline(
@@ -69,7 +69,7 @@ test('objects and arrays', async () => {
   const fn = jest.fn()
 
   await fromTimeline(`
-      --{foo:[bar]}--
+      --{foo:[bar]}--|
     `).pipeTo(
     expectTimeline(
       `
@@ -102,7 +102,7 @@ test('not enough chunks', async () => {
 
   await expect(
     fromTimeline(`
-      --1--
+      --1--|
     `).pipeTo(
       expectTimeline(
         `
@@ -112,12 +112,10 @@ test('not enough chunks', async () => {
       )
     )
   ).rejects.toThrow(`There are 2 more expectations left.
-[
-  2,
-  {
-    "foo": "bar"
-  }
-]`)
+- 2
+- {
+  "foo": "bar"
+}`)
 })
 
 test('not enough of a timeline', async () => {
@@ -125,7 +123,7 @@ test('not enough of a timeline', async () => {
 
   await expect(
     fromTimeline(`
-    --1--2--3--
+    --1--2--3--|
   `).pipeTo(
       expectTimeline(
         `
@@ -142,7 +140,7 @@ test('errors in the timeline will error in the stream', async () => {
 
   await expect(
     fromTimeline(`
-    --1--
+    --1--|
   `).pipeTo(
       expectTimeline(
         `
@@ -158,7 +156,7 @@ test('timing success', async () => {
   const fn = jest.fn()
 
   await fromTimeline(`
-    --1--T10--2--
+    --1--T10--2--|
   `).pipeTo(
     expectTimeline(
       `
@@ -187,14 +185,14 @@ test('timing errors', async () => {
 
   await expect(
     fromTimeline(`
-    --1--T5--2--
-  `).pipeTo(
+    --1--T5--2--|
+    `).pipeTo(
       expectTimeline(
         `
-    --1--T10--2--
-  `,
+    --1--T20--2--
+        `,
         fn
       )
     )
-  ).rejects.toThrow('Expected 10ms timer to have finished')
+  ).rejects.toThrow('Expected 20ms timer to have finished')
 })

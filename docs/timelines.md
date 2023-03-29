@@ -1,8 +1,7 @@
 ---
 layout: page
 title: Timelines
-permalink: /extensions/timelines
-parent: Extensions
+permalink: /timelines
 nav_order: 5
 ---
 
@@ -43,7 +42,7 @@ For example:
 
 ### Objects
 
-Objects will be parsed with the use of braces (`{ ... }`). **Keys and values should NOT be inside quotes**.
+Objects will be parsed with the use of braces `{ ... }`. **Keys and values should NOT be inside quotes**.
 
 For example:
 
@@ -53,7 +52,7 @@ For example:
 
 ### Arrays
 
-Arrays will be parsed with the use of brackets (`[ ... ]`).
+Arrays will be parsed with the use of brackets `[ ... ]`.
 
 For example:
 
@@ -61,13 +60,19 @@ For example:
 - `[foo,bar]`
 - `[{foo:bar}]`
 
+### Closing a stream
+
+A stream will only close, when specified to do, so with the pipe character: `|`.
+
+For example:
+
+```
+--1--2--3--4--|
+```
+
 ### Errors
 
 An error can be populated downstream with the capital letter `E`.
-
-### Closing a stream
-
-Although streams are closed with the timeline finishes, you may want to specify an earlier close with the pipe character: `|`.
 
 ### Never
 

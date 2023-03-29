@@ -3,7 +3,7 @@ import { buffer, fromTimeline } from '../../src/index.js'
 test('buffers the source stream chunks until `notifier` emits.', async () => {
   await expect(
     fromTimeline(`
-    --1--2--3-----------
+    --1--2--3-----------|
     `).pipeThrough(
       buffer(
         fromTimeline(`
@@ -51,7 +51,7 @@ test('flusher whatever is left over when the stream closes', async () => {
 test('max buffer size', async () => {
   await expect(
     fromTimeline(`
-    --1--2--3--4--
+    --1--2--3--4--|
     `).pipeThrough(
       buffer(
         fromTimeline(`

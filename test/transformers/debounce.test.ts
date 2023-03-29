@@ -13,7 +13,7 @@ test('trailing only (by default)', async () => {
     --1--2------T10--|
     `).pipeThrough(debounce(10))
   ).toMatchTimeline(`
-    -----T9-2--------|
+    -----T9-2--------
   `)
 })
 
@@ -38,7 +38,7 @@ test('leading and trailing', async () => {
       ])
     )
   ).toMatchTimeline(`
-    -1---T9-3--|
+    -1---T9-3--
   `)
 })
 
@@ -53,27 +53,6 @@ test('back off', async () => {
       ])
     )
   ).toMatchTimeline(`
-    -1-----T45---5----|
+    -1-----T45---5----
   `)
-
-  // controller
-  //   .pipeThrough(
-  //     debounce(10, [
-  //       new DebounceLeadingBehavior(),
-  //       new DebounceBackOffBehavior({ inc: (x) => x * 2, max: 45 }),
-  //     ])
-  //   )
-  //   .pipeTo(write(fn))
-
-  // controller.enqueue(1)
-  // controller.enqueue(2)
-  // await timeout(15)
-  // expect(fn).toHaveBeenCalledTimes(1)
-  // expect(fn).toHaveBeenCalledWith(1)
-
-  // await timeout(10)
-  // controller.enqueue(3)
-  // controller.enqueue(4)
-  // expect(fn).toHaveBeenCalledTimes(2)
-  // expect(fn).toHaveBeenCalledWith(3)
 })

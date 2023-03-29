@@ -46,15 +46,16 @@ export function fromTimeline<T>(
   return new ReadableStream<T>(
     {
       async pull(controller) {
-        while (controller.desiredSize) {
-          const { done, value } = await iterator.next()
+        const { done, value } = await iterator.next()
 
-          if (done) controller.close()
-          else if (value instanceof CloseTimelineError) controller.close()
-          else if (value instanceof Error) controller.error(value)
-          else if (value instanceof TimelineTimer) await value.promise
-          else controller.enqueue(value as T)
-        }
+        if (done) return
+        else if (value instanceof CloseTimelineError) controller.close()
+        else if (value instanceof Error) controller.error(value)
+        else if (value instanceof TimelineTimer) {
+          await value.promise
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return this.pull!(controller)
+        } else controller.enqueue(value as T)
       },
     },
     queuingStrategy

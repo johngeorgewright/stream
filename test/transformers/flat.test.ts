@@ -47,7 +47,7 @@ test('flattens array likes', async () => {
 test('queues things that arent iterable', async () => {
   await expect(
     fromTimeline(`
-    --{foo:bar}--
+    --{foo:bar}--|
     `).pipeThrough(flat())
   ).toMatchTimeline(`
     --{foo:bar}--
