@@ -50,6 +50,10 @@ For example:
 - `{long key:log value}`
 - `{foo:[{nested:object}]}`
 
+### Null
+
+The word null will be parsed as `null`.
+
 ### Arrays
 
 Arrays will be parsed with the use of brackets `[ ... ]`.
