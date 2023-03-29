@@ -29,8 +29,12 @@ export function reduce<I, O>(
       )
     },
 
-    async transform(chunk) {
-      acc = await fn(acc, chunk)
+    async transform(chunk, controller) {
+      try {
+        acc = await fn(acc, chunk)
+      } catch (error) {
+        controller.error(error)
+      }
     },
 
     flush(controller) {

@@ -31,7 +31,11 @@ export function filter<In>(predicate: Predicate<In>): TransformStream<In, In>
 export function filter<In, Out extends In = In>(predicate: Predicate<In>) {
   return new TransformStream<In, Out>({
     async transform(chunk, controller) {
-      if (await predicate(chunk)) controller.enqueue(chunk as Out)
+      try {
+        if (await predicate(chunk)) controller.enqueue(chunk as Out)
+      } catch (error) {
+        controller.error(error)
+      }
     },
   })
 }

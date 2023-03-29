@@ -19,8 +19,16 @@ export function after<T>(predicate: Predicate<T>) {
 
   return new TransformStream<T, T>({
     async transform(chunk, controller) {
-      if (pass) controller.enqueue(chunk)
-      else if (await predicate(chunk)) {
+      if (pass) return controller.enqueue(chunk)
+
+      let after: boolean
+      try {
+        after = await predicate(chunk)
+      } catch (error) {
+        return controller.error(error)
+      }
+
+      if (after) {
         pass = true
         controller.enqueue(chunk)
       }

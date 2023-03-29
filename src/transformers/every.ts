@@ -39,9 +39,13 @@ export function every<T>(predicate: Predicate<T>, options?: Flushable) {
     },
 
     async transform(chunk, controller) {
-      if (!(await predicate(chunk))) {
-        controller.enqueue(false)
-        controller.terminate()
+      try {
+        if (!(await predicate(chunk))) {
+          controller.enqueue(false)
+          controller.terminate()
+        }
+      } catch (error) {
+        controller.error(error)
       }
     },
 

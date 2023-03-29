@@ -85,7 +85,12 @@ export function stateReducer<Actions extends Record<string, unknown>, State>(
     },
 
     transform(chunk, controller) {
-      const $state = reduce(chunk, state)
+      let $state: State
+      try {
+        $state = reduce(chunk, state)
+      } catch (error) {
+        return controller.error(error)
+      }
       if ($state !== state) {
         state = Object.freeze($state)
         controller.enqueue({

@@ -34,9 +34,13 @@ export function find<In>(predicate: Predicate<In>): TransformStream<In, In>
 export function find<In, Out extends In = In>(predicate: Predicate<In>) {
   return new TransformStream<In, Out>({
     async transform(chunk, controller) {
-      if (await predicate(chunk)) {
-        controller.enqueue(chunk as Out)
-        controller.terminate()
+      try {
+        if (await predicate(chunk)) {
+          controller.enqueue(chunk as Out)
+          controller.terminate()
+        }
+      } catch (error) {
+        controller.error(error)
       }
     },
   })

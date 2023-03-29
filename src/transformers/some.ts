@@ -39,9 +39,13 @@ export function some<T>(predicate: Predicate<T>, options?: Flushable) {
     },
 
     async transform(chunk, controller) {
-      if (await predicate(chunk)) {
-        controller.enqueue(true)
-        controller.terminate()
+      try {
+        if (await predicate(chunk)) {
+          controller.enqueue(true)
+          controller.terminate()
+        }
+      } catch (error) {
+        controller.error(error)
       }
     },
 
