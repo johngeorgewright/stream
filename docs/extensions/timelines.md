@@ -31,12 +31,84 @@ merge([
 
 The syntax for timelines are as follows:
 
-- strings: `imaastring`
-- numbers: `1234`
-- objects: `{key:value}`
-- arrays: `[1,2,3]`
-- errors: `E`
-- close: `|`
+### Strings
+
+Any combination of characters, other than a dash (`-`) or a likeness of a number (`\d+(\.\d+)?`) will be considered a string.
+
+For example:
+
+- `a`
+- `a1`
+- `1.2.3`
+- `__$$%%`
+
+### Numbers
+
+Anything matching the regular expression `\d+(\.\d+)?` will be considered a number.
+
+For example:
+
+- `1`
+- `1000`
+- `12.34`
+
+### Objects
+
+Objects will be parsed with the use of braces (`{ ... }`). **Keys and values should NOT be inside quotes**.
+
+For example:
+
+- `{a:b,c:d}`
+- `{long key:log value}`
+- `{foo:[{nested:object}]}`
+
+### Arrays
+
+Arrays will be parsed with the use of brackets (`[ ... ]`).
+
+For example:
+
+- `[1,2,3,4]`
+- `[foo,bar]`
+- `[{foo:bar}]`
+
+### Errors
+
+An error can be populated downstream with the capital letter `E`.
+
+### Closing a stream
+
+Although streams are closed with the timeline finishes, you may want to specify an earlier close with the pipe character: `|`.
+
+### Never
+
+Sometimes you may want to create an expectation that the timeline should **never** reach. Use the capital `X` for such a scenario.
+
+For example, the `buffer` transformer's test uses this to test when the buffer's `notifier` close even will close the source stream:
+
+```
+--1--2--3---X
+
+buffer(
+--------|
+)
+
+--------[1,2,3]
+```
+
+### Timers
+
+To signal waiting for a period of milliseconds, use a capital `T` followed by a number, representing the amount of `milliseconds` to wait for.
+
+For example:
+
+```
+--1--2------
+
+debounce(10)
+
+-----T10-2--
+```
 
 ## Testing
 
