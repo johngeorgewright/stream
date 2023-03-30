@@ -15,16 +15,12 @@ export class TimelineError extends Error {
 }
 
 /**
- * An error to represent that the stream requires closing.
+ * A symbol to represent that the stream requires closing.
  *
  * @group Utils
  * @category Timeline
  */
-export class CloseTimelineError extends TimelineError {
-  constructor() {
-    super('The stream will now close')
-  }
-}
+export const CloseTimeline = Symbol('close timeline')
 
 /**
  * An error to represent that the stream requires terminating.
@@ -38,6 +34,12 @@ export class NeverReachTimelineError extends TimelineError {
   }
 }
 
+/**
+ * Represents a timer in a timeline.
+ *
+ * @group Utils
+ * @category Timeline
+ */
 export class TimelineTimer {
   #finished = false
   readonly #start = Date.now()
@@ -82,8 +84,20 @@ export class TimelineTimer {
   }
 }
 
+/**
+ * Values that can be added in a timeline.
+ *
+ * @group Utils
+ * @category Timeline
+ */
 export type TimelineValue = ValueOrArrayOrObject<
-  number | boolean | string | null | TimelineTimer | TimelineError
+  | number
+  | boolean
+  | string
+  | null
+  | TimelineTimer
+  | TimelineError
+  | typeof CloseTimeline
 >
 
 type ValueOrArrayOrObject<T> =
@@ -98,8 +112,25 @@ type ValueOrArrayOrObject<T> =
  * Iterates over a timeline, pausing on dashes and yielding
  * values.
  *
+ * @see [timeline docs](/stream/extensions/timelines)
+ * @see {@link fromTimeline:function}
+ * @see {@link expectTimeline:function}
  * @group Utils
  * @category Timeline
+ * @example
+ * ```
+ * parseTimelineValues('-1-2-[{ foo: bar }]-|')
+ * ```
+ *
+ * The above will do the following:
+ * 1. wait for 1ms
+ * 2. yield `1`
+ * 3. wait for 1ms
+ * 4. yield `2`
+ * 5. wait for 1ms
+ * 6. yield `[{ foo: 'bar' }]`
+ * 7. wait for 1ms
+ * 8. yield the `CloseTimeline` symbol
  */
 export async function* parseTimelineValues(
   timeline: string
@@ -120,16 +151,6 @@ async function timeBits(timeline: string): Promise<string> {
   return timeline.slice(size)
 }
 
-/**
- * Parses a single timeline value. Used when creating/parsing
- * streams with timelines.
- *
- * @see [timeline docs](/stream/extensions/timelines)
- * @see {@link fromTimeline:function}
- * @see {@link expectTimeline:function}
- * @group Utils
- * @category Timeline
- */
 function parseTimelineValue(value: string): TimelineValue {
   value = value.trim()
 
@@ -137,11 +158,13 @@ function parseTimelineValue(value: string): TimelineValue {
     case /^T\d+$/.test(value):
       return new TimelineTimer(Number(value.slice(1)))
 
-    case value === 'E':
-      return new TimelineError()
+    case /^E(\([^)]*\))?$/.test(value):
+      return new TimelineError(
+        value.length > 1 ? value.slice(2, -1) : undefined
+      )
 
     case value === '|':
-      return new CloseTimelineError()
+      return CloseTimeline
 
     case value === 'X':
       return new NeverReachTimelineError()

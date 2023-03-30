@@ -67,8 +67,8 @@ test('objects', async () => {
     [
       [
         {
-          "a": "b",
-          "foo": "bar",
+          "a:b": null,
+          "foo:bar": null,
         },
       ],
       [

@@ -1,7 +1,7 @@
 import { timeout } from '../utils/Async.js'
 import { asyncIterableToArray } from '../utils/Iterable.js'
 import {
-  CloseTimelineError,
+  CloseTimeline,
   NeverReachTimelineError,
   TimelineError,
   TimelineTimer,
@@ -52,7 +52,7 @@ export function expectTimeline<T extends TimelineValue>(
           ? []
           : [value, ...(await asyncIterableToArray(iterator))].filter(
               (value) =>
-                !(value instanceof CloseTimelineError) &&
+                !(value === CloseTimeline) &&
                 !(value instanceof NeverReachTimelineError) &&
                 !(value instanceof TimelineTimer && value.finished)
             )
@@ -78,6 +78,12 @@ export function expectTimeline<T extends TimelineValue>(
             )
           )
         else if (value instanceof Error) controller.error(value)
+        else if (value === CloseTimeline)
+          controller.error(
+            new TimelineError(
+              'The writer received a signal to close the stream'
+            )
+          )
         else if (value instanceof TimelineTimer) {
           await timeout()
           if (!value.finished)

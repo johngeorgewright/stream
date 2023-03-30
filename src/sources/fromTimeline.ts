@@ -1,5 +1,5 @@
 import {
-  CloseTimelineError,
+  CloseTimeline,
   TimelineTimer,
   TimelineValue,
   parseTimelineValues,
@@ -50,7 +50,7 @@ export function fromTimeline<T extends TimelineValue>(
         const { done, value } = await iterator.next()
 
         if (done) return
-        else if (value instanceof CloseTimelineError) controller.close()
+        else if (value === CloseTimeline) controller.close()
         else if (value instanceof Error) controller.error(value)
         else if (value instanceof TimelineTimer) {
           await value.promise

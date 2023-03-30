@@ -106,7 +106,7 @@ test('not enough chunks', async () => {
     `).pipeTo(
       expectTimeline(
         `
-      --1--2--{foo:bar}--
+      --1--2--{foo: bar}--
       `,
         fn
       )
