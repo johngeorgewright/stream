@@ -133,11 +133,6 @@ export = class PackageGenerator extends Generator {
     )
 
     this.fs.copy(
-      this.templatePath('tsconfig.test.json'),
-      this.destinationPath('tsconfig.test.json')
-    )
-
-    this.fs.copy(
       this.templatePath('jest.config.ts.template'),
       this.destinationPath('jest.config.ts')
     )
@@ -163,6 +158,12 @@ export = class PackageGenerator extends Generator {
     this.fs.copyTpl(
       this.templatePath('package-test/index.test.ts.template'),
       this.destinationPath('test/index.test.ts'),
+      context
+    )
+
+    this.fs.copyTpl(
+      this.templatePath('package-test/tsconfig.json'),
+      this.destinationPath('test/tsconfig.json'),
       context
     )
 
