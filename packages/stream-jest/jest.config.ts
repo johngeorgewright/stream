@@ -7,7 +7,7 @@ const config: Config = {
   setupFilesAfterEnv: [require.resolve('@johngw/stream-test/polyfill')],
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
+    '^.+\\.ts$': ['ts-jest', { tsconfig: '<rootDir>/test/tsconfig.json' }],
   },
 }
 

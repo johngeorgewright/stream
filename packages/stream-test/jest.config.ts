@@ -7,7 +7,7 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/src/polyfill.ts'],
   testEnvironment: 'node',
   transform: {
-    '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
+    '^.+\\.tsx?$': ['ts-jest', { tsconfig: '<rootDir>/test/tsconfig.json' }],
   },
 }
 

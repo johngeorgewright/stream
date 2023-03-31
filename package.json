@@ -23,7 +23,8 @@
     "package:remove": "node --require ts-node/register $(yarn bin yo) ./packages/scaffold/src/package-remove",
     "prepare": "husky install",
     "release": "yarn workspaces foreach --verbose --no-private --topological-dev run sematnic-release",
-    "serve:docs": "yarn build:docs:api && concurrently --names api,site 'yarn build:docs:api --preserveWatchOutput --watch' 'bundle exec jekyll serve --config jekyll.yml'"
+    "serve:docs": "yarn build:docs:api && concurrently --names api,site 'yarn build:docs:api --preserveWatchOutput --watch' 'bundle exec jekyll serve --config jekyll.yml'",
+    "start": "yarn build && yarn workspaces foreach --verbose --no-private --parallel --interlaced run start"
   },
   "main": "./dist/index.js",
   "exports": [

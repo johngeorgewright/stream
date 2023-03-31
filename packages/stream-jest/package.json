@@ -4,10 +4,12 @@
   "description": "Jest extension for testing streams",
   "type": "module",
   "main": "./dist/es/index.js",
+  "types": "./dist/es/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/es/index.js",
-      "require": "./dist/common/index.js"
+      "require": "./dist/common/index.js",
+      "types": "./dist/es/index.d.ts"
     }
   },
   "scripts": {
