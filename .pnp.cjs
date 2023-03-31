@@ -28,7 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@commitlint/cli", "npm:17.5.0"],\
+            ["@commitlint/cli", "npm:17.5.1"],\
             ["@commitlint/config-conventional", "npm:17.4.4"],\
             ["@commitlint/types", "npm:17.4.4"],\
             ["@semantic-release/commit-analyzer", "virtual:c75f2aad1cfb1386ad5202acb59b82b91b33a53c730761c9fc148a23fea3225950eae1f6d7635bbf8de086fa8e510a43201fc331edd45e67dc120f369cd0411e#npm:9.0.2"],\
@@ -853,14 +853,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@commitlint/cli", [\
-        ["npm:17.5.0", {\
-          "packageLocation": "./.yarn/cache/@commitlint-cli-npm-17.5.0-bae44a995f-d7d7a016a6.zip/node_modules/@commitlint/cli/",\
+        ["npm:17.5.1", {\
+          "packageLocation": "./.yarn/cache/@commitlint-cli-npm-17.5.1-d9d73ad245-2bdd26b321.zip/node_modules/@commitlint/cli/",\
           "packageDependencies": [\
-            ["@commitlint/cli", "npm:17.5.0"],\
+            ["@commitlint/cli", "npm:17.5.1"],\
             ["@commitlint/format", "npm:17.4.4"],\
             ["@commitlint/lint", "npm:17.4.4"],\
             ["@commitlint/load", "npm:17.5.0"],\
-            ["@commitlint/read", "npm:17.4.4"],\
+            ["@commitlint/read", "npm:17.5.1"],\
             ["@commitlint/types", "npm:17.4.4"],\
             ["execa", "npm:5.1.1"],\
             ["lodash.isfunction", "npm:3.0.9"],\
@@ -996,10 +996,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@commitlint/read", [\
-        ["npm:17.4.4", {\
-          "packageLocation": "./.yarn/cache/@commitlint-read-npm-17.4.4-14b477e2f1-29c828ba0a.zip/node_modules/@commitlint/read/",\
+        ["npm:17.5.1", {\
+          "packageLocation": "./.yarn/cache/@commitlint-read-npm-17.5.1-342dfaa5e7-62ee4f7a47.zip/node_modules/@commitlint/read/",\
           "packageDependencies": [\
-            ["@commitlint/read", "npm:17.4.4"],\
+            ["@commitlint/read", "npm:17.5.1"],\
             ["@commitlint/top-level", "npm:17.4.0"],\
             ["@commitlint/types", "npm:17.4.4"],\
             ["fs-extra", "npm:11.1.0"],\
@@ -1501,7 +1501,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@johngw/stream", "workspace:."],\
-            ["@commitlint/cli", "npm:17.5.0"],\
+            ["@commitlint/cli", "npm:17.5.1"],\
             ["@commitlint/config-conventional", "npm:17.4.4"],\
             ["@commitlint/types", "npm:17.4.4"],\
             ["@semantic-release/commit-analyzer", "virtual:c75f2aad1cfb1386ad5202acb59b82b91b33a53c730761c9fc148a23fea3225950eae1f6d7635bbf8de086fa8e510a43201fc331edd45e67dc120f369cd0411e#npm:9.0.2"],\
