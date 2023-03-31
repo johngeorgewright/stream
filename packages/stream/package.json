@@ -13,12 +13,8 @@
   "sideEffects": false,
   "scripts": {
     "build": "yarn clean && tsc && tsc --project tsconfig.common.json",
-    "build:docs": "yarn build:docs:api && yarn build:docs:site",
-    "build:docs:api": "typedoc",
-    "build:docs:site": "bundle exec jekyll build --config jekyll.yml",
     "clean": "rimraf dist",
     "coverage": "open coverage/lcov-report/index.html",
-    "serve:docs": "yarn build:docs:api && concurrently --names api,site 'yarn build:docs:api --preserveWatchOutput --watch' 'bundle exec jekyll serve --config jekyll.yml'",
     "start": "concurrently --names es,common 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json'",
     "test": "yarn test:lint && yarn test:unit",
     "test:lint": "eslint src",
@@ -58,7 +54,6 @@
     "semantic-release": "21.0.0",
     "ts-jest": "29.0.5",
     "ts-node": "10.9.1",
-    "typedoc": "0.23.28",
     "typescript": "5.0.3",
     "web-streams-polyfill": "3.2.1"
   },
@@ -74,6 +69,7 @@
     ]
   },
   "typedoc": {
-    "entryPoint": "./src/index.ts"
+    "entryPoint": "./src/index.ts",
+    "displayName": "stream"
   }
 }

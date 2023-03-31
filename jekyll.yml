@@ -15,6 +15,9 @@ github_username: johngeorgewright
 keep_files:
   - api
 
+include:
+  - api/modules/_johngw_stream.html
+
 nav_external_links:
   - title: API
     url: /api

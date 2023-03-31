@@ -51,6 +51,7 @@
     "web-streams-polyfill": "3.2.1"
   },
   "typedoc": {
-    "entryPoint": "./src/index.ts"
+    "entryPoint": "./src/index.ts",
+    "displayName": "stream-test"
   }
 }
