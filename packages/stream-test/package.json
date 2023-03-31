@@ -18,7 +18,8 @@
     "build": "yarn clean && tsc && tsc --project tsconfig.common.json",
     "clean": "rimraf dist",
     "start": "concurrently --names es,common 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json'",
-    "test": "jest --passWithNoTests"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "license": "MIT",
   "bugs": {
