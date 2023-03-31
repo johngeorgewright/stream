@@ -22,7 +22,8 @@
     "start": "concurrently --names es,common 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json'",
     "test": "yarn test:lint && yarn test:unit",
     "test:lint": "eslint src",
-    "test:unit": "jest"
+    "test:unit": "jest",
+    "test:coverage": "jest --coverage"
   },
   "main": "./dist/es/index.js",
   "exports": {
