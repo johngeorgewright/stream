@@ -1,8 +1,11 @@
 {
-  "name": "@johngw/stream",
+  "name": "@johngw/stream-mono-repo",
   "version": "2.2.0",
-  "type": "module",
   "description": "Reactive programming tools using the WHATWG Streams API.",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "keywords": [
     "stream",
     "streams",
@@ -10,19 +13,19 @@
     "stream api",
     "reactive"
   ],
-  "sideEffects": false,
   "scripts": {
-    "build": "yarn clean && yarn tsc",
+    "build": "yarn workspaces foreach --verbose --topological-dev --exclude @johngeorgewright/scaffold run build",
     "build:docs": "yarn build:docs:api && yarn build:docs:site",
     "build:docs:api": "typedoc",
     "build:docs:site": "bundle exec jekyll build --config jekyll.yml",
-    "clean": "rimraf dist",
-    "coverage": "open coverage/lcov-report/index.html",
+    "clean": "yarn workspaces foreach run clean",
+    "package:generate": "node --require ts-node/register $(yarn bin yo) ./packages/scaffold/src/package-generate",
+    "package:remove": "node --require ts-node/register $(yarn bin yo) ./packages/scaffold/src/package-remove",
+    "prepare": "husky install",
+    "release": "yarn workspaces foreach --verbose --no-private --topological-dev run sematnic-release",
     "serve:docs": "yarn build:docs:api && concurrently --names api,site 'yarn build:docs:api --preserveWatchOutput --watch' 'bundle exec jekyll serve --config jekyll.yml'",
-    "start": "yarn clean && yarn tsc --watch --preserveWatchOutput",
-    "test": "yarn test:lint && yarn test:unit",
-    "test:lint": "eslint src",
-    "test:unit": "jest"
+    "start": "yarn build && yarn workspaces foreach --verbose --no-private --parallel --interlaced run start",
+    "test": "yarn workspaces foreach --verbose run test"
   },
   "main": "./dist/index.js",
   "exports": [
@@ -40,39 +43,20 @@
     "@semantic-release/github": "8.0.7",
     "@semantic-release/release-notes-generator": "10.0.3",
     "@types/jest": "29.5.0",
-    "@types/js-yaml": "^4",
     "@typescript-eslint/eslint-plugin": "5.56.0",
     "@typescript-eslint/parser": "5.56.0",
-    "concurrently": "7.6.0",
     "conventional-changelog-conventionalcommits": "5.0.0",
     "eslint": "8.36.0",
-    "expect": "29.5.0",
     "husky": "8.0.3",
-    "jest": "29.5.0",
-    "jest-environment-jsdom": "29.5.0",
     "lint-staged": "13.2.0",
     "prettier": "2.8.6",
-    "rimraf": "4.4.1",
     "semantic-release": "20.1.3",
-    "ts-jest": "29.0.5",
+    "semantic-release-monorepo": "7.0.5",
     "ts-node": "10.9.1",
     "typedoc": "0.23.28",
     "typescript": "5.0.2",
-    "web-streams-polyfill": "3.2.1"
-  },
-  "dependencies": {
-    "assert-never": "1.2.1",
-    "js-yaml": "4.1.0",
-    "ts-toolbelt": "9.6.0",
-    "tslib": "2.5.0"
-  },
-  "peerDependencies": {
-    "expect": "^29.0.0"
-  },
-  "peerDependenciesMeta": {
-    "expect": {
-      "optional": true
-    }
+    "web-streams-polyfill": "3.2.1",
+    "yo": "4.3.1"
   },
   "lint-staged": {
     "*.{md,json,js,jsx,ts,tsx,yml,yaml}": [

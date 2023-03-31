@@ -1,0 +1,26 @@
+{
+  "extensions": {
+    "recommendations": [
+      "arcanis.vscode-zipfs",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint"
+    ]
+  },
+  "folders": [
+    { "name": "✨ @johngw/stream-mono-repo", "path": "." },
+    { "name": "🏗 @johngw/scaffold", "path": "packages/scaffold" },
+    { "name": "📦 @johngw/stream", "path": "packages/stream" },
+    { "name": "📦 @johngw/stream-common", "path": "packages/stream-common" },
+    { "name": "📦 @johngw/stream-jest", "path": "packages/stream-jest" },
+    { "name": "📦 @johngw/stream-test", "path": "packages/stream-test" },
+    { "name": "🤖 github", "path": ".github" }
+  ],
+  "settings": {
+    "eslint.nodePath": "../../.yarn/sdks",
+    "eslint.packageManager": "yarn",
+    "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+    "search.exclude": { "**/dist": true, "**/.yarn": true, "**/.pnp.*": true },
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.tsdk": "✨ @johngw/stream-mono-repo/.yarn/sdks/typescript/lib"
+  }
+}

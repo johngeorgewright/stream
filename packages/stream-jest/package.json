@@ -1,0 +1,50 @@
+{
+  "name": "@johngw/stream-jest",
+  "version": "0.0.0",
+  "description": "Jest extension for testing streams",
+  "type": "module",
+  "main": "./dist/es/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/common/index.js"
+    }
+  },
+  "scripts": {
+    "build": "yarn clean && tsc && tsc --project tsconfig.common.json",
+    "clean": "rimraf dist",
+    "start": "concurrently --names es,common 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json'",
+    "test": "jest --passWithNoTests"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johngeorgewright/stream/issues"
+  },
+  "homepage": "https://github.com/johngeorgewright/stream#readme",
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "9.0.2",
+    "@semantic-release/exec": "6.0.3",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "8.0.7",
+    "@semantic-release/release-notes-generator": "10.0.3",
+    "@types/jest": "29.5.0",
+    "@types/node": "18.15.11",
+    "concurrently": "8.0.1",
+    "expect": "29.5.0",
+    "jest": "29.5.0",
+    "jest-environment-jsdom": "29.5.0",
+    "rimraf": "4.4.1",
+    "semantic-release": "21.0.0",
+    "semantic-release-monorepo": "7.0.5",
+    "ts-jest": "29.0.5",
+    "ts-node": "10.9.1",
+    "typescript": "5.0.2"
+  },
+  "dependencies": {
+    "@johngw/stream-test": "workspace:*",
+    "tslib": "2.5.0"
+  },
+  "peerDependencies": {
+    "expect": "^29.0.0"
+  }
+}

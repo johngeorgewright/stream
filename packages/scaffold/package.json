@@ -1,0 +1,34 @@
+{
+  "name": "@johngw/scaffold",
+  "version": "0.0.0",
+  "description": "Project scaffolding",
+  "private": true,
+  "files": [
+    "generators/package",
+    "generators/remove"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "9.0.2",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "8.0.7",
+    "@semantic-release/release-notes-generator": "10.0.3",
+    "@types/prettier": "2.7.2",
+    "@types/rimraf": "3.0.2",
+    "@types/yeoman-generator": "5.2.11",
+    "prettier": "2.8.7",
+    "rimraf": "4.4.1",
+    "semantic-release": "21.0.0",
+    "semantic-release-monorepo": "7.0.5",
+    "typescript": "5.0.2"
+  },
+  "dependencies": {
+    "change-case": "4.1.2",
+    "tslib": "2.5.0",
+    "yeoman-generator": "5.8.0"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "name": "@johngw/stream-common",
+  "version": "0.0.0",
+  "description": "Common utilities between other @johngw/stream* packages",
+  "type": "module",
+  "main": "./dist/es/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/common/index.js"
+    },
+    "./Array": {
+      "import": "./dist/es/Array.js",
+      "require": "./dist/common/Array.js"
+    },
+    "./Async": {
+      "import": "./dist/es/Async.js",
+      "require": "./dist/common/Async.js"
+    },
+    "./Function": {
+      "import": "./dist/es/Function.js",
+      "require": "./dist/common/Function.js"
+    },
+    "./immediatelyClosingReadableStream": {
+      "import": "./dist/es/immediatelyClosingReadableStream.js",
+      "require": "./dist/common/immediatelyClosingReadableStream.js"
+    },
+    "./Iterable": {
+      "import": "./dist/es/Iterable.js",
+      "require": "./dist/common/Iterable.js"
+    },
+    "./Object": {
+      "import": "./dist/es/Object.js",
+      "require": "./dist/common/Object.js"
+    },
+    "./merge": {
+      "import": "./dist/es/merge.js",
+      "require": "./dist/common/merge.js"
+    },
+    "./Stream": {
+      "import": "./dist/es/Stream.js",
+      "require": "./dist/common/Stream.js"
+    },
+    "./String": {
+      "import": "./dist/es/String.js",
+      "require": "./dist/common/String.js"
+    },
+    "./Symbol": {
+      "import": "./dist/es/Symbol.js",
+      "require": "./dist/common/Symbol.js"
+    },
+    "./write": {
+      "import": "./dist/es/write.js",
+      "require": "./dist/common/write.js"
+    }
+  },
+  "scripts": {
+    "build": "yarn clean && tsc && tsc --project tsconfig.common.json",
+    "clean": "rimraf dist",
+    "start": "concurrently --names es,common 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json'",
+    "test": "jest --passWithNoTests"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johngeorgewright/stream/issues"
+  },
+  "homepage": "https://github.com/johngeorgewright/stream#readme",
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "9.0.2",
+    "@semantic-release/exec": "6.0.3",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "8.0.7",
+    "@semantic-release/release-notes-generator": "10.0.3",
+    "@types/eslint": "^8",
+    "@types/jest": "29.5.0",
+    "@types/node": "18.15.11",
+    "concurrently": "8.0.1",
+    "jest": "29.5.0",
+    "jest-environment-jsdom": "29.5.0",
+    "rimraf": "4.4.1",
+    "semantic-release": "21.0.0",
+    "semantic-release-monorepo": "7.0.5",
+    "ts-jest": "29.0.5",
+    "ts-node": "10.9.1",
+    "typescript": "5.0.2"
+  },
+  "dependencies": {
+    "assert-never": "1.2.1",
+    "eslint": "8.37.0",
+    "ts-toolbelt": "9.6.0",
+    "tslib": "2.5.0"
+  }
+}
