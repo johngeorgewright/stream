@@ -1,4 +1,5 @@
-import { first, fromTimeline } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { first } from '../../src/index.js'
 
 test('gets only the first chunk', async () => {
   await expect(

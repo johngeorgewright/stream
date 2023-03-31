@@ -1,4 +1,5 @@
-import { fromTimeline, pairwise } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { pairwise } from '../../src/index.js'
 
 test('Queues the current value and previous values', async () => {
   await expect(

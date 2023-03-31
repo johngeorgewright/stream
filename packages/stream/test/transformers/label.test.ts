@@ -1,4 +1,5 @@
-import { fromTimeline, label } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { label } from '../../src/index.js'
 
 test('using a property', async () => {
   await expect(

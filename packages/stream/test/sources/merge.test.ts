@@ -1,5 +1,6 @@
-import { fromTimeline, write } from '../../src/index.js'
 import { merge } from '@johngw/stream-common'
+import { fromTimeline } from '@johngw/stream-test'
+import { write } from '../../src/index.js'
 
 test('successfully merge all streams', async () => {
   await expect(
@@ -36,28 +37,22 @@ test('aborted merged streams', async () => {
 })
 
 test('cancelling the stream will cancel all upstreams', async () => {
-  const oneCancel = jest.fn()
-  const one = new ReadableStream({
-    pull(controller) {
-      controller.enqueue(1)
-    },
-    cancel: oneCancel,
-  })
-
-  const twoCancel = jest.fn()
-  const two = new ReadableStream({
-    pull(controller) {
-      controller.enqueue(2)
-    },
-    cancel: twoCancel,
-  })
-
-  const three = merge([one, two])
-  const reader = three.getReader()
-  await reader.cancel('foobar')
-
-  expect(oneCancel).toHaveBeenCalledWith('foobar')
-  expect(twoCancel).toHaveBeenCalledWith('foobar')
+  try {
+    await expect(
+      merge([
+        fromTimeline(`
+    --------X
+        `),
+        fromTimeline(`
+    --------X
+        `),
+      ])
+    ).toMatchTimeline(`
+    -E(foo)--
+    `)
+  } catch (error) {
+    expect(error).toHaveProperty('message', 'foo')
+  }
 })
 
 test('merge streams of different lengths', async () => {

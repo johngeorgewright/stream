@@ -1,4 +1,5 @@
-import { fromTimeline, withLatestFrom, write } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { withLatestFrom, write } from '../../src/index.js'
 
 test('combines each value from the source with the latest values from other inputs', async () => {
   await expect(

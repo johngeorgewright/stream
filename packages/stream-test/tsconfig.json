@@ -13,6 +13,7 @@
     "noUnusedParameters": true,
     "outDir": "./dist/es",
     "resolveJsonModule": true,
+    "rootDir": "./src",
     "sourceMap": true,
     "strict": true,
     "target": "ES2022"

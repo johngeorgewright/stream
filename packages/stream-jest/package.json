@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/johngeorgewright/stream#readme",
   "devDependencies": {
+    "@johngw/stream-test": "workspace:*",
     "@semantic-release/commit-analyzer": "9.0.2",
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
@@ -44,10 +45,13 @@
     "typescript": "5.0.3"
   },
   "dependencies": {
-    "@johngw/stream-test": "workspace:*",
     "tslib": "2.5.0"
   },
   "peerDependencies": {
+    "@johngw/stream-test": "^0.0.0",
     "expect": "^29.0.0"
+  },
+  "typedoc": {
+    "entryPoint": "./src/index.ts"
   }
 }

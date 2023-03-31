@@ -1,4 +1,5 @@
-import { buffer, fromTimeline } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { buffer } from '../../src/index.js'
 
 test('buffers the source stream chunks until `notifier` emits.', async () => {
   await expect(

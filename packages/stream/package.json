@@ -72,5 +72,8 @@
     "*.{md,json,js,jsx,ts,tsx,yml,yaml}": [
       "yarn prettier --ignore-path .gitignore --write"
     ]
+  },
+  "typedoc": {
+    "entryPoint": "./src/index.ts"
   }
 }

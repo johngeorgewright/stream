@@ -1,4 +1,5 @@
-import { fromTimeline, map } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { map } from '../../src/index.js'
 
 test('transforms values', async () => {
   await expect(

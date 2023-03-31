@@ -1,4 +1,5 @@
-import { fromTimeline, groupBy } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { groupBy } from '../../src/index.js'
 
 test('using a property', async () => {
   await expect(

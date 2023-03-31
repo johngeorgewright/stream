@@ -1,4 +1,5 @@
-import { some, write, fromTimeline } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { some, write } from '../../src/index.js'
 
 test('when not', async () => {
   await expect(

@@ -1,5 +1,5 @@
-import { removedNodes, fromDOMMutations, write } from '../../src/index.js'
 import { timeout } from '@johngw/stream-common'
+import { removedNodes, fromDOMMutations, write } from '../../src/index.js'
 
 test('picks removed nodes from DOM mutations', async () => {
   const fn = jest.fn()

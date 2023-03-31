@@ -1,9 +1,9 @@
+import { fromTimeline } from '@johngw/stream-test'
 import {
   debounce,
   DebounceBackOffBehavior,
   DebounceLeadingBehavior,
   DebounceTrailingBehavior,
-  fromTimeline,
 } from '../../src/index.js'
 
 test('trailing only (by default)', async () => {

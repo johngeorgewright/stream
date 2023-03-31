@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "rootDir": "../src",
     "types": ["@types/jest", "@johngw/stream-jest"]
   },
   "include": ["../src", "."]

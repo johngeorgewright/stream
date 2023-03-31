@@ -1,4 +1,5 @@
-import { fromTimeline, race, write } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { race, write } from '../../src/index.js'
 
 test('mirrors the first source stream to queue an item', async () => {
   await expect(

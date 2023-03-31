@@ -1,5 +1,6 @@
-import { flat, fromCollection, fromTimeline } from '../../src/index.js'
 import { timeout } from '@johngw/stream-common'
+import { fromTimeline } from '@johngw/stream-test'
+import { flat, fromCollection } from '../../src/index.js'
 
 test('flattens iterables', async () => {
   await expect(

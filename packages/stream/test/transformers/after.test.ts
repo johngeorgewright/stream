@@ -1,4 +1,5 @@
-import { after, fromTimeline } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { after } from '../../src/index.js'
 
 test('prevents chunks until predicate', async () => {
   await expect(

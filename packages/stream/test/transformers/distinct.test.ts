@@ -1,4 +1,5 @@
-import { distinct, fromTimeline, write } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { distinct, write } from '../../src/index.js'
 
 test('only emits distinct values', async () => {
   await expect(

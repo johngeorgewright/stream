@@ -13,6 +13,7 @@
     { "name": "📦 @johngw/stream-common", "path": "packages/stream-common" },
     { "name": "📦 @johngw/stream-jest", "path": "packages/stream-jest" },
     { "name": "📦 @johngw/stream-test", "path": "packages/stream-test" },
+    { "name": "📖 docs", "path": "docs" },
     { "name": "🤖 github", "path": ".github" }
   ],
   "settings": {

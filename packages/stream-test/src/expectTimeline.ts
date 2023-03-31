@@ -42,8 +42,8 @@ export function expectTimeline<T extends TimelineValue>(
 
   return new WritableStream<T>(
     {
-      start() {
-        nextResult = iterator.next()
+      start(controller) {
+        next(controller)
       },
 
       async close() {
@@ -92,14 +92,21 @@ export function expectTimeline<T extends TimelineValue>(
                 `Expected ${value.ms}ms timer to have finished. There is ${value.timeLeft}ms left.`
               )
             )
-          nextResult = iterator.next()
+          next(controller)
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           return this.write!(chunk, controller)
         } else await testExcpectation(value, chunk)
 
-        nextResult = iterator.next()
+        next(controller)
       },
     },
     queuingStrategy
   )
+
+  function next(controller: WritableStreamDefaultController) {
+    nextResult = iterator.next().then((result) => {
+      if (result.value instanceof TimelineError) controller.error(result.value)
+      return result
+    })
+  }
 }

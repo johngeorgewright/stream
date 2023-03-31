@@ -1,4 +1,5 @@
-import { fromTimeline, stateReducer } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-test'
+import { stateReducer } from '../../src/index.js'
 
 interface State {
   authors: string[]

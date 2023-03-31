@@ -65,6 +65,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:5.57.0"],\
             ["@typescript-eslint/parser", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:5.57.0"],\
             ["assert-never", "npm:1.2.1"],\
+            ["concurrently", "npm:8.0.1"],\
             ["conventional-changelog-conventionalcommits", "npm:5.0.0"],\
             ["eslint", "npm:8.37.0"],\
             ["husky", "npm:8.0.3"],\
@@ -1596,6 +1597,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/release-notes-generator", "virtual:65c4aa79af9a001e0ede955ac041f3ef9f622b6d66c9dd529f0f758f21f7e1facd157f3eff3d35f4f8e7c043fa96b6b5f917d040def6c551e13f8819208c1380#npm:10.0.3"],\
             ["@types/expect", null],\
             ["@types/jest", "npm:29.5.0"],\
+            ["@types/johngw__stream-test", null],\
             ["@types/node", "npm:18.15.11"],\
             ["concurrently", "npm:8.0.1"],\
             ["expect", "npm:29.5.0"],\
@@ -1610,7 +1612,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A5.0.3#~builtin<compat/typescript>::version=5.0.3&hash=85af82"]\
           ],\
           "packagePeers": [\
-            "@types/expect"\
+            "@johngw/stream-test",\
+            "@types/expect",\
+            "@types/johngw__stream-test"\
           ],\
           "linkType": "SOFT"\
         }],\
@@ -1658,6 +1662,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:5.57.0"],\
             ["@typescript-eslint/parser", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:5.57.0"],\
             ["assert-never", "npm:1.2.1"],\
+            ["concurrently", "npm:8.0.1"],\
             ["conventional-changelog-conventionalcommits", "npm:5.0.0"],\
             ["eslint", "npm:8.37.0"],\
             ["husky", "npm:8.0.3"],\
