@@ -875,23 +875,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@commitlint/cli", [\
-        ["npm:17.5.0", {\
-          "packageLocation": "./.yarn/cache/@commitlint-cli-npm-17.5.0-bae44a995f-d7d7a016a6.zip/node_modules/@commitlint/cli/",\
-          "packageDependencies": [\
-            ["@commitlint/cli", "npm:17.5.0"],\
-            ["@commitlint/format", "npm:17.4.4"],\
-            ["@commitlint/lint", "npm:17.4.4"],\
-            ["@commitlint/load", "npm:17.5.0"],\
-            ["@commitlint/read", "npm:17.5.1"],\
-            ["@commitlint/types", "npm:17.4.4"],\
-            ["execa", "npm:5.1.1"],\
-            ["lodash.isfunction", "npm:3.0.9"],\
-            ["resolve-from", "npm:5.0.0"],\
-            ["resolve-global", "npm:1.0.0"],\
-            ["yargs", "npm:17.6.2"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:17.5.1", {\
           "packageLocation": "./.yarn/cache/@commitlint-cli-npm-17.5.1-d9d73ad245-2bdd26b321.zip/node_modules/@commitlint/cli/",\
           "packageDependencies": [\
@@ -1535,7 +1518,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/stream/",\
           "packageDependencies": [\
             ["@johngw/stream", "workspace:packages/stream"],\
-            ["@commitlint/cli", "npm:17.5.0"],\
+            ["@commitlint/cli", "npm:17.5.1"],\
             ["@commitlint/config-conventional", "npm:17.4.4"],\
             ["@commitlint/types", "npm:17.4.4"],\
             ["@johngw/stream-common", "workspace:packages/stream-common"],\
