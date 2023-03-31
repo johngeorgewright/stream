@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "incremental": true,
+    "lib": ["dom", "es2022"],
+    "module": "ESNext",
+    "moduleResolution": "nodenext",
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist/es",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES2022"
+  },
+  "include": [
+    "src",
+    "../stream-test/src/utils/Timeline.ts",
+    "../stream-common/src/Array.ts",
+    "../stream-test/src/fromTimeline.ts"
+  ]
+}
