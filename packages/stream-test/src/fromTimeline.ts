@@ -8,7 +8,7 @@ import {
 /**
  * Creates a ReadableStream from a "timeline".
  *
- * @see [timeline docs](/stream/extensions/timelines)
+ * @see [timeline docs](/stream/timelines)
  * @see {@link expectTimeline:function}
  * @group Sources
  * @example

@@ -112,7 +112,7 @@ type ValueOrArrayOrObject<T> =
  * Iterates over a timeline, pausing on dashes and yielding
  * values.
  *
- * @see [timeline docs](/stream/extensions/timelines)
+ * @see [timeline docs](/stream/timelines)
  * @see {@link fromTimeline:function}
  * @see {@link expectTimeline:function}
  * @group Utils

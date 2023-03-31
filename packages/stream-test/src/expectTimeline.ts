@@ -12,7 +12,7 @@ import {
 /**
  * Calls an expectation function to compare a timeline against chunks.
  *
- * @see [timeline docs](/stream/extensions/timelines)
+ * @see [timeline docs](/stream/timelines)
  * @see {@link fromTimeline:function}
  * @group Sinks
  * @example
