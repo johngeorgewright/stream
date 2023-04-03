@@ -4,6 +4,8 @@
  * @group Sinks
  */
 export interface Forkable<T> {
+  finished: boolean
+
   fork(
     underlyingSource?: UnderlyingDefaultSource<T>,
     queuingStrategy?: QueuingStrategy<T>

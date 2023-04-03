@@ -1,9 +1,11 @@
+import { Clearable } from '../types/Clearable.js'
+
 /**
  * An in-memory storage class.
  *
  * @group Storages
  */
-export class MemoryStorage implements Storage {
+export class MemoryStorage implements Storage, Clearable {
   #data: Record<string, string> = {}
 
   get length() {

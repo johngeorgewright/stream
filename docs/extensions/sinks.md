@@ -18,3 +18,13 @@ This library considers a "sink" to be something to write to. IE, a `WritableStre
 - [toIterable](/stream/api/functions/stream.toIterable.html)
 - [toIterator](/stream/api/functions/stream.toIterator.html)
 - [write](/stream/api/functions/stream.write.html)
+
+## Combining implementations
+
+You can combine a number of sink implmentations by using the [SinkComposite](/stream/api/classes/stream.SinkComposite.html).
+
+```typescript
+new WritableStream(
+  new SinkComposite([new ForkableRecallSink(), write(console.info)])
+)
+```

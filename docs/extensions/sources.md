@@ -22,3 +22,16 @@ This library considers a "source" as something we can "read" from. IE, a `Readab
 - [merge](/stream/api/functions/stream.merge.html)
 - [race](/stream/api/functions/stream.race.html)
 - [roundRobin](/stream/api/functions/stream.roundRobin.html)
+
+## Combining implementations
+
+You can combine a number of source implmentations by using the [SourceComposite](/stream/api/classes/stream.SourceComposite.html).
+
+```typescript
+new WritableStream(
+  new SourceComposite([
+    new ControllableStream(),
+    { start: (controller) => controller.enqueue() },
+  ])
+)
+```

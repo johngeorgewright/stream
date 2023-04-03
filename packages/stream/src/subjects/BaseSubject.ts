@@ -37,6 +37,10 @@ export abstract class BaseSubject<In, Out> implements Subjectable<In, Out> {
     return this.#controllable
   }
 
+  get finished() {
+    return this.#forkable.finished
+  }
+
   protected get forkable() {
     return this.#forkable
   }

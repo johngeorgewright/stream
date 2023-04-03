@@ -1,7 +1,9 @@
 import { without } from '@johngw/stream-common/Array'
+import { all } from '@johngw/stream-common/Async'
 import { ReadableStreamsChunk } from '@johngw/stream-common/Stream'
 import { IteratorSource } from './fromCollection.js'
 import { immediatelyClosingReadableStream } from '@johngw/stream-common/immediatelyClosingReadableStream'
+import { SourceComposite } from './SourceComposite.js'
 
 /**
  * Given an ordered list of streams, queue their items from one stream at a time.
@@ -27,9 +29,14 @@ export function roundRobin<RSs extends ReadableStream<unknown>[]>(
   return !streams.length
     ? immediatelyClosingReadableStream()
     : new ReadableStream(
-        new IteratorSource(generateReadResults(), async (reason) => {
-          await Promise.all(readers.map((reader) => reader.cancel(reason)))
-        }),
+        new SourceComposite([
+          new IteratorSource(generateReadResults()),
+          {
+            async cancel(reason) {
+              await all(readers, (reader) => reader.cancel(reason))
+            },
+          },
+        ]),
         queuingStrategy
       )
 

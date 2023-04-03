@@ -1,12 +1,14 @@
-import { timeout } from '@johngw/stream-common/Async'
 import { StorageCache } from '../storages/StorageCache.js'
+import { Clearable } from '../types/Clearable.js'
+import { CachableSource, CachePuller } from './CachableSource.js'
 
 /**
  * An extension to the `ReadableStream` that queues items
  * only when a timed cache becomes invalid.
  *
  * @group Sources
- * @see {@link StorageCache:class}
+ * @see {@link StorageCache}
+ * @see {@link CachableSource}
  * @example
  * Caching for 30 minutes.
  *
@@ -31,7 +33,7 @@ import { StorageCache } from '../storages/StorageCache.js'
  * // 2
  * ```
  * @example
- * Manually invalidating cache
+ * Manually clearing cache.
  *
  * ```
  * const cache = new StorageCache(
@@ -50,65 +52,29 @@ import { StorageCache } from '../storages/StorageCache.js'
  * stream.pipeTo(write(console.info))
  * // 1
  *
- * stream.invalidate()
+ * stream.clear()
  * // 2
  * ```
  */
-export class CachableStream<T> extends ReadableStream<T> {
-  #abortController = new AbortController()
-  readonly #cache: StorageCache
-  readonly #ms: number
-  readonly #path: string[]
-  readonly #pullItem: () => T | Promise<T>
+export class CachableStream<T> extends ReadableStream<T> implements Clearable {
+  readonly #source: CachableSource<T>
 
   constructor(
     cache: StorageCache,
     path: string[],
-    pullItem: () => T | Promise<T>,
+    pullItem: CachePuller<T>,
     ms: number = cache.ms
   ) {
-    super({
-      start: async (controller) => {
-        let item = cache.get(path)
-        if (typeof item === 'undefined') {
-          item = await pullItem()
-          cache.set(path, item, ms)
-        }
-        controller.enqueue(item as T)
-      },
-
-      pull: (controller) => this.#pull(controller),
-
-      cancel: (reason) => {
-        this.#abortController.abort(reason)
-      },
-    })
-
-    this.#cache = cache
-    this.#ms = ms
-    this.#path = path
-    this.#pullItem = pullItem
+    const source = new CachableSource(cache, path, pullItem, ms)
+    super(source)
+    this.#source = source
   }
 
-  async #wait(ms: number) {
-    try {
-      await timeout(ms, undefined, this.#abortController.signal)
-    } catch (error) {
-      //
-    }
+  clear() {
+    this.#source.clear()
   }
 
-  async #pull(controller: ReadableStreamDefaultController<T>): Promise<void> {
-    if (await this.#cache.updateIfStale(this.#path, this.#pullItem, this.#ms))
-      controller.enqueue(this.#cache.get(this.#path) as T)
-    else await this.#wait(this.#cache.timeLeft(this.#path))
-
-    if (controller.desiredSize) return this.#pull(controller)
-  }
-
-  invalidate() {
-    this.#cache.unset(this.#path)
-    this.#abortController.abort('invalidate')
-    this.#abortController = new AbortController()
+  get sourceHasFinished() {
+    return this.#source.sourceHasFinished
   }
 }

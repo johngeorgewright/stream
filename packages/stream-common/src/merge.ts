@@ -1,4 +1,5 @@
 import { without } from './Array.js'
+import { all } from './Async.js'
 import { immediatelyClosingReadableStream } from './immediatelyClosingReadableStream.js'
 import { ReadableStreamsChunk } from './Stream.js'
 
@@ -40,21 +41,19 @@ export function merge<RSs extends ReadableStream<unknown>[]>(
         // when the 1st reader queues an item so the stream
         // can request more if it needs.
         return new Promise((resolve) => {
-          Promise.all(
-            readers.map(async (reader) => {
-              try {
-                const result = await reader.read()
-                if (result.done) readers = without(readers, reader)
-                else {
-                  controller.enqueue(result.value as ReadableStreamsChunk<RSs>)
-                  resolve()
-                }
-              } catch (error) {
-                controller.error(error)
+          all(readers, async (reader) => {
+            try {
+              const result = await reader.read()
+              if (result.done) readers = without(readers, reader)
+              else {
+                controller.enqueue(result.value as ReadableStreamsChunk<RSs>)
                 resolve()
               }
-            })
-          ).finally(() => {
+            } catch (error) {
+              controller.error(error)
+              resolve()
+            }
+          }).finally(() => {
             if (!readers.length) {
               try {
                 controller.close()
@@ -68,7 +67,7 @@ export function merge<RSs extends ReadableStream<unknown>[]>(
       },
 
       async cancel(reason) {
-        await Promise.all(readers.map((reader) => reader.cancel(reason)))
+        await all(readers, (reader) => reader.cancel(reason))
       },
     },
     queuingStrategy

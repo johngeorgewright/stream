@@ -19,11 +19,8 @@ test('iteration over a collection of values', async () => {
 })
 
 test('returning from the iterator will cancel the stream', async () => {
-  const controller = new ControllableStream<number>({
-    pull(controller) {
-      controller.enqueue(1)
-    },
-  })
+  const controller = new ControllableStream<number>()
+  controller.enqueue(1)
 
   const iterator = toIterator(controller)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -35,11 +32,8 @@ test('returning from the iterator will cancel the stream', async () => {
 })
 
 test('throwing an error will cancel the stream', async () => {
-  const controller = new ControllableStream<number>({
-    pull(controller) {
-      controller.enqueue(1)
-    },
-  })
+  const controller = new ControllableStream<number>()
+  controller.enqueue(1)
 
   const iterator = toIterator(controller)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -54,11 +48,8 @@ test('throwing an error will cancel the stream', async () => {
 })
 
 test('aborting will cancel the stream', async () => {
-  const controller = new ControllableStream<number>({
-    pull(controller) {
-      controller.enqueue(1)
-    },
-  })
+  const controller = new ControllableStream<number>()
+  controller.enqueue(1)
 
   toIterator(controller, { signal: AbortSignal.abort(new Error('foo')) })
 

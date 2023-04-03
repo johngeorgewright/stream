@@ -1,3 +1,4 @@
+import { all } from '@johngw/stream-common/Async'
 import { immediatelyClosingReadableStream } from '@johngw/stream-common/immediatelyClosingReadableStream'
 
 /**
@@ -34,7 +35,7 @@ export function race<T>(
       },
 
       async cancel(reason) {
-        await Promise.all(readers.map((reader) => reader.cancel(reason)))
+        await all(readers, (reader) => reader.cancel(reason))
       },
     },
     queuingStrategy

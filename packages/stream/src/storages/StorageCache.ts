@@ -97,8 +97,9 @@ export class StorageCache {
     ms?: number
   ) {
     let item = this.get(path)
-    if (typeof item === 'undefined') {
+    if (item === undefined) {
       item = await update()
+      if (item === undefined) return false
       this.set(path, item, ms)
       return true
     }

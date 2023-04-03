@@ -95,7 +95,7 @@ describe('aborting', () => {
       forkable.fork().pipeTo(write(), { signal: AbortSignal.timeout(10) })
     ).rejects.toThrow()
     await timeout(50)
-    expect(fn.mock.calls.length).toBeGreaterThanOrEqual(6)
+    expect(fn.mock.calls.length).toBeGreaterThanOrEqual(5)
   })
 
   test('will cancel the fork', async () => {

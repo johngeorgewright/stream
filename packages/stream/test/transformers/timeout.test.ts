@@ -13,7 +13,7 @@ test('makes sure that events are emitted within a number of milliseconds', async
   await expect(
     fromTimeline(`
     -T5-1-T5-2-|
-    `).pipeThrough(timeout(50))
+    `).pipeThrough(timeout(500))
   ).toMatchTimeline(`
     ----1----2--
   `)

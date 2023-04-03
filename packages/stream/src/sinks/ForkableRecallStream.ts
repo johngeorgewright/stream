@@ -1,5 +1,6 @@
-import { empty, Empty } from '@johngw/stream-common/Symbol'
 import { ForkableStream } from './ForkableStream.js'
+import { ForkableRecallSink } from './ForkableRecallSink.js'
+import { BaseForkableStream } from './BaseForkableStream.js'
 
 /**
  * An extension to the {@link ForkableStream:class} that immediately
@@ -20,31 +21,11 @@ import { ForkableStream } from './ForkableStream.js'
  * // 7
  * ```
  */
-export class ForkableRecallStream<T> extends ForkableStream<T> {
-  #chunk: T | Empty = empty
-
-  constructor(
-    underlyingSink?: UnderlyingSink<T>,
-    strategy?: QueuingStrategy<T>
-  ) {
-    super(
-      {
-        ...underlyingSink,
-        write: (chunk, controller) => {
-          this.#chunk = chunk
-          underlyingSink?.write?.(chunk, controller)
-        },
-      },
-      strategy
-    )
-  }
-
-  protected override _addController(
-    underlyingSource?: UnderlyingDefaultSource<T>,
-    queuingStrategy?: QueuingStrategy<T>
-  ) {
-    const controller = super._addController(underlyingSource, queuingStrategy)
-    if (this.#chunk !== empty) controller.enqueue(this.#chunk)
-    return controller
+export class ForkableRecallStream<T> extends BaseForkableStream<
+  T,
+  ForkableRecallSink<T>
+> {
+  constructor(strategy?: QueuingStrategy<T>) {
+    super(new ForkableRecallSink<T>(), strategy)
   }
 }

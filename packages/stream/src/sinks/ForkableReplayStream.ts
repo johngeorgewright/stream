@@ -1,3 +1,6 @@
+import { Clearable } from '../types/Clearable.js'
+import { BaseForkableStream } from './BaseForkableStream.js'
+import { ForkableReplaySink } from './ForkableReplaySink.js'
 import { ForkableStream } from './ForkableStream.js'
 
 /**
@@ -25,37 +28,15 @@ import { ForkableStream } from './ForkableStream.js'
  * // 7
  * ```
  */
-export class ForkableReplayStream<T> extends ForkableStream<T> {
-  #chunks: T[] = []
-
-  constructor(
-    maxReplaySize = Number.MAX_SAFE_INTEGER,
-    underlyingSink?: UnderlyingSink<T>,
-    strategy?: QueuingStrategy<T>
-  ) {
-    super(
-      {
-        ...underlyingSink,
-        write: (chunk, controller) => {
-          if (this.#chunks.length === maxReplaySize) this.#chunks.shift()
-          this.#chunks.push(chunk)
-          underlyingSink?.write?.(chunk, controller)
-        },
-      },
-      strategy
-    )
-  }
-
-  protected override _addController(
-    underlyingSource?: UnderlyingDefaultSource<T>,
-    queuingStrategy?: QueuingStrategy<T>
-  ) {
-    const controller = super._addController(underlyingSource, queuingStrategy)
-    for (const chunk of this.#chunks) controller.enqueue(chunk)
-    return controller
+export class ForkableReplayStream<T>
+  extends BaseForkableStream<T, ForkableReplaySink<T>>
+  implements Clearable
+{
+  constructor(maxReplaySize?: number, strategy?: QueuingStrategy<T>) {
+    super(new ForkableReplaySink<T>(maxReplaySize), strategy)
   }
 
   clear() {
-    this.#chunks = []
+    return this.sink.clear()
   }
 }

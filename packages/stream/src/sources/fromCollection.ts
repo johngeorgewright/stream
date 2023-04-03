@@ -70,14 +70,9 @@ export function fromCollection<T>(
  */
 export class IteratorSource<T> implements UnderlyingDefaultSource<T> {
   readonly #iterator: Iterator<T> | AsyncIterator<T>
-  readonly cancel?: UnderlyingSourceCancelCallback
 
-  constructor(
-    iterator: Iterator<T> | AsyncIterator<T>,
-    onCancel?: UnderlyingSourceCancelCallback
-  ) {
+  constructor(iterator: Iterator<T> | AsyncIterator<T>) {
     this.#iterator = iterator
-    this.cancel = onCancel
   }
 
   async pull(controller: ReadableStreamDefaultController<T>): Promise<void> {

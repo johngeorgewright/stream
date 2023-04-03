@@ -1,6 +1,7 @@
 import { ReadableStreamsChunks } from '@johngw/stream-common/Stream'
 import { empty } from '@johngw/stream-common/Symbol'
-import { ControllableStream } from '../sources/ControllableStream.js'
+import { ControllableSource } from '../sources/ControllableSource.js'
+import { SourceComposite } from '../sources/SourceComposite.js'
 
 /**
  * Combines the source Observable with other Observables to create an Observable
@@ -46,19 +47,28 @@ export function withLatestFrom<T, RSs extends ReadableStream<unknown>[]>(
       })
   )
 
-  const readable = new ControllableStream<[T, ...ReadableStreamsChunks<RSs>]>({
-    start,
+  const controller = new ControllableSource<
+    [T, ...ReadableStreamsChunks<RSs>]
+  >()
 
-    cancel(reason) {
-      abortController.abort(reason)
-    },
-  })
+  const readable = new ReadableStream<[T, ...ReadableStreamsChunks<RSs>]>(
+    new SourceComposite([
+      controller,
+      {
+        start,
+
+        cancel(reason) {
+          abortController.abort(reason)
+        },
+      },
+    ])
+  )
 
   const writable = new WritableStream<T>({
     start,
 
     write(chunk) {
-      if (isFilled(inputValues)) readable.enqueue([chunk, ...inputValues])
+      if (isFilled(inputValues)) controller.enqueue([chunk, ...inputValues])
     },
 
     abort(reason) {
@@ -66,7 +76,7 @@ export function withLatestFrom<T, RSs extends ReadableStream<unknown>[]>(
     },
 
     close() {
-      readable.close()
+      controller.close()
     },
   })
 
