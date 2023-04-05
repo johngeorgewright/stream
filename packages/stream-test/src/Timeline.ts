@@ -1,6 +1,6 @@
 import yaml from 'js-yaml'
 import { defer, timeout } from '@johngw/stream-common/Async'
-import { takeWhile } from '@johngw/stream-common/Iterable'
+import { takeCharsWhile } from '@johngw/stream-common/String'
 
 /**
  * Base TimelineError.
@@ -137,14 +137,14 @@ export async function* parseTimelineValues(
 ): AsyncGenerator<TimelineValue> {
   timeline = await timeBits(timeline.trim())
   if (!timeline.length) return
-  const unparsed = [...takeWhile(timeline, (x) => x !== '-')]
-  yield parseTimelineValue(unparsed.join(''))
+  const unparsed = takeCharsWhile(timeline, (x) => x !== '-')
+  yield parseTimelineValue(unparsed)
   yield* parseTimelineValues(timeline.slice(unparsed.length))
 }
 
 async function timeBits(timeline: string): Promise<string> {
   let size = 0
-  for (const _ of takeWhile(timeline, (x) => x === '-')) {
+  for (const _ of takeCharsWhile(timeline, (x) => x === '-')) {
     size++
     await timeout(1)
   }

@@ -49,14 +49,24 @@ export function fromTimeline<T extends TimelineValue>(
       async pull(controller) {
         const { done, value } = await iterator.next()
 
-        if (done) return
-        else if (value === CloseTimeline) controller.close()
-        else if (value instanceof Error) controller.error(value)
-        else if (value instanceof TimelineTimer) {
-          await value.promise
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          return this.pull!(controller)
-        } else controller.enqueue(value as T)
+        switch (true) {
+          case done:
+            return
+
+          case value === CloseTimeline:
+            return controller.close()
+
+          case value instanceof Error:
+            return controller.error(value)
+
+          case value instanceof TimelineTimer:
+            await value.promise
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            return this.pull!(controller)
+
+          default:
+            return controller.enqueue(value as T)
+        }
       },
     },
     queuingStrategy
