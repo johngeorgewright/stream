@@ -1,6 +1,6 @@
 {
   "name": "@johngw/stream-common",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Common utilities between other @johngw/stream* packages",
   "type": "module",
   "sideEffects": false,
