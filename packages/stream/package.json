@@ -1,6 +1,6 @@
 {
   "name": "@johngw/stream",
-  "version": "1.0.0",
+  "version": "2.2.0",
   "type": "module",
   "description": "Reactive programming tools using the WHATWG Streams API.",
   "keywords": [
