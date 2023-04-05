@@ -55,6 +55,9 @@ jobs:
       - name: Bundle
         run: bundle install
 
+      - name: Build
+        run: yarn build
+
       - name: Build Docs
         run: yarn build:docs
 
