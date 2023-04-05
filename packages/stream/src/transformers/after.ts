@@ -21,17 +21,13 @@ export function after<T>(predicate: Predicate<T>) {
     async transform(chunk, controller) {
       if (pass) return controller.enqueue(chunk)
 
-      let after: boolean
       try {
-        after = await predicate(chunk)
+        pass = await predicate(chunk)
       } catch (error) {
         return controller.error(error)
       }
 
-      if (after) {
-        pass = true
-        controller.enqueue(chunk)
-      }
+      if (pass) controller.enqueue(chunk)
     },
   })
 }
