@@ -18,6 +18,10 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v3
 
+      - name: NVM
+        id: nvm
+        run: echo "version=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+
       - name: Use Node.js ${{ matrix.node-version }}
         id: node
         uses: actions/setup-node@v3
