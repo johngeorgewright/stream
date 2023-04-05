@@ -48,64 +48,34 @@ export function expectTimeline<T extends TimelineValue>(
       },
 
       async close() {
-        const { done, value } = await nextResult
-        const todo = done
-          ? []
-          : [value, ...(await asyncIterableToArray(iterator))].filter(
-              (value) =>
-                !(value === CloseTimeline) &&
-                !(value instanceof NeverReachTimelineError) &&
-                !(value instanceof TimelineTimer && value.finished)
-            )
-        if (todo.length)
-          throw new TimelineError(
-            `There ${when({ _: 'are', 1: 'is' }, todo.length)} ${when(
-              { _: todo.length, 0: 'no' },
-              todo.length
-            )} more ${when(
-              {
-                _: 'expectations',
-                1: 'expectation',
-              },
-              todo.length
-            )} left.\n- ${todo
-              .map((value) => JSON.stringify(value, null, 2))
-              .join('\n- ')}`
-          )
+        const rest = await getRest()
+        if (rest.length) throw new ExpectedMoreValuesError(rest)
       },
 
       async write(chunk, controller) {
         const { done, value } = await nextResult
 
-        if (done)
-          controller.error(
-            new TimelineError(
-              `Received a value after the expected timeline:\n${JSON.stringify(
-                chunk,
-                null,
-                2
-              )}`
-            )
-          )
-        else if (value instanceof Error) controller.error(value)
-        else if (value === CloseTimeline)
-          controller.error(
-            new TimelineError(
-              'The writer received a signal to close the stream'
-            )
-          )
-        else if (value instanceof TimelineTimer) {
-          await timeout()
-          if (!value.finished)
-            controller.error(
-              new TimelineError(
-                `Expected ${value.ms}ms timer to have finished. There is ${value.timeLeft}ms left.`
-              )
-            )
-          next(controller)
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          return this.write!(chunk, controller)
-        } else await testExcpectation(value, chunk)
+        switch (true) {
+          case done:
+            return controller.error(new ReceivedExtraValueError(chunk))
+
+          case value instanceof Error:
+            return controller.error(value)
+
+          case value === CloseTimeline:
+            return controller.error(new EarlyCloseError())
+
+          case value instanceof TimelineTimer:
+            await timeout()
+            if (!value.finished)
+              controller.error(new TimerError(value.ms, value.timeLeft))
+            next(controller)
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            return this.write!(chunk, controller)
+
+          default:
+            await testExcpectation(value, chunk)
+        }
 
         next(controller)
       },
@@ -118,5 +88,64 @@ export function expectTimeline<T extends TimelineValue>(
       if (result.value instanceof TimelineError) controller.error(result.value)
       return result
     })
+  }
+
+  async function getRest() {
+    const { done, value } = await nextResult
+    return (
+      done
+        ? []
+        : [value, ...(await asyncIterableToArray(iterator))].filter(
+            (value) =>
+              !(value === CloseTimeline) &&
+              !(value instanceof NeverReachTimelineError) &&
+              !(value instanceof TimelineTimer && value.finished)
+          )
+    ) as TimelineValue[]
+  }
+}
+
+class ExpectedMoreValuesError extends TimelineError {
+  constructor(todo: TimelineValue[]) {
+    super(
+      `There ${when({ _: 'are', 1: 'is' }, todo.length)} ${when(
+        { _: todo.length, 0: 'no' },
+        todo.length
+      )} more ${when(
+        {
+          _: 'expectations',
+          1: 'expectation',
+        },
+        todo.length
+      )} left.\n- ${todo
+        .map((value) => JSON.stringify(value, null, 2))
+        .join('\n- ')}`
+    )
+  }
+}
+
+class ReceivedExtraValueError extends TimelineError {
+  constructor(chunk: TimelineValue) {
+    super(
+      `Received a value after the expected timeline:\n${JSON.stringify(
+        chunk,
+        null,
+        2
+      )}`
+    )
+  }
+}
+
+class EarlyCloseError extends TimelineError {
+  constructor() {
+    super('The writer received a signal to close the stream')
+  }
+}
+
+class TimerError extends TimelineError {
+  constructor(ms: number, timeLeft: number) {
+    super(
+      `Expected ${ms}ms timer to have finished. There is ${timeLeft}ms left.`
+    )
   }
 }
