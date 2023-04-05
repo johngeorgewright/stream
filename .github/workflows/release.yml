@@ -37,8 +37,19 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
+      - name: Build
+        run: yarn build
+
       - name: Test
         run: yarn test
+
+      - name: Upload dists
+        uses: actions/upload-artifact@v3
+        if: matrix.node-version == steps.nvm.outputs.version
+        with:
+          if-no-files-found: error
+          name: dists
+          path: packages/**/dist
 
   publish-npm:
     name: NPM
@@ -53,10 +64,15 @@ jobs:
           token: ${{ secrets.PUSH_TOKEN }}
 
       - name: Install Node.js
-        id: node
         uses: actions/setup-node@v3
+        id: node
         with:
           node-version-file: .nvmrc
+
+      - name: Setup Registries
+        run: |
+          yarn config set --home 'npmRegistries["https://registry.npmjs.org"].npmAuthToken' '${{ secrets.NPM_TOKEN }}'
+          yarn config set --home npmPublishRegistry https://registry.npmjs.org
 
       - name: Restore cache
         uses: actions/cache@v3
@@ -71,16 +87,21 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
-      - name: Setup Registries
-        run: |
-          yarn config set --home 'npmRegistries["https://registry.npmjs.org"].npmAuthToken' '${{ secrets.NPM_TOKEN }}'
-          yarn config set --home npmPublishRegistry https://registry.npmjs.org
+      - name: Download dists
+        uses: actions/download-artifact@v3
+        with:
+          name: dists
+          path: ~/dists
 
-      - name: Build
-        run: yarn build
+      - name: Move dists to project
+        run: |
+          for package in ~/dists/*
+          do 
+            mv "$package/dist" "packages/${package/$HOME\/dists\//}"
+          done
 
       - name: Release
-        run: yarn semantic-release
+        run: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
