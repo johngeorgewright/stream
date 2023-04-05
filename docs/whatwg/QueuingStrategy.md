@@ -6,10 +6,10 @@ parent: WHATWG Streams API
 nav_order: 4
 ---
 
-[CountQueuingStrategy]: https://developer.mozilla.org/en-US/docs/Web/API/CountQueuingStrategy
-[ReadableStream]: https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
-[TransformStream]: https://developer.mozilla.org/en-US/docs/Web/API/TransformStream
-[WritableStream]: https://developer.mozilla.org/en-US/docs/Web/API/WritableStream
+[countqueuingstrategy]: https://developer.mozilla.org/en-US/docs/Web/API/CountQueuingStrategy
+[readablestream]: https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
+[transformstream]: https://developer.mozilla.org/en-US/docs/Web/API/TransformStream
+[writablestream]: https://developer.mozilla.org/en-US/docs/Web/API/WritableStream
 
 # QueuingStrategy
 
