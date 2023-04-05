@@ -1,8 +1,10 @@
 import { without } from '@johngw/stream-common/Array'
 import { all } from '@johngw/stream-common/Async'
-import { ReadableStreamsChunk } from '@johngw/stream-common/Stream'
+import {
+  immediatelyClosingReadableStream,
+  ReadableStreamsChunk,
+} from '@johngw/stream-common/Stream'
 import { IteratorSource } from './fromCollection.js'
-import { immediatelyClosingReadableStream } from '@johngw/stream-common/immediatelyClosingReadableStream'
 import { SourceComposite } from './SourceComposite.js'
 
 /**

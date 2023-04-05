@@ -27,7 +27,7 @@ type AccumulateStateReducerInput<
   Actions extends Record<string, unknown>,
   ActionNames extends readonly (keyof Actions)[],
   Acc extends { action: keyof Actions; param?: unknown }
-> = L.Length<ActionNames> extends 0
+> = ActionNames['length'] extends 0
   ? Acc
   : AccumulateStateReducerInput<
       Actions,

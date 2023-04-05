@@ -1048,7 +1048,6 @@ __metadata:
     "@types/jest": 29.5.0
     "@typescript-eslint/eslint-plugin": 5.57.0
     "@typescript-eslint/parser": 5.57.0
-    assert-never: 1.2.1
     concurrently: 8.0.1
     conventional-changelog-conventionalcommits: 5.0.0
     eslint: 8.37.0
@@ -1058,7 +1057,6 @@ __metadata:
     semantic-release: 21.0.0
     semantic-release-monorepo: 7.0.5
     ts-node: 10.9.1
-    ts-toolbelt: 9.6.0
     tslib: 2.5.0
     typedoc: 0.23.28
     typescript: 5.0.3
@@ -1087,6 +1085,7 @@ __metadata:
     semantic-release-monorepo: 7.0.5
     ts-jest: 29.0.5
     ts-node: 10.9.1
+    ts-toolbelt: 9.6.0
     tslib: 2.5.0
     typescript: 5.0.3
     web-streams-polyfill: 3.2.1
@@ -1125,7 +1124,6 @@ __metadata:
     ts-node: 10.9.1
     ts-toolbelt: 9.6.0
     tslib: 2.5.0
-    typedoc: 0.23.28
     typescript: 5.0.3
     web-streams-polyfill: 3.2.1
   languageName: unknown

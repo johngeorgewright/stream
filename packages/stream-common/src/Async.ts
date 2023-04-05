@@ -53,3 +53,27 @@ export function timeout<T>(ms?: number, value?: T, signal?: AbortSignal) {
     signal?.addEventListener('abort', onAbort)
   })
 }
+
+/**
+ * Returns a promise and a way to resolve or reject it.
+ *
+ * @group Utils
+ * @category Async
+ */
+export function defer<T = void>() {
+  let $resolve: (value: T | PromiseLike<T>) => void
+
+  let $reject: (reason?: unknown) => void
+
+  return {
+    promise: new Promise<T>((resolve, reject) => {
+      $resolve = resolve
+      $reject = reject
+    }),
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    resolve: $resolve!,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    reject: $reject!,
+  }
+}

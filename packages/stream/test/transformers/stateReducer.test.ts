@@ -1,5 +1,10 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { stateReducer } from '../../src/index.js'
+import { Pass, check, fromTimeline } from '@johngw/stream-test'
+import {
+  StateReducerInput,
+  StateReducerOutput,
+  StateReducers,
+  stateReducer,
+} from '../../src/index.js'
 
 interface State {
   authors: string[]
@@ -25,6 +30,45 @@ function transform() {
     nothing: (state) => state,
   })
 }
+
+test('StateReducerInput', () => {
+  check<
+    StateReducerInput<{ foo: string; bar: number; nothing: void }>,
+    | { action: 'foo'; param: string }
+    | { action: 'bar'; param: number }
+    | { action: 'nothing' },
+    Pass
+  >()
+})
+
+test('StateReducerOutput', () => {
+  check<
+    StateReducerOutput<{ foo: string; bar: number; nothing: void }, string>,
+    | { action: 'foo'; param: string; state: string }
+    | { action: 'bar'; param: string; state: string }
+    | { action: 'nothing'; state: string },
+    Pass
+  >()
+})
+
+test('StateReducers', () => {
+  interface State {
+    foos: string[]
+  }
+
+  interface Actions {
+    foo: string
+  }
+
+  check<
+    StateReducers<State, Actions>,
+    {
+      __INIT__(): State
+      foo(state: State, param: string): State
+    },
+    Pass
+  >()
+})
 
 test('the __INIT__ action', async () => {
   await expect(

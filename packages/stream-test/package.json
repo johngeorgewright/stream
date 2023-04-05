@@ -47,6 +47,7 @@
   "dependencies": {
     "@johngw/stream-common": "workspace:*",
     "js-yaml": "4.1.0",
+    "ts-toolbelt": "9.6.0",
     "tslib": "2.5.0",
     "web-streams-polyfill": "3.2.1"
   },

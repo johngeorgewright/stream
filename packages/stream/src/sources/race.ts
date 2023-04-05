@@ -1,5 +1,5 @@
 import { all } from '@johngw/stream-common/Async'
-import { immediatelyClosingReadableStream } from '@johngw/stream-common/immediatelyClosingReadableStream'
+import { immediatelyClosingReadableStream } from '@johngw/stream-common/Stream'
 
 /**
  * Returns a `ReadableStream` that mirrors the first source stream to queue an item.

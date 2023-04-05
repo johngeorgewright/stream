@@ -1,5 +1,5 @@
 import yaml from 'js-yaml'
-import { timeout } from '@johngw/stream-common/Async'
+import { defer, timeout } from '@johngw/stream-common/Async'
 import { takeWhile } from '@johngw/stream-common/Iterable'
 
 /**
@@ -50,12 +50,12 @@ export class TimelineTimer {
   constructor(ms: number) {
     this.#ms = ms
     this.#end = this.#start + ms
-    this.#promise = new Promise<void>((resolve) => {
-      setTimeout(() => {
-        this.#finished = true
-        resolve()
-      }, ms)
-    })
+    const { promise, resolve } = defer()
+    this.#promise = promise
+    setTimeout(() => {
+      this.#finished = true
+      resolve()
+    }, ms)
   }
 
   toJSON() {

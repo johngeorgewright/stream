@@ -21,21 +21,17 @@
       "import": "./dist/es/Function.js",
       "require": "./dist/common/Function.js"
     },
-    "./immediatelyClosingReadableStream": {
-      "import": "./dist/es/immediatelyClosingReadableStream.js",
-      "require": "./dist/common/immediatelyClosingReadableStream.js"
-    },
     "./Iterable": {
       "import": "./dist/es/Iterable.js",
       "require": "./dist/common/Iterable.js"
     },
+    "./Logic": {
+      "import": "./dist/es/Logic.js",
+      "require": "./dist/common/Logic.js"
+    },
     "./Object": {
       "import": "./dist/es/Object.js",
       "require": "./dist/common/Object.js"
-    },
-    "./merge": {
-      "import": "./dist/es/merge.js",
-      "require": "./dist/common/merge.js"
     },
     "./Stream": {
       "import": "./dist/es/Stream.js",
@@ -49,9 +45,9 @@
       "import": "./dist/es/Symbol.js",
       "require": "./dist/common/Symbol.js"
     },
-    "./write": {
-      "import": "./dist/es/write.js",
-      "require": "./dist/common/write.js"
+    "./Test": {
+      "import": "./dist/es/Test.js",
+      "require": "./dist/common/Test.js"
     }
   },
   "scripts": {

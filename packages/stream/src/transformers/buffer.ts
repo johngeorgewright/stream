@@ -1,4 +1,4 @@
-import { write } from '@johngw/stream-common/write'
+import { write } from '@johngw/stream-common/Stream'
 
 /**
  * Buffers the source stream chunks until `notifier` emits.

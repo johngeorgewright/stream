@@ -1,5 +1,6 @@
 import { timeout } from '@johngw/stream-common/Async'
 import { asyncIterableToArray } from '@johngw/stream-common/Iterable'
+import { when } from '@johngw/stream-common/Logic'
 import {
   CloseTimeline,
   NeverReachTimelineError,
@@ -58,7 +59,16 @@ export function expectTimeline<T extends TimelineValue>(
             )
         if (todo.length)
           throw new TimelineError(
-            `There are ${todo.length} more expectations left.\n- ${todo
+            `There ${when({ _: 'are', 1: 'is' }, todo.length)} ${when(
+              { _: todo.length, 0: 'no' },
+              todo.length
+            )} more ${when(
+              {
+                _: 'expectations',
+                1: 'expectation',
+              },
+              todo.length
+            )} left.\n- ${todo
               .map((value) => JSON.stringify(value, null, 2))
               .join('\n- ')}`
           )
