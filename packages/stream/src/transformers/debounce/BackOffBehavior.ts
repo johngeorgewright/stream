@@ -34,8 +34,7 @@ export interface DebounceBackOffBehaviorOptions {
  *   new DebounceTrailingBehavior(),
  * ])
  *
- * ---T5-T10-T20---T40--------------
- * -------------------------------d-
+ * ---T5-T10-T20---T40------------d-
  */
 export class DebounceBackOffBehavior<T> implements DebounceBehavior<T> {
   #inc: (currentMS: number) => number
