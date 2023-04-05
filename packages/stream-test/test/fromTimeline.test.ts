@@ -61,15 +61,15 @@ test('objects', async () => {
   const fn = jest.fn()
 
   await fromTimeline(`
-    --{foo:bar,a:b}--{ one: 1, two: 2 }--|
+    --{foo: bar,a: b}--{ one: 1, two: 2 }--|
   `).pipeTo(write(fn))
 
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
       [
         {
-          "a:b": null,
-          "foo:bar": null,
+          "a": "b",
+          "foo": "bar",
         },
       ],
       [
