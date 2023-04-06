@@ -106,7 +106,7 @@ test('arrays', async () => {
 test('booleans', async () => {
   const fn = jest.fn()
 
-  await fromTimeline(`--true--false--|`).pipeTo(write(fn))
+  await fromTimeline(`--true--false--T--F--|`).pipeTo(write(fn))
 
   expect(fn.mock.calls).toMatchInlineSnapshot(`
     [
@@ -115,6 +115,29 @@ test('booleans', async () => {
       ],
       [
         false,
+      ],
+      [
+        true,
+      ],
+      [
+        false,
+      ],
+    ]
+  `)
+})
+
+test('nulls', async () => {
+  const fn = jest.fn()
+
+  await fromTimeline(`--null--N--|`).pipeTo(write(fn))
+
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        null,
+      ],
+      [
+        null,
       ],
     ]
   `)

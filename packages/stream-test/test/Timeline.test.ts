@@ -11,7 +11,7 @@ test('parseTimelineValues', async () => {
   expect(
     await asyncIterableToArray(
       parseTimelineValues(
-        '--1--{foo: bar}--[a,b]--true--E--E(err foo)--T10--X-|'
+        '--1--{foo: bar}--[a,b]--true--T--false--F--null--N--E--E(err foo)--T10--X-|'
       )
     )
   ).toStrictEqual([
@@ -19,6 +19,11 @@ test('parseTimelineValues', async () => {
     { foo: 'bar' },
     ['a', 'b'],
     true,
+    true,
+    false,
+    false,
+    null,
+    null,
     new TimelineError(),
     new TimelineError('err foo'),
     expect.any(TimelineTimer),

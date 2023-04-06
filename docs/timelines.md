@@ -74,6 +74,14 @@ debounce(10)
 -----T10-2--
 ```
 
+### Null
+
+Although the keyword `null` can be used, a shorter `N` can also be used.
+
+### Booleans
+
+Althought the keywords `true` & `false` can be used, the shorter versions `T` & `F` can also be used.
+
 ### Numbers, Strings, Boolean, Objects & Arrays
 
 Any combination of characters, other than a dash (`-`) or any of the above syntax, will be parsed by [js-yaml](https://github.com/nodeca/js-yaml).

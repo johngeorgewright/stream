@@ -163,6 +163,15 @@ function parseTimelineValue(value: string): TimelineValue {
         value.length > 1 ? value.slice(2, -1) : undefined
       )
 
+    case value === 'T':
+      return true
+
+    case value === 'F':
+      return false
+
+    case value === 'N':
+      return null
+
     case value === '|':
       return CloseTimeline
 
