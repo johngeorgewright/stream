@@ -12,7 +12,7 @@ test('trailing only (by default)', async () => {
     --1--2------T10--|
     `).pipeThrough(debounce(10))
   ).toMatchTimeline(`
-    -----T8-2--------
+    -----T10-2--------
   `)
 })
 
@@ -37,7 +37,7 @@ test('leading and trailing', async () => {
       ])
     )
   ).toMatchTimeline(`
-    -1---T8-3--
+    -1---T10-3--
   `)
 })
 

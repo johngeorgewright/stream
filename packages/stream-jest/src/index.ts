@@ -1,8 +1,8 @@
-import { expectTimeline, TimelineValue } from '@johngw/stream-test'
+import { expectTimeline, TimelineItemDefaultValue } from '@johngw/stream-test'
 import { expect, JestAssertionError, MatcherContext } from 'expect'
 
 expect.extend({
-  toMatchTimeline: function toMatchTimeline<T extends TimelineValue>(
+  toMatchTimeline: function toMatchTimeline<T extends TimelineItemDefaultValue>(
     this: MatcherContext,
     stream: ReadableStream<T>,
     timeline: string,

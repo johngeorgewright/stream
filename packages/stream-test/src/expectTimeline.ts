@@ -1,14 +1,24 @@
 import { timeout } from '@johngw/stream-common/Async'
-import { asyncIterableToArray } from '@johngw/stream-common/Iterable'
-import { when } from '@johngw/stream-common/Logic'
 import {
-  CloseTimeline,
-  NeverReachTimelineError,
+  TimelineFactoryResult,
+  TimelineItemValue,
+} from './TimelineItem/TimelineItem.js'
+import { Timeline } from './Timeline.js'
+import { TimelineItemDash } from './TimelineItem/TimelineItemDash.js'
+import { TimelineItemClose } from './TimelineItem/TimelineItemClose.js'
+import {
   TimelineError,
-  TimelineTimer,
-  TimelineValue,
-  parseTimelineValues,
-} from './Timeline.js'
+  TimelineItemError,
+} from './TimelineItem/TimelineItemError.js'
+import { TimelineItemNeverReach } from './TimelineItem/TimelineItemNeverReach.js'
+import { TimelineItemTimer } from './TimelineItem/TimelineItemTimer.js'
+import {
+  TimelineItemDefault,
+  TimelineItemDefaultValue,
+} from './TimelineItem/TimelineItemDefault.js'
+import { TimelineItemBoolean } from './TimelineItem/TimelineItemBoolean.js'
+import { TimelineItemNull } from './TimelineItem/TimelineItemNull.js'
+import { assertNever } from 'assert-never'
 
 /**
  * Calls an expectation function to compare a timeline against chunks.
@@ -30,101 +40,82 @@ import {
  *   ))
  * ```
  */
-export function expectTimeline<T extends TimelineValue>(
-  timeline: string,
-  testExcpectation: (
-    timelineValue: unknown,
-    chunk: unknown
-  ) => void | Promise<void>,
-  queuingStrategy?: QueuingStrategy<unknown>
+export function expectTimeline<T extends TimelineItemDefaultValue>(
+  timelineString: string,
+  testExcpectation: (timelineValue: T, chunk: unknown) => void | Promise<void>,
+  queuingStrategy?: QueuingStrategy<T>
 ) {
-  const iterator = parseTimelineValues(timeline)
-  let nextResult: Promise<IteratorResult<TimelineValue>>
+  const timeline = new Timeline(timelineString)
+  let nextResult: Promise<IteratorResult<TimelineFactoryResult, undefined>>
 
   return new WritableStream<T>(
     {
       start(controller) {
-        next(controller)
+        nextResult = next(controller)
       },
 
       async close() {
-        const rest = await getRest()
-        if (rest.length) throw new TimelineExpectedMoreValuesError(rest)
+        if (timeline.hasMoreItems())
+          throw new TimelineExpectedMoreValuesError(await timeline.toTimeline())
       },
 
       async write(chunk, controller) {
         const { done, value } = await nextResult
 
-        switch (true) {
-          case done:
-            return controller.error(new TimelineReceivedExtraValueError(chunk))
-
-          case value instanceof Error:
-            return controller.error(value)
-
-          case value === CloseTimeline:
-            return controller.error(new TimelineEarlyCloseError())
-
-          case value instanceof TimelineTimer:
-            await timeout()
-            if (!value.finished)
-              controller.error(new TimelineTimerError(value.ms, value.timeLeft))
-            next(controller)
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            return this.write!(chunk, controller)
-
-          default:
-            await testExcpectation(value, chunk)
+        if (done) {
+          return controller.error(new TimelineReceivedExtraValueError(chunk))
+        } else if (value instanceof TimelineItemDash) {
+          //
+        } else if (value instanceof TimelineItemClose) {
+          return controller.error(new TimelineEarlyCloseError())
+        } else if (
+          value instanceof TimelineItemError ||
+          value instanceof TimelineItemNeverReach
+        ) {
+          return controller.error(value.get())
+        } else if (value instanceof TimelineItemTimer) {
+          const timer = value.get()
+          await timeout()
+          if (!timer.finished)
+            controller.error(new TimelineTimerError(timer.ms, timer.timeLeft))
+          nextResult = next(controller)
+          return this.write!(chunk, controller)
+        } else if (
+          value instanceof TimelineItemDefault ||
+          value instanceof TimelineItemBoolean ||
+          value instanceof TimelineItemNull
+        ) {
+          await testExcpectation(value.get() as T, chunk)
+        } else {
+          assertNever(value)
         }
 
-        next(controller)
+        nextResult = next(controller)
       },
     },
     queuingStrategy
   )
 
-  function next(controller: WritableStreamDefaultController) {
-    nextResult = iterator.next().then((result) => {
-      if (result.value instanceof TimelineError) controller.error(result.value)
+  async function next(
+    controller: WritableStreamDefaultController
+  ): Promise<IteratorResult<TimelineFactoryResult>> {
+    return timeline.next().then((result) => {
+      if (result.value instanceof TimelineItemError)
+        controller.error(result.value.get())
+      else if (result.value instanceof TimelineItemDash) return next(controller)
       return result
     })
-  }
-
-  async function getRest() {
-    const { done, value } = await nextResult
-    return (
-      done
-        ? []
-        : [value, ...(await asyncIterableToArray(iterator))].filter(
-            (value) =>
-              !(value === CloseTimeline) &&
-              !(value instanceof NeverReachTimelineError) &&
-              !(value instanceof TimelineTimer && value.finished)
-          )
-    ) as TimelineValue[]
   }
 }
 
 class TimelineExpectedMoreValuesError extends TimelineError {
-  constructor(values: TimelineValue[]) {
-    super(
-      `There ${when({ _: 'are', 1: 'is' }, values.length)} ${
-        values.length
-      } more ${when(
-        {
-          _: 'expectations',
-          1: 'expectation',
-        },
-        values.length
-      )} left.\n- ${values
-        .map((value) => JSON.stringify(value, null, 2))
-        .join('\n- ')}`
-    )
+  constructor(timeline: string) {
+    super(`There are more expectations left.\n${timeline}`)
   }
 }
 
 class TimelineReceivedExtraValueError extends TimelineError {
-  constructor(chunk: TimelineValue) {
+  constructor(chunk: TimelineItemValue) {
     super(
       `Received a value after the expected timeline:\n${JSON.stringify(
         chunk,

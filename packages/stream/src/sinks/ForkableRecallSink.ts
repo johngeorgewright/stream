@@ -6,7 +6,7 @@ import { ForkableSink } from './ForkableSink.js'
  * queues the last received chunk to any fork.
  *
  * @group Sinks
- * @see {@link ForkableReplayStream:class}
+ * @see {@link ForkableRecallStream:class}
  * @example
  * ```
  * const forkable = new ForkableRecallSink<number>()

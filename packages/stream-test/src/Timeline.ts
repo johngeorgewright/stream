@@ -1,184 +1,96 @@
-import yaml from 'js-yaml'
-import { defer, timeout } from '@johngw/stream-common/Async'
+import { asyncIterableToArray, takeWhile } from '@johngw/stream-common/Iterable'
 import { takeCharsWhile } from '@johngw/stream-common/String'
+import {
+  TimelineFactoryResult,
+  timelineItemFactory,
+} from './TimelineItem/TimelineItem.js'
+import {
+  TimelineItemClose,
+  TimelineItemDash,
+  TimelineItemNeverReach,
+  TimelineItemTimer,
+} from './index.js'
 
-/**
- * Base TimelineError.
- *
- * @group Utils
- * @category Timeline
- */
-export class TimelineError extends Error {
-  constructor(message?: string) {
-    super(message || 'Timeline Error')
+export class Timeline implements AsyncIterableIterator<TimelineFactoryResult> {
+  readonly #unparsed: string
+  readonly #parsed: TimelineFactoryResult[]
+  #position = -1
+
+  constructor(timeline: string) {
+    this.#unparsed = timeline
+    this.#parsed = this.#parse(timeline)
   }
-}
 
-/**
- * A symbol to represent that the stream requires closing.
- *
- * @group Utils
- * @category Timeline
- */
-export const CloseTimeline = Symbol('close timeline')
-
-/**
- * An error to represent that the stream requires terminating.
- *
- * @group Utils
- * @category Timeline
- */
-export class NeverReachTimelineError extends TimelineError {
-  constructor() {
-    super('The stream was expected to have closed by now')
+  get position() {
+    return this.#position
   }
-}
 
-/**
- * Represents a timer in a timeline.
- *
- * @group Utils
- * @category Timeline
- */
-export class TimelineTimer {
-  #finished = false
-  readonly #start = Date.now()
-  readonly #end: number
-  readonly #ms: number
-  readonly #promise: Promise<void>
+  toString() {
+    return this.#unparsed
+  }
 
-  constructor(ms: number) {
-    this.#ms = ms
-    this.#end = this.#start + ms
-    const { promise, resolve } = defer()
-    this.#promise = promise
-    setTimeout(() => {
-      this.#finished = true
-      resolve()
-    }, ms)
+  async toTimeline() {
+    return (await asyncIterableToArray(this))
+      .map((x) => x.toTimeline())
+      .join('')
+  }
+
+  hasMoreItems() {
+    return (
+      this.#position < this.#parsed.length - 1 &&
+      !!this.#parsed
+        .slice(this.#position + 1)
+        .filter(
+          (value) =>
+            !(value instanceof TimelineItemDash) &&
+            !(value instanceof TimelineItemClose) &&
+            !(value instanceof TimelineItemNeverReach) &&
+            !(value instanceof TimelineItemTimer && value.get().finished)
+        ).length
+    )
   }
 
   toJSON() {
-    return {
-      name: 'TimelineTimer',
-      finished: this.#finished,
-      ms: this.#ms,
-      timeLeft: this.timeLeft,
-    }
+    return this.#parsed
   }
 
-  get timeLeft() {
-    return this.#end - Date.now()
-  }
+  async next(): Promise<IteratorResult<TimelineFactoryResult, undefined>> {
+    if (this.#position < this.#parsed.length - 1) {
+      const previous = this.#parsed[this.position]
+      if (previous) await previous.onPass()
 
-  get finished() {
-    return this.#finished
-  }
+      const value = this.#parsed[++this.#position]
+      await value.onReach()
 
-  get promise() {
-    return this.#promise
-  }
-
-  get ms() {
-    return this.#ms
-  }
-}
-
-/**
- * Values that can be added in a timeline.
- *
- * @group Utils
- * @category Timeline
- */
-export type TimelineValue = ValueOrArrayOrObject<
-  | number
-  | boolean
-  | string
-  | null
-  | TimelineTimer
-  | TimelineError
-  | typeof CloseTimeline
->
-
-type ValueOrArrayOrObject<T> =
-  | T
-  | ValueOrArrayOrObject<T>[]
-  | {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      [key: keyof any]: ValueOrArrayOrObject<T>
+      return { done: false, value: value }
     }
 
-/**
- * Iterates over a timeline, pausing on dashes and yielding
- * values.
- *
- * @see [timeline docs](/stream/timelines)
- * @see {@link fromTimeline:function}
- * @see {@link expectTimeline:function}
- * @group Utils
- * @category Timeline
- * @example
- * ```
- * parseTimelineValues('-1-2-[{ foo: bar }]-|')
- * ```
- *
- * The above will do the following:
- * 1. wait for 1ms
- * 2. yield `1`
- * 3. wait for 1ms
- * 4. yield `2`
- * 5. wait for 1ms
- * 6. yield `[{ foo: 'bar' }]`
- * 7. wait for 1ms
- * 8. yield the `CloseTimeline` symbol
- */
-export async function* parseTimelineValues(
-  timeline: string
-): AsyncGenerator<TimelineValue> {
-  timeline = await timeBits(timeline.trim())
-  if (!timeline.length) return
-  const unparsed = takeCharsWhile(timeline, (x) => x !== '-')
-  yield parseTimelineValue(unparsed)
-  yield* parseTimelineValues(timeline.slice(unparsed.length))
-}
-
-async function timeBits(timeline: string): Promise<string> {
-  let size = 0
-  for (const _ of takeCharsWhile(timeline, (x) => x === '-')) {
-    size++
-    await timeout(1)
+    return { done: true, value: undefined }
   }
-  return timeline.slice(size)
-}
 
-function parseTimelineValue(value: string): TimelineValue {
-  value = value.trim()
+  startOver() {
+    this.#position = 0
+  }
 
-  switch (true) {
-    case /^T\d+$/.test(value):
-      return new TimelineTimer(Number(value.slice(1)))
+  [Symbol.asyncIterator]() {
+    return this
+  }
 
-    case /^E(\([^)]*\))?$/.test(value):
-      return new TimelineError(
-        value.length > 1 ? value.slice(2, -1) : undefined
-      )
+  #parse(
+    timeline: string,
+    result: TimelineFactoryResult[] = []
+  ): TimelineFactoryResult[] {
+    timeline = timeline.trim()
 
-    case value === 'T':
-      return true
+    const dashes = [...takeWhile(timeline, (x) => x === '-')]
+    result.push(...dashes.map(timelineItemFactory))
 
-    case value === 'F':
-      return false
+    timeline = timeline.slice(dashes.length)
+    if (!timeline.length) return result
 
-    case value === 'N':
-      return null
+    const unparsed = takeCharsWhile(timeline, (x) => x !== '-')
+    result.push(timelineItemFactory(unparsed))
 
-    case value === '|':
-      return CloseTimeline
-
-    case value === 'X':
-      return new NeverReachTimelineError()
-
-    default:
-      return yaml.load(value) as TimelineValue
+    return this.#parse(timeline.slice(unparsed.length), result)
   }
 }
