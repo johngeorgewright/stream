@@ -90,5 +90,5 @@ Any combination of characters, other than a dash (`-`) or any of the above synta
 
 There are a couple functions to help with testing.
 
-- [expectTimeline](/stream/api/functions/expectTimeline.html)
-- [fromTimeline](/stream/api/functions/fromTimeline.html)
+- [expectTimeline](/stream/api/functions/stream_test.expectTimeline.html)
+- [fromTimeline](/stream/api/functions/stream_test.fromTimeline.html)

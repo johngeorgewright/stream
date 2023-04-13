@@ -52,9 +52,5 @@
     "ts-toolbelt": "9.6.0",
     "tslib": "2.5.0",
     "web-streams-polyfill": "3.2.1"
-  },
-  "typedoc": {
-    "entryPoint": "./src/index.ts",
-    "displayName": "stream-test"
   }
 }

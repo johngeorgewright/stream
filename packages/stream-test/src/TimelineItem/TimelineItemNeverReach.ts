@@ -1,6 +1,12 @@
 import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 
+/**
+ * A timeline item that should never be reached.
+ *
+ * @remarks
+ * Represented by the `X` character.
+ */
 @staticImplements<TimelineParsable<TimelineItemNeverReach>>()
 export class TimelineItemNeverReach extends TimelineItem<NeverReachTimelineError> {
   #error: NeverReachTimelineError
@@ -25,9 +31,6 @@ export class TimelineItemNeverReach extends TimelineItem<NeverReachTimelineError
 
 /**
  * An error to represent that the stream requires terminating.
- *
- * @group Utils
- * @category Timeline
  */
 export class NeverReachTimelineError extends Error {
   constructor() {

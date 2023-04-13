@@ -27,7 +27,7 @@ export function isNonNullObject(x: unknown): x is Record<
  * Returns true if `x` is `ArrayLike`.
  *
  * @group Utils
- * @category Array
+ * @category Object
  */
 export function isArrayLike<T>(x: unknown): x is ArrayLike<T> {
   return isNonNullObject(x) && 'length' in x
@@ -35,7 +35,7 @@ export function isArrayLike<T>(x: unknown): x is ArrayLike<T> {
 
 /**
  * @group Utils
- * @category Array
+ * @category Object
  */
 export function isIterable<T>(x: unknown): x is Iterable<T> {
   return isNonNullObject(x) && Symbol.iterator in x
@@ -43,7 +43,7 @@ export function isIterable<T>(x: unknown): x is Iterable<T> {
 
 /**
  * @group Utils
- * @category Array
+ * @category Object
  */
 export function isAsyncIterable<T>(x: unknown): x is AsyncIterable<T> {
   return isNonNullObject(x) && Symbol.asyncIterator in x
@@ -51,10 +51,39 @@ export function isAsyncIterable<T>(x: unknown): x is AsyncIterable<T> {
 
 /**
  * @group Utils
- * @category Array
+ * @category Object
  */
 export function isIteratorOrAsyncIterator<T>(
   x: unknown
 ): x is Iterator<T> | AsyncIterator<T> {
   return isNonNullObject(x) && 'next' in x
 }
+
+/**
+ * Creates another type where `T` could also be an array or an object.
+ *
+ * @group Utils
+ * @example
+ * ```
+ * type T = ValueOrArrayOrObject<number>
+ * // | number
+ * // | number[]
+ * // | { [key: keyof any]:
+ * //     | number
+ * //     | number[]
+ * //     | { [key: keyof any]: number | number[] | ... }
+ * //   }
+ * // | { [key: keyof any]:
+ * //     | number
+ * //     | number[]
+ * //     | { [key: keyof any]: number | number[] | ... }
+ * //   }[]
+ * ```
+ */
+export type ValueOrArrayOrObject<T> =
+  | T
+  | ValueOrArrayOrObject<T>[]
+  | {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      [key: keyof any]: ValueOrArrayOrObject<T>
+    }

@@ -1,6 +1,9 @@
 import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineParsable, TimelineItem } from './TimelineItem.js'
 
+/**
+ *
+ */
 @staticImplements<TimelineParsable<TimelineItemError>>()
 export class TimelineItemError extends TimelineItem<TimelineError> {
   #error: TimelineError

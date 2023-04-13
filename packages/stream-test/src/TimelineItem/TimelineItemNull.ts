@@ -1,6 +1,10 @@
 import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 
+/**
+ * A timeline item, with the value of `null` that is generated
+ * with the shorthand `N`.
+ */
 @staticImplements<TimelineParsable<TimelineItemNull>>()
 export class TimelineItemNull extends TimelineItem<null> {
   constructor() {

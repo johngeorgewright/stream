@@ -2,6 +2,14 @@ import { defer } from '@johngw/stream-common/Async'
 import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 
+/**
+ * A timeline item that represents a timer.
+ *
+ * @remarks
+ * Timers are used in 2 ways. One for simply delaying the stream's
+ * content and the other is to expect that a certain amount of time
+ * has passed since the previous item.
+ */
 @staticImplements<TimelineParsable<TimelineItemTimer>>()
 export class TimelineItemTimer extends TimelineItem<TimelineTimer> {
   #timer: TimelineTimer
@@ -35,9 +43,6 @@ export class TimelineItemTimer extends TimelineItem<TimelineTimer> {
 
 /**
  * Represents a timer in a timeline.
- *
- * @group Utils
- * @category Timeline
  */
 export class TimelineTimer {
   #finished = false

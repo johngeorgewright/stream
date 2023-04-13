@@ -20,6 +20,11 @@ export abstract class TimelineItem<T> {
   /**
    * Called after this item has been used and before the next
    * item is "reached".
+   *
+   * @remarks
+   * To match other timelines, that may be a string of dashes,
+   * consider all characters in the raw value to wait just like
+   * that of a dash.
    */
   async onPass() {
     const length = this.#rawValue.length - 1
@@ -40,6 +45,16 @@ export abstract class TimelineItem<T> {
     return this.rawValue
   }
 
+  /**
+   * A piece of regular expression that will match something
+   * after a timeline item.
+   *
+   * @remarks
+   * This is generally one of:
+   * - a dash
+   * - a close symbol
+   * - the end of the timeline
+   */
   static readonly regexEnding = '(?:-|\\||$)'
 }
 

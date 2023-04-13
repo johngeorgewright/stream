@@ -10,6 +10,9 @@ import { TimelineItemDefault } from './TimelineItem/TimelineItemDefault.js'
 import { TimelineItemDash } from './TimelineItem/TimelineItemDash.js'
 import { TimelineItem, TimelineParsable } from './TimelineItem/TimelineItem.js'
 
+/**
+ * The configured Timeline parsers.
+ */
 const Items = [
   TimelineItemDash,
   TimelineItemBoolean,
@@ -21,6 +24,9 @@ const Items = [
   TimelineItemDefault,
 ] satisfies TimelineParsable<TimelineItem<unknown>>[]
 
+/**
+ * The union of configured {@link TimelineItem} instances.
+ */
 export type ParsedTimelineItem = typeof Items extends Array<infer T>
   ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
     T extends abstract new (...args: any) => any
@@ -28,12 +34,18 @@ export type ParsedTimelineItem = typeof Items extends Array<infer T>
     : never
   : never
 
+/**
+ * The union of configured TimelineItem contained values.
+ */
 export type ParsedTimelineItemValue = ParsedTimelineItem extends TimelineItem<
   infer V
 >
   ? V
   : never
 
+/**
+ * Given a timeline, parse it in to a list of {@link TimelineItem} objects.
+ */
 export class Timeline implements AsyncIterableIterator<ParsedTimelineItem> {
   readonly #unparsed: string
   readonly #parsed: ParsedTimelineItem[]

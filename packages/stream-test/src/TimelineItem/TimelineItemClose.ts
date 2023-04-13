@@ -1,9 +1,22 @@
 import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineParsable, TimelineItem } from './TimelineItem.js'
 
+/**
+ * A symbol to represent closing a timeline.
+ */
 export const CloseTimeline = Symbol.for('@johngw/stream-test close timeline')
+
+/**
+ * @inheritDoc
+ */
 export type CloseTimeline = typeof CloseTimeline
 
+/**
+ * A timeline item that'll close the stream.
+ *
+ * @remarks
+ * This expects the string representation `|`.
+ */
 @staticImplements<TimelineParsable<TimelineItemClose>>()
 export class TimelineItemClose extends TimelineItem<CloseTimeline> {
   constructor() {
