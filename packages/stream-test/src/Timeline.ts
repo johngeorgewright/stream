@@ -1,21 +1,42 @@
-import { asyncIterableToArray, takeWhile } from '@johngw/stream-common/Iterable'
-import { takeCharsWhile } from '@johngw/stream-common/String'
-import {
-  TimelineItemFactoryResult,
-  timelineItemFactory,
-} from './TimelineItem/TimelineItemFactory.js'
-import {
-  TimelineItemClose,
-  TimelineItemDash,
-  TimelineItemNeverReach,
-  TimelineItemTimer,
-} from './index.js'
+import { search } from '@johngw/stream-common/Array'
+import { asyncIterableToArray } from '@johngw/stream-common/Iterable'
+import { TimelineItemBoolean } from './TimelineItem/TimelineItemBoolean.js'
+import { TimelineItemClose } from './TimelineItem/TimelineItemClose.js'
+import { TimelineItemError } from './TimelineItem/TimelineItemError.js'
+import { TimelineItemNeverReach } from './TimelineItem/TimelineItemNeverReach.js'
+import { TimelineItemNull } from './TimelineItem/TimelineItemNull.js'
+import { TimelineItemTimer } from './TimelineItem/TimelineItemTimer.js'
+import { TimelineItemDefault } from './TimelineItem/TimelineItemDefault.js'
+import { TimelineItemDash } from './TimelineItem/TimelineItemDash.js'
+import { TimelineItem, TimelineParsable } from './TimelineItem/TimelineItem.js'
 
-export class Timeline
-  implements AsyncIterableIterator<TimelineItemFactoryResult>
-{
+const Items = [
+  TimelineItemDash,
+  TimelineItemBoolean,
+  TimelineItemClose,
+  TimelineItemError,
+  TimelineItemNeverReach,
+  TimelineItemNull,
+  TimelineItemTimer,
+  TimelineItemDefault,
+] satisfies TimelineParsable<TimelineItem<unknown>>[]
+
+export type ParsedTimelineItem = typeof Items extends Array<infer T>
+  ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    T extends abstract new (...args: any) => any
+    ? InstanceType<T>
+    : never
+  : never
+
+export type ParsedTimelineItemValue = ParsedTimelineItem extends TimelineItem<
+  infer V
+>
+  ? V
+  : never
+
+export class Timeline implements AsyncIterableIterator<ParsedTimelineItem> {
   readonly #unparsed: string
-  readonly #parsed: TimelineItemFactoryResult[]
+  readonly #parsed: ParsedTimelineItem[]
   #position = -1
 
   constructor(timeline: string) {
@@ -56,7 +77,7 @@ export class Timeline
     return this.#parsed
   }
 
-  async next(): Promise<IteratorResult<TimelineItemFactoryResult, undefined>> {
+  async next(): Promise<IteratorResult<ParsedTimelineItem, undefined>> {
     if (this.#position >= this.#parsed.length - 1)
       return { done: true, value: undefined }
 
@@ -77,21 +98,20 @@ export class Timeline
     return this
   }
 
-  #parse(
-    timeline: string,
-    result: TimelineItemFactoryResult[] = []
-  ): TimelineItemFactoryResult[] {
-    timeline = timeline.trim()
+  #parse(timeline: string) {
+    const results: ParsedTimelineItem[] = []
+    let $timeline = timeline.trim()
 
-    const dashes = [...takeWhile(timeline, (x) => x === '-')]
-    result.push(...dashes.map(timelineItemFactory))
+    while ($timeline.length) {
+      const result = search(Items, (Item) => Item.parse($timeline))
+      if (!result)
+        throw new Error(
+          `Cannot find a TimelineParsable capable of parsing ${$timeline}`
+        )
+      $timeline = result[0]
+      results.push(result[1])
+    }
 
-    timeline = timeline.slice(dashes.length)
-    if (!timeline.length) return result
-
-    const unparsed = takeCharsWhile(timeline, (x) => x !== '-')
-    result.push(timelineItemFactory(unparsed))
-
-    return this.#parse(timeline.slice(unparsed.length), result)
+    return results
   }
 }

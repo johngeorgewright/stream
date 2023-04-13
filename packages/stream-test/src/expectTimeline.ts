@@ -1,6 +1,9 @@
 import { timeout } from '@johngw/stream-common/Async'
-import { TimelineItemFactoryResult } from './TimelineItem/TimelineItemFactory.js'
-import { Timeline } from './Timeline.js'
+import {
+  ParsedTimelineItem,
+  ParsedTimelineItemValue,
+  Timeline,
+} from './Timeline.js'
 import { TimelineItemDash } from './TimelineItem/TimelineItemDash.js'
 import { TimelineItemClose } from './TimelineItem/TimelineItemClose.js'
 import {
@@ -16,7 +19,6 @@ import {
 import { TimelineItemBoolean } from './TimelineItem/TimelineItemBoolean.js'
 import { TimelineItemNull } from './TimelineItem/TimelineItemNull.js'
 import { assertNever } from 'assert-never'
-import { TimelineItemValue } from './TimelineItem/TimelineItemValue.js'
 
 /**
  * Calls an expectation function to compare a timeline against chunks.
@@ -44,7 +46,7 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
   queuingStrategy?: QueuingStrategy<T>
 ) {
   const timeline = new Timeline(timelineString)
-  let nextResult: Promise<IteratorResult<TimelineItemFactoryResult, undefined>>
+  let nextResult: Promise<IteratorResult<ParsedTimelineItem, undefined>>
 
   return new WritableStream<T>(
     {
@@ -97,7 +99,7 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
 
   async function next(
     controller: WritableStreamDefaultController
-  ): Promise<IteratorResult<TimelineItemFactoryResult>> {
+  ): Promise<IteratorResult<ParsedTimelineItem>> {
     return timeline.next().then((result) => {
       if (result.value instanceof TimelineItemError)
         controller.error(result.value.get())
@@ -114,7 +116,7 @@ class TimelineExpectedMoreValuesError extends TimelineError {
 }
 
 class TimelineReceivedExtraValueError extends TimelineError {
-  constructor(chunk: TimelineItemValue) {
+  constructor(chunk: ParsedTimelineItemValue) {
     super(
       `Received a value after the expected timeline:\n${JSON.stringify(
         chunk,

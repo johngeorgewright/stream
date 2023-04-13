@@ -4,6 +4,10 @@ import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 
 @staticImplements<TimelineParsable<TimelineItemDash>>()
 export class TimelineItemDash extends TimelineItem<undefined> {
+  constructor() {
+    super('-')
+  }
+
   get() {
     return undefined
   }
@@ -14,6 +18,8 @@ export class TimelineItemDash extends TimelineItem<undefined> {
   }
 
   static parse(timeline: string) {
-    return timeline === '-' ? new TimelineItemDash(timeline) : undefined
+    return timeline.startsWith('-')
+      ? ([timeline.slice(1), new TimelineItemDash()] as const)
+      : undefined
   }
 }

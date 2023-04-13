@@ -39,6 +39,8 @@ export abstract class TimelineItem<T> {
   toTimeline(): string {
     return this.rawValue
   }
+
+  static readonly regexEnding = '(?:-|\\||$)'
 }
 
 /**
@@ -48,5 +50,7 @@ export abstract class TimelineItem<T> {
 export interface TimelineParsable<
   T extends TimelineItem<unknown> = TimelineItem<unknown>
 > extends StaticType<T> {
-  parse(timelinePart: string): T | undefined
+  parse(
+    timelinePart: string
+  ): undefined | readonly [restOfTimeline: string, timelineItem: T]
 }

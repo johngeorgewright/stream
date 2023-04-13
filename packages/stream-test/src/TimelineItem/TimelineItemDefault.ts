@@ -1,4 +1,5 @@
 import { staticImplements } from '@johngw/stream-common/Function'
+import { takeCharsUntil } from '@johngw/stream-common/String'
 import yaml from 'js-yaml'
 import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 
@@ -28,6 +29,12 @@ export class TimelineItemDefault extends TimelineItem<TimelineItemDefaultValue> 
   }
 
   static parse(timeline: string) {
-    return new TimelineItemDefault(timeline)
+    const unparsed = takeCharsUntil(timeline, '-')
+    return unparsed.length
+      ? ([
+          timeline.slice(unparsed.length),
+          new TimelineItemDefault(unparsed),
+        ] as const)
+      : undefined
   }
 }

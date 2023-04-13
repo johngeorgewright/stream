@@ -5,8 +5,8 @@ import { TimelineParsable, TimelineItem } from './TimelineItem.js'
 export class TimelineItemError extends TimelineItem<TimelineError> {
   #error: TimelineError
 
-  constructor(rawValue: string, message?: string) {
-    super(rawValue)
+  constructor(message?: string) {
+    super(message === undefined ? 'E' : `E(${message})`)
     this.#error = new TimelineError(message)
   }
 
@@ -14,12 +14,18 @@ export class TimelineItemError extends TimelineItem<TimelineError> {
     return this.#error
   }
 
-  static readonly #regexp = /^E(?:\(([^)]*)\))?$/
+  static readonly #regexp = new RegExp(
+    `^(E(?:\\(([^)]*)\\))?)${this.regexEnding}`
+  )
 
   static parse(timeline: string) {
     const result = this.#regexp.exec(timeline)
-    if (!result) return
-    return new TimelineItemError(timeline, result[1])
+    return result
+      ? ([
+          timeline.slice(result[1].length),
+          new TimelineItemError(result[2]),
+        ] as const)
+      : undefined
   }
 }
 

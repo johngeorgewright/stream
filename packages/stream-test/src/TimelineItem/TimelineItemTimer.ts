@@ -6,8 +6,8 @@ import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 export class TimelineItemTimer extends TimelineItem<TimelineTimer> {
   #timer: TimelineTimer
 
-  constructor(rawValue: string, ms: number) {
-    super(rawValue)
+  constructor(ms: number) {
+    super(`T${ms}`)
     this.#timer = new TimelineTimer(ms)
   }
 
@@ -20,12 +20,15 @@ export class TimelineItemTimer extends TimelineItem<TimelineTimer> {
     return this.#timer
   }
 
-  static readonly #regex = /^T(\d+)$/
+  static readonly #regex = new RegExp(`^(T(\\d+))${this.regexEnding}`)
 
   static parse(timeline: string) {
     const result = this.#regex.exec(timeline)
     return result
-      ? new TimelineItemTimer(timeline, Number(result[1]))
+      ? ([
+          timeline.slice(result[1].length),
+          new TimelineItemTimer(Number(result[2])),
+        ] as const)
       : undefined
   }
 }

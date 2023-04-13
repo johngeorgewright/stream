@@ -5,8 +5,8 @@ import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 export class TimelineItemNeverReach extends TimelineItem<NeverReachTimelineError> {
   #error: NeverReachTimelineError
 
-  constructor(rawValue: string) {
-    super(rawValue)
+  constructor() {
+    super('X')
     this.#error = new NeverReachTimelineError()
   }
 
@@ -14,8 +14,12 @@ export class TimelineItemNeverReach extends TimelineItem<NeverReachTimelineError
     return this.#error
   }
 
+  static readonly #regexp = new RegExp(`^X${this.regexEnding}`)
+
   static parse(timeline: string) {
-    return timeline === 'X' ? new TimelineItemNeverReach(timeline) : undefined
+    return this.#regexp.test(timeline)
+      ? ([timeline.slice(1), new TimelineItemNeverReach()] as const)
+      : undefined
   }
 }
 

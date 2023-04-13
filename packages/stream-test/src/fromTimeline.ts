@@ -1,6 +1,5 @@
 import { assertNever } from 'assert-never'
-import { Timeline } from './Timeline.js'
-import { TimelineItemValue } from './TimelineItem/TimelineItemValue.js'
+import { ParsedTimelineItemValue, Timeline } from './Timeline.js'
 import { TimelineItemClose } from './TimelineItem/TimelineItemClose.js'
 import { TimelineItemError } from './TimelineItem/TimelineItemError.js'
 import { TimelineItemTimer } from './TimelineItem/TimelineItemTimer.js'
@@ -43,7 +42,7 @@ import { TimelineItemNull } from './TimelineItem/TimelineItemNull.js'
  * // 4
  * ```
  */
-export function fromTimeline<T extends TimelineItemValue>(
+export function fromTimeline<T extends ParsedTimelineItemValue>(
   timelineString: string,
   queuingStrategy?: QueuingStrategy<T>
 ) {
