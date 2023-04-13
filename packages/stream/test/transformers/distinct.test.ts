@@ -28,7 +28,7 @@ test('flushing with a stream', async () => {
     `).pipeThrough(
       distinct({
         flushes: fromTimeline(`
-    -----null------
+    -----N---------
         `),
       })
     )

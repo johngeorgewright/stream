@@ -7,7 +7,7 @@ test('when not', async () => {
     -5-10-15-18-----X
     `).pipeThrough(every((chunk) => chunk % 5 === 0))
   ).toMatchTimeline(`
-    ---------false---
+    ---------F-------
   `)
 })
 
@@ -17,7 +17,7 @@ test('when true', async () => {
     -5-10-15-20-|
     `).pipeThrough(every((chunk) => chunk % 5 === 0))
   ).toMatchTimeline(`
-    ------------true
+    ------------T
   `)
 })
 
@@ -28,12 +28,12 @@ test('flushing', async () => {
     `).pipeThrough(
       every((chunk) => chunk % 5 === 0, {
         flushes: fromTimeline(`
-    ------------null----------
+    ------------N-------------
         `),
       })
     )
   ).toMatchTimeline(`
-    ------------true-----true-
+    ------------T------------T
   `)
 })
 
@@ -66,6 +66,6 @@ test('disallow flush errors to be sent down stream', async () => {
       })
     )
   ).toMatchTimeline(`
-    ----------------true
+    ----------------T
   `)
 })
