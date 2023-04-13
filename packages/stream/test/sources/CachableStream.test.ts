@@ -6,6 +6,7 @@ import {
   write,
 } from '../../src/index.js'
 import { timeout } from '@johngw/stream-common'
+import { fromTimeline } from '@johngw/stream-test'
 import { cacheStream } from '../../src/sources/cacheStream.js'
 
 let cache: StorageCache
@@ -15,21 +16,17 @@ beforeEach(() => {
 })
 
 test('only pulls when the cache is stale', async () => {
-  const fn = jest.fn<void, [number]>()
-  let i = 0
-
-  new CachableStream<number>(cache, ['test'], () => ({
-    done: false,
-    value: ++i,
-  })).pipeTo(write(fn))
-
-  await timeout(10)
-  expect(fn).toHaveBeenCalledTimes(1)
-  expect(fn).toHaveBeenCalledWith(1)
-
-  await timeout(15)
-  expect(fn).toHaveBeenCalledTimes(2)
-  expect(fn.mock.calls[1][0]).toEqual(2)
+  await expect(
+    cacheStream(
+      cache,
+      ['test'],
+      fromTimeline(`
+    --1-------2--|
+      `)
+    )
+  ).toMatchTimeline(`
+    --1--T15--2--
+  `)
 })
 
 test('invalidating cache', async () => {
