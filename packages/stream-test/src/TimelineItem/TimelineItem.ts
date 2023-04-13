@@ -1,53 +1,52 @@
+import { timeout } from '@johngw/stream-common/Async'
 import { StaticType } from '@johngw/stream-common/Function'
-import { TimelineItemBoolean } from './TimelineItemBoolean.js'
-import { TimelineItemClose } from './TimelineItemClose.js'
-import { TimelineItemError } from './TimelineItemError.js'
-import { TimelineItemNeverReach } from './TimelineItemNeverReach.js'
-import { TimelineItemNull } from './TimelineItemNull.js'
-import { TimelineItemTimer } from './TimelineItemTimer.js'
-import { TimelineItemDefault } from './TimelineItemDefault.js'
-import { TimelineItemDash } from './TimelineItemDash.js'
 
-export interface TimelineItem<T> {
-  get(): T
-  onReach(): void | Promise<void>
-  onPass(): void | Promise<void>
-  toTimeline(): string
-}
+export abstract class TimelineItem<T> {
+  #rawValue: string
 
-export interface TimelineParsable<T extends TimelineItem<unknown>>
-  extends StaticType<T> {
-  parse(timelinePart: string): T | undefined
-}
-
-const Items = [
-  TimelineItemDash,
-  TimelineItemBoolean,
-  TimelineItemClose,
-  TimelineItemError,
-  TimelineItemNeverReach,
-  TimelineItemNull,
-  TimelineItemTimer,
-  TimelineItemDefault,
-]
-
-export type TimelineFactoryResult = typeof Items extends Array<infer T>
-  ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    T extends abstract new (...args: any) => any
-    ? InstanceType<T>
-    : never
-  : never
-
-export type TimelineItemValue = TimelineFactoryResult extends TimelineItem<
-  infer V
->
-  ? V
-  : never
-
-export function timelineItemFactory(timeline: string): TimelineFactoryResult {
-  for (const Item of Items) {
-    const item = Item.parse(timeline)
-    if (item !== undefined) return item
+  get rawValue() {
+    return this.#rawValue
   }
-  return new TimelineItemDefault(timeline)
+
+  constructor(rawValue: string) {
+    this.#rawValue = rawValue
+  }
+
+  /**
+   * Returns the value the `TimelineItem` decorates.
+   */
+  abstract get(): T
+
+  /**
+   * Called after this item has been used and before the next
+   * item is "reached".
+   */
+  async onPass() {
+    const length = this.#rawValue.length - 1
+    for (let i = 0; i < length; i++) await timeout(1)
+  }
+
+  /**
+   * Called when this item is reached in the timeline.
+   */
+  onReach(): void | Promise<void> {
+    //
+  }
+
+  /**
+   * The string representation of this item in a timeline.
+   */
+  toTimeline(): string {
+    return this.rawValue
+  }
+}
+
+/**
+ * The static methods of a class that denote how it is turned
+ * in to a {@link TimelineItem}.
+ */
+export interface TimelineParsable<
+  T extends TimelineItem<unknown> = TimelineItem<unknown>
+> extends StaticType<T> {
+  parse(timelinePart: string): T | undefined
 }

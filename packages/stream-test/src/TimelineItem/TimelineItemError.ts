@@ -1,14 +1,12 @@
-import { timeout } from '@johngw/stream-common/Async'
 import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineParsable, TimelineItem } from './TimelineItem.js'
 
 @staticImplements<TimelineParsable<TimelineItemError>>()
-export class TimelineItemError implements TimelineItem<TimelineError> {
-  #message?: string
+export class TimelineItemError extends TimelineItem<TimelineError> {
   #error: TimelineError
 
-  constructor(message?: string) {
-    this.#message = message
+  constructor(rawValue: string, message?: string) {
+    super(rawValue)
     this.#error = new TimelineError(message)
   }
 
@@ -16,25 +14,12 @@ export class TimelineItemError implements TimelineItem<TimelineError> {
     return this.#error
   }
 
-  onReach() {
-    //
-  }
-
-  async onPass() {
-    const length = this.toTimeline().length
-    for (let i = 0; i < length; i++) await timeout(1)
-  }
-
-  toTimeline() {
-    return this.#message ? `E(${this.#message})` : 'E'
-  }
-
   static readonly #regexp = /^E(?:\(([^)]*)\))?$/
 
-  static parse(timelinePart: string) {
-    const result = this.#regexp.exec(timelinePart)
+  static parse(timeline: string) {
+    const result = this.#regexp.exec(timeline)
     if (!result) return
-    return new TimelineItemError(result[1])
+    return new TimelineItemError(timeline, result[1])
   }
 }
 

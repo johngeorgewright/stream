@@ -1,9 +1,9 @@
 import { asyncIterableToArray, takeWhile } from '@johngw/stream-common/Iterable'
 import { takeCharsWhile } from '@johngw/stream-common/String'
 import {
-  TimelineFactoryResult,
+  TimelineItemFactoryResult,
   timelineItemFactory,
-} from './TimelineItem/TimelineItem.js'
+} from './TimelineItem/TimelineItemFactory.js'
 import {
   TimelineItemClose,
   TimelineItemDash,
@@ -11,9 +11,11 @@ import {
   TimelineItemTimer,
 } from './index.js'
 
-export class Timeline implements AsyncIterableIterator<TimelineFactoryResult> {
+export class Timeline
+  implements AsyncIterableIterator<TimelineItemFactoryResult>
+{
   readonly #unparsed: string
-  readonly #parsed: TimelineFactoryResult[]
+  readonly #parsed: TimelineItemFactoryResult[]
   #position = -1
 
   constructor(timeline: string) {
@@ -54,22 +56,21 @@ export class Timeline implements AsyncIterableIterator<TimelineFactoryResult> {
     return this.#parsed
   }
 
-  async next(): Promise<IteratorResult<TimelineFactoryResult, undefined>> {
-    if (this.#position < this.#parsed.length - 1) {
-      const previous = this.#parsed[this.position]
-      if (previous) await previous.onPass()
+  async next(): Promise<IteratorResult<TimelineItemFactoryResult, undefined>> {
+    if (this.#position >= this.#parsed.length - 1)
+      return { done: true, value: undefined }
 
-      const value = this.#parsed[++this.#position]
-      await value.onReach()
+    const previous = this.#parsed[this.position]
+    if (previous) await previous.onPass()
 
-      return { done: false, value: value }
-    }
+    const value = this.#parsed[++this.#position]
+    await value.onReach()
 
-    return { done: true, value: undefined }
+    return { done: false, value }
   }
 
   startOver() {
-    this.#position = 0
+    this.#position = -1
   }
 
   [Symbol.asyncIterator]() {
@@ -78,8 +79,8 @@ export class Timeline implements AsyncIterableIterator<TimelineFactoryResult> {
 
   #parse(
     timeline: string,
-    result: TimelineFactoryResult[] = []
-  ): TimelineFactoryResult[] {
+    result: TimelineItemFactoryResult[] = []
+  ): TimelineItemFactoryResult[] {
     timeline = timeline.trim()
 
     const dashes = [...takeWhile(timeline, (x) => x === '-')]

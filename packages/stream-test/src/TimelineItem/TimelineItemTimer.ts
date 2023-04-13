@@ -1,37 +1,32 @@
-import { defer, timeout } from '@johngw/stream-common/Async'
+import { defer } from '@johngw/stream-common/Async'
 import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 
 @staticImplements<TimelineParsable<TimelineItemTimer>>()
-export class TimelineItemTimer implements TimelineItem<TimelineTimer> {
+export class TimelineItemTimer extends TimelineItem<TimelineTimer> {
   #timer: TimelineTimer
 
-  constructor(ms: number) {
+  constructor(rawValue: string, ms: number) {
+    super(rawValue)
     this.#timer = new TimelineTimer(ms)
   }
 
-  onReach() {
+  override onReach() {
     this.#timer.start()
-  }
-
-  async onPass() {
-    const length = this.toTimeline().length
-    for (let i = 0; i < length; i++) await timeout(1)
+    return super.onReach()
   }
 
   get() {
     return this.#timer
   }
 
-  toTimeline(): string {
-    return `T${this.#timer.ms}`
-  }
-
   static readonly #regex = /^T(\d+)$/
 
   static parse(timeline: string) {
     const result = this.#regex.exec(timeline)
-    return result ? new TimelineItemTimer(Number(result[1])) : undefined
+    return result
+      ? new TimelineItemTimer(timeline, Number(result[1]))
+      : undefined
   }
 }
 

@@ -2,24 +2,12 @@ import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 
 @staticImplements<TimelineParsable<TimelineItemNull>>()
-export class TimelineItemNull implements TimelineItem<null> {
+export class TimelineItemNull extends TimelineItem<null> {
   get() {
     return null
   }
 
-  toTimeline() {
-    return 'N'
-  }
-
-  onReach() {
-    //
-  }
-
-  onPass() {
-    //
-  }
-
-  static parse(timelinePart: string) {
-    return timelinePart === 'N' ? new TimelineItemNull() : undefined
+  static parse(timeline: string) {
+    return timeline === 'N' ? new TimelineItemNull(timeline) : undefined
   }
 }

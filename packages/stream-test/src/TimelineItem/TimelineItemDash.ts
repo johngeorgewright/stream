@@ -3,24 +3,17 @@ import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 
 @staticImplements<TimelineParsable<TimelineItemDash>>()
-export class TimelineItemDash implements TimelineItem<undefined> {
+export class TimelineItemDash extends TimelineItem<undefined> {
   get() {
     return undefined
   }
 
-  onReach() {
+  override async onReach() {
+    await super.onReach()
     return timeout(1)
   }
 
-  onPass() {
-    //
-  }
-
-  toTimeline() {
-    return '-'
-  }
-
   static parse(timeline: string) {
-    return timeline === '-' ? new TimelineItemDash() : undefined
+    return timeline === '-' ? new TimelineItemDash(timeline) : undefined
   }
 }

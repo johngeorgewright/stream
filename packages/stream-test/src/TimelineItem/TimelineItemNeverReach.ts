@@ -2,12 +2,11 @@ import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 
 @staticImplements<TimelineParsable<TimelineItemNeverReach>>()
-export class TimelineItemNeverReach
-  implements TimelineItem<NeverReachTimelineError>
-{
+export class TimelineItemNeverReach extends TimelineItem<NeverReachTimelineError> {
   #error: NeverReachTimelineError
 
-  constructor() {
+  constructor(rawValue: string) {
+    super(rawValue)
     this.#error = new NeverReachTimelineError()
   }
 
@@ -15,20 +14,8 @@ export class TimelineItemNeverReach
     return this.#error
   }
 
-  onReach() {
-    //
-  }
-
-  onPass() {
-    //
-  }
-
-  toTimeline(): string {
-    return 'X'
-  }
-
-  static parse(timelinePart: string) {
-    return timelinePart === 'X' ? new TimelineItemNeverReach() : undefined
+  static parse(timeline: string) {
+    return timeline === 'X' ? new TimelineItemNeverReach(timeline) : undefined
   }
 }
 

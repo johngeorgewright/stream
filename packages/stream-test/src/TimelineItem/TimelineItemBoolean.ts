@@ -2,10 +2,11 @@ import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineParsable, TimelineItem } from './TimelineItem.js'
 
 @staticImplements<TimelineParsable<TimelineItemBoolean>>()
-export class TimelineItemBoolean implements TimelineItem<boolean> {
+export class TimelineItemBoolean extends TimelineItem<boolean> {
   #value: boolean
 
-  constructor(value: boolean) {
+  constructor(rawValue: string, value: boolean) {
+    super(rawValue)
     this.#value = value
   }
 
@@ -13,23 +14,11 @@ export class TimelineItemBoolean implements TimelineItem<boolean> {
     return this.#value
   }
 
-  onReach() {
-    //
-  }
-
-  onPass() {
-    //
-  }
-
-  toTimeline() {
-    return this.#value ? 'T' : 'F'
-  }
-
-  static parse(timelinePart: string) {
-    return timelinePart === 'T'
-      ? new TimelineItemBoolean(true)
-      : timelinePart === 'F'
-      ? new TimelineItemBoolean(false)
+  static parse(timeline: string) {
+    return timeline === 'T'
+      ? new TimelineItemBoolean(timeline, true)
+      : timeline === 'F'
+      ? new TimelineItemBoolean(timeline, false)
       : undefined
   }
 }

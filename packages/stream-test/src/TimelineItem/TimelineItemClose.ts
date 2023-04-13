@@ -5,24 +5,12 @@ export const CloseTimeline = Symbol.for('@johngw/stream-test close timeline')
 export type CloseTimeline = typeof CloseTimeline
 
 @staticImplements<TimelineParsable<TimelineItemClose>>()
-export class TimelineItemClose implements TimelineItem<CloseTimeline> {
+export class TimelineItemClose extends TimelineItem<CloseTimeline> {
   get(): CloseTimeline {
     return CloseTimeline
   }
 
-  onReach() {
-    //
-  }
-
-  onPass() {
-    //
-  }
-
-  toTimeline() {
-    return '|'
-  }
-
-  static parse(timelinePart: string) {
-    return timelinePart === '|' ? new TimelineItemClose() : undefined
+  static parse(timeline: string) {
+    return timeline === '|' ? new TimelineItemClose(timeline) : undefined
   }
 }

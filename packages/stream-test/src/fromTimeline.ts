@@ -1,6 +1,6 @@
 import { assertNever } from 'assert-never'
 import { Timeline } from './Timeline.js'
-import { TimelineItemValue } from './TimelineItem/TimelineItem.js'
+import { TimelineItemValue } from './TimelineItem/TimelineItemValue.js'
 import { TimelineItemClose } from './TimelineItem/TimelineItemClose.js'
 import { TimelineItemError } from './TimelineItem/TimelineItemError.js'
 import { TimelineItemTimer } from './TimelineItem/TimelineItemTimer.js'
