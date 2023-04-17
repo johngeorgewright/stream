@@ -48,7 +48,7 @@
     "semantic-release": "21.0.1",
     "semantic-release-monorepo": "7.0.5",
     "ts-node": "10.9.1",
-    "typedoc": "0.24.2",
+    "typedoc": "0.24.4",
     "typescript": "5.0.4",
     "web-streams-polyfill": "3.2.1"
   },
