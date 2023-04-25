@@ -1,0 +1,5 @@
+.jekyll-cache
+dist
+docs/api
+docs/_site
+.yarn
