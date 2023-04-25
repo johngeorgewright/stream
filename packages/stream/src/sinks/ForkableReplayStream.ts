@@ -8,6 +8,7 @@ import { ForkableStream } from './ForkableStream.js'
  * queues the entire contents of whatever has been previously consumed.
  *
  * @group Sinks
+ * @see {@link ForkableReplaySink}
  * @example
  * ```
  * const forkable = new ForkableReplayStream<number>()

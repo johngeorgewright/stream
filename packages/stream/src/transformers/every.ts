@@ -16,7 +16,7 @@ import { Flushable, pipeFlushes } from '@johngw/stream-common/Stream'
  *
  * every((x) => x < 10)
  *
- * -----------------------------true-|
+ * ----------------------------T-|
  * ```
  *
  * When something fails the predicate.
@@ -25,7 +25,20 @@ import { Flushable, pipeFlushes } from '@johngw/stream-common/Stream'
  *
  * every((x) => x < 5)
  *
- * --------------------false-|
+ * ------------------F-|
+ * ```
+ *
+ * A `flushes` stream can be used to force the transformer to queue
+ * it's current state downstream.
+ *
+ * ```
+ * --1--2--3--4--5--6--7--8--9-|
+ *
+ * every((x) => x < 10, { flushes:
+ * -----------N-----------------
+ * })
+ *
+ * -----------T----------------T-|
  * ```
  */
 export function every<T>(predicate: Predicate<T>, options?: Flushable) {

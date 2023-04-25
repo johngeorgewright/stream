@@ -86,11 +86,11 @@ export class ForkableSink<T> implements UnderlyingSink<T>, Forkable<T> {
     const stream = new ReadableStream<T>(
       new SourceComposite<T>([
         controller,
+        underlyingSource || {},
         {
-          cancel: (reason) => {
+          cancel: () => {
             this.#controllers.delete(controller)
             this.#controllerSet.delete(controller)
-            underlyingSource?.cancel?.(reason)
           },
         },
       ]),

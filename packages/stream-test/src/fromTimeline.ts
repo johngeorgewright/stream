@@ -1,9 +1,13 @@
-import {
-  CloseTimeline,
-  TimelineTimer,
-  TimelineValue,
-  parseTimelineValues,
-} from './Timeline.js'
+import { assertNever } from 'assert-never'
+import { ParsedTimelineItemValue, Timeline } from './Timeline.js'
+import { TimelineItemClose } from './TimelineItem/TimelineItemClose.js'
+import { TimelineItemError } from './TimelineItem/TimelineItemError.js'
+import { TimelineItemTimer } from './TimelineItem/TimelineItemTimer.js'
+import { TimelineItemDefault } from './TimelineItem/TimelineItemDefault.js'
+import { TimelineItemDash } from './TimelineItem/TimelineItemDash.js'
+import { TimelineItemBoolean } from './TimelineItem/TimelineItemBoolean.js'
+import { TimelineItemNeverReach } from './TimelineItem/TimelineItemNeverReach.js'
+import { TimelineItemNull } from './TimelineItem/TimelineItemNull.js'
 
 /**
  * Creates a ReadableStream from a "timeline".
@@ -38,34 +42,41 @@ import {
  * // 4
  * ```
  */
-export function fromTimeline<T extends TimelineValue>(
-  timeline: string,
+export function fromTimeline<T extends ParsedTimelineItemValue>(
+  timelineString: string,
   queuingStrategy?: QueuingStrategy<T>
 ) {
-  const iterator = parseTimelineValues(timeline)
+  const timeline = new Timeline(timelineString)
 
   return new ReadableStream<T>(
     {
       async pull(controller) {
-        const { done, value } = await iterator.next()
+        const { done, value } = await timeline.next()
 
-        switch (true) {
-          case done:
-            return
-
-          case value === CloseTimeline:
-            return controller.close()
-
-          case value instanceof Error:
-            return controller.error(value)
-
-          case value instanceof TimelineTimer:
-            await value.promise
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            return this.pull!(controller)
-
-          default:
-            return controller.enqueue(value as T)
+        if (done) {
+          return
+        } else if (value instanceof TimelineItemDash) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return this.pull!(controller)
+        } else if (value instanceof TimelineItemClose) {
+          return controller.close()
+        } else if (
+          value instanceof TimelineItemError ||
+          value instanceof TimelineItemNeverReach
+        ) {
+          return controller.error(value.get())
+        } else if (value instanceof TimelineItemTimer) {
+          await value.get().promise
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return this.pull!(controller)
+        } else if (
+          value instanceof TimelineItemDefault ||
+          value instanceof TimelineItemBoolean ||
+          value instanceof TimelineItemNull
+        ) {
+          return controller.enqueue(value.get() as T)
+        } else {
+          assertNever(value)
         }
       },
     },

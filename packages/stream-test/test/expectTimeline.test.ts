@@ -108,15 +108,12 @@ test('not enough chunks', async () => {
       expectTimeline(
         `
       --1--2--{foo: bar}--
-      `,
+        `,
         fn
       )
     )
-  ).rejects.toThrow(`There are 2 more expectations left.
-- 2
-- {
-  "foo": "bar"
-}`)
+  ).rejects.toThrow(`There are more expectations left.
+--{foo: bar}--`)
 })
 
 test('not enough of a timeline', async () => {
@@ -125,11 +122,11 @@ test('not enough of a timeline', async () => {
   await expect(
     fromTimeline(`
     --1--2--3--|
-  `).pipeTo(
+    `).pipeTo(
       expectTimeline(
         `
     --1--
-  `,
+        `,
         fn
       )
     )

@@ -1689,6 +1689,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.5.1"],\
             ["@types/js-yaml", "npm:4.0.5"],\
             ["@types/node", "npm:18.16.0"],\
+            ["assert-never", "npm:1.2.1"],\
             ["concurrently", "npm:8.0.1"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.5.0"],\
             ["js-yaml", "npm:4.1.0"],\

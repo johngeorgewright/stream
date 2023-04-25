@@ -74,6 +74,14 @@ debounce(10)
 -----T10-2--
 ```
 
+### Null
+
+Although the keyword `null` can be used, a shorter `N` can also be used.
+
+### Booleans
+
+Althought the keywords `true` & `false` can be used, the shorter versions `T` & `F` can also be used.
+
 ### Numbers, Strings, Boolean, Objects & Arrays
 
 Any combination of characters, other than a dash (`-`) or any of the above syntax, will be parsed by [js-yaml](https://github.com/nodeca/js-yaml).
@@ -82,5 +90,5 @@ Any combination of characters, other than a dash (`-`) or any of the above synta
 
 There are a couple functions to help with testing.
 
-- [expectTimeline](/stream/api/functions/expectTimeline.html)
-- [fromTimeline](/stream/api/functions/fromTimeline.html)
+- [expectTimeline](/stream/api/functions/stream_test.expectTimeline.html)
+- [fromTimeline](/stream/api/functions/stream_test.fromTimeline.html)

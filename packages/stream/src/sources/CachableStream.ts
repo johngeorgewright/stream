@@ -8,7 +8,7 @@ import { CachableSource, CachePuller } from './CachableSource.js'
  *
  * @group Sources
  * @see {@link StorageCache}
- * @see {@link CachableSource}
+ * @see {@link CachableSource:class}
  * @example
  * Caching for 30 minutes.
  *

@@ -7,6 +7,7 @@ import { BaseForkableStream } from './BaseForkableStream.js'
  * queues the last received chunk to any fork.
  *
  * @group Sinks
+ * @see {@link ForkableRecallSink}
  * @example
  * ```
  * const forkable = new ForkableRecallStream<number>()

@@ -16,12 +16,23 @@ export interface Stringable {
  * @group Utils
  * @category String
  */
+export function takeCharsWhile(string: string, matchingString: string): string
+
 export function takeCharsWhile(
   string: string,
   predicate: (x: string) => boolean
+): string
+
+export function takeCharsWhile(
+  string: string,
+  predicate: string | ((x: string) => boolean)
 ) {
   let result = ''
-  for (const char of takeWhile(string, predicate)) result += char
+  for (const char of takeWhile(
+    string,
+    typeof predicate === 'string' ? (x) => x === predicate : predicate
+  ))
+    result += char
   return result
 }
 
@@ -31,11 +42,22 @@ export function takeCharsWhile(
  * @group Utils
  * @category String
  */
+export function takeCharsUntil(string: string, matchingString: string): string
+
 export function takeCharsUntil(
   string: string,
   predicate: (x: string) => boolean
+): string
+
+export function takeCharsUntil(
+  string: string,
+  predicate: string | ((x: string) => boolean)
 ) {
   let result = ''
-  for (const char of takeUntil(string, predicate)) result += char
+  for (const char of takeUntil(
+    string,
+    typeof predicate === 'string' ? (x) => x === predicate : predicate
+  ))
+    result += char
   return result
 }

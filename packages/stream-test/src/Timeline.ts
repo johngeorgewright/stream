@@ -1,175 +1,129 @@
-import yaml from 'js-yaml'
-import { defer, timeout } from '@johngw/stream-common/Async'
-import { takeCharsWhile } from '@johngw/stream-common/String'
+import { search } from '@johngw/stream-common/Array'
+import { asyncIterableToArray } from '@johngw/stream-common/Iterable'
+import { TimelineItemBoolean } from './TimelineItem/TimelineItemBoolean.js'
+import { TimelineItemClose } from './TimelineItem/TimelineItemClose.js'
+import { TimelineItemError } from './TimelineItem/TimelineItemError.js'
+import { TimelineItemNeverReach } from './TimelineItem/TimelineItemNeverReach.js'
+import { TimelineItemNull } from './TimelineItem/TimelineItemNull.js'
+import { TimelineItemTimer } from './TimelineItem/TimelineItemTimer.js'
+import { TimelineItemDefault } from './TimelineItem/TimelineItemDefault.js'
+import { TimelineItemDash } from './TimelineItem/TimelineItemDash.js'
+import { TimelineItem, TimelineParsable } from './TimelineItem/TimelineItem.js'
 
 /**
- * Base TimelineError.
- *
- * @group Utils
- * @category Timeline
+ * The configured Timeline parsers.
  */
-export class TimelineError extends Error {
-  constructor(message?: string) {
-    super(message || 'Timeline Error')
+const Items = [
+  TimelineItemDash,
+  TimelineItemBoolean,
+  TimelineItemClose,
+  TimelineItemError,
+  TimelineItemNeverReach,
+  TimelineItemNull,
+  TimelineItemTimer,
+  TimelineItemDefault,
+] satisfies TimelineParsable<TimelineItem<unknown>>[]
+
+/**
+ * The union of configured {@link TimelineItem} instances.
+ */
+export type ParsedTimelineItem = typeof Items extends Array<infer T>
+  ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    T extends abstract new (...args: any) => any
+    ? InstanceType<T>
+    : never
+  : never
+
+/**
+ * The union of configured TimelineItem contained values.
+ */
+export type ParsedTimelineItemValue = ParsedTimelineItem extends TimelineItem<
+  infer V
+>
+  ? V
+  : never
+
+/**
+ * Given a timeline, parse it in to a list of {@link TimelineItem} objects.
+ */
+export class Timeline implements AsyncIterableIterator<ParsedTimelineItem> {
+  readonly #unparsed: string
+  readonly #parsed: ParsedTimelineItem[]
+  #position = -1
+
+  constructor(timeline: string) {
+    this.#unparsed = timeline
+    this.#parsed = this.#parse(timeline)
   }
-}
 
-/**
- * A symbol to represent that the stream requires closing.
- *
- * @group Utils
- * @category Timeline
- */
-export const CloseTimeline = Symbol('close timeline')
-
-/**
- * An error to represent that the stream requires terminating.
- *
- * @group Utils
- * @category Timeline
- */
-export class NeverReachTimelineError extends TimelineError {
-  constructor() {
-    super('The stream was expected to have closed by now')
+  get position() {
+    return this.#position
   }
-}
 
-/**
- * Represents a timer in a timeline.
- *
- * @group Utils
- * @category Timeline
- */
-export class TimelineTimer {
-  #finished = false
-  readonly #start = Date.now()
-  readonly #end: number
-  readonly #ms: number
-  readonly #promise: Promise<void>
+  toString() {
+    return this.#unparsed
+  }
 
-  constructor(ms: number) {
-    this.#ms = ms
-    this.#end = this.#start + ms
-    const { promise, resolve } = defer()
-    this.#promise = promise
-    setTimeout(() => {
-      this.#finished = true
-      resolve()
-    }, ms)
+  async toTimeline() {
+    return (await asyncIterableToArray(this))
+      .map((x) => x.toTimeline())
+      .join('')
+  }
+
+  hasMoreItems() {
+    return (
+      this.#position < this.#parsed.length - 1 &&
+      !!this.#parsed
+        .slice(this.#position + 1)
+        .filter(
+          (value) =>
+            !(value instanceof TimelineItemDash) &&
+            !(value instanceof TimelineItemClose) &&
+            !(value instanceof TimelineItemNeverReach) &&
+            !(value instanceof TimelineItemTimer && value.get().finished)
+        ).length
+    )
   }
 
   toJSON() {
-    return {
-      name: 'TimelineTimer',
-      finished: this.#finished,
-      ms: this.#ms,
-      timeLeft: this.timeLeft,
-    }
+    return this.#parsed
   }
 
-  get timeLeft() {
-    return this.#end - Date.now()
+  async next(): Promise<IteratorResult<ParsedTimelineItem, undefined>> {
+    if (this.#position >= this.#parsed.length - 1)
+      return { done: true, value: undefined }
+
+    const previous = this.#parsed[this.position]
+    if (previous) await previous.onPass()
+
+    const value = this.#parsed[++this.#position]
+    await value.onReach()
+
+    return { done: false, value }
   }
 
-  get finished() {
-    return this.#finished
+  startOver() {
+    this.#position = -1
   }
 
-  get promise() {
-    return this.#promise
+  [Symbol.asyncIterator]() {
+    return this
   }
 
-  get ms() {
-    return this.#ms
-  }
-}
+  #parse(timeline: string) {
+    const results: ParsedTimelineItem[] = []
+    let $timeline = timeline.trim()
 
-/**
- * Values that can be added in a timeline.
- *
- * @group Utils
- * @category Timeline
- */
-export type TimelineValue = ValueOrArrayOrObject<
-  | number
-  | boolean
-  | string
-  | null
-  | TimelineTimer
-  | TimelineError
-  | typeof CloseTimeline
->
-
-type ValueOrArrayOrObject<T> =
-  | T
-  | ValueOrArrayOrObject<T>[]
-  | {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      [key: keyof any]: ValueOrArrayOrObject<T>
+    while ($timeline.length) {
+      const result = search(Items, (Item) => Item.parse($timeline))
+      if (!result)
+        throw new Error(
+          `Cannot find a TimelineParsable capable of parsing ${$timeline}`
+        )
+      $timeline = result[0]
+      results.push(result[1])
     }
 
-/**
- * Iterates over a timeline, pausing on dashes and yielding
- * values.
- *
- * @see [timeline docs](/stream/timelines)
- * @see {@link fromTimeline:function}
- * @see {@link expectTimeline:function}
- * @group Utils
- * @category Timeline
- * @example
- * ```
- * parseTimelineValues('-1-2-[{ foo: bar }]-|')
- * ```
- *
- * The above will do the following:
- * 1. wait for 1ms
- * 2. yield `1`
- * 3. wait for 1ms
- * 4. yield `2`
- * 5. wait for 1ms
- * 6. yield `[{ foo: 'bar' }]`
- * 7. wait for 1ms
- * 8. yield the `CloseTimeline` symbol
- */
-export async function* parseTimelineValues(
-  timeline: string
-): AsyncGenerator<TimelineValue> {
-  timeline = await timeBits(timeline.trim())
-  if (!timeline.length) return
-  const unparsed = takeCharsWhile(timeline, (x) => x !== '-')
-  yield parseTimelineValue(unparsed)
-  yield* parseTimelineValues(timeline.slice(unparsed.length))
-}
-
-async function timeBits(timeline: string): Promise<string> {
-  let size = 0
-  for (const _ of takeCharsWhile(timeline, (x) => x === '-')) {
-    size++
-    await timeout(1)
-  }
-  return timeline.slice(size)
-}
-
-function parseTimelineValue(value: string): TimelineValue {
-  value = value.trim()
-
-  switch (true) {
-    case /^T\d+$/.test(value):
-      return new TimelineTimer(Number(value.slice(1)))
-
-    case /^E(\([^)]*\))?$/.test(value):
-      return new TimelineError(
-        value.length > 1 ? value.slice(2, -1) : undefined
-      )
-
-    case value === '|':
-      return CloseTimeline
-
-    case value === 'X':
-      return new NeverReachTimelineError()
-
-    default:
-      return yaml.load(value) as TimelineValue
+    return results
   }
 }

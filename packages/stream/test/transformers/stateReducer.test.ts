@@ -1,4 +1,4 @@
-import { Pass, check, fromTimeline } from '@johngw/stream-test'
+import { Pass, check, checks, fromTimeline } from '@johngw/stream-test'
 import {
   StateReducerInput,
   StateReducerOutput,
@@ -32,23 +32,29 @@ function transform() {
 }
 
 test('StateReducerInput', () => {
-  check<
-    StateReducerInput<{ foo: string; bar: number; nothing: void }>,
-    | { action: 'foo'; param: string }
-    | { action: 'bar'; param: number }
-    | { action: 'nothing' },
-    Pass
-  >()
+  checks([
+    check<
+      StateReducerInput<{ foo: string; bar: number; nothing: void }>,
+      | { action: '__INIT__' }
+      | { action: 'foo'; param: string }
+      | { action: 'bar'; param: number }
+      | { action: 'nothing' },
+      Pass
+    >(),
+  ])
 })
 
 test('StateReducerOutput', () => {
-  check<
-    StateReducerOutput<{ foo: string; bar: number; nothing: void }, string>,
-    | { action: 'foo'; param: string; state: string }
-    | { action: 'bar'; param: string; state: string }
-    | { action: 'nothing'; state: string },
-    Pass
-  >()
+  checks([
+    check<
+      StateReducerOutput<{ foo: string; bar: number; nothing: void }, string>,
+      | { action: '__INIT__'; state: string }
+      | { action: 'foo'; param: string; state: string }
+      | { action: 'bar'; param: number; state: string }
+      | { action: 'nothing'; state: string },
+      Pass
+    >(),
+  ])
 })
 
 test('StateReducers', () => {

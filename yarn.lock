@@ -1077,6 +1077,7 @@ __metadata:
     "@types/jest": 29.5.1
     "@types/js-yaml": ^4.0.5
     "@types/node": 18.16.0
+    assert-never: 1.2.1
     concurrently: 8.0.1
     jest: 29.5.0
     js-yaml: 4.1.0
