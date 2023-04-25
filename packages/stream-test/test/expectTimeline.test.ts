@@ -113,7 +113,7 @@ test('not enough chunks', async () => {
       )
     )
   ).rejects.toThrow(`There are more expectations left.
-`)
+--{foo: bar}--`)
 })
 
 test('not enough of a timeline', async () => {
