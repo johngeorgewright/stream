@@ -24,10 +24,10 @@ export class SourceComposite<T> implements UnderlyingDefaultSource<T> {
       (source): source is CancellableSource<T> => 'cancel' in source
     )
     this.#pullableSources = sources.filter(
-      (source): source is PullableSource<T> => 'cancel' in source
+      (source): source is PullableSource<T> => 'pull' in source
     )
     this.#startableSources = sources.filter(
-      (source): source is StartableSource<T> => 'cancel' in source
+      (source): source is StartableSource<T> => 'start' in source
     )
   }
 
