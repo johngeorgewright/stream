@@ -99,12 +99,6 @@ export class CachableSource<T>
     this.#pullResult = pullResult
   }
 
-  async start(controller: ReadableStreamDefaultController<T>) {
-    await this.#cache.updateIfStale(this.#path, this.#pullItem, this.#ms)
-    const item = this.#cache.get(this.#path)
-    if (item !== undefined) controller.enqueue(item as T)
-  }
-
   async pull(controller: ReadableStreamDefaultController<T>): Promise<void> {
     if (this.#sourceHasFinished) {
       const item = this.#cache.get(this.#path)

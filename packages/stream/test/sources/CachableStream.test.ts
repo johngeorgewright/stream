@@ -29,6 +29,21 @@ test('only pulls when the cache is stale', async () => {
   `)
 })
 
+test('starting a stream that already has cache', async () => {
+  cache.set(['test'], 1)
+  await expect(
+    cacheStream(
+      cache,
+      ['test'],
+      fromTimeline(`
+    --1-------2--|
+      `)
+    )
+  ).toMatchTimeline(`
+    --1--T15--2--
+  `)
+})
+
 test('invalidating cache', async () => {
   const fn = jest.fn<void, [number]>()
   let i = 0

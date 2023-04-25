@@ -15,21 +15,35 @@ import { all } from '@johngw/stream-common/Async'
  * ```
  */
 export class SourceComposite<T> implements UnderlyingDefaultSource<T> {
-  #sources: UnderlyingDefaultSource<T>[]
+  readonly #cancellableSources: CancellableSource<T>[]
+  readonly #pullableSources: PullableSource<T>[]
+  readonly #startableSources: StartableSource<T>[]
 
   constructor(sources: UnderlyingDefaultSource<T>[]) {
-    this.#sources = sources
+    this.#cancellableSources = sources.filter(
+      (source): source is CancellableSource<T> => 'cancel' in source
+    )
+    this.#pullableSources = sources.filter(
+      (source): source is PullableSource<T> => 'cancel' in source
+    )
+    this.#startableSources = sources.filter(
+      (source): source is StartableSource<T> => 'cancel' in source
+    )
   }
 
   async cancel(reason: unknown) {
-    await all(this.#sources, (source) => source.cancel?.(reason))
+    await all(this.#cancellableSources, (source) => source.cancel(reason))
   }
 
   async pull(controller: ReadableStreamDefaultController<T>) {
-    await all(this.#sources, (source) => source.pull?.(controller))
+    await all(this.#pullableSources, (source) => source.pull(controller))
   }
 
   async start(controller: ReadableStreamDefaultController<T>) {
-    await all(this.#sources, (source) => source.start?.(controller))
+    await all(this.#startableSources, (source) => source.start(controller))
   }
 }
+
+type CancellableSource<T> = Required<Pick<UnderlyingDefaultSource<T>, 'cancel'>>
+type PullableSource<T> = Required<Pick<UnderlyingDefaultSource<T>, 'pull'>>
+type StartableSource<T> = Required<Pick<UnderlyingDefaultSource<T>, 'start'>>

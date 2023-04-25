@@ -17,25 +17,44 @@ import { all } from '@johngw/stream-common/Async'
  * ```
  */
 export class SinkComposite<T> implements UnderlyingSink<T> {
-  #sinks: UnderlyingSink<T>[]
+  readonly #abortableSinks: AbortableSink<T>[]
+  readonly #closableSinks: ClosableSink<T>[]
+  readonly #startableSinks: StartableSink<T>[]
+  readonly #writableSinks: WritableSink<T>[]
 
   constructor(sinks: UnderlyingSink<T>[]) {
-    this.#sinks = sinks
+    this.#abortableSinks = sinks.filter(
+      (sink): sink is AbortableSink<T> => 'abort' in sink
+    )
+    this.#closableSinks = sinks.filter(
+      (sink): sink is ClosableSink<T> => 'close' in sink
+    )
+    this.#startableSinks = sinks.filter(
+      (sink): sink is StartableSink<T> => 'start' in sink
+    )
+    this.#writableSinks = sinks.filter(
+      (sink): sink is WritableSink<T> => 'write' in sink
+    )
   }
 
   async abort(reason: unknown) {
-    await all(this.#sinks, (sink) => sink.abort?.(reason))
+    await all(this.#abortableSinks, (sink) => sink.abort(reason))
   }
 
   async close() {
-    await all(this.#sinks, (sink) => sink.close?.())
+    await all(this.#closableSinks, (sink) => sink.close())
   }
 
   async start(controller: WritableStreamDefaultController) {
-    await all(this.#sinks, (sink) => sink.start?.(controller))
+    await all(this.#startableSinks, (sink) => sink.start(controller))
   }
 
   async write(chunk: T, controller: WritableStreamDefaultController) {
-    await all(this.#sinks, (sink) => sink.write?.(chunk, controller))
+    await all(this.#writableSinks, (sink) => sink.write(chunk, controller))
   }
 }
+
+type AbortableSink<T> = Required<Pick<UnderlyingSink<T>, 'abort'>>
+type ClosableSink<T> = Required<Pick<UnderlyingSink<T>, 'close'>>
+type StartableSink<T> = Required<Pick<UnderlyingSink<T>, 'start'>>
+type WritableSink<T> = Required<Pick<UnderlyingSink<T>, 'write'>>
