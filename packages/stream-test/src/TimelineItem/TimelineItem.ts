@@ -1,6 +1,9 @@
 import { timeout } from '@johngw/stream-common/Async'
 import { StaticType } from '@johngw/stream-common/Function'
 
+/**
+ * The base class of a timeline item.
+ */
 export abstract class TimelineItem<T> {
   #rawValue: string
 

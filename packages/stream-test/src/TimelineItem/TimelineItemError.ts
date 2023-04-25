@@ -2,7 +2,10 @@ import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineParsable, TimelineItem } from './TimelineItem.js'
 
 /**
+ * Represents an error in the timeline.
  *
+ * @remarks
+ * Represented by an `E` character.
  */
 @staticImplements<TimelineParsable<TimelineItemError>>()
 export class TimelineItemError extends TimelineItem<TimelineError> {
