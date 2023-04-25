@@ -34,8 +34,8 @@ export abstract class TimelineItem<T> {
   /**
    * Called when this item is reached in the timeline.
    */
-  onReach(): void | Promise<void> {
-    //
+  onReach(): Promise<void> {
+    return Promise.resolve()
   }
 
   /**

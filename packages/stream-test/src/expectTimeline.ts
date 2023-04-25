@@ -11,7 +11,10 @@ import {
   TimelineItemError,
 } from './TimelineItem/TimelineItemError.js'
 import { TimelineItemNeverReach } from './TimelineItem/TimelineItemNeverReach.js'
-import { TimelineItemTimer } from './TimelineItem/TimelineItemTimer.js'
+import {
+  TimelineItemTimer,
+  TimelineTimer,
+} from './TimelineItem/TimelineItemTimer.js'
 import {
   TimelineItemDefault,
   TimelineItemDefaultValue,
@@ -76,8 +79,7 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
         } else if (value instanceof TimelineItemTimer) {
           const timer = value.get()
           await timeout()
-          if (!timer.finished)
-            controller.error(new TimelineTimerError(timer.ms, timer.timeLeft))
+          if (!timer.finished) controller.error(new TimelineTimerError(timer))
           nextResult = next(controller)
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           return this.write!(chunk, controller)
@@ -134,9 +136,11 @@ class TimelineEarlyCloseError extends TimelineError {
 }
 
 class TimelineTimerError extends TimelineError {
-  constructor(ms: number, timeLeft: number) {
+  constructor(timer: TimelineTimer) {
+    let timeLeft = timer.timeLeft
+    if (timeLeft === undefined) timeLeft = timer.ms
     super(
-      `Expected ${ms}ms timer to have finished. There is ${timeLeft}ms left.`
+      `Expected ${timer.ms}ms timer to have finished. There is ${timeLeft}ms left.`
     )
   }
 }

@@ -1,4 +1,4 @@
-import { defer } from '@johngw/stream-common/Async'
+import { timeout } from '@johngw/stream-common/Async'
 import { staticImplements } from '@johngw/stream-common/Function'
 import { TimelineItem, TimelineParsable } from './TimelineItem.js'
 
@@ -45,7 +45,7 @@ export class TimelineItemTimer extends TimelineItem<TimelineTimer> {
  * Represents a timer in a timeline.
  */
 export class TimelineTimer {
-  #finished = false
+  #started = false
   #start?: number
   #end?: number
   readonly #ms: number
@@ -56,45 +56,46 @@ export class TimelineTimer {
   }
 
   start() {
+    this.#started = true
     this.#start = Date.now()
     this.#end = this.#start + this.#ms
-    const { promise, resolve } = defer()
-    this.#promise = promise
-    setTimeout(() => {
-      this.#finished = true
-      resolve()
-    }, this.#ms)
+    this.#promise = timeout(this.#ms)
   }
 
   toJSON() {
-    if (!this.#promise) throw this.#notStartedError()
     return {
       name: 'TimelineTimer',
-      finished: this.#finished,
+      finished: this.finished,
       ms: this.#ms,
+      started: this.#started,
       timeLeft: this.timeLeft,
     }
   }
 
+  toString() {
+    return `TimelineTimer(${this.ms}ms) { ${
+      this.finished ? 'finished' : this.#started ? `${this.timeLeft}ms` : ''
+    } }`
+  }
+
   get timeLeft() {
-    if (this.#end === undefined) throw this.#notStartedError()
-    return this.#end - Date.now()
+    return this.#end === undefined ? this.#end : this.#end - Date.now()
+  }
+
+  get started() {
+    return this.#started
   }
 
   get finished() {
-    return this.#finished
+    const timeLeft = this.timeLeft
+    return timeLeft !== undefined && timeLeft <= 0
   }
 
   get promise() {
-    if (!this.#promise) throw this.#notStartedError()
     return this.#promise
   }
 
   get ms() {
     return this.#ms
-  }
-
-  #notStartedError() {
-    return new Error('Timer has not been started')
   }
 }

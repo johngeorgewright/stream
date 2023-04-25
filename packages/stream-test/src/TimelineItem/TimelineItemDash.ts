@@ -20,7 +20,6 @@ export class TimelineItemDash extends TimelineItem<undefined> {
   }
 
   override async onReach() {
-    await super.onReach()
     return timeout(1)
   }
 
