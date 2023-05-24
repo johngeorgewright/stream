@@ -20,9 +20,7 @@ export class TimelineItemError extends TimelineItem<TimelineError> {
     return this.#error
   }
 
-  static readonly #regexp = new RegExp(
-    `^(E(?:\\(([^)]*)\\))?)${this.regexEnding}`
-  )
+  static readonly #regexp = this.createItemRegExp('(E(?:\\(([^)]*)\\))?)')
 
   static parse(timeline: string) {
     const result = this.#regexp.exec(timeline)

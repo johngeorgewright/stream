@@ -27,7 +27,7 @@ export class TimelineItemClose extends TimelineItem<CloseTimeline> {
     return CloseTimeline
   }
 
-  static readonly #regexp = new RegExp(`^\\|${this.regexEnding}`)
+  static readonly #regexp = this.createItemRegExp('\\|')
 
   static parse(timeline: string) {
     return this.#regexp.test(timeline)

@@ -28,7 +28,7 @@ export class TimelineItemTimer extends TimelineItem<TimelineTimer> {
     return this.#timer
   }
 
-  static readonly #regex = new RegExp(`^(T(\\d+))${this.regexEnding}`)
+  static readonly #regex = this.createItemRegExp('(T(\\d+))')
 
   static parse(timeline: string) {
     const result = this.#regex.exec(timeline)

@@ -59,6 +59,17 @@ export abstract class TimelineItem<T> {
    * - the end of the timeline
    */
   static readonly regexEnding = '(?:-|\\||$)'
+
+  /**
+   * Creates a `RegExp` item to match your timeline item.
+   *
+   * @remarks
+   * Prepends the regexp with a start character (`^`) and appends
+   * it with {@link TimelineItem.regexEnding}.
+   */
+  static createItemRegExp(regexp: string) {
+    return new RegExp(`^${regexp}${this.regexEnding}`)
+  }
 }
 
 /**
