@@ -41,7 +41,7 @@
     "@semantic-release/github": "8.1.0",
     "@semantic-release/release-notes-generator": "10.0.3",
     "@types/eslint": "^8.37.0",
-    "@types/jest": "29.5.1",
+    "@types/jest": "29.5.2",
     "concurrently": "8.0.1",
     "conventional-changelog-conventionalcommits": "5.0.0",
     "eslint": "8.39.0",
