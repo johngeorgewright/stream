@@ -28,7 +28,6 @@
       "require": "./dist/common/index.js"
     }
   },
-  "packageManager": "yarn@3.5.0",
   "devDependencies": {
     "@commitlint/cli": "17.6.5",
     "@commitlint/config-conventional": "17.6.5",
