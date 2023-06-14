@@ -25,7 +25,7 @@ test('only pulls when the cache is stale', async () => {
       `)
     )
   ).toMatchTimeline(`
-    --1--T15--2--
+    --1--T10--2--
   `)
 })
 
@@ -40,7 +40,7 @@ test('starting a stream that already has cache', async () => {
       `)
     )
   ).toMatchTimeline(`
-    --1--T15--2--
+    --1--T10--2--
   `)
 })
 

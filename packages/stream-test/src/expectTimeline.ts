@@ -3,24 +3,24 @@ import {
   ParsedTimelineItem,
   ParsedTimelineItemValue,
   Timeline,
-} from './Timeline.js'
-import { TimelineItemDash } from './TimelineItem/TimelineItemDash.js'
-import { TimelineItemClose } from './TimelineItem/TimelineItemClose.js'
+} from '@johngw/timeline/Timeline'
+import { TimelineItemDash } from '@johngw/timeline/TimelineItemDash'
+import { TimelineItemClose } from '@johngw/timeline/TimelineItemClose'
 import {
   TimelineError,
   TimelineItemError,
-} from './TimelineItem/TimelineItemError.js'
-import { TimelineItemNeverReach } from './TimelineItem/TimelineItemNeverReach.js'
+} from '@johngw/timeline/TimelineItemError'
+import { TimelineItemNeverReach } from '@johngw/timeline/TimelineItemNeverReach'
 import {
   TimelineItemTimer,
   TimelineTimer,
-} from './TimelineItem/TimelineItemTimer.js'
+} from '@johngw/timeline/TimelineItemTimer'
 import {
   TimelineItemDefault,
   TimelineItemDefaultValue,
-} from './TimelineItem/TimelineItemDefault.js'
-import { TimelineItemBoolean } from './TimelineItem/TimelineItemBoolean.js'
-import { TimelineItemNull } from './TimelineItem/TimelineItemNull.js'
+} from '@johngw/timeline/TimelineItemDefault'
+import { TimelineItemBoolean } from '@johngw/timeline/TimelineItemBoolean'
+import { TimelineItemNull } from '@johngw/timeline/TimelineItemNull'
 import { assertNever } from 'assert-never'
 
 /**

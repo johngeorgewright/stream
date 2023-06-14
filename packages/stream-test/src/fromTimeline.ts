@@ -1,13 +1,13 @@
 import { assertNever } from 'assert-never'
-import { ParsedTimelineItemValue, Timeline } from './Timeline.js'
-import { TimelineItemClose } from './TimelineItem/TimelineItemClose.js'
-import { TimelineItemError } from './TimelineItem/TimelineItemError.js'
-import { TimelineItemTimer } from './TimelineItem/TimelineItemTimer.js'
-import { TimelineItemDefault } from './TimelineItem/TimelineItemDefault.js'
-import { TimelineItemDash } from './TimelineItem/TimelineItemDash.js'
-import { TimelineItemBoolean } from './TimelineItem/TimelineItemBoolean.js'
-import { TimelineItemNeverReach } from './TimelineItem/TimelineItemNeverReach.js'
-import { TimelineItemNull } from './TimelineItem/TimelineItemNull.js'
+import { ParsedTimelineItemValue, Timeline } from '@johngw/timeline/Timeline'
+import { TimelineItemBoolean } from '@johngw/timeline/TimelineItemBoolean'
+import { TimelineItemClose } from '@johngw/timeline/TimelineItemClose'
+import { TimelineItemDash } from '@johngw/timeline/TimelineItemDash'
+import { TimelineItemDefault } from '@johngw/timeline/TimelineItemDefault'
+import { TimelineItemError } from '@johngw/timeline/TimelineItemError'
+import { TimelineItemNeverReach } from '@johngw/timeline/TimelineItemNeverReach'
+import { TimelineItemNull } from '@johngw/timeline/TimelineItemNull'
+import { TimelineItemTimer } from '@johngw/timeline/TimelineItemTimer'
 
 /**
  * Creates a ReadableStream from a "timeline".
