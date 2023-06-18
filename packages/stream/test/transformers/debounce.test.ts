@@ -29,7 +29,7 @@ test('leading only', async () => {
 test('leading and trailing', async () => {
   await expect(
     fromTimeline(`
-    -1-2-3------------|
+    -1-2-3--------------|
     `).pipeThrough(
       debounce(10, [
         new DebounceLeadingBehavior(),
@@ -37,7 +37,7 @@ test('leading and trailing', async () => {
       ])
     )
   ).toMatchTimeline(`
-    -1---T10-3--
+    -1-T10-3-
   `)
 })
 
