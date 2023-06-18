@@ -20,3 +20,24 @@ test('queues whatever remains after stream has closed', async () => {
     ---------[1,2,3,4,5]---[6,7,8]-
   `)
 })
+
+test('infinit numbers will error', () => {
+  expect(() => bufferCount(Infinity)).toThrow(
+    'bufferCount() cannot be used with an infinite number.'
+  )
+})
+
+test('floating points will error', () => {
+  expect(() => bufferCount(1.1)).toThrow(
+    'bufferCount() cannot be used with a floating point length. Got "1.1".'
+  )
+})
+
+test('numbers less than 1 will error', () => {
+  expect(() => bufferCount(0)).toThrow(
+    'bufferCount() cannot be used with a count less than one. Got "0".'
+  )
+  expect(() => bufferCount(-2)).toThrow(
+    'bufferCount() cannot be used with a count less than one. Got "-2".'
+  )
+})
