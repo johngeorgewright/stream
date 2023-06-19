@@ -1008,9 +1008,9 @@ __metadata:
     "@semantic-release/git": 10.0.1
     "@semantic-release/github": 9.0.3
     "@semantic-release/release-notes-generator": 11.0.3
-    "@types/eslint": ^8.40.0
+    "@types/eslint": 8.40.2
     "@types/jest": 29.5.2
-    "@types/node": 20.2.5
+    "@types/node": 20.3.1
     assert-never: 1.2.1
     concurrently: 8.2.0
     eslint: 8.43.0
@@ -1038,7 +1038,7 @@ __metadata:
     "@semantic-release/github": 9.0.3
     "@semantic-release/release-notes-generator": 11.0.3
     "@types/jest": 29.5.2
-    "@types/node": 20.2.5
+    "@types/node": 20.3.1
     concurrently: 8.2.0
     expect: 29.5.0
     jest: 29.5.0
@@ -1072,7 +1072,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.59.11
     "@typescript-eslint/parser": 5.59.11
     concurrently: 8.2.0
-    conventional-changelog-conventionalcommits: 6.0.0
+    conventional-changelog-conventionalcommits: 6.1.0
     eslint: 8.43.0
     husky: 8.0.3
     lint-staged: 13.2.2
@@ -1092,15 +1092,15 @@ __metadata:
   resolution: "@johngw/stream-test@workspace:packages/stream-test"
   dependencies:
     "@johngw/stream-common": "workspace:*"
-    "@johngw/timeline": 1.0.2
+    "@johngw/timeline": 1.0.3
     "@semantic-release/commit-analyzer": 10.0.1
     "@semantic-release/exec": 6.0.3
     "@semantic-release/git": 10.0.1
     "@semantic-release/github": 9.0.3
     "@semantic-release/release-notes-generator": 11.0.3
     "@types/jest": 29.5.2
-    "@types/js-yaml": ^4.0.5
-    "@types/node": 20.2.5
+    "@types/js-yaml": 4.0.5
+    "@types/node": 20.3.1
     assert-never: 1.2.1
     concurrently: 8.2.0
     jest: 29.5.0
@@ -1132,11 +1132,11 @@ __metadata:
     "@semantic-release/git": 10.0.1
     "@semantic-release/github": 9.0.3
     "@semantic-release/release-notes-generator": 11.0.3
-    "@types/eslint": ^8.40.0
+    "@types/eslint": 8.40.2
     "@types/jest": 29.5.2
     assert-never: 1.2.1
     concurrently: 8.2.0
-    conventional-changelog-conventionalcommits: 6.0.0
+    conventional-changelog-conventionalcommits: 6.1.0
     eslint: 8.43.0
     husky: 8.0.3
     jest: 29.5.0
@@ -1154,13 +1154,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@johngw/timeline@npm:1.0.2":
-  version: 1.0.2
-  resolution: "@johngw/timeline@npm:1.0.2"
+"@johngw/timeline@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@johngw/timeline@npm:1.0.3"
   dependencies:
     js-yaml: 4.1.0
     tslib: 2.5.3
-  checksum: 5c2fed76648e9acf81efcdfc44cd87c568517590ba648acf995349225db4664c50e03b4aad658df34893330fb8a20c99aec0a9d87abc12584719eff6e009e6e7
+  checksum: 75decd1e55398e9cd8f561a8b0a7aaf9dd5f1788dae0b94ca6fd8a025580621a38feb0d62aea1010f2c821c1baa1b955ec7abd73e0bcd87758af55188cc3a30e
   languageName: node
   linkType: hard
 
@@ -2147,7 +2147,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:^8.40.0":
+"@types/eslint@npm:8.40.2":
   version: 8.40.2
   resolution: "@types/eslint@npm:8.40.2"
   dependencies:
@@ -2235,7 +2235,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/js-yaml@npm:^4.0.5":
+"@types/js-yaml@npm:4.0.5":
   version: 4.0.5
   resolution: "@types/js-yaml@npm:4.0.5"
   checksum: 7dcac8c50fec31643cc9d6444b5503239a861414cdfaa7ae9a38bc22597c4d850c4b8cec3d82d73b3fbca408348ce223b0408d598b32e094470dfffc6d486b4d
@@ -2319,10 +2319,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.2.5":
-  version: 20.2.5
-  resolution: "@types/node@npm:20.2.5"
-  checksum: 38ce7c7e9d76880dc632f71d71e0d5914fcda9d5e9a7095d6c339abda55ca4affb0f2a882aeb29398f8e09d2c5151f0b6586c81c8ccdfe529c34b1ea3337425e
+"@types/node@npm:20.3.1":
+  version: 20.3.1
+  resolution: "@types/node@npm:20.3.1"
+  checksum: 63a393ab6d947be17320817b35d7277ef03728e231558166ed07ee30b09fd7c08861be4d746f10fdc63ca7912e8cd023939d4eab887ff6580ff704ff24ed810c
   languageName: node
   linkType: hard
 
@@ -3643,12 +3643,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-conventionalcommits@npm:6.0.0":
-  version: 6.0.0
-  resolution: "conventional-changelog-conventionalcommits@npm:6.0.0"
+"conventional-changelog-conventionalcommits@npm:6.1.0":
+  version: 6.1.0
+  resolution: "conventional-changelog-conventionalcommits@npm:6.1.0"
   dependencies:
     compare-func: ^2.0.0
-  checksum: 40b9c731bc3d2e1c9d0c66c793768afa6d99826de24c458e527f1e189641d916b0dc5a195f10f4a5e974bf64b2919a5966b9818003ba0a32f723dfa292ad13cd
+  checksum: 4383a35cdf72f5964e194a1146e7f78276e301f73bd993b71627bb93586b6470d411b9613507ceb37e0fed0b023199c95e941541fa47172b4e6a7916fc3a53ff
   languageName: node
   linkType: hard
 
