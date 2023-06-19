@@ -1,6 +1,7 @@
 import { L } from 'ts-toolbelt'
 import { all } from './Async.js'
 import { without } from './Array.js'
+import { RequiredProps } from './Object.js'
 
 /**
  * Something that can be flushed by another stream.
@@ -211,4 +212,153 @@ export function write<T>(
     },
     queuingStrategy
   )
+}
+
+/**
+ * An `UnderlyingDefaultSource` object that has a `cancel` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export type CancellableSource<T> = RequiredProps<
+  UnderlyingDefaultSource<T>,
+  'cancel'
+>
+
+/**
+ * A guard to test that an `UnderlyingDefaultSource` object that has a `cancel` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export function isCancellableSource<T>(
+  source: UnderlyingDefaultSource<T>
+): source is CancellableSource<T> {
+  return 'cancel' in source
+}
+
+/**
+ * An `UnderlyingDefaultSource` object that has a `pull` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export type PullableSource<T> = RequiredProps<
+  UnderlyingDefaultSource<T>,
+  'pull'
+>
+
+/**
+ * A guard to test that an `UnderlyingDefaultSource` object that has a `pull` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export function isPullableSource<T>(
+  source: UnderlyingDefaultSource<T>
+): source is PullableSource<T> {
+  return 'pull' in source
+}
+
+/**
+ * An `UnderlyingDefaultSource` object that has a `start` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export type StartableSource<T> = RequiredProps<
+  UnderlyingDefaultSource<T>,
+  'start'
+>
+
+/**
+ * A guard to test that an `UnderlyingDefaultSource` object that has a `start` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export function isStartableSource<T>(
+  source: UnderlyingDefaultSource<T>
+): source is StartableSource<T> {
+  return 'start' in source
+}
+
+/**
+ * An `UnderlyingSink` object that has an `abort` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export type AbortableSink<T> = RequiredProps<UnderlyingSink<T>, 'abort'>
+
+/**
+ * A guard to test that an `UnderlyingSink` object that has an `abort` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export function isAbortableSink<T>(
+  sink: UnderlyingSink<T>
+): sink is AbortableSink<T> {
+  return 'abort' in sink
+}
+
+/**
+ * An `UnderlyingSink` object that has a `close` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export type ClosableSink<T> = RequiredProps<UnderlyingSink<T>, 'close'>
+
+/**
+ * A guard to test that an `UnderlyingSink` object that has a `close` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export function isClosableSink<T>(
+  sink: UnderlyingSink<T>
+): sink is ClosableSink<T> {
+  return 'close' in sink
+}
+
+/**
+ * An `UnderlyingSink` object that has a `start` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export type StartableSink<T> = RequiredProps<UnderlyingSink<T>, 'start'>
+
+/**
+ * A guard to test that an `UnderlyingSink` object that has a `start` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export function isStartableSink<T>(
+  sink: UnderlyingSink<T>
+): sink is StartableSink<T> {
+  return 'start' in sink
+}
+
+/**
+ * An `UnderlyingSink` object that has a `write` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export type WritableSink<T> = RequiredProps<UnderlyingSink<T>, 'write'>
+
+/**
+ * A guard to test that an `UnderlyingSink` object that has a `write` method.
+ *
+ * @group Utils
+ * @category Stream
+ */
+export function isWritableSink<T>(
+  sink: UnderlyingSink<T>
+): sink is WritableSink<T> {
+  return 'write' in sink
 }

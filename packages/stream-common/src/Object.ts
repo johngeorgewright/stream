@@ -60,6 +60,16 @@ export function isIteratorOrAsyncIterator<T>(
 }
 
 /**
+ * Makes keys required, if they're not already.
+ *
+ * @group Utils
+ * @category Object
+ */
+export type RequiredProps<Type, Key extends keyof Type> = Type & {
+  [K in Key]-?: Type[K]
+}
+
+/**
  * Creates another type where `T` could also be an array or an object.
  *
  * @group Utils

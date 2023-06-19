@@ -1,4 +1,12 @@
 import { all } from '@johngw/stream-common/Async'
+import {
+  CancellableSource,
+  PullableSource,
+  StartableSource,
+  isCancellableSource,
+  isPullableSource,
+  isStartableSource,
+} from '@johngw/stream-common/Stream'
 
 /**
  * A collection of `UnderlyingSource`s that implement the `UnderlyingSource`.
@@ -20,15 +28,9 @@ export class SourceComposite<T> implements UnderlyingDefaultSource<T> {
   readonly #startableSources: StartableSource<T>[]
 
   constructor(sources: UnderlyingDefaultSource<T>[]) {
-    this.#cancellableSources = sources.filter(
-      (source): source is CancellableSource<T> => 'cancel' in source
-    )
-    this.#pullableSources = sources.filter(
-      (source): source is PullableSource<T> => 'pull' in source
-    )
-    this.#startableSources = sources.filter(
-      (source): source is StartableSource<T> => 'start' in source
-    )
+    this.#cancellableSources = sources.filter(isCancellableSource)
+    this.#pullableSources = sources.filter(isPullableSource)
+    this.#startableSources = sources.filter(isStartableSource)
   }
 
   async cancel(reason: unknown) {
@@ -43,7 +45,3 @@ export class SourceComposite<T> implements UnderlyingDefaultSource<T> {
     await all(this.#startableSources, (source) => source.start(controller))
   }
 }
-
-type CancellableSource<T> = Required<Pick<UnderlyingDefaultSource<T>, 'cancel'>>
-type PullableSource<T> = Required<Pick<UnderlyingDefaultSource<T>, 'pull'>>
-type StartableSource<T> = Required<Pick<UnderlyingDefaultSource<T>, 'start'>>

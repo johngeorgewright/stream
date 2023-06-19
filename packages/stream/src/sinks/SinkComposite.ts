@@ -1,4 +1,14 @@
 import { all } from '@johngw/stream-common/Async'
+import {
+  AbortableSink,
+  ClosableSink,
+  StartableSink,
+  WritableSink,
+  isAbortableSink,
+  isClosableSink,
+  isStartableSink,
+  isWritableSink,
+} from '@johngw/stream-common/Stream'
 
 /**
  * A collection of `UnderlyingSink`s that implement the `UnderlyingSink`.
@@ -23,18 +33,10 @@ export class SinkComposite<T> implements UnderlyingSink<T> {
   readonly #writableSinks: WritableSink<T>[]
 
   constructor(sinks: UnderlyingSink<T>[]) {
-    this.#abortableSinks = sinks.filter(
-      (sink): sink is AbortableSink<T> => 'abort' in sink
-    )
-    this.#closableSinks = sinks.filter(
-      (sink): sink is ClosableSink<T> => 'close' in sink
-    )
-    this.#startableSinks = sinks.filter(
-      (sink): sink is StartableSink<T> => 'start' in sink
-    )
-    this.#writableSinks = sinks.filter(
-      (sink): sink is WritableSink<T> => 'write' in sink
-    )
+    this.#abortableSinks = sinks.filter(isAbortableSink)
+    this.#closableSinks = sinks.filter(isClosableSink)
+    this.#startableSinks = sinks.filter(isStartableSink)
+    this.#writableSinks = sinks.filter(isWritableSink)
   }
 
   async abort(reason: unknown) {
@@ -53,8 +55,3 @@ export class SinkComposite<T> implements UnderlyingSink<T> {
     await all(this.#writableSinks, (sink) => sink.write(chunk, controller))
   }
 }
-
-type AbortableSink<T> = Required<Pick<UnderlyingSink<T>, 'abort'>>
-type ClosableSink<T> = Required<Pick<UnderlyingSink<T>, 'close'>>
-type StartableSink<T> = Required<Pick<UnderlyingSink<T>, 'start'>>
-type WritableSink<T> = Required<Pick<UnderlyingSink<T>, 'write'>>
