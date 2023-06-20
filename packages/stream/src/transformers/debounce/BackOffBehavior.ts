@@ -27,14 +27,14 @@ export interface DebounceBackOffBehaviorOptions {
  * @group Transformers
  * @see {@link debounce:function}
  * @example
- * --a--b---c----d------------------
+ * --a--b---c----d----|
  *
  * debounce(5, [
  *   new DebounceBackOffBehavior({ inc: (ms) => ms * 2 }),
  *   new DebounceTrailingBehavior(),
  * ])
  *
- * ---T5-T10-T20---T40------------d-
+ * --T5-T10-T20--T40-d-
  */
 export class DebounceBackOffBehavior<T> implements DebounceBehavior<T> {
   #inc: (currentMS: number) => number

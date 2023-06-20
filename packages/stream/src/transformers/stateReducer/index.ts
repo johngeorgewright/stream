@@ -14,7 +14,7 @@ export { StateReducerInput, StateReducerOutput, StateReducer, StateReducers }
  * @see {@link StatefulSubject:class}
  * @example
  * ```
- * ------------{'add author','Jane Austin'}----------------------------
+ * ---------------{'add author','Jane Austin'}--|
  *
  * stateReducer({
  *   __INIT__: () => ({ authors: [] }),
@@ -24,7 +24,7 @@ export { StateReducerInput, StateReducerOutput, StateReducer, StateReducers }
  *   })
  * })
  *
- * --{authors:[]}----------------------------{authors:['Jane Austin']}--
+ * --{authors:[]}--{authors:['Jane Austin']}-----
  * ```
  *
  * @example

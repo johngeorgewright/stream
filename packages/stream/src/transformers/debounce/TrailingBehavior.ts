@@ -8,13 +8,13 @@ import { DebounceState } from './State.js'
  * @see {@link debounce:function}
  * @example
  * ```
- * --a-----------------b-c--------------d-----------
+ * --a----T20--b-c----T20--d------|
  *
  * debounce(20)
  * // Same as...
  * debounce(20, new DebounceTrailingBehavior())
  *
- * ----------a------------------c----------------d--
+ * ---T20-a------T20-c------T20-d--
  * ```
  */
 export class DebounceTrailingBehavior<T> implements DebounceBehavior<T> {

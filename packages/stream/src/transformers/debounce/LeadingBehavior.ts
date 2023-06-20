@@ -8,11 +8,11 @@ import { DebounceState } from './State.js'
  * @see {@link debounce:function}
  * @example
  * ```
- * --a-b-c--------------d-----------
+ * --a-b-c--T20-d--|
  *
  * debounce(20, new DebounceLeadingBehavior())
  *
- * ---a------------------d----------
+ * --a----------d---
  * ```
  */
 export class DebounceLeadingBehavior<T> implements DebounceBehavior<T> {
