@@ -7,9 +7,10 @@ import { Test } from 'ts-toolbelt'
  *
  * @example
  * ```
- * check<1, number, Pass>()
- *
- * check<'foo', boolean, Fail>()
+ * checks([
+ *   check<1, number, Pass>(),
+ *   check<'foo', boolean, Fail>(),
+ * ])
  * ```
  */
 export function check<Type, Expect, Outcome extends B>(

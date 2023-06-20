@@ -22,14 +22,6 @@
       "import": "./dist/es/Function.js",
       "require": "./dist/common/Function.js"
     },
-    "./Iterable": {
-      "import": "./dist/es/Iterable.js",
-      "require": "./dist/common/Iterable.js"
-    },
-    "./Logic": {
-      "import": "./dist/es/Logic.js",
-      "require": "./dist/common/Logic.js"
-    },
     "./Object": {
       "import": "./dist/es/Object.js",
       "require": "./dist/common/Object.js"
