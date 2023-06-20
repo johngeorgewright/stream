@@ -1,3 +1,4 @@
+import '@johngw/stream-jest'
 import { Pass, check, checks, fromTimeline } from '@johngw/stream-test'
 import {
   StateReducerInput,
