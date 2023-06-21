@@ -40,7 +40,7 @@ test('starting a stream that already has cache', async () => {
       `)
     )
   ).toMatchTimeline(`
-    --1--T10--2--
+    --1-T10-2--
   `)
 })
 
