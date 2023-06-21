@@ -1,3 +1,4 @@
+import { without } from '@johngw/stream-common'
 import { ForkableRecallStream } from '../sinks/ForkableRecallStream.js'
 import {
   stateReducer,
@@ -6,6 +7,7 @@ import {
   StateReducers,
 } from '../transformers/stateReducer/index.js'
 import { BaseSubject, BaseSubjectOptions } from './BaseSubject.js'
+import { StatefulSubjectController } from './StatefulSubjectController.js'
 
 /**
  * The constructor options for a {@link StatefulSubject}.
@@ -93,23 +95,15 @@ export class StatefulSubject<
   }
 
   /**
-   * Parameterised version of enqueue for simpliclity.
-   *
-   * @example
-   * ```
-   * subject.dispatch('action', 'param')
-   * // Instead of
-   * subject.enqueue({ action: 'action', param: 'param' })
-   * ```
+   * Returns a new {@link StatefulControllableStream}. Once all controllers
+   * have been closed, then the source is also closed.
    */
-  dispatch<Action extends keyof Actions>(
-    ...args: Actions[Action] extends void
-      ? [action: Action]
-      : [action: Action, param: Actions[Action]]
-  ) {
-    this.controllable.enqueue({
-      action: args[0],
-      param: args[1],
-    } as StateReducerInput<Actions>)
+  override control(): StatefulSubjectController<Actions> {
+    const controller = new StatefulSubjectController(this.controllable, () => {
+      this.controllers = without(this.controllers, controller)
+      if (!this.controllers.length) this.controllable.close()
+    })
+    this.controllers.push(controller)
+    return controller
   }
 }

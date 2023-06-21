@@ -3,10 +3,11 @@ import { Subject, write } from '../../src/index.js'
 test('ability to queue and fork from the same object', async () => {
   const subject = new Subject<number>()
   const fn = jest.fn()
-  subject.enqueue(1)
-  subject.enqueue(2)
-  subject.enqueue(3)
-  subject.close()
+  const controller = subject.control()
+  controller.enqueue(1)
+  controller.enqueue(2)
+  controller.enqueue(3)
+  controller.close()
   await subject.fork().pipeTo(write(fn))
   expect(fn).toHaveBeenCalledTimes(3)
   expect(fn.mock.calls).toMatchInlineSnapshot(`
@@ -26,10 +27,11 @@ test('ability to queue and fork from the same object', async () => {
 
 test('pulling from subject', async () => {
   const subject = new Subject<number>()
+  const controller = subject.control()
   let i = 0
-  subject.onPull(() => {
+  controller.onPull(() => {
     if (i === 3) {
-      subject.close()
+      controller.close()
       return undefined
     }
     return ++i
@@ -53,21 +55,52 @@ test('pulling from subject', async () => {
 
 test('back pressure', async () => {
   const subject = new Subject<number>()
-  expect(subject.desiredSize).toBe(1)
-  subject.enqueue(1)
-  expect(subject.desiredSize).toBe(0)
+  const controller = subject.control()
+  expect(controller.desiredSize).toBe(1)
+  controller.enqueue(1)
+  expect(controller.desiredSize).toBe(0)
 })
 
 test('erroring subjects', async () => {
   let errored = false
   const subject = new Subject<number>()
+  const controller = subject.control()
   const promise = subject
     .fork()
     .pipeTo(write())
     .catch(() => {
       errored = true
     })
-  subject.error(new Error('foo'))
+  controller.error(new Error('foo'))
   await promise
   expect(errored).toBe(true)
+})
+
+test('multiple controllers', async () => {
+  const subject = new Subject<number>()
+  const fn = jest.fn()
+  const controller1 = subject.control()
+  const controller2 = subject.control()
+  const controller3 = subject.control()
+  controller1.enqueue(1)
+  controller2.enqueue(2)
+  controller3.enqueue(3)
+  controller1.close()
+  controller2.close()
+  controller3.close()
+  await subject.fork().pipeTo(write(fn))
+  expect(fn).toHaveBeenCalledTimes(3)
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        1,
+      ],
+      [
+        2,
+      ],
+      [
+        3,
+      ],
+    ]
+  `)
 })

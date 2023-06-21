@@ -19,7 +19,7 @@
   "settings": {
     "eslint.nodePath": "../../.yarn/sdks",
     "eslint.packageManager": "yarn",
-    "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+    "prettier.prettierPath": "../../.yarn/sdks/prettier/index.js",
     "search.exclude": { "**/dist": true, "**/.yarn": true, "**/.pnp.*": true },
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "typescript.tsdk": "✨ @johngw/stream-mono-repo/.yarn/sdks/typescript/lib"

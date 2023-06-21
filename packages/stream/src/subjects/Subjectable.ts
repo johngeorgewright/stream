@@ -6,6 +6,6 @@ import { Controllable } from '../sources/Controllable.js'
  *
  * @group Subjects
  */
-export interface Subjectable<Input, Output>
-  extends Controllable<Input>,
-    Forkable<Output> {}
+export interface Subjectable<Input, Output> extends Forkable<Output> {
+  control(): Controllable<Input>
+}
