@@ -30,7 +30,8 @@ beforeEach(() => {
 
 test('the __INIT__ action', async () => {
   const fn = jest.fn()
-  subject.close()
+  const controller = subject.control()
+  controller.close()
   await subject.fork().pipeTo(write(fn))
 
   expect(fn).toHaveBeenCalledTimes(1)
@@ -50,8 +51,9 @@ test('the __INIT__ action', async () => {
 
 test('a reducer that changes state', async () => {
   const fn = jest.fn()
-  subject.dispatch('add author', 'Jane Austin')
-  subject.close()
+  const controller = subject.control()
+  controller.dispatch('add author', 'Jane Austin')
+  controller.close()
   await subject.fork().pipeTo(write(fn))
 
   expect(fn).toHaveBeenCalledTimes(1)
@@ -74,8 +76,9 @@ test('a reducer that changes state', async () => {
 
 test('a reducer that doesnt change state', async () => {
   const fn = jest.fn()
-  subject.dispatch('nothing')
-  subject.close()
+  const controller = subject.control()
+  controller.dispatch('nothing')
+  controller.close()
   await subject.fork().pipeTo(write(fn))
 
   expect(fn).toHaveBeenCalledTimes(1)
@@ -96,13 +99,14 @@ test('a reducer that doesnt change state', async () => {
 test('multiple calls', async () => {
   const fn = jest.fn()
   const promise = subject.fork().pipeTo(write(fn))
+  const controller = subject.control()
   // There's a bug in the web-streams-polyfill that resolves the above
   // promise too early.
   await timeout()
-  subject.dispatch('add author', 'Jane Austin')
-  subject.dispatch('add author', 'George Orwell')
-  subject.dispatch('add author', 'Jane Austin')
-  subject.close()
+  controller.dispatch('add author', 'Jane Austin')
+  controller.dispatch('add author', 'George Orwell')
+  controller.dispatch('add author', 'Jane Austin')
+  controller.close()
   await promise
 
   expect(fn).toHaveBeenCalledTimes(3)
@@ -162,7 +166,7 @@ test('typing errors', () => {
     nothing: (state: State, param: string) => ({ ...state, authors: [param] }),
   })
 
-  subject.close()
+  subject.control().close()
   return subject.fork().pipeTo(
     write((chunk) => {
       if (chunk.action === 'nothing') {

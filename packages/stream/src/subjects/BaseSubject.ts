@@ -1,6 +1,7 @@
+import { without } from '@johngw/stream-common'
 import { ForkableStream } from '../sinks/ForkableStream.js'
-import { ControllerPullListener } from '../sources/Controllable.js'
 import { ControllableStream } from '../sources/ControllableStream.js'
+import { SubjectController } from './SubjectController.js'
 import { Subjectable } from './Subjectable.js'
 
 /**
@@ -24,6 +25,7 @@ export interface BaseSubjectOptions<In, Out> {
 export abstract class BaseSubject<In, Out> implements Subjectable<In, Out> {
   #controllable: ControllableStream<In>
   #forkable: ForkableStream<Out>
+  protected controllers: SubjectController<In>[] = []
 
   constructor({
     controllable = new ControllableStream(),
@@ -45,31 +47,20 @@ export abstract class BaseSubject<In, Out> implements Subjectable<In, Out> {
     return this.#forkable
   }
 
-  get desiredSize() {
-    return this.#controllable.desiredSize
-  }
-
-  enqueue(chunk: In) {
-    this.#controllable.enqueue(chunk)
-  }
-
-  close() {
-    this.#controllable.close()
-  }
-
-  cancel(reason?: unknown) {
-    return this.#controllable.cancel(reason)
-  }
-
-  error(reason: unknown) {
-    return this.#controllable.error(reason)
-  }
-
   fork() {
     return this.#forkable.fork()
   }
 
-  onPull(pullListener: ControllerPullListener<In>) {
-    return this.#controllable.onPull(pullListener)
+  /**
+   * Returns a new {@link ControllableStream}. Once all controllers
+   * have been closed, then the source is also closed.
+   */
+  control() {
+    const controller = new SubjectController(this.#controllable, () => {
+      this.controllers = without(this.controllers, controller)
+      if (!this.controllers.length) this.#controllable.close()
+    })
+    this.controllers.push(controller)
+    return controller
   }
 }
