@@ -4,7 +4,7 @@
   "description": "Testing utilities for streams",
   "type": "module",
   "sideEffects": false,
-  "main": "./dist/es/index.js",
+  "main": "./dist/common/index.js",
   "exports": {
     ".": {
       "import": "./dist/es/index.js",

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Jest extension for testing streams",
   "type": "module",
-  "main": "./dist/es/index.js",
+  "main": "./dist/common/index.js",
   "types": "./dist/es/index.d.ts",
   "exports": {
     ".": {
