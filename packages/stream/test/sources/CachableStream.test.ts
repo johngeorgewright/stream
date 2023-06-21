@@ -36,7 +36,7 @@ test('starting a stream that already has cache', async () => {
       cache,
       ['test'],
       fromTimeline(`
-    --1-------2--|
+    --1--2------|
       `)
     )
   ).toMatchTimeline(`
