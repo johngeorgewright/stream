@@ -66,7 +66,7 @@ export = class PackageGenerator extends Generator {
     this.packageJson.set('exports', {
       '.': {
         import: './dist/es/index.js',
-        require: './dist/common/index.js',
+        require: './dist/common/index.cjs',
       },
     })
 
@@ -75,7 +75,8 @@ export = class PackageGenerator extends Generator {
     }
 
     this.packageJson.set('scripts', {
-      build: 'yarn clean && tsc && tsc --project tsconfig.common.json',
+      build:
+        "yarn clean && tsc && tsc --project tsconfig.common.json && renamer --find '/\\.js$/' --replace '.cjs' dist/common/**/*.js",
       clean: 'rimraf dist',
       start:
         "concurrently --names es,common 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json",
@@ -101,6 +102,7 @@ export = class PackageGenerator extends Generator {
       'concurrently',
       'jest',
       'jest-environment-jsdom',
+      'renamer',
       'rimraf',
       'ts-node',
       'ts-jest',
