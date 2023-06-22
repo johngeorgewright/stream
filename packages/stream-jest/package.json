@@ -1,6 +1,6 @@
 {
   "name": "@johngw/stream-jest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Jest extension for testing streams",
   "type": "module",
   "exports": {
@@ -47,7 +47,7 @@
     "tslib": "2.5.0"
   },
   "peerDependencies": {
-    "@johngw/stream-test": "^1.0.0",
+    "@johngw/stream-test": "^1.1.1",
     "expect": "^29.0.0"
   }
 }
