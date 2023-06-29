@@ -83,8 +83,8 @@
     }
   },
   "devDependencies": {
-    "@commitlint/cli": "17.6.5",
-    "@commitlint/config-conventional": "17.6.5",
+    "@commitlint/cli": "17.6.6",
+    "@commitlint/config-conventional": "17.6.6",
     "@commitlint/types": "17.4.4",
     "@johngw/stream-jest": "workspace:*",
     "@johngw/stream-test": "workspace:*",
