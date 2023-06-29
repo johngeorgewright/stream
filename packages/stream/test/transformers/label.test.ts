@@ -1,5 +1,5 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { label } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { label } from '@johngw/stream/transformers/label'
 
 test('using a property', async () => {
   await expect(

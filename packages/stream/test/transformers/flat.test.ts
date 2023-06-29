@@ -1,6 +1,7 @@
 import { timeout } from '@johngw/stream-common'
-import { fromTimeline } from '@johngw/stream-test'
-import { flat, fromCollection } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { fromCollection } from '@johngw/stream/sources/fromCollection'
+import { flat } from '@johngw/stream/transformers/flat'
 
 test('flattens iterables', async () => {
   await expect(

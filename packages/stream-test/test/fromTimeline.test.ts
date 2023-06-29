@@ -1,5 +1,5 @@
-import { merge, write } from '@johngw/stream-common'
-import { fromTimeline } from '../src/index.js'
+import { merge, write } from '@johngw/stream-common/Stream'
+import { fromTimeline } from '@johngw/stream-test'
 
 test('numbers', async () => {
   const fn = jest.fn()

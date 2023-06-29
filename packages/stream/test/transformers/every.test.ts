@@ -1,5 +1,6 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { every, write } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { every } from '@johngw/stream/transformers/every'
+import { write } from '@johngw/stream/sinks/write'
 
 test('when not', async () => {
   await expect(

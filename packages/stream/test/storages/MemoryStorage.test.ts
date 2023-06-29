@@ -1,4 +1,4 @@
-import { MemoryStorage } from '../../src/index.js'
+import { MemoryStorage } from '@johngw/stream/storages/MemoryStorage'
 
 let storage: MemoryStorage
 

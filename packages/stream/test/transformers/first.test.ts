@@ -1,5 +1,5 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { first } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { first } from '@johngw/stream/transformers/first'
 
 test('gets only the first chunk', async () => {
   await expect(

@@ -1,5 +1,5 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { SinkComposite } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { SinkComposite } from '@johngw/stream/sinks/SinkComposite'
 
 test('composing underlying sinks', async () => {
   const close = jest.fn()

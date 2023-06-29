@@ -1,4 +1,6 @@
-import { ForkableRecallStream, fromCollection, write } from '../../src/index.js'
+import { ForkableRecallStream } from '@johngw/stream/sinks/ForkableRecallStream'
+import { fromCollection } from '@johngw/stream/sources/fromCollection'
+import { write } from '@johngw/stream/sinks/write'
 
 test('subscribing will always provide that last chunk', async () => {
   const forkable = new ForkableRecallStream()

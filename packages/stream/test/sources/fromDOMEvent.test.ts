@@ -1,4 +1,6 @@
-import { first, fromDOMEvent, write } from '../../src/index.js'
+import { fromDOMEvent } from '@johngw/stream/sources/fromDOMEvent'
+import { write } from '@johngw/stream/sinks/write'
+import { first } from '@johngw/stream/transformers/first'
 
 let element: HTMLAnchorElement
 

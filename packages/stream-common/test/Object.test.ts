@@ -1,5 +1,5 @@
-import { PickByValue } from '../src/Object.js'
-import { Pass, check, checks } from '../src/Test.js'
+import { PickByValue } from '@johngw/stream-common/Object'
+import { Pass, check, checks } from '@johngw/stream-common/Test'
 
 test('PickByValue', () => {
   checks([

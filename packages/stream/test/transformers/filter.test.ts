@@ -1,5 +1,7 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { filter, fromCollection, write } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { fromCollection } from '@johngw/stream/sources/fromCollection'
+import { filter } from '@johngw/stream/transformers/filter'
+import { write } from '@johngw/stream/sinks/write'
 
 test('filters unwanted values', async () => {
   await expect(

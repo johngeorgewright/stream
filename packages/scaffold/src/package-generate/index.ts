@@ -76,10 +76,12 @@ export = class PackageGenerator extends Generator {
 
     this.packageJson.set('scripts', {
       build:
-        "yarn clean && tsc && tsc --project tsconfig.common.json && renamer --find '/\\.js$/' --replace '.cjs' dist/common/**/*.js",
+        'yarn clean && tsc && tsc --project tsconfig.common.json && yarn build:covertcommonext',
+      'build:convertcommonext':
+        "renamer --force --find '/\\.(j|t)s/' --replace '.c$1s' dist/common/**/*",
       clean: 'rimraf dist',
       start:
-        "concurrently --names es,common 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json",
+        "concurrently --names es,common,renamer 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json' \"nodemon --ext js --exec 'yarn build:covertcommonext' --watch dist/common\"",
       test: 'jest --passWithNoTests',
     })
 
@@ -102,6 +104,7 @@ export = class PackageGenerator extends Generator {
       'concurrently',
       'jest',
       'jest-environment-jsdom',
+      'nodemon',
       'renamer',
       'rimraf',
       'ts-node',

@@ -1,13 +1,11 @@
-import {
-  CachableStream,
-  ControllableStream,
-  MemoryStorage,
-  StorageCache,
-  write,
-} from '../../src/index.js'
+import { CachableStream } from '@johngw/stream/sources/CachableStream'
+import { ControllableStream } from '@johngw/stream/sources/ControllableStream'
+import { MemoryStorage } from '@johngw/stream/storages/MemoryStorage'
+import { StorageCache } from '@johngw/stream/storages/StorageCache'
 import { timeout } from '@johngw/stream-common'
-import { fromTimeline } from '@johngw/stream-test'
-import { cacheStream } from '../../src/sources/cacheStream.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { cacheStream } from '@johngw/stream/sources/cacheStream'
+import { write } from '@johngw/stream/sinks/write'
 
 let cache: StorageCache
 

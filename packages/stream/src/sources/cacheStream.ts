@@ -1,5 +1,6 @@
-import { CachableStream, StorageCache } from '../index.js'
-import { CachePullerResult } from './CachableSource.js'
+import { CachableStream } from '@johngw/stream/sources/CachableStream'
+import { CachePullerResult } from '@johngw/stream/sources/CachableSource'
+import { StorageCache } from '@johngw/stream/storages/StorageCache'
 
 /**
  * Wraps a `ReadableStream` in a `CachableStream`.

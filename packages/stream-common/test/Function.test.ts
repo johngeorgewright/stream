@@ -1,5 +1,5 @@
-import { check, checks, Fail, Pass } from '../src/Test.js'
-import { Accumulator, Predicate } from '../src/Function.js'
+import { check, checks, Fail, Pass } from '@johngw/stream-common/Test'
+import { Accumulator, Predicate } from '@johngw/stream-common/Function'
 
 test('Accumulator', () => {
   checks([

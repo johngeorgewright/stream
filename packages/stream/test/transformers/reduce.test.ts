@@ -1,5 +1,6 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { reduce, write } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { reduce } from '@johngw/stream/transformers/reduce'
+import { write } from '@johngw/stream/sinks/write'
 
 test('accumulates values from a stream', async () => {
   await expect(

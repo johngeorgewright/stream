@@ -1,5 +1,4 @@
-import { fromTimeline } from '@johngw/stream-test'
-import '../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
 
 test('toMatchTimeline', async () => {
   await expect(

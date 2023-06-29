@@ -1,4 +1,4 @@
-import { Clearable } from '../types/Clearable.js'
+import { Clearable } from '@johngw/stream/types/Clearable'
 
 /**
  * An in-memory storage class.

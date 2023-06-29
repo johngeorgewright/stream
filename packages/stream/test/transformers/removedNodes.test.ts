@@ -1,5 +1,7 @@
 import { timeout } from '@johngw/stream-common'
-import { removedNodes, fromDOMMutations, write } from '../../src/index.js'
+import { fromDOMMutations } from '@johngw/stream/sources/fromDOMMutations'
+import { removedNodes } from '@johngw/stream/transformers/removedNodes'
+import { write } from '@johngw/stream/sinks/write'
 
 test('picks removed nodes from DOM mutations', async () => {
   const fn = jest.fn()

@@ -1,4 +1,6 @@
-import { ForkableReplayStream, fromCollection, write } from '../../src/index.js'
+import { ForkableReplayStream } from '@johngw/stream/sinks/ForkableReplayStream'
+import { fromCollection } from '@johngw/stream/sources/fromCollection'
+import { write } from '@johngw/stream/sinks/write'
 
 test('subscribing will replay all previously emitted values', async () => {
   const forkable = new ForkableReplayStream()

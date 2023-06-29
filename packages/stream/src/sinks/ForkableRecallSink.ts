@@ -1,5 +1,5 @@
 import { empty, Empty } from '@johngw/stream-common/Symbol'
-import { ForkableSink } from './ForkableSink.js'
+import { ForkableSink } from '@johngw/stream/sinks/ForkableSink'
 
 /**
  * An extension to the {@link ForkableSink:class} that immediately

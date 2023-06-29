@@ -1,10 +1,8 @@
-import {
-  ForkableStream,
-  fromCollection,
-  interval,
-  tap,
-  write,
-} from '../../src/index.js'
+import { ForkableStream } from '@johngw/stream/sinks/ForkableStream'
+import { fromCollection } from '@johngw/stream/sources/fromCollection'
+import { write } from '@johngw/stream/sinks/write'
+import { interval } from '@johngw/stream/sources/interval'
+import { tap } from '@johngw/stream/transformers/tap'
 import { timeout } from '@johngw/stream-common'
 
 let forkable: ForkableStream<number>

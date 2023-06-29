@@ -1,5 +1,5 @@
-import { StateReducerInput } from '../index.js'
-import { SubjectController } from './SubjectController.js'
+import { StateReducerInput } from '@johngw/stream/transformers/stateReducer'
+import { SubjectController } from '@johngw/stream/subjects/SubjectController'
 
 export class StatefulSubjectController<
   Actions extends Record<string, unknown>

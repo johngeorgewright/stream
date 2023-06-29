@@ -1,4 +1,4 @@
-export * from './Clearable.js'
+export * from '@johngw/stream/types/Clearable'
 export {
   ReadableStreamChunk,
   ReadableStreamsChunk,

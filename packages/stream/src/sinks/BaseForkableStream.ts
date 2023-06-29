@@ -1,5 +1,5 @@
-import { Forkable } from './Forkable.js'
-import { ForkableSink } from './ForkableSink.js'
+import { Forkable } from '@johngw/stream/sinks/Forkable'
+import { ForkableSink } from '@johngw/stream/sinks/ForkableSink'
 
 /**
  * Abstract logic for Forkable streams.

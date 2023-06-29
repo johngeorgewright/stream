@@ -1,4 +1,4 @@
-import { timeout } from '../src/Async.js'
+import { timeout } from '@johngw/stream-common/Async'
 
 describe('timeout', () => {
   test('setTimeout', async () => {

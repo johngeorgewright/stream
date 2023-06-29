@@ -4,8 +4,8 @@ import {
   immediatelyClosingReadableStream,
   ReadableStreamsChunk,
 } from '@johngw/stream-common/Stream'
-import { IteratorSource } from './fromCollection.js'
-import { SourceComposite } from './SourceComposite.js'
+import { IteratorSource } from '@johngw/stream/sources/fromCollection'
+import { SourceComposite } from '@johngw/stream/sources/SourceComposite'
 
 /**
  * Given an ordered list of streams, queue their items from one stream at a time.

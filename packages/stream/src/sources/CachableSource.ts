@@ -1,6 +1,6 @@
 import { timeout } from '@johngw/stream-common/Async'
-import { StorageCache } from '../storages/StorageCache.js'
-import { Clearable } from '../types/Clearable.js'
+import { StorageCache } from '@johngw/stream/storages/StorageCache'
+import { Clearable } from '@johngw/stream/types/Clearable'
 
 /**
  * Describes a function to pull data.

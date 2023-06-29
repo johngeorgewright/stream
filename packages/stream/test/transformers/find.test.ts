@@ -1,5 +1,7 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { find, fromCollection, write } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { fromCollection } from '@johngw/stream/sources/fromCollection'
+import { find } from '@johngw/stream/transformers/find'
+import { write } from '@johngw/stream/sinks/write'
 
 test('queues the first found chunk and then terminates the stream', async () => {
   await expect(

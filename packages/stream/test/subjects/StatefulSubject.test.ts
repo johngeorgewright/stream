@@ -1,4 +1,5 @@
-import { StatefulSubject, write } from '../../src/index.js'
+import { write } from '@johngw/stream/sinks/write'
+import { StatefulSubject } from '@johngw/stream/subjects/StatefulSubject'
 import { timeout } from '@johngw/stream-common'
 
 interface State {

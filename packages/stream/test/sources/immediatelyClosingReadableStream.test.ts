@@ -1,4 +1,4 @@
-import { immediatelyClosingReadableStream } from '../../src/index.js'
+import { immediatelyClosingReadableStream } from '@johngw/stream/sources/immediatelyClosingReadableStream'
 
 test('it closes the stream immediately', async () => {
   const fn = jest.fn()
