@@ -12,20 +12,74 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "yarn clean && tsc && tsc --project tsconfig.common.json",
+    "build": "yarn clean && tsc && tsc --project tsconfig.common.json && yarn build:covertcommonext",
+    "build:covertcommonext": "renamer --force --find '/\\.(j|t)s/' --replace '.c$1s' dist/common/**/*",
     "clean": "rimraf dist",
     "coverage": "open coverage/lcov-report/index.html",
-    "start": "concurrently --names es,common 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json'",
+    "start": "concurrently --names es,common,renamer 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json' \"nodemon --ext js --exec 'yarn build:covertcommonext' --watch dist/common\"",
     "test": "yarn test:lint && yarn test:unit",
     "test:lint": "eslint src",
     "test:unit": "jest",
     "test:coverage": "jest --coverage"
   },
-  "main": "./dist/common/index.js",
   "exports": {
-    ".": {
-      "import": "./dist/es/index.js",
-      "require": "./dist/common/index.js"
+    "./sinks": {
+      "import": "./dist/es/sinks/index.js",
+      "require": "./dist/common/sinks/index.cjs"
+    },
+    "./sinks/*": {
+      "import": "./dist/es/sinks/*.js",
+      "require": "./dist/common/sinks/*.cjs"
+    },
+    "./sources": {
+      "import": "./dist/es/sources/index.js",
+      "require": "./dist/common/sources/index.cjs"
+    },
+    "./sources/*": {
+      "import": "./dist/es/sources/*.js",
+      "require": "./dist/common/sources/*.cjs"
+    },
+    "./storages": {
+      "import": "./dist/es/storages/index.js",
+      "require": "./dist/common/storages/index.cjs"
+    },
+    "./storages/*": {
+      "import": "./dist/es/storages/*.js",
+      "require": "./dist/common/storages/*.cjs"
+    },
+    "./subjects": {
+      "import": "./dist/es/subjects/index.js",
+      "require": "./dist/common/subjects/index.cjs"
+    },
+    "./subjects/*": {
+      "import": "./dist/es/subjects/*.js",
+      "require": "./dist/common/subjects/*.cjs"
+    },
+    "./transformers": {
+      "import": "./dist/es/transformers/index.js",
+      "require": "./dist/common/transformers/index.cjs"
+    },
+    "./transformers/*": {
+      "import": "./dist/es/transformers/*.js",
+      "require": "./dist/common/transformers/*.cjs"
+    },
+    "./types": {
+      "import": "./dist/es/types/index.js",
+      "require": "./dist/common/types/index.cjs"
+    },
+    "./types/*": {
+      "import": "./dist/es/types/*.js",
+      "require": "./dist/common/types/*.cjs"
+    }
+  },
+  "imports": {
+    "#transformers/debounce/*": {
+      "import": "./dist/es/transformers/debounce/*.js",
+      "require": "./dist/common/transformers/debounce/*.cjs"
+    },
+    "#transformers/stateReducer/*": {
+      "import": "./dist/es/transformers/stateReducer/*.js",
+      "require": "./dist/common/transformers/stateReducer/*.cjs"
     }
   },
   "devDependencies": {
@@ -48,7 +102,9 @@
     "jest": "29.5.0",
     "jest-environment-jsdom": "29.5.0",
     "lint-staged": "13.2.2",
+    "nodemon": "2.0.22",
     "prettier": "2.8.8",
+    "renamer": "4.0.0",
     "rimraf": "5.0.1",
     "semantic-release": "19.0.5",
     "ts-jest": "29.1.0",

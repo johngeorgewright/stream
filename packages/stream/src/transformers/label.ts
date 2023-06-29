@@ -1,4 +1,4 @@
-import { map } from './map.js'
+import { map } from '@johngw/stream/transformers/map'
 
 /**
  * Maps each chunk as an object with a "label" and a "value".

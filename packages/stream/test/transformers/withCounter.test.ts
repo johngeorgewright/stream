@@ -1,5 +1,5 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { withCounter } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { withCounter } from '@johngw/stream/transformers/withCounter'
 
 test('Adds a counter representing the amount of chunks received thus far', async () => {
   await expect(

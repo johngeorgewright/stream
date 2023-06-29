@@ -1,4 +1,6 @@
-import { ControllableStream, map, write } from '../../src/index.js'
+import { ControllableStream } from '@johngw/stream/sources/ControllableStream'
+import { write } from '@johngw/stream/sinks/write'
+import { map } from '@johngw/stream/transformers/map'
 
 let controller: ControllableStream<number>
 

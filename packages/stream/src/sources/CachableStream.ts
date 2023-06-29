@@ -1,6 +1,9 @@
-import { StorageCache } from '../storages/StorageCache.js'
-import { Clearable } from '../types/Clearable.js'
-import { CachableSource, CachePuller } from './CachableSource.js'
+import { StorageCache } from '@johngw/stream/storages/StorageCache'
+import { Clearable } from '@johngw/stream/types/Clearable'
+import {
+  CachableSource,
+  CachePuller,
+} from '@johngw/stream/sources/CachableSource'
 
 /**
  * An extension to the `ReadableStream` that queues items

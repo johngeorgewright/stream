@@ -2,8 +2,8 @@ import {
   ReadableStreamChunk,
   ReadableStreamsChunk,
   ReadableStreamsChunks,
-} from '../src/Stream.js'
-import { check, checks, Fail, Pass } from '../src/Test.js'
+} from '@johngw/stream-common/Stream'
+import { check, checks, Fail, Pass } from '@johngw/stream-common/Test'
 
 test('ReadableStreamChunk', () => {
   checks([

@@ -1,10 +1,11 @@
-import { fromDOMIntersections, write } from '../../src/index.js'
+import { fromDOMIntersections } from '@johngw/stream/sources/fromDOMIntersections'
+import { write } from '@johngw/stream/sinks/write'
 import {
   CallIntersectionObserver,
   IntersectionObserverMock,
   boundingClientRect,
   mockIntersectionObserver,
-} from '../mocks/IntersectionObserver'
+} from '../mocks/IntersectionObserver.js'
 import { timeout } from '@johngw/stream-common'
 
 let callIntersectionObservers: CallIntersectionObserver

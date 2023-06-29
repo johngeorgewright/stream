@@ -1,5 +1,5 @@
-import { DebounceBehavior } from './Behavior.js'
-import { DebounceState } from './State.js'
+import { DebounceBehavior } from '#transformers/debounce/Behavior'
+import { DebounceState } from '#transformers/debounce/State'
 
 /**
  * The transformer implementation for {@link debounce:function}.

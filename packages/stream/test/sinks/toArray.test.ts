@@ -1,4 +1,5 @@
-import { fromCollection, toArray } from '../../src/index.js'
+import { fromCollection } from '@johngw/stream/sources/fromCollection'
+import { toArray } from '@johngw/stream/sinks/toArray'
 
 test('consumes a stream in to an array of values', async () => {
   expect(await toArray(fromCollection([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]))).toEqual(

@@ -1,7 +1,7 @@
-import { Forkable } from './Forkable.js'
-import { ControllableSource } from '../sources/ControllableSource.js'
-import { SourceComposite } from '../sources/SourceComposite.js'
-import { Controllable } from '../index.js'
+import { Forkable } from '@johngw/stream/sinks/Forkable'
+import { Controllable } from '@johngw/stream/sources/Controllable'
+import { ControllableSource } from '@johngw/stream/sources/ControllableSource'
+import { SourceComposite } from '@johngw/stream/sources/SourceComposite'
 
 /**
  * A ForkableSink is the underlying logic for "1 Writable to many Readables".

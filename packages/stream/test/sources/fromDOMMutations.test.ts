@@ -1,4 +1,5 @@
-import { fromDOMMutations, write } from '../../src/index.js'
+import { fromDOMMutations } from '@johngw/stream/sources/fromDOMMutations'
+import { write } from '@johngw/stream/sinks/write'
 import { timeout } from '@johngw/stream-common'
 
 test('stream of DOM mutations', async () => {

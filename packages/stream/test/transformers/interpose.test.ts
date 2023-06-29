@@ -1,5 +1,7 @@
 import { timeout } from '@johngw/stream-common'
-import { fromCollection, interpose, write } from '../../src/index.js'
+import { fromCollection } from '@johngw/stream/sources/fromCollection'
+import { interpose } from '@johngw/stream/transformers/interpose'
+import { write } from '@johngw/stream/sinks/write'
 import { defer } from '../util.js'
 
 test('holds up a stream until a promise resolves', async () => {

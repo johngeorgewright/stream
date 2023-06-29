@@ -1,4 +1,5 @@
-import { MemoryStorage, StorageCache } from '../../src/index.js'
+import { MemoryStorage } from '@johngw/stream/storages/MemoryStorage'
+import { StorageCache } from '@johngw/stream/storages/StorageCache'
 import { timeout } from '@johngw/stream-common'
 
 let cache: StorageCache

@@ -1,6 +1,6 @@
-import { merge } from '@johngw/stream-common'
-import { fromTimeline } from '@johngw/stream-test'
-import { write } from '../../src/index.js'
+import { merge } from '@johngw/stream/sources/merge'
+import { write } from '@johngw/stream/sinks/write'
+import { fromTimeline } from '@johngw/stream-jest'
 
 test('successfully merge all streams', async () => {
   await expect(

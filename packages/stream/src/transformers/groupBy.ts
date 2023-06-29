@@ -1,6 +1,6 @@
 import { PickByValue } from '@johngw/stream-common/Object'
 import { Stringable } from '@johngw/stream-common/String'
-import { accumulate } from './accumulate.js'
+import { accumulate } from '@johngw/stream/transformers/accumulate'
 
 /**
  * Accumulates each chunk into an object where the key is the result of

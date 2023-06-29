@@ -1,10 +1,10 @@
-import { fromTimeline } from '@johngw/stream-test'
+import { fromTimeline } from '@johngw/stream-jest'
 import {
   debounce,
   DebounceBackOffBehavior,
   DebounceLeadingBehavior,
   DebounceTrailingBehavior,
-} from '../../src/index.js'
+} from '@johngw/stream/transformers/debounce'
 
 test('trailing only (by default)', async () => {
   await expect(

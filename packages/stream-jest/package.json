@@ -3,20 +3,18 @@
   "version": "1.0.1",
   "description": "Jest extension for testing streams",
   "type": "module",
-  "main": "./dist/common/index.js",
-  "types": "./dist/es/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/es/index.js",
-      "require": "./dist/common/index.js",
-      "types": "./dist/es/index.d.ts"
+      "require": "./dist/common/index.cjs"
     }
   },
   "scripts": {
-    "build": "yarn clean && tsc && tsc --project tsconfig.common.json",
+    "build": "yarn clean && tsc && tsc --project tsconfig.common.json && yarn build:covertcommonext",
+    "build:covertcommonext": "renamer --force --find '/\\.(j|t)s/' --replace '.c$1s' dist/common/**/*",
     "clean": "rimraf dist",
-    "start": "concurrently --names es,common 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json'",
-    "test": "jest",
+    "start": "concurrently --names es,common,renamer 'yarn tsc --watch --preserveWatchOutput' 'yarn tsc --watch --preserveWatchOutput --project tsconfig.common.json' \"nodemon --ext js --exec 'yarn build:covertcommonext' --watch dist/common\"",
+    "test": "node --experimental-vm-modules $(yarn bin jest)",
     "test:coverage": "jest --coverage"
   },
   "license": "MIT",
@@ -37,6 +35,8 @@
     "expect": "29.5.0",
     "jest": "29.5.0",
     "jest-environment-jsdom": "29.5.0",
+    "nodemon": "2.0.22",
+    "renamer": "4.0.0",
     "rimraf": "5.0.1",
     "semantic-release": "19.0.5",
     "semantic-release-monorepo": "7.0.5",

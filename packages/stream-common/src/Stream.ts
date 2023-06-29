@@ -1,7 +1,7 @@
 import { L } from 'ts-toolbelt'
-import { all } from './Async.js'
-import { without } from './Array.js'
-import { RequiredProps } from './Object.js'
+import { all } from '@johngw/stream-common/Async'
+import { without } from '@johngw/stream-common/Array'
+import { RequiredProps } from '@johngw/stream-common/Object'
 
 /**
  * Something that can be flushed by another stream.

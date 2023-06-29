@@ -1,8 +1,8 @@
 import {
   Controllable,
-  ControllableStream,
   ControllerPullListener,
-} from '../index.js'
+} from '@johngw/stream/sources/Controllable'
+import { ControllableStream } from '@johngw/stream/sources/ControllableStream'
 
 export class SubjectController<T> implements Controllable<T> {
   #controller: ControllableStream<T>

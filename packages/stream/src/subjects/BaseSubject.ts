@@ -1,8 +1,8 @@
-import { without } from '@johngw/stream-common'
-import { ForkableStream } from '../sinks/ForkableStream.js'
-import { ControllableStream } from '../sources/ControllableStream.js'
-import { SubjectController } from './SubjectController.js'
-import { Subjectable } from './Subjectable.js'
+import { without } from '@johngw/stream-common/Array'
+import { ForkableStream } from '@johngw/stream/sinks/ForkableStream'
+import { ControllableStream } from '@johngw/stream/sources/ControllableStream'
+import { Subjectable } from '@johngw/stream/subjects/Subjectable'
+import { SubjectController } from '@johngw/stream/subjects/SubjectController'
 
 /**
  * The constructor options for {@link BaseSubject}.

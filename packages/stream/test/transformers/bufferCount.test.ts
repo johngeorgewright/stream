@@ -1,5 +1,5 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { bufferCount } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { bufferCount } from '@johngw/stream/transformers/bufferCount'
 
 test('bufferCount in 2s', async () => {
   await expect(

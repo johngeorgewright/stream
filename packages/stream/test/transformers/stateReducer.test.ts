@@ -1,11 +1,12 @@
 import '@johngw/stream-jest'
-import { Pass, check, checks, fromTimeline } from '@johngw/stream-test'
+import { Pass, check, checks } from '@johngw/stream-test'
+import { fromTimeline } from '@johngw/stream-jest'
 import {
   StateReducerInput,
   StateReducerOutput,
   StateReducers,
   stateReducer,
-} from '../../src/index.js'
+} from '@johngw/stream/transformers/stateReducer'
 
 interface State {
   authors: string[]

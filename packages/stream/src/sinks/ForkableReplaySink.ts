@@ -1,5 +1,5 @@
-import { Clearable } from '../types/Clearable.js'
-import { ForkableSink } from './ForkableSink.js'
+import { Clearable } from '@johngw/stream/types/Clearable'
+import { ForkableSink } from '@johngw/stream/sinks/ForkableSink'
 
 /**
  * An extension to the {@link ForkableSink:class} that immediately

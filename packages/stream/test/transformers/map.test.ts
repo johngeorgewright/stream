@@ -1,5 +1,5 @@
-import { fromTimeline } from '@johngw/stream-test'
-import { map } from '../../src/index.js'
+import { fromTimeline } from '@johngw/stream-jest'
+import { map } from '@johngw/stream/transformers/map'
 
 test('transforms values', async () => {
   await expect(

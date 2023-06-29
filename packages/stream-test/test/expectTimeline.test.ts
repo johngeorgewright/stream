@@ -1,5 +1,5 @@
-import { merge } from '@johngw/stream-common'
-import { expectTimeline, fromTimeline } from '../src/index.js'
+import { merge } from '@johngw/stream-common/Stream'
+import { expectTimeline, fromTimeline } from '@johngw/stream-test'
 
 test('expectTimeline', async () => {
   const fn = jest.fn()

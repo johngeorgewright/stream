@@ -1,7 +1,7 @@
 import { ReadableStreamsChunks } from '@johngw/stream-common/Stream'
 import { empty } from '@johngw/stream-common/Symbol'
-import { ControllableSource } from '../sources/ControllableSource.js'
-import { SourceComposite } from '../sources/SourceComposite.js'
+import { ControllableSource } from '@johngw/stream/sources/ControllableSource'
+import { SourceComposite } from '@johngw/stream/sources/SourceComposite'
 
 /**
  * Combines the source Observable with other Observables to create an Observable

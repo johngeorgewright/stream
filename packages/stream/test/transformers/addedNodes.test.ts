@@ -1,4 +1,6 @@
-import { addedNodes, fromDOMMutations, write } from '../../src/index.js'
+import { fromDOMMutations } from '@johngw/stream/sources/fromDOMMutations'
+import { addedNodes } from '@johngw/stream/transformers/addedNodes'
+import { write } from '@johngw/stream/sinks/write'
 import { timeout } from '@johngw/stream-common'
 
 test('picks added nodes from DOM mutations', async () => {

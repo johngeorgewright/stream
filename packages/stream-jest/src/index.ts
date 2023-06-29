@@ -1,6 +1,8 @@
 import { expectTimeline, TimelineItemDefaultValue } from '@johngw/stream-test'
 import { expect, JestAssertionError, MatcherContext } from 'expect'
 
+export { fromTimeline } from '@johngw/stream-test'
+
 expect.extend({
   toMatchTimeline: function toMatchTimeline<T extends TimelineItemDefaultValue>(
     this: MatcherContext,

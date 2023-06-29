@@ -1,5 +1,5 @@
-import { write } from '@johngw/stream-common'
-import { fromCollection } from '../../src/index.js'
+import { write } from '@johngw/stream/sinks/write'
+import { fromCollection } from '@johngw/stream/sources/fromCollection'
 
 test('iterables', async () => {
   const fn = jest.fn()

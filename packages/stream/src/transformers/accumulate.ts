@@ -1,4 +1,4 @@
-import { map } from './map.js'
+import { map } from '@johngw/stream/transformers/map'
 import { Accumulator } from '@johngw/stream-common/Function'
 
 /**
