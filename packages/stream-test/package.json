@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@johngw/stream-common": "workspace:*",
-    "@johngw/timeline": "1.0.3",
+    "@johngw/timeline": "1.0.5",
     "assert-never": "1.2.1",
     "js-yaml": "4.1.0",
     "ts-toolbelt": "9.6.0",

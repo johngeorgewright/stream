@@ -1051,7 +1051,7 @@ __metadata:
     tslib: 2.5.0
     typescript: 5.0.4
   peerDependencies:
-    "@johngw/stream-test": ^1.0.0
+    "@johngw/stream-test": ^1.1.1
     expect: ^29.0.0
   languageName: unknown
   linkType: soft
@@ -1092,7 +1092,7 @@ __metadata:
   resolution: "@johngw/stream-test@workspace:packages/stream-test"
   dependencies:
     "@johngw/stream-common": "workspace:*"
-    "@johngw/timeline": 1.0.3
+    "@johngw/timeline": 1.0.5
     "@semantic-release/commit-analyzer": 9.0.2
     "@semantic-release/exec": 6.0.3
     "@semantic-release/git": 10.0.1
@@ -1154,13 +1154,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@johngw/timeline@npm:1.0.3":
-  version: 1.0.3
-  resolution: "@johngw/timeline@npm:1.0.3"
+"@johngw/timeline@npm:1.0.5":
+  version: 1.0.5
+  resolution: "@johngw/timeline@npm:1.0.5"
   dependencies:
     js-yaml: 4.1.0
     tslib: 2.5.3
-  checksum: 75decd1e55398e9cd8f561a8b0a7aaf9dd5f1788dae0b94ca6fd8a025580621a38feb0d62aea1010f2c821c1baa1b955ec7abd73e0bcd87758af55188cc3a30e
+  checksum: a683bc6dada626f8566b714a5c5da490b8e55ead3c414e6c8c68fc9903baac20b364c685ee9fdfee6b65835cef58194bcccec69d7204544dfdaa9892987b15a7
   languageName: node
   linkType: hard
 
