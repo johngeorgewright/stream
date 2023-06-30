@@ -5,7 +5,7 @@ import {
   IntersectionObserverMock,
   boundingClientRect,
   mockIntersectionObserver,
-} from '../mocks/IntersectionObserver.js'
+} from '#mock-intersection-observer'
 import { timeout } from '@johngw/stream-common'
 
 let callIntersectionObservers: CallIntersectionObserver

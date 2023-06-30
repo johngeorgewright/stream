@@ -2,7 +2,7 @@ import { timeout } from '@johngw/stream-common'
 import { fromCollection } from '@johngw/stream/sources/fromCollection'
 import { interpose } from '@johngw/stream/transformers/interpose'
 import { write } from '@johngw/stream/sinks/write'
-import { defer } from '../util.js'
+import { defer } from '#test-util'
 
 test('holds up a stream until a promise resolves', async () => {
   const fn = jest.fn()

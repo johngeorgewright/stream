@@ -77,6 +77,8 @@
     }
   },
   "imports": {
+    "#mock-intersection-observer": "./test/mocks/IntersectionObserver.ts",
+    "#test-util": "./test/util.ts",
     "#transformers/debounce/*": {
       "import": "./dist/es/transformers/debounce/*.js",
       "require": "./dist/common/transformers/debounce/*.cjs"
