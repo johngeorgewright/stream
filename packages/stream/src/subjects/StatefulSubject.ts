@@ -1,16 +1,16 @@
 import { without } from '@johngw/stream-common/Array'
-import { ForkableRecallStream } from '@johngw/stream/sinks/ForkableRecallStream'
+import { ForkableRecallStream } from '@johngw/stream/sinks'
 import {
   stateReducer,
   StateReducerInput,
   StateReducerOutput,
   StateReducers,
-} from '@johngw/stream/transformers/stateReducer'
+} from '@johngw/stream/transformers'
 import {
   BaseSubject,
   BaseSubjectOptions,
-} from '@johngw/stream/subjects/BaseSubject'
-import { StatefulSubjectController } from '@johngw/stream/subjects/StatefulSubjectController'
+  StatefulSubjectController,
+} from '@johngw/stream/subjects'
 
 /**
  * The constructor options for a {@link StatefulSubject}.

@@ -23,6 +23,10 @@
     "test:coverage": "jest --coverage"
   },
   "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/common/index.cjs"
+    },
     "./sinks": {
       "import": "./dist/es/sinks/index.js",
       "require": "./dist/common/sinks/index.cjs"
