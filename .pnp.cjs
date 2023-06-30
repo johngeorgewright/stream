@@ -1601,7 +1601,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
             ["@types/eslint", "npm:8.40.2"],\
             ["@types/jest", "npm:29.5.2"],\
-            ["@types/node", "npm:20.3.1"],\
+            ["@types/node", "npm:20.3.2"],\
             ["assert-never", "npm:1.2.1"],\
             ["concurrently", "npm:8.2.0"],\
             ["eslint", "npm:8.43.0"],\
@@ -1635,7 +1635,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/expect", null],\
             ["@types/jest", "npm:29.5.2"],\
             ["@types/johngw__stream-test", null],\
-            ["@types/node", "npm:20.3.1"],\
+            ["@types/node", "npm:20.3.2"],\
             ["concurrently", "npm:8.2.0"],\
             ["expect", "npm:29.5.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.5.0"],\
@@ -1668,7 +1668,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/github", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:8.1.0"],\
             ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
             ["@types/jest", "npm:29.5.2"],\
-            ["@types/node", "npm:20.3.1"],\
+            ["@types/node", "npm:20.3.2"],\
             ["concurrently", "npm:8.2.0"],\
             ["expect", "npm:29.5.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.5.0"],\
@@ -1733,7 +1733,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
             ["@types/jest", "npm:29.5.2"],\
             ["@types/js-yaml", "npm:4.0.5"],\
-            ["@types/node", "npm:20.3.1"],\
+            ["@types/node", "npm:20.3.2"],\
             ["assert-never", "npm:1.2.1"],\
             ["concurrently", "npm:8.2.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.5.0"],\
@@ -3117,10 +3117,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:20.3.1", {\
-          "packageLocation": "./.yarn/cache/@types-node-npm-20.3.1-86012346c0-63a393ab6d.zip/node_modules/@types/node/",\
+        ["npm:20.3.2", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-20.3.2-e93bcb71b8-5929ce2b9b.zip/node_modules/@types/node/",\
           "packageDependencies": [\
-            ["@types/node", "npm:20.3.1"]\
+            ["@types/node", "npm:20.3.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -11765,7 +11765,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node12", "npm:1.0.11"],\
             ["@tsconfig/node14", "npm:1.0.3"],\
             ["@tsconfig/node16", "npm:1.0.3"],\
-            ["@types/node", "npm:20.3.1"],\
+            ["@types/node", "npm:20.3.2"],\
             ["@types/swc__core", null],\
             ["@types/swc__wasm", null],\
             ["@types/typescript", null],\
