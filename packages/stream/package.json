@@ -87,8 +87,8 @@
     }
   },
   "devDependencies": {
-    "@commitlint/cli": "17.6.5",
-    "@commitlint/config-conventional": "17.6.5",
+    "@commitlint/cli": "17.6.6",
+    "@commitlint/config-conventional": "17.6.6",
     "@commitlint/types": "17.4.4",
     "@johngw/stream-jest": "workspace:*",
     "@johngw/stream-test": "workspace:*",
@@ -105,7 +105,7 @@
     "husky": "8.0.3",
     "jest": "29.5.0",
     "jest-environment-jsdom": "29.5.0",
-    "lint-staged": "13.2.2",
+    "lint-staged": "13.2.3",
     "nodemon": "2.0.22",
     "prettier": "2.8.8",
     "renamer": "4.0.0",
