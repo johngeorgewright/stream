@@ -4,6 +4,10 @@ Jest extension for testing streams.
 
 ## Usage
 
+```
+npm i @johngw/stream-test @johngw/stream-jest
+```
+
 ```typescript
 // jest.config.ts
 
@@ -11,21 +15,7 @@ import { Config } from 'jest'
 
 const conig: Config = {
   // ...
-  setupFilesAfterEnv: [
-    require.resolve('@johngw/stream-test/polyfill'),
-    require.resolve('@johngw/stream-jest'),
-  ],
-}
-```
-
-```
-/* test/tsconfig.json */
-{
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "rootDir": "../",
-    "types": ["@types/jest", "@johngw/stream-jest"]
-  }
+  setupFilesAfterEnv: [require.resolve('@johngw/stream-test/polyfill')],
 }
 ```
 
@@ -37,6 +27,7 @@ const conig: Config = {
 // test/pairwise.ts
 
 import { fromTimeline, pairwise } from '@johngw/stream'
+import { fromTimeline } from '@johngw/stream-jest'
 
 test('Queues the current value and previous values', async () => {
   await expect(
