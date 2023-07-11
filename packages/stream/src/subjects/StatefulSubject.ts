@@ -1,16 +1,12 @@
-import { without } from '@johngw/stream-common/Array'
-import { ForkableRecallStream } from '@johngw/stream/sinks'
+import { ForkableRecallStream } from '@johngw/stream/sinks/ForkableRecallStream'
 import {
   stateReducer,
   StateReducerInput,
   StateReducerOutput,
   StateReducers,
-} from '@johngw/stream/transformers'
-import {
-  BaseSubject,
-  BaseSubjectOptions,
-  StatefulSubjectController,
-} from '@johngw/stream/subjects'
+} from '@johngw/stream/transformers/stateReducer'
+import { Subject, SubjectOptions } from '@johngw/stream/subjects/Subject'
+import { ControllableStream } from '@johngw/stream/sources/ControllableStream'
 
 /**
  * The constructor options for a {@link StatefulSubject}.
@@ -18,11 +14,13 @@ import {
  * @group Subjects
  */
 interface StatefulSubjectOptions<Actions extends Record<string, unknown>, State>
-  extends BaseSubjectOptions<
-    StateReducerInput<Actions>,
-    StateReducerOutput<Actions, State>
+  extends Omit<
+    SubjectOptions<
+      StateReducerInput<Actions>,
+      StateReducerOutput<Actions, State>
+    >,
+    'forkable' | 'transform'
   > {
-  forkable?: ForkableRecallStream<StateReducerOutput<Actions, State>>
   pipeThroughOptions?: StreamPipeOptions
 }
 
@@ -77,36 +75,57 @@ interface StatefulSubjectOptions<Actions extends Record<string, unknown>, State>
 export class StatefulSubject<
   Actions extends Record<string, unknown>,
   State
-> extends BaseSubject<
+> extends Subject<
   StateReducerInput<Actions>,
   StateReducerOutput<Actions, State>
 > {
   constructor(
     reducers: StateReducers<Actions, State>,
-    {
-      forkable = new ForkableRecallStream(),
-      ...options
-    }: StatefulSubjectOptions<Actions, State> = {}
+    options: StatefulSubjectOptions<Actions, State> = {}
   ) {
-    super({ ...options, forkable })
-    this.controllable
-      .pipeThrough(stateReducer(reducers), options.pipeThroughOptions)
-      .pipeTo(this.forkable, options.pipeToOptions)
-      .catch(() => {
-        // Errors can be handled in forks
-      })
+    super({
+      ...options,
+      forkable: new ForkableRecallStream(),
+      transform: stateReducer(reducers),
+    })
   }
 
   /**
    * Returns a new {@link StatefulControllableStream}. Once all controllers
    * have been closed, then the source is also closed.
    */
-  override control(): StatefulSubjectController<Actions> {
-    const controller = new StatefulSubjectController(this.controllable, () => {
-      this.controllers = without(this.controllers, controller)
-      if (!this.controllers.length) this.controllable.close()
-    })
-    this.controllers.push(controller)
-    return controller
+  override control() {
+    const subjectController = super.control()
+    return Object.assign(subjectController, {
+      /**
+       * Parameterised version of enqueue for simpliclity.
+       *
+       * @example
+       * ```
+       * subject.dispatch('action', 'param')
+       * // Instead of
+       * subject.enqueue({ action: 'action', param: 'param' })
+       * ```
+       */
+      dispatch<Action extends keyof Actions>(
+        ...args: Actions[Action] extends void
+          ? [action: Action]
+          : [action: Action, param: Actions[Action]]
+      ) {
+        subjectController.enqueue({
+          action: args[0],
+          param: args[1],
+        } as StateReducerInput<Actions>)
+      },
+    }) as StatefulSubjectController<Actions>
   }
+}
+
+export interface StatefulSubjectController<
+  Actions extends Record<string, unknown>
+> extends ControllableStream<StateReducerInput<Actions>> {
+  dispatch<Action extends keyof Actions>(
+    action: Action,
+    param?: Actions[Action]
+  ): void
 }

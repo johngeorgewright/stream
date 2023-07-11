@@ -6,6 +6,6 @@ import { Controllable } from '@johngw/stream/sources/Controllable'
  *
  * @group Subjects
  */
-export interface Subjectable<Input, Output> extends Forkable<Output> {
+export interface Subjectable<Input, Output = Input> extends Forkable<Output> {
   control(): Controllable<Input>
 }

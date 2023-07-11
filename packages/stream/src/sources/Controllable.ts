@@ -21,3 +21,12 @@ export interface Controllable<T> extends ReadableStreamDefaultController<T> {
 export interface ControllerPullListener<T> {
   (): T | Promise<T> | undefined
 }
+
+/**
+ * An interface for a {@link ControllableStream:class}.
+ *
+ * @group Sources
+ */
+export interface ControllableReadableStream<T>
+  extends ReadableStream<T>,
+    Controllable<T> {}
