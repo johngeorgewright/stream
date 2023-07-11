@@ -1602,7 +1602,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/git", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:10.0.1"],\
             ["@semantic-release/github", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:8.1.0"],\
             ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
-            ["@types/eslint", "npm:8.40.2"],\
+            ["@types/eslint", "npm:8.44.0"],\
             ["@types/jest", "npm:29.5.3"],\
             ["assert-never", "npm:1.2.1"],\
             ["concurrently", "npm:8.2.0"],\
@@ -1637,7 +1637,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/git", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:10.0.1"],\
             ["@semantic-release/github", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:8.1.0"],\
             ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
-            ["@types/eslint", "npm:8.40.2"],\
+            ["@types/eslint", "npm:8.44.0"],\
             ["@types/jest", "npm:29.5.3"],\
             ["@types/node", "npm:20.4.1"],\
             ["assert-never", "npm:1.2.1"],\
@@ -2973,10 +2973,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/eslint", [\
-        ["npm:8.40.2", {\
-          "packageLocation": "./.yarn/cache/@types-eslint-npm-8.40.2-b5096beae4-a4780e45e6.zip/node_modules/@types/eslint/",\
+        ["npm:8.44.0", {\
+          "packageLocation": "./.yarn/cache/@types-eslint-npm-8.44.0-9fec951209-2655f409a4.zip/node_modules/@types/eslint/",\
           "packageDependencies": [\
-            ["@types/eslint", "npm:8.40.2"],\
+            ["@types/eslint", "npm:8.44.0"],\
             ["@types/estree", "npm:1.0.0"],\
             ["@types/json-schema", "npm:7.0.11"]\
           ],\
