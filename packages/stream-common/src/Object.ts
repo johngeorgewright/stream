@@ -68,32 +68,3 @@ export function isIteratorOrAsyncIterator<T>(
 export type RequiredProps<Type, Key extends keyof Type> = Type & {
   [K in Key]-?: Type[K]
 }
-
-/**
- * Creates another type where `T` could also be an array or an object.
- *
- * @group Utils
- * @example
- * ```
- * type T = ValueOrArrayOrObject<number>
- * // | number
- * // | number[]
- * // | { [key: keyof any]:
- * //     | number
- * //     | number[]
- * //     | { [key: keyof any]: number | number[] | ... }
- * //   }
- * // | { [key: keyof any]:
- * //     | number
- * //     | number[]
- * //     | { [key: keyof any]: number | number[] | ... }
- * //   }[]
- * ```
- */
-export type ValueOrArrayOrObject<T> =
-  | T
-  | ValueOrArrayOrObject<T>[]
-  | {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      [key: keyof any]: ValueOrArrayOrObject<T>
-    }

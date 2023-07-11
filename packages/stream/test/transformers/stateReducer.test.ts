@@ -37,10 +37,10 @@ test('StateReducerInput', () => {
   checks([
     check<
       StateReducerInput<{ foo: string; bar: number; nothing: void }>,
-      | { action: '__INIT__' }
+      | { action: '__INIT__'; param: void }
       | { action: 'foo'; param: string }
       | { action: 'bar'; param: number }
-      | { action: 'nothing' },
+      | { action: 'nothing'; param: void },
       Pass
     >(),
   ])
@@ -50,10 +50,10 @@ test('StateReducerOutput', () => {
   checks([
     check<
       StateReducerOutput<{ foo: string; bar: number; nothing: void }, string>,
-      | { action: '__INIT__'; state: string }
+      | { action: '__INIT__'; param: void; state: string }
       | { action: 'foo'; param: string; state: string }
       | { action: 'bar'; param: number; state: string }
-      | { action: 'nothing'; state: string },
+      | { action: 'nothing'; param: void; state: string },
       Pass
     >(),
   ])
@@ -64,15 +64,17 @@ test('StateReducers', () => {
     foos: string[]
   }
 
-  interface Actions {
+  type Actions = {
     foo: string
+    nothing: void
   }
 
   check<
-    StateReducers<State, Actions>,
+    StateReducers<Actions, State>,
     {
-      __INIT__(): State
+      __INI__(): State
       foo(state: State, param: string): State
+      nothing(state: State): State
     },
     Pass
   >()

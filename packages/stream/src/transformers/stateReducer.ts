@@ -91,7 +91,9 @@ export function stateReducer<Actions extends Record<string, unknown>, State>(
     transform(chunk, controller) {
       let $state: State
       try {
-        $state = reduce(chunk, state)
+        // No idea why `chunk` (`StateReducerInput`) doesn't have typed properties.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        $state = reducers[(chunk as any).action](state, (chunk as any).param)
       } catch (error) {
         return controller.error(error)
       }
@@ -104,17 +106,4 @@ export function stateReducer<Actions extends Record<string, unknown>, State>(
       }
     },
   })
-
-  function reduce<Action extends keyof Actions>(
-    {
-      action,
-      param,
-    }: {
-      action: Action
-      param?: Actions[Action]
-    },
-    state: State
-  ) {
-    return reducers[action](state, param)
-  }
 }

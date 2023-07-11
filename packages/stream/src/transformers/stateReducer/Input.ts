@@ -17,7 +17,7 @@ export type StateReducerInput<Actions extends Record<string, unknown>> =
   AccumulateStateReducerInput<
     Actions,
     U.ListOf<keyof Actions>,
-    { action: StateReducerInit }
+    { action: StateReducerInit; param: void }
   >
 
 /**
@@ -26,17 +26,15 @@ export type StateReducerInput<Actions extends Record<string, unknown>> =
 type AccumulateStateReducerInput<
   Actions extends Record<string, unknown>,
   ActionNames extends readonly (keyof Actions)[],
-  Acc extends { action: keyof Actions; param?: unknown }
+  Acc extends { action: keyof Actions; param: unknown }
 > = ActionNames['length'] extends 0
   ? Acc
   : AccumulateStateReducerInput<
       Actions,
       L.Tail<ActionNames>,
       | Acc
-      | (Actions[L.Head<ActionNames>] extends void
-          ? { action: L.Head<ActionNames> }
-          : {
-              action: L.Head<ActionNames>
-              param: Actions[L.Head<ActionNames>]
-            })
+      | {
+          action: L.Head<ActionNames>
+          param: Actions[L.Head<ActionNames>]
+        }
     >
