@@ -1,1 +1,1 @@
-export { merge } from '@johngw/stream-common'
+export { merge } from '@johngw/stream-common/Stream'
