@@ -53,13 +53,11 @@ export function fromTimeline<T extends ParsedTimelineItemValue>(
       async pull(controller) {
         const { done, value } = await timeline.next()
 
-        if (done) {
-          return
+        if (done || value instanceof TimelineItemClose) {
+          return controller.close()
         } else if (value instanceof TimelineItemDash) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           return this.pull!(controller)
-        } else if (value instanceof TimelineItemClose) {
-          return controller.close()
         } else if (
           value instanceof TimelineItemError ||
           value instanceof TimelineItemNeverReach
