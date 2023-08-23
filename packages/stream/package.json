@@ -100,7 +100,7 @@
     "@semantic-release/github": "8.1.0",
     "@semantic-release/release-notes-generator": "10.0.3",
     "@types/eslint": "8.44.2",
-    "@types/jest": "29.5.3",
+    "@types/jest": "29.5.4",
     "concurrently": "8.2.1",
     "conventional-changelog-conventionalcommits": "6.1.0",
     "eslint": "8.47.0",
