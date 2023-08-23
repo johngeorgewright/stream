@@ -162,6 +162,26 @@ test('errors', async () => {
   `)
 })
 
+test('instances', async () => {
+  const fn = jest.fn()
+
+  await fromTimeline(`--<Date>--<Mung>--<Foo>--`).pipeTo(write(fn))
+
+  expect(fn.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        Date {},
+      ],
+      [
+        Mung {},
+      ],
+      [
+        Foo {},
+      ],
+    ]
+  `)
+})
+
 test('timeline', async () => {
   const fn = jest.fn()
 

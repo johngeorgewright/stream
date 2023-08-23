@@ -194,3 +194,37 @@ test('timing errors', async () => {
     )
   ).rejects.toThrow('Expected 20ms timer to have finished')
 })
+
+test('instances', async () => {
+  const fn = jest.fn()
+
+  await fromTimeline(`
+    --<Date>--<Foo>--<Bar>--|
+  `).pipeTo(
+    expectTimeline(
+      `
+    --<Date>--<Foo>--<Bar>--|
+      `,
+      fn
+    )
+  )
+
+  expect(fn.mock.calls).toHaveLength(0)
+
+  await new ReadableStream({
+    start(controller) {
+      controller.enqueue(new Date())
+      controller.enqueue(new Date())
+      controller.close()
+    },
+  }).pipeTo(
+    expectTimeline(
+      `
+    --<Date>--<Date>--
+      `,
+      fn
+    )
+  )
+
+  expect(fn.mock.calls).toHaveLength(0)
+})

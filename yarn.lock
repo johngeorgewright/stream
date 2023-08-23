@@ -1144,7 +1144,7 @@ __metadata:
   resolution: "@johngw/stream-test@workspace:packages/stream-test"
   dependencies:
     "@johngw/stream-common": "workspace:*"
-    "@johngw/timeline": 1.0.6
+    "@johngw/timeline": 1.1.0
     "@semantic-release/commit-analyzer": 9.0.2
     "@semantic-release/exec": 6.0.3
     "@semantic-release/git": 10.0.1
@@ -1210,13 +1210,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@johngw/timeline@npm:1.0.6":
-  version: 1.0.6
-  resolution: "@johngw/timeline@npm:1.0.6"
+"@johngw/timeline@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@johngw/timeline@npm:1.1.0"
   dependencies:
     js-yaml: 4.1.0
-    tslib: 2.5.3
-  checksum: 1b04395ee0e28da3c9e6b0f784bd6b0c5ef973926f75fabc512ca7636210ad1df54a013ce2aa8f7592ddea77db0d5e711fb667300c5316a316f52b77fa522717
+    tslib: 2.6.2
+  checksum: 1585c2c6bc83dd1b4b07f084eb902e8cc993c1e84c30876a851ff5e5352d9de3633acdcd422fd447820124713f923d810d53be7fc4e5695feb3377b61b27c712
   languageName: node
   linkType: hard
 
@@ -10116,10 +10116,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.5.3":
-  version: 2.5.3
-  resolution: "tslib@npm:2.5.3"
-  checksum: 88902b309afaf83259131c1e13da1dceb0ad1682a213143a1346a649143924d78cf3760c448b84d796938fd76127183894f8d85cbb3bf9c4fddbfcc140c0003c
+"tslib@npm:2.6.2":
+  version: 2.6.2
+  resolution: "tslib@npm:2.6.2"
+  checksum: 329ea56123005922f39642318e3d1f0f8265d1e7fcb92c633e0809521da75eeaca28d2cf96d7248229deb40e5c19adf408259f4b9640afd20d13aecc1430f3ad
   languageName: node
   linkType: hard
 

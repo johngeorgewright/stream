@@ -10,6 +10,7 @@ import {
   TimelineError,
   TimelineItemError,
 } from '@johngw/timeline/TimelineItemError'
+import { TimelineItemInstance } from '@johngw/timeline/TimelineItemInstance'
 import { TimelineItemNeverReach } from '@johngw/timeline/TimelineItemNeverReach'
 import {
   TimelineItemTimer,
@@ -83,6 +84,15 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
           nextResult = next(controller)
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           return this.write!(chunk, controller)
+        } else if (value instanceof TimelineItemInstance) {
+          if (
+            typeof chunk !== 'object' ||
+            chunk === null ||
+            chunk.constructor.name !== value.get().name
+          )
+            throw new TimelineError(
+              `chunk is not instance of ${value.get().name}`
+            )
         } else if (
           value instanceof TimelineItemDefault ||
           value instanceof TimelineItemBoolean ||
