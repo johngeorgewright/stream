@@ -5,6 +5,7 @@ import { TimelineItemClose } from '@johngw/timeline/TimelineItemClose'
 import { TimelineItemDash } from '@johngw/timeline/TimelineItemDash'
 import { TimelineItemDefault } from '@johngw/timeline/TimelineItemDefault'
 import { TimelineItemError } from '@johngw/timeline/TimelineItemError'
+import { TimelineItemInstance } from '@johngw/timeline/TimelineItemInstance'
 import { TimelineItemNeverReach } from '@johngw/timeline/TimelineItemNeverReach'
 import { TimelineItemNull } from '@johngw/timeline/TimelineItemNull'
 import { TimelineItemTimer } from '@johngw/timeline/TimelineItemTimer'
@@ -67,6 +68,9 @@ export function fromTimeline<T extends ParsedTimelineItemValue>(
           await value.get().promise
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           return this.pull!(controller)
+        } else if (value instanceof TimelineItemInstance) {
+          const Class = new Function(`return class ${value.get().name} {}`)()
+          return controller.enqueue(new Class())
         } else if (
           value instanceof TimelineItemDefault ||
           value instanceof TimelineItemBoolean ||

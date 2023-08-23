@@ -1770,7 +1770,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@johngw/stream-test", "workspace:packages/stream-test"],\
             ["@johngw/stream-common", "workspace:packages/stream-common"],\
-            ["@johngw/timeline", "npm:1.0.6"],\
+            ["@johngw/timeline", "npm:1.1.0"],\
             ["@semantic-release/commit-analyzer", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:9.0.2"],\
             ["@semantic-release/exec", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:6.0.3"],\
             ["@semantic-release/git", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:10.0.1"],\
@@ -1799,12 +1799,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@johngw/timeline", [\
-        ["npm:1.0.6", {\
-          "packageLocation": "./.yarn/cache/@johngw-timeline-npm-1.0.6-991a139889-1b04395ee0.zip/node_modules/@johngw/timeline/",\
+        ["npm:1.1.0", {\
+          "packageLocation": "./.yarn/cache/@johngw-timeline-npm-1.1.0-ff94922d15-1585c2c6bc.zip/node_modules/@johngw/timeline/",\
           "packageDependencies": [\
-            ["@johngw/timeline", "npm:1.0.6"],\
+            ["@johngw/timeline", "npm:1.1.0"],\
             ["js-yaml", "npm:4.1.0"],\
-            ["tslib", "npm:2.5.3"]\
+            ["tslib", "npm:2.6.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12061,10 +12061,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:2.5.3", {\
-          "packageLocation": "./.yarn/cache/tslib-npm-2.5.3-7756051e02-88902b309a.zip/node_modules/tslib/",\
+        ["npm:2.6.2", {\
+          "packageLocation": "./.yarn/cache/tslib-npm-2.6.2-4fc8c068d9-329ea56123.zip/node_modules/tslib/",\
           "packageDependencies": [\
-            ["tslib", "npm:2.5.3"]\
+            ["tslib", "npm:2.6.2"]\
           ],\
           "linkType": "HARD"\
         }]\
