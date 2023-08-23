@@ -33,7 +33,7 @@
     "@types/node": "20.5.3",
     "concurrently": "8.2.1",
     "expect": "29.6.3",
-    "jest": "29.6.2",
+    "jest": "29.6.3",
     "jest-environment-jsdom": "29.6.2",
     "nodemon": "2.0.22",
     "renamer": "4.0.0",
