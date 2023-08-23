@@ -1090,7 +1090,7 @@ __metadata:
     "@semantic-release/release-notes-generator": 10.0.3
     "@types/eslint": 8.44.2
     "@types/jest": 29.5.4
-    "@types/node": 20.5.2
+    "@types/node": 20.5.3
     assert-never: 1.2.1
     concurrently: 8.2.1
     eslint: 8.47.0
@@ -1120,7 +1120,7 @@ __metadata:
     "@semantic-release/github": 8.1.0
     "@semantic-release/release-notes-generator": 10.0.3
     "@types/jest": 29.5.4
-    "@types/node": 20.5.2
+    "@types/node": 20.5.3
     concurrently: 8.2.1
     expect: 29.6.3
     jest: 29.6.2
@@ -1184,7 +1184,7 @@ __metadata:
     "@semantic-release/release-notes-generator": 10.0.3
     "@types/jest": 29.5.4
     "@types/js-yaml": 4.0.5
-    "@types/node": 20.5.2
+    "@types/node": 20.5.3
     assert-never: 1.2.1
     concurrently: 8.2.1
     jest: 29.6.2
@@ -2401,10 +2401,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.5.2":
-  version: 20.5.2
-  resolution: "@types/node@npm:20.5.2"
-  checksum: 46d032bb9a1db687693f6351702572d2f1e12face32caf8182323413918de27d4ac16cc2b15ff6b891651313e602da18edbdd095d16d2b5a26588c2edffca892
+"@types/node@npm:20.5.3":
+  version: 20.5.3
+  resolution: "@types/node@npm:20.5.3"
+  checksum: fe67a0fd7402218bdf91523a2b1c2e41d619f7294b1a471e0a778b8bc7bb3fcf291aed12041bcbe9622d50a3d1295a9adea0e7e19bb9386a246bf66071404721
   languageName: node
   linkType: hard
 
