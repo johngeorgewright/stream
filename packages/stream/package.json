@@ -108,7 +108,7 @@
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "lint-staged": "13.3.0",
-    "nodemon": "2.0.22",
+    "nodemon": "3.0.1",
     "prettier": "3.0.3",
     "renamer": "4.0.0",
     "rimraf": "5.0.1",
