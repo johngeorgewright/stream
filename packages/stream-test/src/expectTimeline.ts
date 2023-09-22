@@ -6,10 +6,7 @@ import {
 } from '@johngw/timeline/Timeline'
 import { TimelineItemDash } from '@johngw/timeline/TimelineItemDash'
 import { TimelineItemClose } from '@johngw/timeline/TimelineItemClose'
-import {
-  TimelineError,
-  TimelineItemError,
-} from '@johngw/timeline/TimelineItemError'
+import { TimelineItemError } from '@johngw/timeline/TimelineItemError'
 import { TimelineItemInstance } from '@johngw/timeline/TimelineItemInstance'
 import { TimelineItemNeverReach } from '@johngw/timeline/TimelineItemNeverReach'
 import {
@@ -47,7 +44,7 @@ import { assertNever } from 'assert-never'
 export function expectTimeline<T extends TimelineItemDefaultValue>(
   timelineString: string,
   testExcpectation: (timelineValue: T, chunk: unknown) => void | Promise<void>,
-  queuingStrategy?: QueuingStrategy<T>
+  queuingStrategy?: QueuingStrategy<T>,
 ) {
   const timeline = new Timeline(timelineString)
   let nextResult: Promise<IteratorResult<ParsedTimelineItem, undefined>>
@@ -60,18 +57,23 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
 
       async close() {
         if (timeline.hasMoreItems())
-          throw new TimelineExpectedMoreValuesError(await timeline.toTimeline())
+          throw new TimelineExpectedMoreValuesError(
+            timeline,
+            await timeline.toTimeline(),
+          )
       },
 
       async write(chunk, controller) {
         const { done, value } = await nextResult
 
         if (done) {
-          return controller.error(new TimelineReceivedExtraValueError(chunk))
+          return controller.error(
+            new TimelineReceivedExtraValueError(timeline, chunk),
+          )
         } else if (value instanceof TimelineItemDash) {
           //
         } else if (value instanceof TimelineItemClose) {
-          return controller.error(new TimelineEarlyCloseError())
+          return controller.error(new TimelineEarlyCloseError(timeline))
         } else if (
           value instanceof TimelineItemError ||
           value instanceof TimelineItemNeverReach
@@ -80,7 +82,8 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
         } else if (value instanceof TimelineItemTimer) {
           const timer = value.get()
           await timeout()
-          if (!timer.finished) controller.error(new TimelineTimerError(timer))
+          if (!timer.finished)
+            controller.error(new TimelineTimerError(timeline, timer))
           nextResult = next(controller)
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           return this.write!(chunk, controller)
@@ -90,8 +93,11 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
             chunk === null ||
             chunk.constructor.name !== value.get().name
           )
-            throw new TimelineError(
-              `chunk is not instance of ${value.get().name}`
+            controller.error(
+              new TimelineError(
+                timeline,
+                `chunk is not instance of ${value.get().name}`,
+              ),
             )
         } else if (
           value instanceof TimelineItemDefault ||
@@ -106,11 +112,11 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
         nextResult = next(controller)
       },
     },
-    queuingStrategy
+    queuingStrategy,
   )
 
   async function next(
-    controller: WritableStreamDefaultController
+    controller: WritableStreamDefaultController,
   ): Promise<IteratorResult<ParsedTimelineItem>> {
     return timeline.next().then((result) => {
       if (result.value instanceof TimelineItemError)
@@ -121,36 +127,47 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
   }
 }
 
+class TimelineError extends Error {
+  constructor(timeline: Timeline, message: string) {
+    super(`${message}
+
+${timeline.displayTimelinePosition()}
+`)
+  }
+}
+
 class TimelineExpectedMoreValuesError extends TimelineError {
-  constructor(timeline: string) {
-    super(`There are more expectations left.\n${timeline}`)
+  constructor(timeline: Timeline, rest: string) {
+    super(timeline, `There are more expectations left.\n${rest}`)
   }
 }
 
 class TimelineReceivedExtraValueError extends TimelineError {
-  constructor(chunk: ParsedTimelineItemValue) {
+  constructor(timeline: Timeline, chunk: ParsedTimelineItemValue) {
     super(
+      timeline,
       `Received a value after the expected timeline:\n${JSON.stringify(
         chunk,
         null,
-        2
-      )}`
+        2,
+      )}`,
     )
   }
 }
 
 class TimelineEarlyCloseError extends TimelineError {
-  constructor() {
-    super('The writer received a signal to close the stream')
+  constructor(timeline: Timeline) {
+    super(timeline, 'The writer received a signal to close the stream')
   }
 }
 
 class TimelineTimerError extends TimelineError {
-  constructor(timer: TimelineTimer) {
+  constructor(timeline: Timeline, timer: TimelineTimer) {
     let timeLeft = timer.timeLeft
     if (timeLeft === undefined) timeLeft = timer.ms
     super(
-      `Expected ${timer.ms}ms timer to have finished. There is ${timeLeft}ms left.`
+      timeline,
+      `Expected ${timer.ms}ms timer to have finished. There is ${timeLeft}ms left.`,
     )
   }
 }
