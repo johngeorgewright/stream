@@ -1601,7 +1601,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/rimraf", "npm:4.0.5"],\
             ["@types/yeoman-generator", "npm:5.2.11"],\
             ["change-case", "npm:4.1.2"],\
-            ["nodemon", "npm:2.0.22"],\
+            ["nodemon", "npm:3.0.1"],\
             ["prettier", "npm:3.0.3"],\
             ["renamer", "npm:4.0.0"],\
             ["rimraf", "npm:5.0.1"],\
@@ -1640,7 +1640,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
             ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
             ["lint-staged", "npm:13.3.0"],\
-            ["nodemon", "npm:2.0.22"],\
+            ["nodemon", "npm:3.0.1"],\
             ["prettier", "npm:3.0.3"],\
             ["renamer", "npm:4.0.0"],\
             ["rimraf", "npm:5.0.1"],\
@@ -1673,7 +1673,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.49.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
             ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
-            ["nodemon", "npm:2.0.22"],\
+            ["nodemon", "npm:3.0.1"],\
             ["renamer", "npm:4.0.0"],\
             ["rimraf", "npm:5.0.1"],\
             ["semantic-release", "npm:19.0.5"],\
@@ -1706,7 +1706,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["expect", "npm:29.7.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
             ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
-            ["nodemon", "npm:2.0.22"],\
+            ["nodemon", "npm:3.0.1"],\
             ["renamer", "npm:4.0.0"],\
             ["rimraf", "npm:5.0.1"],\
             ["semantic-release", "npm:19.0.5"],\
@@ -1739,7 +1739,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["expect", "npm:29.7.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
             ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
-            ["nodemon", "npm:2.0.22"],\
+            ["nodemon", "npm:3.0.1"],\
             ["renamer", "npm:4.0.0"],\
             ["rimraf", "npm:5.0.1"],\
             ["semantic-release", "npm:19.0.5"],\
@@ -1804,7 +1804,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["concurrently", "npm:8.2.1"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
             ["js-yaml", "npm:4.1.0"],\
-            ["nodemon", "npm:2.0.22"],\
+            ["nodemon", "npm:3.0.1"],\
             ["renamer", "npm:4.0.0"],\
             ["rimraf", "npm:5.0.1"],\
             ["semantic-release", "npm:19.0.5"],\
@@ -5159,10 +5159,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:2e71ccda0bb8e9b150eba16d9555040ae3f5a03be41bbaba1c15a7310399806e2c8e36c9e19d1b8015c6bb7294dccf844594ece9e99a12b6d5722662eca0b9b2#npm:3.2.7", {\
-          "packageLocation": "./.yarn/__virtual__/debug-virtual-40e471c348/0/cache/debug-npm-3.2.7-754e818c7a-b3d8c59407.zip/node_modules/debug/",\
+        ["virtual:07d6d759b1359dbe6312f6d0dbe0e579a03f96a7488074a1978eb0a39cddda092115963230672b3a644e0eb5bf2e6bb872260fd7461deb0a18969606250d726f#npm:3.2.7", {\
+          "packageLocation": "./.yarn/__virtual__/debug-virtual-397285b962/0/cache/debug-npm-3.2.7-754e818c7a-b3d8c59407.zip/node_modules/debug/",\
           "packageDependencies": [\
-            ["debug", "virtual:2e71ccda0bb8e9b150eba16d9555040ae3f5a03be41bbaba1c15a7310399806e2c8e36c9e19d1b8015c6bb7294dccf844594ece9e99a12b6d5722662eca0b9b2#npm:3.2.7"],\
+            ["debug", "virtual:07d6d759b1359dbe6312f6d0dbe0e579a03f96a7488074a1978eb0a39cddda092115963230672b3a644e0eb5bf2e6bb872260fd7461deb0a18969606250d726f#npm:3.2.7"],\
             ["@types/supports-color", null],\
             ["ms", "npm:2.1.3"],\
             ["supports-color", "npm:5.5.0"]\
@@ -9249,17 +9249,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["nodemon", [\
-        ["npm:2.0.22", {\
-          "packageLocation": "./.yarn/unplugged/nodemon-npm-2.0.22-2e71ccda0b/node_modules/nodemon/",\
+        ["npm:3.0.1", {\
+          "packageLocation": "./.yarn/unplugged/nodemon-npm-3.0.1-07d6d759b1/node_modules/nodemon/",\
           "packageDependencies": [\
-            ["nodemon", "npm:2.0.22"],\
+            ["nodemon", "npm:3.0.1"],\
             ["chokidar", "npm:3.5.3"],\
-            ["debug", "virtual:2e71ccda0bb8e9b150eba16d9555040ae3f5a03be41bbaba1c15a7310399806e2c8e36c9e19d1b8015c6bb7294dccf844594ece9e99a12b6d5722662eca0b9b2#npm:3.2.7"],\
+            ["debug", "virtual:07d6d759b1359dbe6312f6d0dbe0e579a03f96a7488074a1978eb0a39cddda092115963230672b3a644e0eb5bf2e6bb872260fd7461deb0a18969606250d726f#npm:3.2.7"],\
             ["ignore-by-default", "npm:1.0.1"],\
             ["minimatch", "npm:3.1.2"],\
             ["pstree.remy", "npm:1.1.8"],\
-            ["semver", "npm:5.7.1"],\
-            ["simple-update-notifier", "npm:1.1.0"],\
+            ["semver", "npm:7.5.3"],\
+            ["simple-update-notifier", "npm:2.0.0"],\
             ["supports-color", "npm:5.5.0"],\
             ["touch", "npm:3.1.0"],\
             ["undefsafe", "npm:2.0.5"]\
@@ -11017,13 +11017,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:7.0.0", {\
-          "packageLocation": "./.yarn/cache/semver-npm-7.0.0-218e8c00ca-272c11bf8d.zip/node_modules/semver/",\
-          "packageDependencies": [\
-            ["semver", "npm:7.0.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:7.3.8", {\
           "packageLocation": "./.yarn/cache/semver-npm-7.3.8-25a996cb4f-ba9c7cbbf2.zip/node_modules/semver/",\
           "packageDependencies": [\
@@ -11199,11 +11192,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["simple-update-notifier", [\
-        ["npm:1.1.0", {\
-          "packageLocation": "./.yarn/cache/simple-update-notifier-npm-1.1.0-92878518a3-1012e9b6c5.zip/node_modules/simple-update-notifier/",\
+        ["npm:2.0.0", {\
+          "packageLocation": "./.yarn/cache/simple-update-notifier-npm-2.0.0-4d6e5dba61-9ba00d38ce.zip/node_modules/simple-update-notifier/",\
           "packageDependencies": [\
-            ["simple-update-notifier", "npm:1.1.0"],\
-            ["semver", "npm:7.0.0"]\
+            ["simple-update-notifier", "npm:2.0.0"],\
+            ["semver", "npm:7.5.3"]\
           ],\
           "linkType": "HARD"\
         }]\
