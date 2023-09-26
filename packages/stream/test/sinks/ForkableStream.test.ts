@@ -1,9 +1,9 @@
 import { ForkableStream } from '@johngw/stream/sinks/ForkableStream'
-import { fromCollection } from '@johngw/stream/sources/fromCollection'
 import { write } from '@johngw/stream/sinks/write'
 import { interval } from '@johngw/stream/sources/interval'
 import { tap } from '@johngw/stream/transformers/tap'
 import { timeout } from '@johngw/stream-common'
+import { expectTimeline, fromTimeline } from '@johngw/stream-jest'
 
 let forkable: ForkableStream<number>
 let fn: jest.Mock<void, [number]>
@@ -12,30 +12,49 @@ let readable: ReadableStream<number>
 beforeEach(() => {
   forkable = new ForkableStream()
   fn = jest.fn()
-  readable = fromCollection([1, 2, 3, 4, 5])
+  readable = fromTimeline(`
+    --1--2--3--4--5--|
+  `)
 })
 
 test('fork before piping', async () => {
-  const promise = forkable.fork().pipeTo(write(fn))
+  const promise = forkable.fork().pipeTo(
+    expectTimeline(`
+    --1--2--3--4--5--
+    `)
+  )
   readable.pipeTo(forkable)
   await promise
-  expect(fn).toHaveBeenCalledTimes(5)
 })
 
 test('fork after piping', async () => {
   readable.pipeTo(forkable)
-  await forkable.fork().pipeTo(write(fn))
-  expect(fn).toHaveBeenCalledTimes(5)
+  await forkable.fork().pipeTo(
+    expectTimeline(`
+    --1--2--3--4--5--
+    `)
+  )
 })
 
 test('multiple subscribers', async () => {
   readable.pipeTo(forkable)
   await Promise.all([
-    forkable.fork().pipeTo(write(fn)),
-    forkable.fork().pipeTo(write(fn)),
-    forkable.fork().pipeTo(write(fn)),
+    forkable.fork().pipeTo(
+      expectTimeline(`
+      --1--2--3--4--5--
+      `)
+    ),
+    forkable.fork().pipeTo(
+      expectTimeline(`
+      --1--2--3--4--5--
+      `)
+    ),
+    forkable.fork().pipeTo(
+      expectTimeline(`
+      --1--2--3--4--5--
+      `)
+    ),
   ])
-  expect(fn).toHaveBeenCalledTimes(15)
 })
 
 test('finished property', async () => {
