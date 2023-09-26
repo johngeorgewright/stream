@@ -46,7 +46,7 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
   testExcpectation: (timelineValue: T, chunk: unknown) => void | Promise<void>,
   queuingStrategy?: QueuingStrategy<T>,
 ) {
-  const timeline = new Timeline(timelineString)
+  const timeline: Timeline = Timeline.create(timelineString)
   let nextResult: Promise<IteratorResult<ParsedTimelineItem, undefined>>
 
   return new WritableStream<T>(
@@ -56,7 +56,7 @@ export function expectTimeline<T extends TimelineItemDefaultValue>(
       },
 
       async close() {
-        if (timeline.hasMoreItems())
+        if (timeline.hasUnfinishedItems())
           throw new TimelineExpectedMoreValuesError(
             timeline,
             await timeline.toTimeline(),

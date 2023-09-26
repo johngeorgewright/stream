@@ -1144,7 +1144,7 @@ __metadata:
   resolution: "@johngw/stream-test@workspace:packages/stream-test"
   dependencies:
     "@johngw/stream-common": "workspace:*"
-    "@johngw/timeline": 1.2.2
+    "@johngw/timeline": 2.1.1
     "@semantic-release/commit-analyzer": 9.0.2
     "@semantic-release/exec": 6.0.3
     "@semantic-release/git": 10.0.1
@@ -1210,13 +1210,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@johngw/timeline@npm:1.2.2":
-  version: 1.2.2
-  resolution: "@johngw/timeline@npm:1.2.2"
+"@johngw/timeline@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@johngw/timeline@npm:2.1.1"
   dependencies:
     js-yaml: 4.1.0
     tslib: 2.6.2
-  checksum: 0fb02d8c8d3cffe110075d8deff7ddb47d98cf9f6b63481d10ac893363b62c7a9bcc32e96e36b38d2f9bc1bca35883fbf26814926270289f30d09f7aa4982220
+  checksum: d05b2ad92b88150483746416d2580d75f324820b492c0938eb2f19170447fca9f6ac51e287d4909ca7adc1b1610e3e08d29a6919066223acd016730937ef1833
   languageName: node
   linkType: hard
 
