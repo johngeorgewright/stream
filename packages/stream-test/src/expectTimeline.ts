@@ -13,10 +13,7 @@ import {
   TimelineItemTimer,
   TimelineTimer,
 } from '@johngw/timeline/TimelineItemTimer'
-import {
-  TimelineItemDefault,
-  TimelineItemDefaultValue,
-} from '@johngw/timeline/TimelineItemDefault'
+import { TimelineItemDefault } from '@johngw/timeline/TimelineItemDefault'
 import { TimelineItemBoolean } from '@johngw/timeline/TimelineItemBoolean'
 import { TimelineItemNull } from '@johngw/timeline/TimelineItemNull'
 import { assertNever } from 'assert-never'
@@ -41,12 +38,12 @@ import { assertNever } from 'assert-never'
  *   ))
  * ```
  */
-export function expectTimeline<T extends TimelineItemDefaultValue>(
+export function expectTimeline<T extends ParsedTimelineItemValue>(
   timelineString: string,
   testExcpectation: (timelineValue: T, chunk: unknown) => void | Promise<void>,
   queuingStrategy?: QueuingStrategy<T>,
 ) {
-  const timeline: Timeline = Timeline.create(timelineString)
+  const timeline = Timeline.create(timelineString)
   let nextResult: Promise<IteratorResult<ParsedTimelineItem, undefined>>
 
   return new WritableStream<T>(

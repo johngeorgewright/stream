@@ -1,34 +1,34 @@
-import { expectTimeline, TimelineItemDefaultValue } from '@johngw/stream-test'
+import { expectTimeline, ParsedTimelineItemValue } from '@johngw/stream-test'
 import { expect, JestAssertionError, MatcherContext } from 'expect'
 
 export { fromTimeline } from '@johngw/stream-test'
 
 expect.extend({
-  toMatchTimeline: function toMatchTimeline<T extends TimelineItemDefaultValue>(
+  toMatchTimeline: function toMatchTimeline<T extends ParsedTimelineItemValue>(
     this: MatcherContext,
     stream: ReadableStream<T>,
     timeline: string,
-    streamPipeOptions?: StreamPipeOptions
+    streamPipeOptions?: StreamPipeOptions,
   ) {
     return stream
       .pipeTo(
         expectTimeline(timeline, (timelineValue, chunk) => {
           expect(chunk).toStrictEqual(timelineValue)
         }),
-        streamPipeOptions
+        streamPipeOptions,
       )
       .then(
         () => ({
           message: () =>
             `expect ${this.utils.printExpected(
-              stream
+              stream,
             )} to match timeline ${timeline}`,
           pass: true,
         }),
         (error: JestAssertionError) => ({
           message: () => error.matcherResult?.message || error.message,
           pass: error.matcherResult?.pass || false,
-        })
+        }),
       )
   },
 })
@@ -39,7 +39,7 @@ declare global {
     interface Matchers<R> {
       toMatchTimeline(
         timeline: string,
-        streamPipeOptions?: StreamPipeOptions
+        streamPipeOptions?: StreamPipeOptions,
       ): Promise<R>
     }
   }
