@@ -16,8 +16,8 @@ test('expectTimeline', async () => {
       `
       --1-a-2-b-3-c-4-d-5-e-
       `,
-      fn,
-    ),
+      fn
+    )
   )
 
   expect(fn.mock.calls).toMatchInlineSnapshot(`
@@ -25,42 +25,282 @@ test('expectTimeline', async () => {
       [
         1,
         1,
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+        ],
       ],
       [
         "a",
         "a",
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+        ],
       ],
       [
         2,
         2,
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+        ],
       ],
       [
         "b",
         "b",
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+        ],
       ],
       [
         3,
         3,
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+        ],
       ],
       [
         "c",
         "c",
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+        ],
       ],
       [
         4,
         4,
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+        ],
       ],
       [
         "d",
         "d",
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+        ],
       ],
       [
         5,
         5,
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+        ],
       ],
       [
         "e",
         "e",
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+        ],
       ],
     ]
   `)
@@ -76,8 +316,8 @@ test('objects and arrays', async () => {
       `
       --{foo:[rab]}--
       `,
-      fn,
-    ),
+      fn
+    )
   )
 
   expect(fn.mock.calls).toMatchInlineSnapshot(`
@@ -93,6 +333,13 @@ test('objects and arrays', async () => {
             "bar",
           ],
         },
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDash {},
+        ],
       ],
     ]
   `)
@@ -109,9 +356,9 @@ test('not enough chunks', async () => {
         `
       --1--2--{foo: bar}--
         `,
-        fn,
-      ),
-    ),
+        fn
+      )
+    )
   ).rejects.toThrow(`There are more expectations left.
 --{foo: bar}--`)
 })
@@ -127,9 +374,9 @@ test('not enough of a timeline', async () => {
         `
     --1--
         `,
-        fn,
-      ),
-    ),
+        fn
+      )
+    )
   ).rejects.toThrow('Received a value after the expected timeline:\n2')
 })
 
@@ -144,9 +391,9 @@ test('errors in the timeline will error in the stream', async () => {
         `
     --E--
   `,
-        fn,
-      ),
-    ),
+        fn
+      )
+    )
   ).rejects.toThrow()
 })
 
@@ -160,8 +407,8 @@ test('timing success', async () => {
       `
     --1--T10--2--
   `,
-      fn,
-    ),
+      fn
+    )
   )
 
   expect(fn.mock.calls).toMatchInlineSnapshot(`
@@ -169,10 +416,36 @@ test('timing success', async () => {
       [
         1,
         1,
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemTimer {},
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDash {},
+        ],
       ],
       [
         2,
         2,
+        [
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemTimer {},
+          TimelineItemDash {},
+          TimelineItemDash {},
+          TimelineItemDefault {},
+          TimelineItemDash {},
+          TimelineItemDash {},
+        ],
       ],
     ]
   `)
@@ -189,15 +462,15 @@ test('timing errors', async () => {
         `
     --1--T20--2--
         `,
-        fn,
-      ),
-    ),
+        fn
+      )
+    )
   ).rejects.toThrow(
     new RegExp(`Expected 20ms timer to have finished. There is \\d+ms left.
 
 --1--T20--2--
      \\^
-`),
+`)
   )
 })
 
@@ -211,8 +484,8 @@ test('instances', async () => {
       `
     --<Date>--<Foo>--<Bar>--|
       `,
-      fn,
-    ),
+      fn
+    )
   )
 
   expect(fn.mock.calls).toHaveLength(0)
@@ -228,8 +501,8 @@ test('instances', async () => {
       `
     --<Date>--<Date>--
       `,
-      fn,
-    ),
+      fn
+    )
   )
 
   expect(fn.mock.calls).toHaveLength(0)
