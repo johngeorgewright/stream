@@ -1798,7 +1798,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/github", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:8.1.0"],\
             ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
             ["@types/jest", "npm:29.5.5"],\
-            ["@types/js-yaml", "npm:4.0.6"],\
+            ["@types/js-yaml", "npm:4.0.7"],\
             ["@types/node", "npm:20.6.4"],\
             ["assert-never", "npm:1.2.1"],\
             ["concurrently", "npm:8.2.1"],\
@@ -3102,10 +3102,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/js-yaml", [\
-        ["npm:4.0.6", {\
-          "packageLocation": "./.yarn/cache/@types-js-yaml-npm-4.0.6-2552380aa3-d4439ec2cc.zip/node_modules/@types/js-yaml/",\
+        ["npm:4.0.7", {\
+          "packageLocation": "./.yarn/cache/@types-js-yaml-npm-4.0.7-06f1295a48-e02eca876f.zip/node_modules/@types/js-yaml/",\
           "packageDependencies": [\
-            ["@types/js-yaml", "npm:4.0.6"]\
+            ["@types/js-yaml", "npm:4.0.7"]\
           ],\
           "linkType": "HARD"\
         }]\
