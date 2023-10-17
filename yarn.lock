@@ -692,10 +692,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.49.0":
-  version: 8.49.0
-  resolution: "@eslint/js@npm:8.49.0"
-  checksum: a6601807c8aeeefe866926ad92ed98007c034a735af20ff709009e39ad1337474243d47908500a3bde04e37bfba16bcf1d3452417f962e1345bc8756edd6b830
+"@eslint/js@npm:8.51.0":
+  version: 8.51.0
+  resolution: "@eslint/js@npm:8.51.0"
+  checksum: 0228bf1e1e0414843e56d9ff362a2a72d579c078f93174666f29315690e9e30a8633ad72c923297f7fd7182381b5a476805ff04dac8debe638953eb1ded3ac73
   languageName: node
   linkType: hard
 
@@ -1067,12 +1067,12 @@ __metadata:
     "@semantic-release/git": 10.0.1
     "@semantic-release/github": 8.1.0
     "@semantic-release/release-notes-generator": 10.0.3
-    "@types/eslint": 8.44.2
+    "@types/eslint": 8.44.4
     "@types/jest": 29.5.5
     "@types/node": 20.6.4
     assert-never: 1.2.1
     concurrently: 8.2.1
-    eslint: 8.49.0
+    eslint: 8.51.0
     jest: 29.7.0
     jest-environment-jsdom: 29.7.0
     nodemon: 3.0.1
@@ -1136,7 +1136,7 @@ __metadata:
     "@typescript-eslint/parser": 6.7.3
     concurrently: 8.2.1
     conventional-changelog-conventionalcommits: 7.0.2
-    eslint: 8.49.0
+    eslint: 8.51.0
     husky: 8.0.3
     lint-staged: 13.3.0
     prettier: 2.8.7
@@ -1197,12 +1197,12 @@ __metadata:
     "@semantic-release/git": 10.0.1
     "@semantic-release/github": 8.1.0
     "@semantic-release/release-notes-generator": 10.0.3
-    "@types/eslint": 8.44.2
+    "@types/eslint": 8.44.4
     "@types/jest": 29.5.5
     assert-never: 1.2.1
     concurrently: 8.2.1
     conventional-changelog-conventionalcommits: 7.0.2
-    eslint: 8.49.0
+    eslint: 8.51.0
     husky: 8.0.3
     jest: 29.7.0
     jest-environment-jsdom: 29.7.0
@@ -2201,13 +2201,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:8.44.2":
-  version: 8.44.2
-  resolution: "@types/eslint@npm:8.44.2"
+"@types/eslint@npm:8.44.4":
+  version: 8.44.4
+  resolution: "@types/eslint@npm:8.44.4"
   dependencies:
     "@types/estree": "*"
     "@types/json-schema": "*"
-  checksum: 25b3ef61bae96350026593c9914c8a61ee02fde48ab8d568a73ee45032f13c0028c62e47a5ff78715af488dfe8e8bba913f7d30f859f60c7f9e639d328e80482
+  checksum: 15bafdaba800e2995f38d3a2a929d8e9303035315e8d3535523a21cd719b6769a45884afa955f0b845ffa545a4150429b0178e2c44feeedf59ebb285eeae9825
   languageName: node
   linkType: hard
 
@@ -4431,14 +4431,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.49.0":
-  version: 8.49.0
-  resolution: "eslint@npm:8.49.0"
+"eslint@npm:8.51.0":
+  version: 8.51.0
+  resolution: "eslint@npm:8.51.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.2.0
     "@eslint-community/regexpp": ^4.6.1
     "@eslint/eslintrc": ^2.1.2
-    "@eslint/js": 8.49.0
+    "@eslint/js": 8.51.0
     "@humanwhocodes/config-array": ^0.11.11
     "@humanwhocodes/module-importer": ^1.0.1
     "@nodelib/fs.walk": ^1.2.8
@@ -4474,7 +4474,7 @@ __metadata:
     text-table: ^0.2.0
   bin:
     eslint: bin/eslint.js
-  checksum: 4dfe257e1e42da2f9da872b05aaaf99b0f5aa022c1a91eee8f2af1ab72651b596366320c575ccd4e0469f7b4c97aff5bb85ae3323ebd6a293c3faef4028b0d81
+  checksum: 214fa5d1fcb67af1b8992ce9584ccd85e1aa7a482f8b8ea5b96edc28fa838a18a3b69456db45fc1ed3ef95f1e9efa9714f737292dc681e572d471d02fda9649c
   languageName: node
   linkType: hard
 
