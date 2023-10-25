@@ -1667,7 +1667,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
             ["@types/eslint", "npm:8.44.6"],\
             ["@types/jest", "npm:29.5.6"],\
-            ["@types/node", "npm:20.8.6"],\
+            ["@types/node", "npm:20.8.9"],\
             ["assert-never", "npm:1.2.1"],\
             ["concurrently", "npm:8.2.1"],\
             ["eslint", "npm:8.51.0"],\
@@ -1701,7 +1701,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/expect", null],\
             ["@types/jest", "npm:29.5.6"],\
             ["@types/johngw__stream-test", null],\
-            ["@types/node", "npm:20.8.6"],\
+            ["@types/node", "npm:20.8.9"],\
             ["concurrently", "npm:8.2.1"],\
             ["expect", "npm:29.7.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -1734,7 +1734,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/github", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:8.1.0"],\
             ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
             ["@types/jest", "npm:29.5.6"],\
-            ["@types/node", "npm:20.8.6"],\
+            ["@types/node", "npm:20.8.9"],\
             ["concurrently", "npm:8.2.1"],\
             ["expect", "npm:29.7.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -1798,8 +1798,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/github", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:8.1.0"],\
             ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
             ["@types/jest", "npm:29.5.6"],\
-            ["@types/js-yaml", "npm:4.0.7"],\
-            ["@types/node", "npm:20.8.6"],\
+            ["@types/js-yaml", "npm:4.0.8"],\
+            ["@types/node", "npm:20.8.9"],\
             ["assert-never", "npm:1.2.1"],\
             ["concurrently", "npm:8.2.1"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -3102,10 +3102,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/js-yaml", [\
-        ["npm:4.0.7", {\
-          "packageLocation": "./.yarn/cache/@types-js-yaml-npm-4.0.7-06f1295a48-e02eca876f.zip/node_modules/@types/js-yaml/",\
+        ["npm:4.0.8", {\
+          "packageLocation": "./.yarn/cache/@types-js-yaml-npm-4.0.8-9956f51f10-a5a77a5a1e.zip/node_modules/@types/js-yaml/",\
           "packageDependencies": [\
-            ["@types/js-yaml", "npm:4.0.7"]\
+            ["@types/js-yaml", "npm:4.0.8"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3213,11 +3213,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:20.8.6", {\
-          "packageLocation": "./.yarn/cache/@types-node-npm-20.8.6-856e50b60a-ccfb7ac482.zip/node_modules/@types/node/",\
+        ["npm:20.8.9", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-20.8.9-9c9903a005-0c05f3502a.zip/node_modules/@types/node/",\
           "packageDependencies": [\
-            ["@types/node", "npm:20.8.6"],\
-            ["undici-types", "npm:5.25.3"]\
+            ["@types/node", "npm:20.8.9"],\
+            ["undici-types", "npm:5.26.5"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12052,7 +12052,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node12", "npm:1.0.11"],\
             ["@tsconfig/node14", "npm:1.0.3"],\
             ["@tsconfig/node16", "npm:1.0.3"],\
-            ["@types/node", "npm:20.8.6"],\
+            ["@types/node", "npm:20.8.9"],\
             ["@types/swc__core", null],\
             ["@types/swc__wasm", null],\
             ["@types/typescript", null],\
@@ -12327,10 +12327,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["undici-types", [\
-        ["npm:5.25.3", {\
-          "packageLocation": "./.yarn/cache/undici-types-npm-5.25.3-2ac9eafc9e-ec9d2cc365.zip/node_modules/undici-types/",\
+        ["npm:5.26.5", {\
+          "packageLocation": "./.yarn/cache/undici-types-npm-5.26.5-de4f7c7bb9-3192ef6f3f.zip/node_modules/undici-types/",\
           "packageDependencies": [\
-            ["undici-types", "npm:5.25.3"]\
+            ["undici-types", "npm:5.26.5"]\
           ],\
           "linkType": "HARD"\
         }]\
