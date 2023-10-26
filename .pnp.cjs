@@ -64,7 +64,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.5.6"],\
             ["@typescript-eslint/eslint-plugin", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:6.8.0"],\
             ["@typescript-eslint/parser", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:6.8.0"],\
-            ["concurrently", "npm:8.2.1"],\
+            ["concurrently", "npm:8.2.2"],\
             ["conventional-changelog-conventionalcommits", "npm:7.0.2"],\
             ["eslint", "npm:8.51.0"],\
             ["husky", "npm:8.0.3"],\
@@ -1633,7 +1633,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/eslint", "npm:8.44.6"],\
             ["@types/jest", "npm:29.5.6"],\
             ["assert-never", "npm:1.2.1"],\
-            ["concurrently", "npm:8.2.1"],\
+            ["concurrently", "npm:8.2.2"],\
             ["conventional-changelog-conventionalcommits", "npm:7.0.2"],\
             ["eslint", "npm:8.51.0"],\
             ["husky", "npm:8.0.3"],\
@@ -1669,7 +1669,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.5.6"],\
             ["@types/node", "npm:20.8.9"],\
             ["assert-never", "npm:1.2.1"],\
-            ["concurrently", "npm:8.2.1"],\
+            ["concurrently", "npm:8.2.2"],\
             ["eslint", "npm:8.51.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
             ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -1702,7 +1702,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.5.6"],\
             ["@types/johngw__stream-test", null],\
             ["@types/node", "npm:20.8.9"],\
-            ["concurrently", "npm:8.2.1"],\
+            ["concurrently", "npm:8.2.2"],\
             ["expect", "npm:29.7.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
             ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -1735,7 +1735,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
             ["@types/jest", "npm:29.5.6"],\
             ["@types/node", "npm:20.8.9"],\
-            ["concurrently", "npm:8.2.1"],\
+            ["concurrently", "npm:8.2.2"],\
             ["expect", "npm:29.7.0"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
             ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -1768,7 +1768,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.5.6"],\
             ["@typescript-eslint/eslint-plugin", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:6.8.0"],\
             ["@typescript-eslint/parser", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:6.8.0"],\
-            ["concurrently", "npm:8.2.1"],\
+            ["concurrently", "npm:8.2.2"],\
             ["conventional-changelog-conventionalcommits", "npm:7.0.2"],\
             ["eslint", "npm:8.51.0"],\
             ["husky", "npm:8.0.3"],\
@@ -1801,7 +1801,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/js-yaml", "npm:4.0.8"],\
             ["@types/node", "npm:20.8.9"],\
             ["assert-never", "npm:1.2.1"],\
-            ["concurrently", "npm:8.2.1"],\
+            ["concurrently", "npm:8.2.2"],\
             ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
             ["js-yaml", "npm:4.1.0"],\
             ["nodemon", "npm:3.0.1"],\
@@ -4803,10 +4803,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["concurrently", [\
-        ["npm:8.2.1", {\
-          "packageLocation": "./.yarn/cache/concurrently-npm-8.2.1-2922c29e4d-216cb16d5b.zip/node_modules/concurrently/",\
+        ["npm:8.2.2", {\
+          "packageLocation": "./.yarn/cache/concurrently-npm-8.2.2-8ae42f052b-8ac774df06.zip/node_modules/concurrently/",\
           "packageDependencies": [\
-            ["concurrently", "npm:8.2.1"],\
+            ["concurrently", "npm:8.2.2"],\
             ["chalk", "npm:4.1.2"],\
             ["date-fns", "npm:2.30.0"],\
             ["lodash", "npm:4.17.21"],\
