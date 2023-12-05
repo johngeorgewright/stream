@@ -1,5 +1,6 @@
 import { write } from '@johngw/stream/sinks/write'
 import { fromCollection } from '@johngw/stream/sources/fromCollection'
+import '@johngw/stream-jest'
 
 test('iterables', async () => {
   const fn = jest.fn()
@@ -144,4 +145,10 @@ test('unknown iterable type', async () => {
       () => 'mung'
     )
   ).toThrow()
+})
+
+test('object entires', async () => {
+  expect(fromCollection({ one: 1, two: 2, three: 3 })).toMatchTimeline(`
+    -[one,1]-[two,2]-[three,3]-|
+  `)
 })

@@ -26,34 +26,30 @@ export class ForkableSink<T> implements UnderlyingSink<T>, Forkable<T> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   #error?: any
   #finished = false
-  #controllers = new WeakMap<Controllable<T>, ReadableStream<T>>()
-  #controllerSet = new Set<Controllable<T>>()
+  #controllers = new Map<Controllable<T>, ReadableStream<T>>()
 
   abort(reason: unknown) {
-    this.#forEachController((controller) => controller.error(reason))
-    this.#controllerSet.clear()
-    this.#controllers = new WeakMap()
+    for (const [controller] of this.#controllers) controller.error(reason)
+    this.#controllers.clear()
     this.#error = reason
     this.#finished = true
   }
 
   close() {
-    this.#forEachController((controller) => {
+    for (const [controller] of this.#controllers) {
       try {
         controller.close()
       } catch (error) {
         // potentially already closed
       }
-    })
-    this.#controllerSet.clear()
-    this.#controllers = new WeakMap()
+    }
+    this.#controllers.clear()
     this.#finished = true
   }
 
   write(chunk: T) {
-    this.#forEachController(
-      (controller) => controller.desiredSize && controller.enqueue(chunk)
-    )
+    for (const [controller] of this.#controllers)
+      controller.desiredSize && controller.enqueue(chunk)
   }
 
   get finished() {
@@ -69,15 +65,6 @@ export class ForkableSink<T> implements UnderlyingSink<T>, Forkable<T> {
     )
   }
 
-  #forEachController(
-    fn: (controller: Controllable<T>, stream: ReadableStream<T>) => void
-  ) {
-    for (const controller of this.#controllerSet) {
-      const stream = this.#controllers.get(controller)
-      if (stream) fn(controller, stream)
-    }
-  }
-
   protected _addController(
     underlyingSource?: UnderlyingDefaultSource<T>,
     queuingStrategy?: QueuingStrategy<T>
@@ -90,16 +77,12 @@ export class ForkableSink<T> implements UnderlyingSink<T>, Forkable<T> {
         {
           cancel: () => {
             this.#controllers.delete(controller)
-            this.#controllerSet.delete(controller)
           },
         },
       ]),
       queuingStrategy
     )
-    if (!this.#finished) {
-      this.#controllerSet.add(controller)
-      this.#controllers.set(controller, stream)
-    }
+    if (!this.#finished) this.#controllers.set(controller, stream)
     return [controller, stream] as const
   }
 
