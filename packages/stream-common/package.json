@@ -61,13 +61,13 @@
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "8.1.0",
     "@semantic-release/release-notes-generator": "10.0.3",
-    "@types/eslint": "8.44.6",
-    "@types/jest": "29.5.6",
-    "@types/node": "20.8.9",
-    "concurrently": "8.2.1",
+    "@types/eslint": "8.44.8",
+    "@types/jest": "29.5.10",
+    "@types/node": "20.10.3",
+    "concurrently": "8.2.2",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
-    "nodemon": "3.0.1",
+    "nodemon": "3.0.2",
     "renamer": "4.0.0",
     "rimraf": "5.0.5",
     "semantic-release": "19.0.5",
@@ -78,7 +78,7 @@
   },
   "dependencies": {
     "assert-never": "1.2.1",
-    "eslint": "8.51.0",
+    "eslint": "8.55.0",
     "ts-toolbelt": "9.6.0",
     "tslib": "2.5.0"
   }
