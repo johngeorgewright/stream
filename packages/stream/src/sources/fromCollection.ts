@@ -4,6 +4,7 @@ import {
   isAsyncIterable,
   isIterable,
   isIteratorOrAsyncIterator,
+  isNonNullObject,
 } from '@johngw/stream-common/Object'
 
 /**
@@ -11,12 +12,12 @@ import {
  *
  * @group Sources
  * @example
- * Using an iterable
+ * Using an Iterable
  * ```
  * fromCollection([1, 2, 3, 4])
  * ```
  *
- * Using an Async Iterable
+ * Using an AsyncIterable
  * ```
  * fromCollection((async function* () {
  *   yield 1
@@ -32,6 +33,16 @@ import {
  *   length: 3,
  * })
  * ```
+ *
+ * Streaming object entries
+ * ```
+ * fromCollection({
+ *   one: 1,
+ *   two: 2,
+ *   three: 3,
+ * })
+ * // -[one, 1]-[two, 2]-[threee, 3]-|
+ * ```
  */
 export function fromCollection<T>(
   collection:
@@ -40,6 +51,22 @@ export function fromCollection<T>(
     | AsyncIterator<T>
     | AsyncIterable<T>
     | ArrayLike<T>,
+  queuingStrategy?: QueuingStrategy<T>
+): ReadableStream<T>
+
+export function fromCollection<T extends Record<string | symbol, unknown>>(
+  collection: T,
+  queuingStrategy?: QueuingStrategy<T>
+): ReadableStream<Entries<T>>
+
+export function fromCollection<T>(
+  collection:
+    | Iterator<T>
+    | Iterable<T>
+    | AsyncIterator<T>
+    | AsyncIterable<T>
+    | ArrayLike<T>
+    | Record<string | symbol, unknown>,
   queuingStrategy?: QueuingStrategy<T>
 ) {
   return new ReadableStream(
@@ -51,6 +78,16 @@ export function fromCollection<T>(
       ? new IteratorSource(collection)
       : isArrayLike<T>(collection)
       ? new ArrayLikeSource(collection)
+      : isNonNullObject(collection)
+      ? new IteratorSource(
+          (function* () {
+            for (const key in collection) {
+              if (Object.prototype.hasOwnProperty.call(collection, key)) {
+                yield [key, collection[key]] as T
+              }
+            }
+          })()
+        )
       : assertNever(collection),
     queuingStrategy
   )
@@ -128,3 +165,7 @@ export class ArrayLikeSource<T> implements UnderlyingDefaultSource<T> {
     return this.#i === this.#length
   }
 }
+
+type Entries<T extends Record<string | number | symbol, unknown>> = {
+  [K in keyof T]: [K, T[K]]
+}[keyof T]
