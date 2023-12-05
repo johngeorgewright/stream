@@ -16,7 +16,7 @@ jobs:
         node-version: [16.x, 18.x, 20.x]
     steps:
       - name: Checkout project
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: NVM
         id: nvm
@@ -63,7 +63,7 @@ jobs:
     permissions: write-all
     steps:
       - name: Checkout project
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.PUSH_TOKEN }}
 
