@@ -1663,7 +1663,7 @@ const RAW_RUNTIME_STATE =
           ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
           ["@types/eslint", "npm:8.44.8"],\
           ["@types/jest", "npm:29.5.11"],\
-          ["@types/node", "npm:20.10.3"],\
+          ["@types/node", "npm:20.10.4"],\
           ["assert-never", "npm:1.2.1"],\
           ["concurrently", "npm:8.2.2"],\
           ["eslint", "npm:8.55.0"],\
@@ -1697,7 +1697,7 @@ const RAW_RUNTIME_STATE =
           ["@types/expect", null],\
           ["@types/jest", "npm:29.5.11"],\
           ["@types/johngw__stream-test", null],\
-          ["@types/node", "npm:20.10.3"],\
+          ["@types/node", "npm:20.10.4"],\
           ["concurrently", "npm:8.2.2"],\
           ["expect", "npm:29.7.0"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -1730,7 +1730,7 @@ const RAW_RUNTIME_STATE =
           ["@semantic-release/github", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:8.1.0"],\
           ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
           ["@types/jest", "npm:29.5.11"],\
-          ["@types/node", "npm:20.10.3"],\
+          ["@types/node", "npm:20.10.4"],\
           ["concurrently", "npm:8.2.2"],\
           ["expect", "npm:29.7.0"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -1795,7 +1795,7 @@ const RAW_RUNTIME_STATE =
           ["@semantic-release/release-notes-generator", "virtual:93ff9e54e7e85ba03f8777529e2e31fd687b3208f0bfd29f9526626fccebedcf25fd704ae938492bcd5692d38a16927bd020804d445cde5885dc772e9e1e1ff9#npm:10.0.3"],\
           ["@types/jest", "npm:29.5.11"],\
           ["@types/js-yaml", "npm:4.0.9"],\
-          ["@types/node", "npm:20.10.3"],\
+          ["@types/node", "npm:20.10.4"],\
           ["assert-never", "npm:1.2.1"],\
           ["concurrently", "npm:8.2.2"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -3210,10 +3210,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:20.10.3", {\
-        "packageLocation": "./.yarn/cache/@types-node-npm-20.10.3-d385a9ec0a-7cb506abb0.zip/node_modules/@types/node/",\
+      ["npm:20.10.4", {\
+        "packageLocation": "./.yarn/cache/@types-node-npm-20.10.4-45b062d723-c10c1dd13f.zip/node_modules/@types/node/",\
         "packageDependencies": [\
-          ["@types/node", "npm:20.10.3"],\
+          ["@types/node", "npm:20.10.4"],\
           ["undici-types", "npm:5.26.5"]\
         ],\
         "linkType": "HARD"\
@@ -12108,7 +12108,7 @@ const RAW_RUNTIME_STATE =
           ["@tsconfig/node12", "npm:1.0.11"],\
           ["@tsconfig/node14", "npm:1.0.3"],\
           ["@tsconfig/node16", "npm:1.0.3"],\
-          ["@types/node", "npm:20.10.3"],\
+          ["@types/node", "npm:20.10.4"],\
           ["@types/swc__core", null],\
           ["@types/swc__wasm", null],\
           ["@types/typescript", null],\
