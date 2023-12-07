@@ -24,7 +24,7 @@ jobs:
 
       - name: Use Node.js ${{ matrix.node-version }}
         id: node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -68,7 +68,7 @@ jobs:
           token: ${{ secrets.PUSH_TOKEN }}
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         id: node
         with:
           node-version-file: .nvmrc
