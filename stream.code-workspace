@@ -9,11 +9,15 @@
   "folders": [
     { "name": "✨ @johngw/stream-mono-repo", "path": "." },
     { "name": "🏗 @johngw/scaffold", "path": "packages/scaffold" },
+    { "name": "📖 docs", "path": "docs" },
     { "name": "📦 @johngw/stream", "path": "packages/stream" },
     { "name": "📦 @johngw/stream-common", "path": "packages/stream-common" },
     { "name": "📦 @johngw/stream-jest", "path": "packages/stream-jest" },
+    {
+      "name": "📦 @johngw/stream-assert",
+      "path": "packages/stream-assert"
+    },
     { "name": "📦 @johngw/stream-test", "path": "packages/stream-test" },
-    { "name": "📖 docs", "path": "docs" },
     { "name": "🤖 github", "path": ".github" }
   ],
   "settings": {

@@ -51,7 +51,8 @@
     "ts-node": "10.9.2",
     "typedoc": "0.25.4",
     "typescript": "5.0.4",
-    "web-streams-polyfill": "3.2.1"
+    "web-streams-polyfill": "3.2.1",
+    "yo": "4.3.1"
   },
   "dependencies": {
     "tslib": "2.5.0"
