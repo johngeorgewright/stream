@@ -81,7 +81,7 @@ const RAW_RUNTIME_STATE =
           ]],\
           ["ts-node", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:10.9.2"],\
           ["tslib", "npm:2.5.0"],\
-          ["typedoc", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:0.25.4"],\
+          ["typedoc", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:0.25.6"],\
           ["typescript", "patch:typescript@npm%3A5.0.4#optional!builtin<compat/typescript>::version=5.0.4&hash=b5f058"],\
           ["web-streams-polyfill", "npm:3.2.1"],\
           ["yo", "npm:4.3.1"]\
@@ -1672,7 +1672,7 @@ const RAW_RUNTIME_STATE =
           ["@semantic-release/git", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:10.0.1"],\
           ["@semantic-release/github", "virtual:af2cf72dc39691c71459e458026c5c34e70102662ec3c672a81f04a0a9438b409df99e648748671b2c936443bb341cff406321d9d48103b5d85fdc26705c8a42#npm:9.2.6"],\
           ["@semantic-release/release-notes-generator", "virtual:af2cf72dc39691c71459e458026c5c34e70102662ec3c672a81f04a0a9438b409df99e648748671b2c936443bb341cff406321d9d48103b5d85fdc26705c8a42#npm:12.1.0"],\
-          ["@types/eslint", "npm:8.44.9"],\
+          ["@types/eslint", "npm:8.56.0"],\
           ["@types/jest", "npm:29.5.11"],\
           ["assert-never", "npm:1.2.1"],\
           ["concurrently", "npm:8.2.2"],\
@@ -1745,7 +1745,7 @@ const RAW_RUNTIME_STATE =
           ["@semantic-release/git", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:10.0.1"],\
           ["@semantic-release/github", "virtual:af2cf72dc39691c71459e458026c5c34e70102662ec3c672a81f04a0a9438b409df99e648748671b2c936443bb341cff406321d9d48103b5d85fdc26705c8a42#npm:9.2.6"],\
           ["@semantic-release/release-notes-generator", "virtual:af2cf72dc39691c71459e458026c5c34e70102662ec3c672a81f04a0a9438b409df99e648748671b2c936443bb341cff406321d9d48103b5d85fdc26705c8a42#npm:12.1.0"],\
-          ["@types/eslint", "npm:8.44.9"],\
+          ["@types/eslint", "npm:8.56.0"],\
           ["@types/jest", "npm:29.5.11"],\
           ["@types/node", "npm:20.10.6"],\
           ["assert-never", "npm:1.2.1"],\
@@ -1874,7 +1874,7 @@ const RAW_RUNTIME_STATE =
           ]],\
           ["ts-node", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:10.9.2"],\
           ["tslib", "npm:2.5.0"],\
-          ["typedoc", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:0.25.4"],\
+          ["typedoc", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:0.25.6"],\
           ["typescript", "patch:typescript@npm%3A5.0.4#optional!builtin<compat/typescript>::version=5.0.4&hash=b5f058"],\
           ["web-streams-polyfill", "npm:3.2.1"],\
           ["yo", "npm:4.3.1"]\
@@ -3335,10 +3335,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/eslint", [\
-      ["npm:8.44.9", {\
-        "packageLocation": "./.yarn/cache/@types-eslint-npm-8.44.9-032f805e4c-dd78831339.zip/node_modules/@types/eslint/",\
+      ["npm:8.56.0", {\
+        "packageLocation": "./.yarn/cache/@types-eslint-npm-8.56.0-0c4fdbfa21-0405403788.zip/node_modules/@types/eslint/",\
         "packageDependencies": [\
-          ["@types/eslint", "npm:8.44.9"],\
+          ["@types/eslint", "npm:8.56.0"],\
           ["@types/estree", "npm:1.0.0"],\
           ["@types/json-schema", "npm:7.0.11"]\
         ],\
@@ -14596,10 +14596,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["shiki", [\
-      ["npm:0.14.1", {\
-        "packageLocation": "./.yarn/cache/shiki-npm-0.14.1-f41a21e5be-6256651a5d.zip/node_modules/shiki/",\
+      ["npm:0.14.7", {\
+        "packageLocation": "./.yarn/cache/shiki-npm-0.14.7-a8806632f6-be3f2444c6.zip/node_modules/shiki/",\
         "packageDependencies": [\
-          ["shiki", "npm:0.14.1"],\
+          ["shiki", "npm:0.14.7"],\
           ["ansi-sequence-parser", "npm:1.1.0"],\
           ["jsonc-parser", "npm:3.2.0"],\
           ["vscode-oniguruma", "npm:1.7.0"],\
@@ -16092,22 +16092,22 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["typedoc", [\
-      ["npm:0.25.4", {\
-        "packageLocation": "./.yarn/cache/typedoc-npm-0.25.4-19cf6708e5-638f63d751.zip/node_modules/typedoc/",\
+      ["npm:0.25.6", {\
+        "packageLocation": "./.yarn/cache/typedoc-npm-0.25.6-cdbe1ae961-4d38581528.zip/node_modules/typedoc/",\
         "packageDependencies": [\
-          ["typedoc", "npm:0.25.4"]\
+          ["typedoc", "npm:0.25.6"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:0.25.4", {\
-        "packageLocation": "./.yarn/__virtual__/typedoc-virtual-66138ca5d7/0/cache/typedoc-npm-0.25.4-19cf6708e5-638f63d751.zip/node_modules/typedoc/",\
+      ["virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:0.25.6", {\
+        "packageLocation": "./.yarn/__virtual__/typedoc-virtual-0d83a87629/0/cache/typedoc-npm-0.25.6-cdbe1ae961-4d38581528.zip/node_modules/typedoc/",\
         "packageDependencies": [\
-          ["typedoc", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:0.25.4"],\
+          ["typedoc", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:0.25.6"],\
           ["@types/typescript", null],\
           ["lunr", "npm:2.3.9"],\
           ["marked", "npm:4.3.0"],\
           ["minimatch", "npm:9.0.3"],\
-          ["shiki", "npm:0.14.1"],\
+          ["shiki", "npm:0.14.7"],\
           ["typescript", "patch:typescript@npm%3A5.0.4#optional!builtin<compat/typescript>::version=5.0.4&hash=b5f058"]\
         ],\
         "packagePeers": [\
