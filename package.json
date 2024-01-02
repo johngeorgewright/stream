@@ -50,7 +50,7 @@
     "semantic-release": "22.0.12",
     "semantic-release-monorepo": "npm:semantic-release-monorepo-esm@1.0.12",
     "ts-node": "10.9.2",
-    "typedoc": "0.25.4",
+    "typedoc": "0.25.6",
     "typescript": "5.0.4",
     "web-streams-polyfill": "3.2.1",
     "yo": "4.3.1"
