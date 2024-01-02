@@ -1716,6 +1716,7 @@ const RAW_RUNTIME_STATE =
           ["@types/js-yaml", "npm:4.0.9"],\
           ["@types/node", "npm:20.10.6"],\
           ["concurrently", "npm:8.2.2"],\
+          ["conventional-changelog-conventionalcommits", "npm:7.0.2"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["nodemon", "npm:3.0.2"],\
@@ -1749,6 +1750,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.10.6"],\
           ["assert-never", "npm:1.2.1"],\
           ["concurrently", "npm:8.2.2"],\
+          ["conventional-changelog-conventionalcommits", "npm:7.0.2"],\
           ["eslint", "npm:8.56.0"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -1785,6 +1787,7 @@ const RAW_RUNTIME_STATE =
           ["@types/johngw__stream-test", null],\
           ["@types/node", "npm:20.10.6"],\
           ["concurrently", "npm:8.2.2"],\
+          ["conventional-changelog-conventionalcommits", "npm:7.0.2"],\
           ["expect", "npm:29.7.0"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -1821,6 +1824,7 @@ const RAW_RUNTIME_STATE =
           ["@types/jest", "npm:29.5.11"],\
           ["@types/node", "npm:20.10.6"],\
           ["concurrently", "npm:8.2.2"],\
+          ["conventional-changelog-conventionalcommits", "npm:7.0.2"],\
           ["expect", "npm:29.7.0"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
@@ -1895,6 +1899,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.10.6"],\
           ["assert-never", "npm:1.2.1"],\
           ["concurrently", "npm:8.2.2"],\
+          ["conventional-changelog-conventionalcommits", "npm:7.0.2"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["js-yaml", "npm:4.1.0"],\
           ["nodemon", "npm:3.0.2"],\
