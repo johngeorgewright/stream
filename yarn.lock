@@ -1106,7 +1106,7 @@ __metadata:
     "@types/js-yaml": "npm:4.0.9"
     "@types/node": "npm:20.10.6"
     concurrently: "npm:8.2.2"
-    conventional-changelog-conventionalcommits: "npm:7.0.2"
+    conventional-changelog-conventionalcommits: "npm:6.1.0"
     jest: "npm:29.7.0"
     jest-environment-jsdom: "npm:29.7.0"
     nodemon: "npm:3.0.2"
@@ -1137,7 +1137,7 @@ __metadata:
     "@types/node": "npm:20.10.6"
     assert-never: "npm:1.2.1"
     concurrently: "npm:8.2.2"
-    conventional-changelog-conventionalcommits: "npm:7.0.2"
+    conventional-changelog-conventionalcommits: "npm:6.1.0"
     eslint: "npm:8.56.0"
     jest: "npm:29.7.0"
     jest-environment-jsdom: "npm:29.7.0"
@@ -1167,7 +1167,7 @@ __metadata:
     "@types/jest": "npm:29.5.11"
     "@types/node": "npm:20.10.6"
     concurrently: "npm:8.2.2"
-    conventional-changelog-conventionalcommits: "npm:7.0.2"
+    conventional-changelog-conventionalcommits: "npm:6.1.0"
     expect: "npm:29.7.0"
     jest: "npm:29.7.0"
     jest-environment-jsdom: "npm:29.7.0"
@@ -1203,7 +1203,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:6.14.0"
     "@typescript-eslint/parser": "npm:6.14.0"
     concurrently: "npm:8.2.2"
-    conventional-changelog-conventionalcommits: "npm:7.0.2"
+    conventional-changelog-conventionalcommits: "npm:6.1.0"
     eslint: "npm:8.56.0"
     husky: "npm:8.0.3"
     lint-staged: "npm:15.2.0"
@@ -1235,7 +1235,7 @@ __metadata:
     "@types/node": "npm:20.10.6"
     assert-never: "npm:1.2.1"
     concurrently: "npm:8.2.2"
-    conventional-changelog-conventionalcommits: "npm:7.0.2"
+    conventional-changelog-conventionalcommits: "npm:6.1.0"
     jest: "npm:29.7.0"
     js-yaml: "npm:4.1.0"
     nodemon: "npm:3.0.2"
@@ -1271,7 +1271,7 @@ __metadata:
     "@types/jest": "npm:29.5.11"
     assert-never: "npm:1.2.1"
     concurrently: "npm:8.2.2"
-    conventional-changelog-conventionalcommits: "npm:7.0.2"
+    conventional-changelog-conventionalcommits: "npm:6.1.0"
     eslint: "npm:8.56.0"
     husky: "npm:8.0.3"
     jest: "npm:29.7.0"
@@ -4667,7 +4667,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-conventionalcommits@npm:7.0.2, conventional-changelog-conventionalcommits@npm:^7.0.2":
+"conventional-changelog-conventionalcommits@npm:6.1.0":
+  version: 6.1.0
+  resolution: "conventional-changelog-conventionalcommits@npm:6.1.0"
+  dependencies:
+    compare-func: "npm:^2.0.0"
+  checksum: 7e5caef7d65b381a0b302534058acff83adc7a907094c85379ef138c35f2aa043cf8e7a3bef30f42078dcc4bff0e8bc763b179c007dd732d92856fae0607a4bc
+  languageName: node
+  linkType: hard
+
+"conventional-changelog-conventionalcommits@npm:^7.0.2":
   version: 7.0.2
   resolution: "conventional-changelog-conventionalcommits@npm:7.0.2"
   dependencies:
