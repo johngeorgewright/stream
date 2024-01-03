@@ -10,7 +10,7 @@ module.exports = {
     [
       '@semantic-release/commit-analyzer',
       {
-        preset: require.resolve('conventional-changelog-conventionalcommits'),
+        preset: 'conventionalcommits',
       },
     ],
     '@semantic-release/release-notes-generator',
