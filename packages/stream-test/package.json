@@ -65,7 +65,7 @@
     "assert-never": "1.2.1",
     "js-yaml": "4.1.0",
     "ts-toolbelt": "9.6.0",
-    "tslib": "2.5.0",
+    "tslib": "2.8.1",
     "web-streams-polyfill": "3.2.1"
   }
 }

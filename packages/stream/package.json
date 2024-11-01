@@ -124,7 +124,7 @@
     "@johngw/stream-common": "workspace:*",
     "assert-never": "1.2.1",
     "ts-toolbelt": "9.6.0",
-    "tslib": "2.5.0"
+    "tslib": "2.8.1"
   },
   "lint-staged": {
     "*.{md,json,js,jsx,ts,tsx,yml,yaml}": [
