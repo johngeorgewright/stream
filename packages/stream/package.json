@@ -117,7 +117,7 @@
     "semantic-release-monorepo": "npm:semantic-release-monorepo-esm@1.0.12",
     "ts-jest": "29.1.1",
     "ts-node": "10.9.2",
-    "typescript": "5.0.4",
+    "typescript": "5.7.2",
     "web-streams-polyfill": "3.2.1"
   },
   "dependencies": {
