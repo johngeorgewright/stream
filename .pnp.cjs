@@ -73,7 +73,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "npm:8.56.0"],\
           ["husky", "npm:8.0.3"],\
           ["lint-staged", "npm:15.2.0"],\
-          ["prettier", "npm:2.8.8"],\
+          ["prettier", "npm:3.4.2"],\
           ["semantic-release", "npm:22.0.12"],\
           ["semantic-release-monorepo", [\
             "semantic-release-monorepo-esm",\
@@ -1637,12 +1637,12 @@ const RAW_RUNTIME_STATE =
           ["@semantic-release/git", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:10.0.1"],\
           ["@semantic-release/github", "virtual:af2cf72dc39691c71459e458026c5c34e70102662ec3c672a81f04a0a9438b409df99e648748671b2c936443bb341cff406321d9d48103b5d85fdc26705c8a42#npm:9.2.6"],\
           ["@semantic-release/release-notes-generator", "virtual:af2cf72dc39691c71459e458026c5c34e70102662ec3c672a81f04a0a9438b409df99e648748671b2c936443bb341cff406321d9d48103b5d85fdc26705c8a42#npm:12.1.0"],\
-          ["@types/prettier", "npm:2.7.3"],\
+          ["@types/prettier", "npm:3.0.0"],\
           ["@types/rimraf", "npm:4.0.5"],\
           ["@types/yeoman-generator", "npm:5.2.14"],\
           ["change-case", "npm:4.1.2"],\
           ["nodemon", "npm:3.0.2"],\
-          ["prettier", "npm:2.8.8"],\
+          ["prettier", "npm:3.4.2"],\
           ["rimraf", "npm:5.0.5"],\
           ["semantic-release", "npm:22.0.12"],\
           ["semantic-release-monorepo", [\
@@ -1683,7 +1683,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["lint-staged", "npm:15.2.0"],\
           ["nodemon", "npm:3.0.2"],\
-          ["prettier", "npm:2.8.8"],\
+          ["prettier", "npm:3.4.2"],\
           ["renamer", "npm:4.0.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["semantic-release", "npm:22.0.12"],\
@@ -1866,7 +1866,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "npm:8.56.0"],\
           ["husky", "npm:8.0.3"],\
           ["lint-staged", "npm:15.2.0"],\
-          ["prettier", "npm:2.8.8"],\
+          ["prettier", "npm:3.4.2"],\
           ["semantic-release", "npm:22.0.12"],\
           ["semantic-release-monorepo", [\
             "semantic-release-monorepo-esm",\
@@ -3600,10 +3600,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/prettier", [\
-      ["npm:2.7.3", {\
-        "packageLocation": "./.yarn/cache/@types-prettier-npm-2.7.3-497316f37c-cda84c19ac.zip/node_modules/@types/prettier/",\
+      ["npm:3.0.0", {\
+        "packageLocation": "./.yarn/cache/@types-prettier-npm-3.0.0-6c770110eb-a2a512d304.zip/node_modules/@types/prettier/",\
         "packageDependencies": [\
-          ["@types/prettier", "npm:2.7.3"]\
+          ["@types/prettier", "npm:3.0.0"],\
+          ["prettier", "npm:3.4.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -13333,10 +13334,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["prettier", [\
-      ["npm:2.8.8", {\
-        "packageLocation": "./.yarn/cache/prettier-npm-2.8.8-430828a36c-00cdb6ab02.zip/node_modules/prettier/",\
+      ["npm:3.4.2", {\
+        "packageLocation": "./.yarn/unplugged/prettier-npm-3.4.2-fae349e44a/node_modules/prettier/",\
         "packageDependencies": [\
-          ["prettier", "npm:2.8.8"]\
+          ["prettier", "npm:3.4.2"]\
         ],\
         "linkType": "HARD"\
       }]\
