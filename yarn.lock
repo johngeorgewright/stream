@@ -1069,6 +1069,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@johngw/outerface@npm:^1.0.0":
+  version: 1.0.2
+  resolution: "@johngw/outerface@npm:1.0.2"
+  dependencies:
+    tslib: "npm:^2.6.3"
+  checksum: 6aa6a7aa0e27f96731c8c56f52d2f9e90c5d4b133dc8558524e3ad101e1c12af836544018d15ef2b2fb25ae2706945e005ca61088328a4e3bc4375d4ff91e05f
+  languageName: node
+  linkType: hard
+
 "@johngw/scaffold@workspace:packages/scaffold":
   version: 0.0.0-use.local
   resolution: "@johngw/scaffold@workspace:packages/scaffold"
@@ -1224,7 +1233,7 @@ __metadata:
   resolution: "@johngw/stream-test@workspace:packages/stream-test"
   dependencies:
     "@johngw/stream-common": "workspace:*"
-    "@johngw/timeline": "npm:3.0.0"
+    "@johngw/timeline": "npm:3.0.1"
     "@semantic-release/commit-analyzer": "npm:11.1.0"
     "@semantic-release/exec": "npm:6.0.3"
     "@semantic-release/git": "npm:10.0.1"
@@ -1292,13 +1301,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@johngw/timeline@npm:3.0.0":
-  version: 3.0.0
-  resolution: "@johngw/timeline@npm:3.0.0"
+"@johngw/timeline@npm:3.0.1":
+  version: 3.0.1
+  resolution: "@johngw/timeline@npm:3.0.1"
   dependencies:
-    js-yaml: "npm:4.1.0"
-    tslib: "npm:2.6.2"
-  checksum: 92cfd994b9557760f400ead991f1bf9750afb03db7a9b509baf02d4a7371dde5c6650d3c290fd172df16fce476f355e9908b48db81ee99e9b22b89e8749b7e3d
+    "@johngw/outerface": "npm:^1.0.0"
+    js-yaml: "npm:^4.1.0"
+    tslib: "npm:^2.6.3"
+  checksum: a6cb21c5d1be9fcce03a1db88420d227a7ea7cba1b70950ce3890c999b27124eae00bee2a4189d8265d9c4a56cdbdac4ed8cbeee6a591f75d4797cbc8d450902
   languageName: node
   linkType: hard
 
@@ -13816,17 +13826,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.6.2":
-  version: 2.6.2
-  resolution: "tslib@npm:2.6.2"
-  checksum: bd26c22d36736513980091a1e356378e8b662ded04204453d353a7f34a4c21ed0afc59b5f90719d4ba756e581a162ecbf93118dc9c6be5acf70aa309188166ca
-  languageName: node
-  linkType: hard
-
 "tslib@npm:^1.9.0":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: 7dbf34e6f55c6492637adb81b555af5e3b4f9cc6b998fb440dac82d3b42bdc91560a35a5fb75e20e24a076c651438234da6743d139e4feabf0783f3cdfe1dddb
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.6.3":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
   languageName: node
   linkType: hard
 
