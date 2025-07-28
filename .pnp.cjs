@@ -1643,7 +1643,7 @@ const RAW_RUNTIME_STATE =
           ["change-case", "npm:4.1.2"],\
           ["nodemon", "npm:3.0.2"],\
           ["prettier", "npm:2.8.8"],\
-          ["rimraf", "npm:5.0.5"],\
+          ["rimraf", "npm:5.0.10"],\
           ["semantic-release", "npm:22.0.12"],\
           ["semantic-release-monorepo", [\
             "semantic-release-monorepo-esm",\
@@ -1685,7 +1685,7 @@ const RAW_RUNTIME_STATE =
           ["nodemon", "npm:3.0.2"],\
           ["prettier", "npm:2.8.8"],\
           ["renamer", "npm:4.0.0"],\
-          ["rimraf", "npm:5.0.5"],\
+          ["rimraf", "npm:5.0.10"],\
           ["semantic-release", "npm:22.0.12"],\
           ["semantic-release-monorepo", [\
             "semantic-release-monorepo-esm",\
@@ -1721,7 +1721,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["nodemon", "npm:3.0.2"],\
           ["renamer", "npm:4.0.0"],\
-          ["rimraf", "npm:5.0.5"],\
+          ["rimraf", "npm:5.0.10"],\
           ["semantic-release", "npm:22.0.12"],\
           ["semantic-release-monorepo", [\
             "semantic-release-monorepo-esm",\
@@ -1756,7 +1756,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["nodemon", "npm:3.0.2"],\
           ["renamer", "npm:4.0.0"],\
-          ["rimraf", "npm:5.0.5"],\
+          ["rimraf", "npm:5.0.10"],\
           ["semantic-release", "npm:22.0.12"],\
           ["semantic-release-monorepo", [\
             "semantic-release-monorepo-esm",\
@@ -1793,7 +1793,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["nodemon", "npm:3.0.2"],\
           ["renamer", "npm:4.0.0"],\
-          ["rimraf", "npm:5.0.5"],\
+          ["rimraf", "npm:5.0.10"],\
           ["semantic-release", "npm:22.0.12"],\
           ["semantic-release-monorepo", [\
             "semantic-release-monorepo-esm",\
@@ -1830,7 +1830,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["nodemon", "npm:3.0.2"],\
           ["renamer", "npm:4.0.0"],\
-          ["rimraf", "npm:5.0.5"],\
+          ["rimraf", "npm:5.0.10"],\
           ["semantic-release", "npm:22.0.12"],\
           ["semantic-release-monorepo", [\
             "semantic-release-monorepo-esm",\
@@ -1904,7 +1904,7 @@ const RAW_RUNTIME_STATE =
           ["js-yaml", "npm:4.1.0"],\
           ["nodemon", "npm:3.0.2"],\
           ["renamer", "npm:4.0.0"],\
-          ["rimraf", "npm:5.0.5"],\
+          ["rimraf", "npm:5.0.10"],\
           ["semantic-release", "npm:22.0.12"],\
           ["semantic-release-monorepo", [\
             "semantic-release-monorepo-esm",\
@@ -14207,10 +14207,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:5.0.5", {\
-        "packageLocation": "./.yarn/cache/rimraf-npm-5.0.5-19228633fd-a612c7184f.zip/node_modules/rimraf/",\
+      ["npm:5.0.10", {\
+        "packageLocation": "./.yarn/cache/rimraf-npm-5.0.10-d0c6647697-f3b8ce81ee.zip/node_modules/rimraf/",\
         "packageDependencies": [\
-          ["rimraf", "npm:5.0.5"],\
+          ["rimraf", "npm:5.0.10"],\
           ["glob", "npm:10.3.10"]\
         ],\
         "linkType": "HARD"\
