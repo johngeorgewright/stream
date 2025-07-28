@@ -1628,6 +1628,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@johngw/outerface", [\
+      ["npm:1.0.2", {\
+        "packageLocation": "./.yarn/cache/@johngw-outerface-npm-1.0.2-e3de2e40dd-6aa6a7aa0e.zip/node_modules/@johngw/outerface/",\
+        "packageDependencies": [\
+          ["@johngw/outerface", "npm:1.0.2"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@johngw/scaffold", [\
       ["workspace:packages/scaffold", {\
         "packageLocation": "./packages/scaffold/",\
@@ -1888,7 +1898,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@johngw/stream-test", "workspace:packages/stream-test"],\
           ["@johngw/stream-common", "workspace:packages/stream-common"],\
-          ["@johngw/timeline", "npm:3.0.0"],\
+          ["@johngw/timeline", "npm:3.0.1"],\
           ["@semantic-release/commit-analyzer", "virtual:af2cf72dc39691c71459e458026c5c34e70102662ec3c672a81f04a0a9438b409df99e648748671b2c936443bb341cff406321d9d48103b5d85fdc26705c8a42#npm:11.1.0"],\
           ["@semantic-release/exec", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:6.0.3"],\
           ["@semantic-release/git", "virtual:e4ed4b50c6753c20a29a9ae348d98dca88aa1f41cb2bbf8a2d917d855b574385f99d975bbe9be5d3efea696050fb829572ba74c79704c89e01e44584dc554209#npm:10.0.1"],\
@@ -1921,12 +1931,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@johngw/timeline", [\
-      ["npm:3.0.0", {\
-        "packageLocation": "./.yarn/cache/@johngw-timeline-npm-3.0.0-236dbb0444-92cfd994b9.zip/node_modules/@johngw/timeline/",\
+      ["npm:3.0.1", {\
+        "packageLocation": "./.yarn/cache/@johngw-timeline-npm-3.0.1-ee2078645f-a6cb21c5d1.zip/node_modules/@johngw/timeline/",\
         "packageDependencies": [\
-          ["@johngw/timeline", "npm:3.0.0"],\
+          ["@johngw/timeline", "npm:3.0.1"],\
+          ["@johngw/outerface", "npm:1.0.2"],\
           ["js-yaml", "npm:4.1.0"],\
-          ["tslib", "npm:2.6.2"]\
+          ["tslib", "npm:2.8.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -15917,10 +15928,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:2.6.2", {\
-        "packageLocation": "./.yarn/cache/tslib-npm-2.6.2-4fc8c068d9-bd26c22d36.zip/node_modules/tslib/",\
+      ["npm:2.8.1", {\
+        "packageLocation": "./.yarn/cache/tslib-npm-2.8.1-66590b21b8-3e2e043d5c.zip/node_modules/tslib/",\
         "packageDependencies": [\
-          ["tslib", "npm:2.6.2"]\
+          ["tslib", "npm:2.8.1"]\
         ],\
         "linkType": "HARD"\
       }]\
