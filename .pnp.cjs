@@ -1641,7 +1641,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rimraf", "npm:4.0.5"],\
           ["@types/yeoman-generator", "npm:5.2.14"],\
           ["change-case", "npm:4.1.2"],\
-          ["nodemon", "npm:3.0.2"],\
+          ["nodemon", "npm:3.1.10"],\
           ["prettier", "npm:2.8.8"],\
           ["rimraf", "npm:5.0.5"],\
           ["semantic-release", "npm:22.0.12"],\
@@ -1682,7 +1682,7 @@ const RAW_RUNTIME_STATE =
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["lint-staged", "npm:15.2.0"],\
-          ["nodemon", "npm:3.0.2"],\
+          ["nodemon", "npm:3.1.10"],\
           ["prettier", "npm:2.8.8"],\
           ["renamer", "npm:4.0.0"],\
           ["rimraf", "npm:5.0.5"],\
@@ -1719,7 +1719,7 @@ const RAW_RUNTIME_STATE =
           ["conventional-changelog-conventionalcommits", "npm:6.1.0"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
-          ["nodemon", "npm:3.0.2"],\
+          ["nodemon", "npm:3.1.10"],\
           ["renamer", "npm:4.0.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["semantic-release", "npm:22.0.12"],\
@@ -1754,7 +1754,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "npm:8.56.0"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
-          ["nodemon", "npm:3.0.2"],\
+          ["nodemon", "npm:3.1.10"],\
           ["renamer", "npm:4.0.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["semantic-release", "npm:22.0.12"],\
@@ -1791,7 +1791,7 @@ const RAW_RUNTIME_STATE =
           ["expect", "npm:29.7.0"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
-          ["nodemon", "npm:3.0.2"],\
+          ["nodemon", "npm:3.1.10"],\
           ["renamer", "npm:4.0.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["semantic-release", "npm:22.0.12"],\
@@ -1828,7 +1828,7 @@ const RAW_RUNTIME_STATE =
           ["expect", "npm:29.7.0"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
-          ["nodemon", "npm:3.0.2"],\
+          ["nodemon", "npm:3.1.10"],\
           ["renamer", "npm:4.0.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["semantic-release", "npm:22.0.12"],\
@@ -1902,7 +1902,7 @@ const RAW_RUNTIME_STATE =
           ["conventional-changelog-conventionalcommits", "npm:6.1.0"],\
           ["jest", "virtual:dc6718d08b43b1a66f3a497090455185ee66efe78dd9c0318ef851ef2e0ec8393e03071357bf2b37637ab3b0a3e78966505d13707cffc5f1a4af0a09a5896d7e#npm:29.7.0"],\
           ["js-yaml", "npm:4.1.0"],\
-          ["nodemon", "npm:3.0.2"],\
+          ["nodemon", "npm:3.1.10"],\
           ["renamer", "npm:4.0.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["semantic-release", "npm:22.0.12"],\
@@ -6184,6 +6184,20 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
+      ["virtual:a345fb10767f7507bb836583037bd0538e45be4c0b7d01b378c28de2575623867b926ab06543de0e9efc893338034a56314289b227582d36e15650769aac23d1#npm:4.3.4", {\
+        "packageLocation": "./.yarn/__virtual__/debug-virtual-b43659aab2/0/cache/debug-npm-4.3.4-4513954577-0073c3bcbd.zip/node_modules/debug/",\
+        "packageDependencies": [\
+          ["debug", "virtual:a345fb10767f7507bb836583037bd0538e45be4c0b7d01b378c28de2575623867b926ab06543de0e9efc893338034a56314289b227582d36e15650769aac23d1#npm:4.3.4"],\
+          ["@types/supports-color", null],\
+          ["ms", "npm:2.1.2"],\
+          ["supports-color", "npm:5.5.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/supports-color",\
+          "supports-color"\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["virtual:a35208a143e582bb3158539d5dc1e269672846333cedd0593984f3a8722f2553efc18ed6e4d2ea6ccdc88bc379f1dad2a4469de2d67ba89f314e444a335bd181#npm:2.6.9", {\
         "packageLocation": "./.yarn/__virtual__/debug-virtual-92e12ff279/0/cache/debug-npm-2.6.9-7d4cb597dc-e07005f2b4.zip/node_modules/debug/",\
         "packageDependencies": [\
@@ -6205,20 +6219,6 @@ const RAW_RUNTIME_STATE =
           ["@types/supports-color", null],\
           ["ms", "npm:2.1.3"],\
           ["supports-color", null]\
-        ],\
-        "packagePeers": [\
-          "@types/supports-color",\
-          "supports-color"\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["virtual:cdcc6f3da7f89f4f693b033af4f99b7f7eb2f3f501c7d5f495b2e59334593feeb573fc7147bf9c632d1fc88514fbaf4f1d948c77e8f525aefbead37e648d68e4#npm:4.3.4", {\
-        "packageLocation": "./.yarn/__virtual__/debug-virtual-ebdf22dbe0/0/cache/debug-npm-4.3.4-4513954577-0073c3bcbd.zip/node_modules/debug/",\
-        "packageDependencies": [\
-          ["debug", "virtual:cdcc6f3da7f89f4f693b033af4f99b7f7eb2f3f501c7d5f495b2e59334593feeb573fc7147bf9c632d1fc88514fbaf4f1d948c77e8f525aefbead37e648d68e4#npm:4.3.4"],\
-          ["@types/supports-color", null],\
-          ["ms", "npm:2.1.2"],\
-          ["supports-color", "npm:5.5.0"]\
         ],\
         "packagePeers": [\
           "@types/supports-color",\
@@ -11842,12 +11842,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["nodemon", [\
-      ["npm:3.0.2", {\
-        "packageLocation": "./.yarn/unplugged/nodemon-npm-3.0.2-cdcc6f3da7/node_modules/nodemon/",\
+      ["npm:3.1.10", {\
+        "packageLocation": "./.yarn/unplugged/nodemon-npm-3.1.10-a345fb1076/node_modules/nodemon/",\
         "packageDependencies": [\
-          ["nodemon", "npm:3.0.2"],\
+          ["nodemon", "npm:3.1.10"],\
           ["chokidar", "npm:3.5.3"],\
-          ["debug", "virtual:cdcc6f3da7f89f4f693b033af4f99b7f7eb2f3f501c7d5f495b2e59334593feeb573fc7147bf9c632d1fc88514fbaf4f1d948c77e8f525aefbead37e648d68e4#npm:4.3.4"],\
+          ["debug", "virtual:a345fb10767f7507bb836583037bd0538e45be4c0b7d01b378c28de2575623867b926ab06543de0e9efc893338034a56314289b227582d36e15650769aac23d1#npm:4.3.4"],\
           ["ignore-by-default", "npm:1.0.1"],\
           ["minimatch", "npm:3.1.2"],\
           ["pstree.remy", "npm:1.1.8"],\
